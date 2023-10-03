@@ -8,8 +8,7 @@
 %
 % Template license:
 % CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%s
 
 %----------------------------------------------------------------------------------------
 %  BASIC DOCUMENT CONFIGURATIONS
@@ -76,6 +75,9 @@
 %  PACKAGES
 %----------------------------------------------------------------------------------------
 
+\usepackage{todonotes}
+\usepackage{amsmath}
+
 % ------ FONTS ------
 \usepackage[T1]{fontenc} % Output font encoding
 \usepackage[utf8]{inputenc} % Required for inputting international characters
@@ -84,9 +86,8 @@
 
 
 % ------ BIBLIOGRAPHY ------
-% Use the bibtex backend with the authoryear citation style (which resembles APA); DIN ISO: science
-\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex}
-\addbibresource{sources.bib} % The filename of the bibliography
+\usepackage[backend=bibtex,style=ieee,natbib=true]{biblatex}
+\addbibresource{example.bib} % The filename of the bibliography
 
 
 % ------ FIGURES ------
@@ -174,6 +175,9 @@
 
 \input{commands.tex}
 
+\newcommand{\tabref}[1]{Table \ref{#1}}
+\newcommand{\figref}[1]{Fig. \ref{#1}}
+
 
 % ------ HYPERSETUP ------
 \AtBeginDocument{
@@ -208,9 +212,6 @@
 % Include title page
 \input{Base/titlepage.tex}
 
-% Include declaration of independence
-\input{Base/declaration.tex}
-
 \cleardoublepage
 
 % Include quotation page
@@ -242,19 +243,7 @@
   
 \chapter{\abbrevname}
 \begin{acronym}[AAAAAA]
-  \acro{acl}[ACL]{Access Control List}
-  \acro{ajax}[AJAX]{Asynchronous JavaScript and XML}
-  \acro{api}[API]{Application Programming Interface}
-  \acro{css}[CSS]{Cascading Style Sheets}
-  \acro{gui}[GUI]{Graphical User Interface}
-  \acro{html}[HTML]{Hypertext Markup Language}
-  \acro{json}[JSON]{JavaScript Object Notation}
-  \acro{php}[PHP]{PHP Hypertext Preprocessor}
-  \acro{sql}[SQL]{Structured Query Language}
-  \acro{uid}[UID]{User Identifier}
-  \acro{url}[URL]{Uniform Resource Locator}
-  \acro{ux}[UX]{User Experience}
-  % \acro{}[]{}
+  %\acro{dl}[DL]{Deep Learning}
 \end{acronym}
 % Use 
 % - \ac{id} for standard behavior (\Ac{id} for first letter capitalized)
@@ -266,11 +255,6 @@
 % See https://ctan.mirror.norbert-ruehl.de/macros/latex/contrib/acronym/acronym.pdf
 
 \newpage
-
-
-% ------ GLOSSARY ------
-
-\input{Base/glossary.tex}
 
 
 %----------------------------------------------------------------------------------------

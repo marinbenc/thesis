@@ -1,55 +1,132 @@
-% Kapitel 2
+\chapter{Neural Network-Based Segmentation of Biomedical Images}
+\label{chap:seg-background}
 
-\chapter{Foundations} % Main chapter title
+This chapter introduces biomedical images as well as the process of segmenting them. We will start with a brief overview of the most common types of biomedical images.
 
-\label{chap:foundations}
+Biomedical images are a broad and diverse category of images referring to imaging use for the purposes of biology or medicine. These can range from complex modalities such as CT scans all the way to photographs (such as clinical images or photographs of plants). With such a diverse set of modalities and imaging techniques, biomedical images have a low level of cross-domain consistency. Methods developed for one modality often cannot be used in a different modality without modification. This is especially true for learned models such as neural networks. Biomedical image segmentation networks are notoriously bad at out-of-sample performance, i.e. when evaluated on a different modality than they were trained on. This chapter presents a brief overview of various biomedical imaging modalities and techniques, with a focus on those relevant to the methods presented in this thesis.
 
-\begin{itemize}
-  \item Hier gehören alle für das weitere Geschehen erforderlichen Grundlagen hin, aber auch nicht mehr, denn:
-  \item Die Thesis ist kein Lehrbuch. Hier muss kein Überblick über weit verbreitete Inhalte und Methoden Ihres Themas gegeben werden.
-  \item Beschreiben Sie nur das, was Sie im weiteren Verlauf Ihrer Thesis anwenden.
-  \item Der fehlende Bezug zwischen Grundlagen und deren Anwendung in der Thesis ist der häufigste Grund für eine suboptimale Bewertung.
-  \item Lassen Sie bitte, wenn möglich, das Wort theoretisch weg, denn es kann auch praktische Grundlagen geben.
-\end{itemize}
+\section{Common Types of Biomedical Images}
 
-%----------------------------------------------------------------------------------------
-%	Section 1 - Title
-%----------------------------------------------------------------------------------------
-\section{Section 1}
+Broadly, we may classify biomedical images into 3D and 2D images. 3D images include modalities such as CT and MRI, but also some types of microscopy as well as other techniques. 2D images, among others, include X-rays, most microscopic images, and dermatoscopic images. The images could also be classified by color space. Techniques that visualize the insides of objects such as CT, MRI or X-ray are usually grayscale. On the other hand, camera-based imaging techniques such as dermoscopy or photographs use three or more color channels. As is apparent, biomedical images do not yield themselves to clean classification, so the classification here is only a general descriptive categorization. There are novel techniques that combine different modalities that escape this classification.
 
-%-----------------------------------
-%	Subsection 1.1 - Subtitle
-%-----------------------------------
-\subsection{Subsection 1.1}
+\subsection{3D Modalities}
+
+In medicine, 3D imaging of the patient allows experts to look below the patient's skin. It is hard to overstate the importance of modalities such as CT and MRI on modern medical developments and patient outcomes. These modalities are often captured and stored as voxel-based 3D files, where a voxel is the smallest 3D unit equivalent to a pixel in 3D. They are usually stored alongside patient data such as age, sex, imaging parameters and other relevant information.
+
+\subsubsection{Computed Tomography (CT)}
+
+Computed tomography is an x-ray-based imaging technique where different planes of the subject are captured and then reconstructed into a 3D image using a process called tomography. CT, as opposed to MRI, uses ionizing radiation that can be harmful in large doses. This makes it important to evaluate the cost and benefit of each scan since each scan presents a risk of harming the subject. In addition, image quality is correlated with radiation dose, and the dose is carefully selected based on the required level of image quality so as to not unnecessarily radiate the subject.
+
+Low-dose and high-dose CT images differ enough to cause issues in the segmentation model's performance across these two domains \todo{cite}. High-quality images result in better neural network models, but their availability is much more limited than low-dose scans.
+
+CT can be enhanced using a contrast agent. The contrast agent is usually injected intravenously and is chosen to appear with a high intensity on the resulting image. This makes it easier to delineate blood vessels from surrounding tissue, as is the case e.g. in angiography (CTA).
+
+In the image itself, the values of a CT scan are usually stored as $W \times H \times D$ values, where $W$, $H$, and $D$ are the x, y, and z dimensions, respectively. Each value represents a voxel, \textit{volumetric pixel}, in a 3D volume. The voxels are usually not cubes and can have different lengths along each dimension. In the z-axis, the voxel length is known as slice thickness, and it is chosen based on the task at hand. Thinner slices increase the spatial detail in the image, leading to more details in small tissues. However, thinner slices generally also increase the level of noise in the image, so slice thickness is selected to maintain a tradeoff between spatial resolution and level of noise. The resolution along the x- and y-axes is governed by the field of view and the scanner itself.
+
+The values of the voxels are usually stored as 12 bit signed integer values. The value corresponds to the attenuation of the X-ray as it passes through the tissue. Denser structures such as bones attenuate the radiation more strongly than adipose tissue, and thus result in higher values. This results in higher-intensity voxels in the resulting CT image. To maintain consistency across scans and machines, the attenuation values are linearly transformed such that air has a value of -1000 while water has a value of 0 at standard pressure temperature, as:
+
+\begin{equation}
+	{\operatorname{HU}(\mu)}=1000 \cdot {\frac {\mu -\mu _{\textrm {water}}}{\mu _{\textrm {water}}-\mu _{\textrm {air}}}}
+\end{equation}
+
+where $\mu$ is the attenuation value of a voxel, and $\mu _{\textrm {water}}$ and $\mu _{\textrm {air}}$ are attenuation values of water and air, respectively. This transformation is called the Hounsfield unit (HU) scale. When calibrated in this way, the attenuation of each tissue is represented as relative to the attenuation of water, and thus values are standardized across images, CT machines, imaging parameters, and centers. Various tissues broadly fall into Hounsfield unit values as is shown in \tabref{tab:hu-tissues}.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l l} 
+ \hline
+ \textbf{Tissue} & \textbf{Hounsfield value} \\
+ \hline
+ Fat & -30 to -70 HU\\
+ Muscle & 20 to 40 HU\\
+ Bone & 1000 HU \\
+ Blood & 13 to 50 HU\\
+ \hline
+\end{tabular}
+\caption{Approximate Hounsfield values of various tissues \cite{fosbinder2011essentials, kamalianComputedTomographyImaging2016}.}
+\label{table:1}
+\end{table}
+
+Hounsfield values are a crucial tool in analyzing medical images. Aside from getting a better understanding of what tissues or objects are present, measured Hounsfield values can have diagnostic significance. For instance, clotted blood has a higher HU value than unclotted blood, and so the Hounsfield value is used as an indicator of intracranial hemorrhage \cite{kamalianComputedTomographyImaging2016}. Another example is using the average HU value of epicardial fat as a sign of myocardial infarction \cite{mahabadiCardiacComputedTomographyderived2017}.
+
+Since the human eye recognizes much fewer gray levels than are available on a CT scan, the scan is typically windowed when viewed by an expert. Windowing refers to the process of shrinking the value range using two thresholds ($t_1$, $t_2$) as:
+
+\begin{equation}
+y(x) = 
+    \begin{cases}
+        t_1, & \text{if } x \leq t_1\\
+        x, & \text{if } t_1 < x < t_2\\
+        	t_2, & \text{if } x \geq t_2\\
+    \end{cases}
+\end{equation}
+
+where $x$ is a given HU value. This allows the software to visually stretch the remaining range of gray values to more easily see smaller differences in attenuation, as seen in \figref{fig:windowing-example}. This technique is not limited to human experts. It is common to window CT image inputs into segmentation neural networks. For instance, if segmenting fat, it is often beneficial to discard all voxels outside of the fat tissue range \cite{bencevicRecentProgressEpicardial2022}.
+
+\todo{windowing figure}
+
+\subsubsection{Magnetic Resonance Imaging (MRI)}
+
+Much like CT, MRI visualizes the insides of an object using a voxel-based image. MRI works by first applying a strong magnetic field such that protons align parallel to the z-axis. The protons are then excited using a radio frequency pulse which causes them to become misaligned. After the pulse, the protons gradually return back to alignment and induce an electric current. Unlike CT which measures the attention of X-rays, MRI measures this induced current while protons are returning to equilibrium alignment. The time to reach the equilibrium state depends on the specific tissue type. The use of magnetic fields instead of ionizing radiation means that MRI does not cause harm to the patient due to radiation. Unlike CT, MRI values are not standardized across scans and MRI machines, and the specific values can not be used diagnostically across scans, only in relation to surrounding tissues.
+
+MRI generally provides a better contrast than CT, especially in soft tissues. This makes MRI the gold standard of imaging for a large number of tissues and diagnostic procedures. Much like CT, this contrast can be further enhanced using contrast agents. However, MRI imaging is slower when compared to CT which causes patient discomfort, especially for claustrophobic and non-neurotypical patients. MRIs are also not possible in cases where the subject has non-removable magnetic objects such as coronary pacemakers and other implants.
+
+The voxels in an MRI, much like a CT, are generally rectangular solids and can different in the x-, y- and z-axis lengths. The resolution is government by the field of view, the MRI scanner as well as imaging parameters. Generally, increasing resolution leads to higher levels of noise and a longer acquisition time. Thus, a compromise needs to be determined for each imaged tissue and diagnostic task. 
+
+The voxel values are weighted based on the time to reach the equilibrium state which is achieved through two independent processes called T1 and T2. T1 measures the time it takes the protons to reach equilibrium longitudinal magnetization, while T2 measures the time to regain its equilibrium transverse magnetization. Different tissues regain equilibrium states in T2 and T2 at different rates, so MRI images can be weighted according to T1 or T2 time. Water has a long T1 time while fat has a short T1 time, so in T1-weighted images fat appears with a higher intensity than water. On the other hand, water has a high T2 and appears as high-intensity on T2-weighted images. This can be seen in \figref{fig:t1-t2-example}.
+
+\todo{figure}
+
+The relative differences in T1 and T2 images make the two weightings more or less beneficial for imaging certain tissues. T1 weighting is useful, among others, for identifying fatty tissue or detecting liver lesions. T2 weighting is useful, among others, for identifying white matter lesions or edemas.
+
+\subsection{2D Modalities}
+
+While 3D modalities offer a detailed view of a subject, they are often time-consuming and invasive in the case of CT. 2D modalities such as X-ray and diagnostic ultrasound are often quicker and more available, making them ideal for screening and simpler diagnostics. The same reason also results in a much larger amount of publicly available datasets in 2D modalities compared to 3D ones. Segmentation, object detection and classification in X-ray images, for instance, is one of the most active fields in computerized medical image analysis research \cite{nguyen2020vindrcxr, irvinCheXpertLargeChest2019}.
+
+\subsubsection{X-ray imaging}
+
+Similarly to CT, X-ray imaging or radiography uses ionizing radiation emitted on one side of the object and detected on the other. The intensity of the image corresponds to the attenuation of the emitted radiation. Denser materials appear with a higher intensity on the resulting image due to their high attenuation.
+
+When capturing an X-ray image, an expert manually positions the generator. The position of the generator and the object determine the magnification and field of view in the image. If the distance between the detector and the object is larger than the distance between the generator and the object, the object will appear larger on the resulting image. This magnification means that the scale on an X-ray image is relative to the image itself and so objective measurements cannot be made on an X-ray.
+
+The expert also determines various parameters that ultimately change the quality and quantity of the X-ray beams. The quality measures the ability of an X-ray to penetrate tissue and is proportional to the X-ray energy level. Quantity, on the other hand, measures the number of photons that constitute the beam. Increasing the beam quality allows for imaging denser tissues such as bones or through large bodies but results in lower contrast in soft tissues. This means that intensity in X-rays is not standardized across images like it is in CT, and so there is no objective unit of measuring X-ray intensity.
+
+\subsubsection{Dermatological images (clinical and dermatoscopic)}
+
+An increasingly active application of deep learning-based models is in dermatological applications, namely skin lesion analysis. This is driven in part by organisations such as the International Skin Imaging Collaboration (ISIC) that curates large dermatological datasets \cite{rotembergPatientcentricDatasetImages2021}. These datasets consists of clinical and dermatoscopic images. Clinical images are regular photographs of skin lesions, while dermatoscopic images are captured with a digital epiluminescence dermatoscope. This dermatoscope consists of a camera attached to a magnifying lens with a built-in light source. It allows capturing detailed and magnified images of a skin lesion while filtering out skin reflections.
+
+The primary application of deep learning in dermatological images is for classification --- predicting whether a lesion is benign or not or detecting the type of skin disease. However, skin lesion segmentation plays a role in the detection as delineating the skin lesion border can be used to provide more objective attributes of the skin lesion \cite{rotembergPatientcentricDatasetImages2021}.
+
+\subsubsection{Microscopy}
+
+In biomedicine, one of the most used applications of computer vision is in segmenting, analyzing, and quantifying microscopic images. This encompasses various tasks in digital pathology such as detecting cancerous cells, segmenting nuclei, or counting white blood cells.
+
+Publicly available microscopic images of cells are abundant due to how frequently they are captured and that they don't contain any personally identifiable information. However, these images sometimes present a challenge due to their size. Microscopic images can have an area of multiple megapixels, far too large for current deep-learning models. Therefore, the images are often split into patches, downscaled or analyzed in a coarse-to-fine manner \cite{jhaInstanceSegmentationWhole2021a}.
+
+With those modalities in mind, we can now cover the process of segmenting the images.
+
+\section{Image Segmentation: From Images to Segmentation Maps}
+
+Image segmentation is the process of categorizing each pixel (or voxel) of an image as belonging to one of several predefined classes. For instance, a 3-class problem of segmenting CT images could be liver, liver tumour, and background. Each class gets assigned an arbitrary class label, such as `0', `1' and `2' for the background, liver and tumour, respectively. The segmentation output is another image of the same size, only the value for each voxel corresponds to the class label of that voxel. Voxels belonging to the liver would each have a value of `1', etcetera. This resulting image is called a \textbf{segmentation map}, since it acts as a map for the original image. In medical image segmentation commonly only target is segmented, which is called \textbf{binary segmentation} since we are using two classes, the target, and the background.
+
+However, multi-class segmentation problems can be reduced to a set of binary segmentation problems where a separate class-vs-background segmentation map is constructed for each class. Mathematically, given a set of $K$ classes, and an input $d$-dimensional image of $N$ channels $I(A)$, $I \in \mathbb{R}^{N}$, $A \in \mathbb{Z}_{\geq0}^d$ where A is a vector representing the location of each voxel, the segmentation map can be expressed as a function $M : \mathbb{Z}_{\geq0}^d \rightarrow \mathbb{R}^K$ mapping each pixel location to a vector of class probabilities:
+
+\begin{equation}
+M(A) = (\;\operatorname{Pr}(C_0\!\mid\!I(A)),\; \operatorname{Pr}(C_1\!\mid\!I(A)),\; \cdots\!,\;  \operatorname{Pr}(C_{K - 1}\!\mid\!I(A))\;)
+\end{equation}
+
+Where $\operatorname{Pr} (C_i \!\mid\! I(A))$ denotes the probability that the voxel $I(A)$ contains an object of class $C_i$. Expressed this way, the segmentation map is a $K$-channel image of the same size as $I$, where each channel corresponds to a probability map of finding an object of a given class at a given voxel location. 
+
+In the case of binary segmentation where $C_0$ is the background and the $C_1$ is the target object, $Pr(C_1 \!\mid\! (A)) = 1 - Pr(C_0 \!\mid\! I(A))\; \forall A$ and therefore $M(A)$ can be treated as a scalar value $M(A) = Pr(C_1 \!\mid\! I(A))$. This representation is very common as many medical image segmentation problems are binary segmentation problems, such as segmenting organs, cell nuclei, skin lesions, etc.
+
+Ultimately, to delineate tissues the segmentation masks $M(A)$ are commonly binarized such that voxels containing the target object become `1' and the background becomes `0'. This is why $M(A)$ is also commonly called a \textbf{segmentation mask}. In computer vision, the term mask refers to a binary image $M_{01}(A) \in \{0, 1\}$ that hides (masks) regions in another image producing a masked image $I_m(A) = I(A) M_{01}(A)$. In the context of deep learning-based image segmentation, the terms segmentation map and segmentation mask are often used interchangeably.
+
+What follows is a broad overview of commonly used segmentation methods, from traditional ones based on heuristics to complex model-based approaches broadly used today.
+
+\subsection{Traditional image segmentation methods}
 
 
 
-%-----------------------------------
-%	Subsection 1.2 - Subtitle
-%-----------------------------------
-\subsection{Subsection 1.2}
 
 
 
-%----------------------------------------------------------------------------------------
-%	Section 2 - Title
-%----------------------------------------------------------------------------------------
-\section{Section 2}
 
-
-%-----------------------------------
-%	Subsection 2.1 - Subtitle
-%-----------------------------------
-\subsection{Subsection 2.1}
-
-
-%-----------------------------------
-%	Subsection 2.2 - Subtitle
-%-----------------------------------
-\subsection{Subsection 2.2}
-
-
-%----------------------------------------------------------------------------------------
-%	Section 3 - Title
-%----------------------------------------------------------------------------------------
-\section{Section 3}
