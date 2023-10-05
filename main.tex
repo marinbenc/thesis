@@ -176,7 +176,8 @@
 \input{commands.tex}
 
 \newcommand{\tabref}[1]{Table \ref{#1}}
-\newcommand{\figref}[1]{Fig. \ref{#1}}
+\newcommand{\pr}[0]{\operatorname{Pr}}
+\newcommand{\prg}[2]{\pr({#1}\!\mid\!{#2})}
 
 
 % ------ HYPERSETUP ------
@@ -214,8 +215,26 @@
 
 \cleardoublepage
 
+First printed interior sheet:
+ Recto: same text and formatting as front cover.
+o Verso: ISBN, theme code, NUR code(s) and legal depot number. Position: bottom of the page.
+
+\clearpage
+
+Second printed interior sheet, recto: Members of the examination board
+ Title: ‘Members of the Examination Board’ / ‘Leden van de examencommissie’ (same
+language as front cover),
+ Members, per category:
+ Chair / Voorzitter
+ Other members entitled to vote / Andere stemgerechtigde leden
+ Supervisor(s) / Promotor(en) (they are members!)
+ (it is no longer needed to indicate the secretary)
+ Every member is listed as Title Name, Affiliation (incl. country if not BE)
+
+\clearpage
+
 % Include quotation page
-\input{Base/quotation.tex}
+% \input{Base/quotation.tex}
 
 % Include abstract page
 \input{Base/abstract.tex}
@@ -232,8 +251,8 @@
   \tableofcontents % Prints the main table of contents
   \listoffigures % Prints the list of figures
   \listoftables % Prints the list of tables
-  \lstlistoflistings % Prints the list of (code) listings
-  \addchaptertocentry{Listings} % Add the list of listings to the table of contents
+%  \lstlistoflistings % Prints the list of (code) listings
+%  \addchaptertocentry{Listings} % Add the list of listings to the table of contents
 }
 
 
@@ -243,7 +262,7 @@
   
 \chapter{\abbrevname}
 \begin{acronym}[AAAAAA]
-  %\acro{dl}[DL]{Deep Learning}
+  \acro{cnn}[CNN]{convolutional neural network}
 \end{acronym}
 % Use 
 % - \ac{id} for standard behavior (\Ac{id} for first letter capitalized)
@@ -270,10 +289,6 @@
 
 \include{Chapters/01_introduction}
 \include{Chapters/02_foundations}
-\include{Chapters/03_methods}
-\include{Chapters/04_results}
-\include{Chapters/05_discussion}
-\include{Chapters/06_conclusion}
 
 
 %----------------------------------------------------------------------------------------
