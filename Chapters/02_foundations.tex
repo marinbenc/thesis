@@ -380,17 +380,115 @@ Generally, most \ac{cnn}-based encoders follow a similar pattern of gradually re
 \begin{figure}[h]
  \centering
  \includegraphics[width=\linewidth]{images/cnn_encoder_example.pdf}
- \caption{A typical architecture of a \ac{cnn} encoder. The encoder consists of consecutive convolutional and pooling layers that gradually increase the feature map depth and decrease its width and height. The result is a map of features that tells the decoder what features are on the image but does not provide much spatial information about the location of those features.}
+ \caption{A typical architecture of a \ac{cnn} encoder. The encoder consists of consecutive convolutional and pooling layers that gradually increase the feature map depth and decrease its width and height. The result is a map of features that tells the decoder what features are on the image but does not provide much spatial information about the location of those features. \cite{lecunGradientbasedLearningApplied1998}}
  \label{fig:cnn-encoder-achitecture}
  \end{figure}
 
 To illustrate this, we can think of a contrived example of a \ac{cnn} feature detector to detect grapes on a vine. The first few layers could do a simple operation such as edge detection, and for that, they need a lot of spatial information. The next layer could combine the edges to detect a specific shape, such as a circle. For this, it needs less spatial information as the edges are already detected. A third layer could combine several circle locations to detect a cluster of grapes on a vine. For this, it only needs a very rough location of the circles, and thus does not need detailed width and height-wise information.
 
-A convolutional decoder can work in much the same way, but reversed. Instead of adding channels, a convolutional decoder successively removes channels and upsamples the image until the resulting image is a segmentation map $M(A) \in C \times W \times H$. Segmentation models that use only convolutional and pooling layers are called \textbf{fully convolutional models} and are one of the most widely used types of models for medical image segmentation.
+A convolutional decoder can work in much the same way, but reversed. Instead of adding channels, a convolutional decoder successively removes channels and upsamples the image until the resulting image is a segmentation map $M(A) \in C \times W \times H$. 
 
-\section{Commonly Used Convolutional Encoders}
+Another way to achieve upsampling is using a \textbf{transposed convolutional layer}. These layers are very common in segmentation neural networks and allow for dynamic, learned upsampling of the image. Regular convolutions as described earlier cannot increase the image dimension, the output is always of equal size or smaller than the input image since convolution slides along each pixel of the input. To get around this, a transposed convolution performs scalar multiplication of the whole kernel and the pixel it is sliding over during each sliding window step. To illustrate this, let us look at an example. Assume one $2 \times 2$ channel $i$ of an input feature map $m(A)$ and one $2 \times 2$ kernel $k(B)$. The transposed convolution would be calculated as follows:
 
-Almost all medical image segmentation models employ convolutional layers in their encoder stage. 
+\begin{align*}
+m \star^T k = & 
+\begin{bmatrix}
+m_{11}k_{11} & m_{11}k_{12} & 0\\
+m_{11}k_{21} & m_{11}k_{22} & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
++
+\begin{bmatrix}
+0 & m_{12}k_{11} & m_{12}k_{12}\\
+0 & m_{12}k_{21} & m_{12}k_{22}\\
+0 & 0 & 0\\
+\end{bmatrix}
++\\
+&
+\begin{bmatrix}
+0 & 0 & 0\\
+m_{21}k_{11} & m_{21}k_{12} & 0\\
+m_{21}k_{21} & m_{21}k_{22} & 0\\
+\end{bmatrix}
++
+\begin{bmatrix}
+0 & 0 & 0\\
+0 & m_{22}k_{11} & m_{22}k_{12}\\
+0 & m_{22}k_{21} & m_{22}k_{22}\\
+\end{bmatrix}
+\end{align*}
+
+The procedure can be similarly calculated for an arbitrarily sized image and kernel. Commonly, transposed convolution is referred to as \textit{deconvolution}, however, in this thesis, we do not use the term to avoid confusion with the more standard definition of deconvolution outside of the deep learning context.
+
+Segmentation models that use only convolutional and pooling layers are called \textbf{fully convolutional models} and are one of the most widely used types of models for medical image segmentation.
+
+\section{CNN Architectures for Medical Image Segmentation}
+
+A majority of deep learning-based medical image segmentation models to date use convolutional layers to achieve their task. Over the years, a large number of architectures have been proposed and standardized. Some of the them have been created for the task of natural image classification or segmentation, while others are made for more domain-specific domains in medical imaging. In this chapter, we will go over some of the most seminal architectures for medical image segmentation in chronological order.
+
+\subsection{Fully Convolutional Network (FCN)}
+
+One of the simplest contemporary architectures for image segmentation is the fully convolutional network (FCN) \cite{long2015fully}. FCN aims to solve the problem of how do we produce an output value for each pixel of the input while leveraging convolutional encoders. As mentioned earlier, convolutional encoders gradually downsample the image while increasing the number of channels in the feature maps. There is then a need to reverse the process and decode the features into an image of equal width and height of the input image. 
+
+FCN solves this by using convolutional layers to reverse the encoding process. In a sense, they interpret the last layer of the encoder as a very downsampled heatmap of features in the original image. They then connected that heatmap to a convolutional layer with a number of channels equal to the number of channels in the segmentation map. This produces a very coarse segmentation map for each class that needs to be segmented. 
+
+To be useful, this segmentation map needs to be upsampled to the original image resolution. They achieve this using deconvolution as explained earlier in this chapter. However, as noted earlier, the high-level feature maps have very coarse spatial information. To inject additional spatial information into the final segmentation, FCN combines outputs of multiple encoder layers to form the final prediction. They do this by upsampling outputs of different layers to the same size and summing the feature maps together. The summed feature map is then upsampled to the final image resolution. This process is shown in \figref{fig:fcn-arch}. A slightly simpler variant of this architecture is U-Net, which we will look at next.
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=\linewidth]{images/fcn-arch}
+ \caption{A diagram of how FCN forms predictions based on the output of different encoder layers. Encoder layers are shown on the left and the grid represents the coarseness of the feature map. The maps are combined at three different levels to produce three predictions. Each prediction is compared with the ground truth during training, but for inference only the 8x upsampled prediction is used, as it retains the most spatial information. \cite{long2015fully}}
+ \label{fig:fcn-arch}
+ \end{figure}
+ 
+ \subsection{U-Net and Its Variants}
+
+U-Net \cite{ronnebergerUNetConvolutionalNetworks2015d} is one of the most influential and commonly used architectures in medical image segmentation. Aside from being a standard baseline model, a well-tuned U-Net network with data preprocessing is the state of the art for various medical image segmentation tasks including segmenting various organs, cerebral aneurysms, infarctions, edemas, tumors and other tasks on CT and MRI images \cite{isenseeNnUNetSelfconfiguringMethod2021}.
+
+U-Net follows a relatively simple architectural pattern. Like other networks, it consists of an encoder and decoder branch. Both the encoder and decoder are fully convolutional, meaning that they consist only of convolutions, pooling layers and transposed convolutions. They have a symmetrical structure where the encoder gradually decreases the width and height of the feature maps while increasing the number of channels, and the decoder does the opposite using upsampling or transposed convolutions.
+
+Earlier we mentioned that encoders gradually reduce spatial information while detecting features in the image. For segmentation, however, the spatial information is important for the precise localization of the features. To overcome this issue, FCN used the feature maps of multiple layers in the encoder. U-Net also takes advantage of feature maps at various levels but does so in a different way.
+
+In U-Net, the output of every encoder layer is added to the input of its corresponding decoder layer on the other side of the network. This gives each of the decoder's layer access to spatial information in the form of feature maps that are the same size as the layer's input. The architecture can be seen in \figref{fig:unet-arch}.
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=0.8\linewidth]{images/unet-arch}
+ \caption{A diagram of the U-Net model. The output of each layer of the encoder is concatenated to the input of its corresponding layer in the decoder. \cite{ronnebergerUNetConvolutionalNetworks2015d}}
+ \label{fig:unet-arch}
+ \end{figure}
+
+Because of its symmetrical structure and skip connections, U-Net is often visualized in the shape of the letter U, giving it its name. U-Net is only one of a class of networks that are sometimes called U-shaped networks. Aside from being a state-of-the-art architecture for medical image segmentation, U-Net is also widely used as a component of networks in other domains such as image generation \cite{rombach2021highresolution} and registration \cite{sinclairAtlasISTNJointSegmentation2022a}.
+
+\subsubsection{nnU-Net}
+
+U-Net is a powerful baseline model that can be carefully tuned using various heretics and combined with beneficial data preprocessing to achieve state-of-the-art results, even when compared to much more complex models. This process has been automated in nnU-Net \cite{isenseeNnUNetSelfconfiguringMethod2021}. nnU-Net is a general method that automatically produces a data pre- and postprocessing pipeline and a U-Net-based architecture to achieve optimal segmentation. This is achieved through a set of heuristics, rules, and optimization techniques.
+
+nnU-Net first calculates various parameters about the data distribution such as the intensity distribution and median image size. These parameters are used as inputs into an interdependent set of rules that produces parameters of the network such as the number of layers, training parameters, and preprocessing strategy, among others. Using these parameters, nnU-Net trains three different networks, one using only 2D slices of the input data, one using the whole 3D volume, and finally, one using only the region of interest in the 3D volume. During inference, the result of each model is preprocessed and combined to form an ensemble prediction. Some of the process can be seen in \figref{fig:nnunet-arch}.
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=\linewidth]{images/nnunet-arch}
+ \caption{A diagram of the nnU-Net procedure of creating a training configuration. \cite{isenseeNnUNetSelfconfiguringMethod2021}}
+ \label{fig:nnunet-arch}
+ \end{figure}
+ 
+ nnU-Net achieved state-of-the-art results in a wide variety of tasks in CT and MRI segmentation and still remains state-of-the-art in many of those tasks. Aside from that, nnU-Net is a hugely important tool for both academia and industry, as it allows for creating well-tuned baseline models with very little manual intervention or technical know-how.
+ 
+ nnU-Net also makes it plainly obvious how much of an impact preprocessing and parameter tuning can have on model results when training on small datasets. This is one of the central premises of this thesis and is what allows us to achieve data efficiency with small neural networks.
+ 
+ \subsubsection{Other U-Net Variants}
+
+FCN
+UNET
+unet++
+double unet?
+Mask RCNN
+PSPNet
+PAN
+MA-Net
+DeepLab
+DeepLabV3
 
 
 \subsection{Balancing Inductive Bias}
