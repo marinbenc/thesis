@@ -121,12 +121,12 @@ Image segmentation is the process of categorizing each pixel (or voxel) of an im
 However, multi-class segmentation problems can be reduced to a set of binary segmentation problems where a separate class-vs-background segmentation map is constructed for each class. Mathematically, given a set of $K$ classes, and an input $d$-dimensional image of $N$ channels $I(A)$, $I \in \mathbb{R}^{N}$, $A \in \mathbb{Z}_{\geq0}^d$ where A is a vector representing the location of each voxel, the segmentation map can be expressed as a function $M : \mathbb{Z}_{\geq0}^d \rightarrow \mathbb{R}^K$ mapping each pixel location to a vector of class probabilities:
 
 \begin{equation}
-M(A) = (\;\prg{C_0}{I(A)},\; \prg{C_1}{I(A)},\; \cdots\!,\;  \prg{C_{K - 1}}{I(A)}\;),
+M(A) = (\;\prg{C_1}{I(A)},\; \prg{C_2}{I(A)},\; \cdots\!,\;  \prg{C_{K}}{I(A)}\;),
 \end{equation}
 
 where $\operatorname{Pr} (C_i \!\mid\! I(A))$ denotes the probability that the voxel $I(A)$ contains an object of class $C_i$. Expressed this way, the segmentation map is a $K$-channel image of the same size as $I$, where each channel corresponds to a probability map of finding an object of a given class at a given voxel location. 
 
-In the case of binary segmentation where $C_0$ is the background and the $C_1$ is the target object, $\prg{C_1}{I(A)} = 1 - \prg{C_0}{I(A)}\; \forall A$ and therefore $M(A)$ can be treated as a scalar value $M(A) = \prg{C_1}{I(A)}$. This representation is very common as many medical image segmentation problems are binary segmentation problems, such as segmenting organs, cell nuclei, skin lesions, etc.
+In the case of binary segmentation where $C_1$ is the background and the $C_2$ is the target object, $\prg{C_2}{I(A)} = 1 - \prg{C_1}{I(A)}\; \forall A$ and therefore $M(A)$ can be treated as a scalar value $M(A) = \prg{C_2}{I(A)}$. This representation is very common as many medical image segmentation problems are binary segmentation problems, such as segmenting organs, cell nuclei, skin lesions, etc.
 
 Ultimately, to delineate tissues the segmentation masks $M(A)$ are commonly binarized such that voxels containing the target object become `1' and the background becomes `0'. This is why $M(A)$ is also commonly called a \textbf{segmentation mask}. In computer vision, the term mask refers to a binary image $M_{01}(A) \in \{0, 1\}$ that hides (masks) regions in another image producing a masked image $I_m(A) = I(A) M_{01}(A)$. In the context of deep learning-based image segmentation, the terms segmentation map and segmentation mask are often used interchangeably.
 
@@ -477,21 +477,51 @@ nnU-Net first calculates various parameters about the data distribution such as 
  
  nnU-Net also makes it plainly obvious how much of an impact preprocessing and parameter tuning can have on model results when training on small datasets. This is one of the central premises of this thesis and is what allows us to achieve data efficiency with small neural networks.
  
- \subsubsection{Other U-Net Variants}
+ \subsubsection{U-Net++}
+ 
+ U-Net has motivated many variants over the years that are state-of-the-art models for a variety of tasks in medical image segmentation. In this section, we will cover the most seminal of these U-Net modifications, however, there are many more presented in the literature.
+ 
+ In the standard U-Net, the skip connections, i.e. the connections between the outputs of the encoder layers and inputs to the decoder layers, are simple concatenation operations. The outputs are placed to the beginning of the input matrix. However, there is an opportunity here to further combine the two in more complex ways. Furthermore, U-Net only combines features at the same level of encoder and decoder. There is, then, an opportunity to enhance U-Net by giving each decoder layer access to features of multiple encoder layers. U-Net++ \cite{zhou2019unetplusplus} takes advantage of both of these opportunities.
+ 
+ In U-Net++, the skip connections are designed as a set of convolutional layers. Each encoder layer is connected to a decoder layer via several convolutional layers. In addition, each encoder layer's output (except for the first one) is upsampled and given to the skip connection of the earlier layer as an additional input to the skip convolutional layers. The outputs of the skip connections themselves are also upscaled and given to the next corresponding decoder layer. What results is a much more complex network where each decoder layer is receives features not just from its corresponding encoder layer but for every encoder layer deeper than the corresponding one. Visually, this is presented in \figref{fig:unetpp-arch}.
+ 
+ \begin{figure}[h!]
+ \centering
+ \includegraphics[width=\linewidth]{images/unetpp-arch}
+ \caption{A comparison between U-Net (left) and U-Net++ (right). Each node in the graph represents convolutional layers. The dashed arrows represent skip connections, while full arrows are downsampling or upsampling operations. \cite{zhou2019unetplusplus}}
+ \label{fig:unetpp-arch}
+ \end{figure}
+ 
+There are several advantages to U-Net++ over U-Net. Each decoder layer has access to multi-scale features of the input image and thus can produce more accurate outputs. In addition, U-Net++ can be seen as multiple U-Nets of varying depths. This also improves the time it takes the network to converge when compared to a U-Net of similar depth. Further, instead of finding the optimal U-Net depth, due to the flexibility of neural networks, in U-Net++ the optimal network depth is learned via the parameters of the network. U-Net++ results in a more flexible architecture as less design decisions need to be made by hand. However, U-Net++ still has a large parameter count and does not necessarily improve data efficiency. In some cases, the performance advantages achieved by using U-Net++ can be surpassed using a U-net with better data preprocessing and a well-tuned network \cite{isenseeNnUNetSelfconfiguringMethod2021}.
 
-FCN
-UNET
-unet++
-double unet?
-Mask RCNN
-PSPNet
-PAN
-MA-Net
-DeepLab
-DeepLabV3
+\subsection{Mask R-CNN}
+
+Earlier in the chapter we mentioned that CNN-based segmentation networks generally consist of encoder and decoder stages. In segmentation networks, as seen in U-Net and other architectures, the decoder branch progressively upsamples the features map and builds out a segmentation map using convolutional layers. This differs in object detection networks.
+
+Object detection aims to find the location of an object in an image. Instead of classifying each pixel as in segmentation, object detection usually aims to find a bounding box of the object. Therefore, instead of producing segmentation maps, object detection networks generally produce the coordinates of the object's bounding box. In technical terms, the output is not an image but rather a vector of four numbers for each object. As such, the decoders in object detection networks are usually much shallower and employ fully connected layers instead of convolutional layers. 
+
+However, CNN-based object detection and segmentation networks still use the same encoders. Therefore it is possible to combine object detection and segmentation into a single network by using two decoder branches --- this is done by Mask R-CNN \cite{heMaskRCNN2017b}.
+
+In Mask R-CNN, a standard CNN encoder is used to encode a given image into a feature map. This feature map is then given to two separate decoder branches. One branch consists of convolutional layers and upsampling to produce a segmentation map, just like in other segmentation CNNs. The other branch consists of downsampling and fully connected layers in order to produce a bounding box and class label for each object on the image. This means that, for each object, the network outputs a bounding box, a class label as well as a segmentation mask for that object. The network is trained using a combination of segmentation, detection, and classification loss functions such that all three tasks are optimized jointly.
+
+The three tasks have synergy between them, as the information learned for e.g. classifying an object is relevant to its detection (for instance, parrots are more likely to be purple than dogs). Similarly, by using a bounding box the segmentation decoder can only focus on the relevant portion of the image and be invariant to the scale of the object on the image. Jointly learning the three tasks results in better performance on each than training them using separate networks. Mask R-CNN, however, due to its relative complexity, presents challenges when trained on very small datasets compared to simpler segmentation-focused architectures like U-Net.
+
+\subsection{Other Notable Segmentation CNNs}
+
+One of the key challenges of CNN-based segmentation is the tradeoff between spatial information and feature complexity. As the network increases the feature map depth and decreases width and height, spatial information is erased but more complex features can be detection on the image. For segmentation, however, both sources of information are necessary. U-Net solves this problem using skip connections, but there are many other ways to combine features at various spatial scales. 
+
+One approach is by using pyramid pooling, as is suggested in PSPNet \cite{zhao2017pspnet}. PSPNet first employs a standard decoder to derive a feature map. This feature map is then upscaled to various scales, and each scale go through convolutional layers to further decode each scale separately. The outputs of these layers are all upsampled to the same spatial size, concatenated together, and given to a final set of convolutional layers that produces a segmentation map.
+
+Pyramid pooling is also employed by DeepLabV3 \cite{chen2017rethinking} albeit in a different way. Like in PSPNet, the encoder first encodes the image into a feature map. This feature map then goes through a series of parallel convolutional layers that each use an atrous convolution. Atrous convolution, also known as dilated convolution, works by dilating the kernel such that there are gaps between the kernel values. During each sliding window step, the gaps are ignored and otherwise a regular convolution procedure is done by multiplying and summing the overlapping values. This allows the kernel to access a larger region of the image without having to increase the number of parameters in the network. In DeepLabV3, each of the parallel layers has a different number of gap pixels between each kernel element. This produces features at different scales that are all upsampled and concatenated together to be further decoded into a segmentation map.
+
+MA-Net \cite{manet} attempts to combine multi-scale features using an attention mechanism. Instead of concatenating the skip connections as U-Net does, MANet introduces a multi-scale attention block. This block aims to capture the interdependencies of different features to focus on more salient ones before they are concatenated to the decoder layer input. In addition, the last decoder layer goes through a position-wise attention block that aims to emphasize features in important locations on the image. MA-Net was applied to the task of liver tumor segmentation in CT images reaching performance improvements over both U-Net and U-Net++.
+
+\section{Fully Connected Transformers for Medical Image Segmentation}
 
 
-\subsection{Balancing Inductive Bias}
+
+
+
 
 
 

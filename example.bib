@@ -68,6 +68,15 @@
   file = {/Users/marinbenc/Zotero/storage/DKRMCWRA/Calabrese et al_2022_The University of California San Francisco Preoperative Diffuse Glioma MRI.pdf;/Users/marinbenc/Zotero/storage/UADUEREK/2109.html}
 }
 
+@misc{chen2017rethinking,
+  title = {Rethinking Atrous Convolution for Semantic Image Segmentation},
+  author = {Chen, Liang-Chieh and Papandreou, George and Schroff, Florian and Adam, Hartwig},
+  year = {2017},
+  eprint = {1706.05587},
+  primaryclass = {cs.CV},
+  archiveprefix = {arxiv}
+}
+
 @misc{choHowMuchData2016,
   title = {How Much Data Is Needed to Train a Medical Image Deep Learning System to Achieve Necessary High Accuracy?},
   author = {Cho, Junghwan and Lee, Kyewook and Shin, Ellie and Choy, Garry and Do, Synho},
@@ -134,6 +143,18 @@
   file = {/Users/marinbenc/Zotero/storage/TUQV6DIR/Edlund et al_2021_LIVECell—A large-scale dataset for label-free live cell segmentation.pdf}
 }
 
+@inproceedings{fasterRCNN,
+  title = {Faster {{R-CNN}}: {{Towards}} Real-Time Object Detection with Region Proposal Networks},
+  booktitle = {Proceedings of the 28th International Conference on Neural Information Processing Systems - Volume 1},
+  author = {Ren, Shaoqing and He, Kaiming and Girshick, Ross and Sun, Jian},
+  year = {2015},
+  series = {{{NIPS}}'15},
+  pages = {91--99},
+  publisher = {{MIT Press}},
+  address = {{Cambridge, MA, USA}},
+  abstract = {State-of-the-art object detection networks depend on region proposal algorithms to hypothesize object locations. Advances like SPPnet [7] and Fast R-CNN [5] have reduced the running time of these detection networks, exposing region proposal computation as a bottleneck. In this work, we introduce a Region Proposal Network (RPN) that shares full-image convolutional features with the detection network, thus enabling nearly cost-free region proposals. An RPN is a fully-convolutional network that simultaneously predicts object bounds and objectness scores at each position. RPNs are trained end-to-end to generate high-quality region proposals, which are used by Fast R-CNN for detection. With a simple alternating optimization, RPN and Fast R-CNN can be trained to share convolutional features. For the very deep VGG-16 model [19], our detection system has a frame rate of 5fps (including all steps) on a GPU, while achieving state-of-the-art object detection accuracy on PASCAL VOC 2007 (73.2\% mAP) and 2012 (70.4\% mAP) using 300 proposals per image. Code is available at https://github.com/ShaoqingRen/faster\textsubscript{r}cnn.}
+}
+
 @book{fosbinder2011essentials,
   title = {Essentials of Radiologic Science},
   author = {Fosbinder, R. and Orth, D.},
@@ -143,20 +164,18 @@
   lccn = {2010030972}
 }
 
-@misc{heMaskRCNN2018,
+@inproceedings{heMaskRCNN2017b,
   title = {Mask {{R-CNN}}},
-  author = {He, Kaiming and Gkioxari, Georgia and Doll{\'a}r, Piotr and Girshick, Ross},
-  year = {2018},
-  month = jan,
-  number = {arXiv:1703.06870},
-  eprint = {1703.06870},
-  primaryclass = {cs},
-  publisher = {{arXiv}},
-  urldate = {2023-10-03},
-  abstract = {We present a conceptually simple, flexible, and general framework for object instance segmentation. Our approach efficiently detects objects in an image while simultaneously generating a high-quality segmentation mask for each instance. The method, called Mask R-CNN, extends Faster R-CNN by adding a branch for predicting an object mask in parallel with the existing branch for bounding box recognition. Mask R-CNN is simple to train and adds only a small overhead to Faster R-CNN, running at 5 fps. Moreover, Mask R-CNN is easy to generalize to other tasks, e.g., allowing us to estimate human poses in the same framework. We show top results in all three tracks of the COCO suite of challenges, including instance segmentation, bounding-box object detection, and person keypoint detection. Without bells and whistles, Mask R-CNN outperforms all existing, single-model entries on every task, including the COCO 2016 challenge winners. We hope our simple and effective approach will serve as a solid baseline and help ease future research in instance-level recognition. Code has been made available at: https://github.com/facebookresearch/Detectron},
-  archiveprefix = {arxiv},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition},
-  file = {/Users/marinbenc/Zotero/storage/78ZMVALZ/He et al_2018_Mask R-CNN.pdf;/Users/marinbenc/Zotero/storage/RBRIFKSN/1703.html}
+  booktitle = {2017 {{IEEE International Conference}} on {{Computer Vision}} ({{ICCV}})},
+  author = {He, Kaiming and Gkioxari, Georgia and Dollar, Piotr and Girshick, Ross},
+  year = {2017},
+  month = oct,
+  pages = {2980--2988},
+  publisher = {{IEEE}},
+  address = {{Venice}},
+  doi = {10.1109/ICCV.2017.322},
+  urldate = {2023-10-09},
+  isbn = {978-1-5386-1032-9}
 }
 
 @misc{irvinCheXpertLargeChest2019,
@@ -306,11 +325,14 @@
   file = {/Users/marinbenc/Zotero/storage/XEEL69CF/Mahabadi et al_2017_Cardiac computed tomography-derived epicardial fat volume and attenuation.pdf}
 }
 
-@misc{matterport_maskrcnn_2017,
-  title = {Mask {{R-CNN}} for Object Detection and Instance Segmentation on {{Keras}} and {{TensorFlow}}},
-  author = {Abdulla, Waleed},
-  year = {2017},
-  publisher = {{Github}}
+@article{manet,
+  title = {{{MA-Net}}: {{A}} Multi-Scale Attention Network for Liver and Tumor Segmentation},
+  author = {Fan, Tongle and Wang, Guanglei and Li, Yan and Wang, Hongrui},
+  year = {2020},
+  journal = {IEEE access : practical innovations, open solutions},
+  volume = {8},
+  pages = {179656--179665},
+  doi = {10.1109/ACCESS.2020.3025372}
 }
 
 @misc{nguyen2020vindrcxr,
@@ -446,4 +468,19 @@
   urldate = {2023-09-27},
   isbn = {978-1-5386-1311-5},
   file = {/Users/marinbenc/Zotero/storage/IAH26LKM/Sobhaninia et al_2019_Fetal Ultrasound Image Segmentation for Measuring Biometric Parameters Using.pdf}
+}
+
+@inproceedings{zhao2017pspnet,
+  title = {Pyramid Scene Parsing Network},
+  booktitle = {{{CVPR}}},
+  author = {Zhao, Hengshuang and Shi, Jianping and Qi, Xiaojuan and Wang, Xiaogang and Jia, Jiaya},
+  year = {2017}
+}
+
+@article{zhou2019unetplusplus,
+  title = {{{UNet}}++: {{Redesigning}} Skip Connections to Exploit Multiscale Features in Image Segmentation},
+  author = {Zhou, Zongwei and Siddiquee, Md Mahfuzur Rahman and Tajbakhsh, Nima and Liang, Jianming},
+  year = {2019},
+  journal = {IEEE Transactions on Medical Imaging},
+  publisher = {{IEEE}}
 }
