@@ -1,33 +1,32 @@
 % Kapitel 1
-
+	
 \chapter{Introduction}
 \label{chap:introduction}
 
-Medical image segmentation, the process of delineating one region of the image such as cancerous tissues from the rest of the image, is a crucial step in computer-assisted medical image analysis. Whether the ultimate goal is surgical planning \cite{selleAnalysisVasculatureLiver2002}, diagnosis \cite{devunooruDeepLearningNeural2021}, performing measurements \cite{sobhaniniaFetalUltrasoundImage2019}, or doing population-level research \cite{bastarrikaRelationshipCoronaryArtery2010}, segmentation is often the first step in understanding 2D and 3D medical images.
-
-Neural networks have become the standard tool to achieve biomedical image segmentation in almost all problem areas including, among others, segmenting organs or specific tissues from CT, MRI, or X-ray images \cite{antonelliMedicalSegmentationDecathlon2022}; cells from microscopic images \cite{edlundLIVECellLargescaleDataset2021}; and skin lesions from dermatoscopic images \cite{codellaSkinLesionAnalysis2019c}.
-
-While achieving impressive results, these results are highly dependent on the quantity and quality of the training data \cite{choHowMuchData2016}. However, obtaining medical imaging data is challenging due to several reasons. Firstly, capturing medical images is costly both in terms of time and finances. For instance, MRI and CT scanning can take 30 minutes or more and require equipment that is inaccessible to large parts of the world. Secondly, such data is often large in terms of file size and stored in complex systems, increasing the friction of sharing and using the data. Finally, some jurisdictions define medical images as personally identifiable data \cite{lotanMedicalImagingPrivacy2020} and thus require explicit consent for their secondary use for the purpose of training neural networks. While valid and understandable, these patient privacy concerns can limit the use of already existing large databases in medical institutions.
-
-After obtaining a medical image, these images need to be labeled with high-quality delineations of the target region. Such labeling is often done through a tedious and time-consuming process where multiple experts would manually draw curves or polygons on the image. While some labeling methods make this process easier \cite{lutnickIntegratedIterativeAnnotation2019}, each image still needs to be checked by an expert in the field. For challenging problems, this often requires highly trained and experienced specialists.
-
-These challenges make collecting large medical image segmentation datasets infeasible. Therefore, to improve performance and robustness, there is a need to develop data-efficient segmentation methods. Data efficiency, sometimes referred to as sample efficiency, measures how well a model performs with respect to its sample size. Data-efficient models achieve good results given a small amount of data.
-
-This thesis provides an overview of medical image segmentation and efforts to increase its data efficiency. It also presents several novel methods for achieving data efficiency in various contexts. The unifying central principle of these methods is the notion that necessary network capacity (number of parameters) grows with problem complexity. However, higher-capacity networks require a larger amount of data to be trained. The thesis aims to answer the question of how can we transform the data to make the segmentation problem simpler. This would allow us to train networks of lower capacity, and thus ones that are more data efficient. This is achieved using traditional image processing techniques informed by features detected by a neural network, thus combining the two worlds of traditional and neural network-based medical image segmentation.
-
-\section{Contributions of this thesis}
-
-This thesis aims to develop new methods of achieving data efficiency in medical image segmentation. In particular, we propose the following original contributions to the scientific literature:
-
-\begin{enumerate}
-	\item A new biomedical image segmentation method based on polar transform preprocessing with a learned center point.
-	\item An improved method of reducing input image size in neural networks using salient image crops.
-	\item A new neural network architecture for high-resolution image segmentation that combines object detection in low-resolution images and segmentation in high-resolution images.
-	\item A new method of embedding depth information in two-dimensional convolutional neural network input data.
-\end{enumerate}
-
-\section{Organization of the thesis}
-
-\todo{todo}
-
+%Medical image segmentation, the process of delineating one region of the image such as cancerous tissues from the rest of the image, is a crucial step in computer-assisted medical image analysis. Whether the ultimate goal is surgical planning \cite{selleAnalysisVasculatureLiver2002}, diagnosis \cite{devunooruDeepLearningNeural2021}, performing measurements \cite{sobhaniniaFetalUltrasoundImage2019}, or doing population-level research \cite{bastarrikaRelationshipCoronaryArtery2010}, segmentation is often the first step in understanding 2D and 3D medical images.
+%
+%Neural networks have become the standard tool to achieve biomedical image segmentation in almost all problem areas including, among others, segmenting organs or specific tissues from CT, MRI, or X-ray images \cite{antonelliMedicalSegmentationDecathlon2022}; cells from microscopic images \cite{edlundLIVECellLargescaleDataset2021}; and skin lesions from dermatoscopic images \cite{codellaSkinLesionAnalysis2019c}.
+%
+%While achieving impressive results, these results are highly dependent on the quantity and quality of the training data \cite{choHowMuchData2016}. However, obtaining medical imaging data is challenging due to several reasons. Firstly, capturing medical images is costly both in terms of time and finances. For instance, MRI and CT scanning can take 30 minutes or more and require equipment that is inaccessible to large parts of the world. Secondly, such data is often large in terms of file size and stored in complex systems, increasing the friction of sharing and using the data. Finally, some jurisdictions define medical images as personally identifiable data \cite{lotanMedicalImagingPrivacy2020} and thus require explicit consent for their secondary use for the purpose of training neural networks. While valid and understandable, these patient privacy concerns can limit the use of already existing large databases in medical institutions.
+%
+%After obtaining a medical image, these images need to be labeled with high-quality delineations of the target region. Such labeling is often done through a tedious and time-consuming process where multiple experts would manually draw curves or polygons on the image. While some labeling methods make this process easier \cite{lutnickIntegratedIterativeAnnotation2019}, each image still needs to be checked by an expert in the field. For challenging problems, this often requires highly trained and experienced specialists.
+%
+%These challenges make collecting large medical image segmentation datasets infeasible. Therefore, to improve performance and robustness, there is a need to develop data-efficient segmentation methods. Data efficiency, sometimes referred to as sample efficiency, measures how well a model performs with respect to its sample size. Data-efficient models achieve good results given a small amount of data.
+%
+%This thesis provides an overview of medical image segmentation and efforts to increase its data efficiency. It also presents several novel methods for achieving data efficiency in various contexts. \todo{expand on this} The unifying central principle of these methods is the notion that necessary network capacity (number of parameters) grows with problem complexity. However, higher-capacity networks require a larger amount of data to be trained. The thesis aims to answer the question of how can we transform the data to make the segmentation problem simpler. This would allow us to train networks of lower capacity, and thus ones that are more data efficient. This is achieved using traditional image processing techniques informed by features detected by a neural network, thus combining the two worlds of traditional and neural network-based medical image segmentation.
+%
+%\section{Contributions of this thesis}
+%
+%This thesis aims to develop new methods of achieving data efficiency in medical image segmentation. In particular, we propose the following original contributions to the scientific literature:
+%
+%\begin{enumerate}
+%	\item A new biomedical image segmentation method based on polar transform preprocessing with a learned center point.
+%	\item An improved method of reducing input image size in neural networks using salient image crops.
+%	\item A new neural network architecture for high-resolution image segmentation that combines object detection in low-resolution images and segmentation in high-resolution images.
+%	\item A new method of embedding depth information in two-dimensional convolutional neural network input data.
+%\end{enumerate}
+%
+%\section{Organization of the thesis}
+%
+%\todo{todo}
 

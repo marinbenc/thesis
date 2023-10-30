@@ -1,35 +1,44 @@
 \chapter{Neural Network-Based Segmentation of Biomedical Images}
 \label{chap:seg-background}
 
-This chapter introduces biomedical images as well as the process of segmenting them. We will start with a brief overview of the most common types of biomedical images.
+This chapter introduces biomedical images as well as the process of segmenting them. We will first provide an overview of the world of biomedical images and its diverse modalities and imaging techniques. We will touch on the technical details of how these images are stored and used in segmentation algorithms. Then, we will more formally describe the process of image segmentation from traditional segmentation methods to the most current deep learning methods.
 
-Biomedical images are a broad and diverse category of images referring to imaging use for the purposes of biology or medicine. These can range from complex modalities such as CT scans all the way to photographs (such as clinical images or photographs of plants). With such a diverse set of modalities and imaging techniques, biomedical images have a low level of cross-domain consistency. Methods developed for one modality often cannot be used in a different modality without modification. This is especially true for learned models such as neural networks. Biomedical image segmentation networks are notoriously bad at out-of-sample performance, i.e. when evaluated on a different modality than they were trained on. This chapter presents a brief overview of various biomedical imaging modalities and techniques, with a focus on those relevant to the methods presented in this thesis.
+Biomedical imaging covers a wide range of techniques used in both biology and medicine. This includes complex modalities like CT scans and simpler ones like photographs of a patient's skin or plants. Because of this variety, a method designed for one modality might not work for another without changes. So, understanding each modality's specifics is crucial when considering segmentation methods. The next section will provide an overview of different biomedical imaging modalities, focusing on those most relevant to this thesis.
 
 \section{Common Types of Biomedical Images}
 
-Broadly, we may classify biomedical images into 3D and 2D images. 3D images include modalities such as CT and MRI, but also some types of microscopy as well as other techniques. 2D images, among others, include X-rays, most microscopic images, and dermatoscopic images. The images could also be classified by color space. Techniques that visualize the insides of objects such as CT, MRI or X-ray are usually grayscale. On the other hand, camera-based imaging techniques such as dermoscopy or photographs use three or more color channels. As is apparent, biomedical images do not yield themselves to clean classification, so the classification here is only a general descriptive categorization. There are novel techniques that combine different modalities that escape this classification.
+Broadly, we may classify biomedical images into 3D and 2D images. 3D images include modalities such as CT and MRI. Examples of 2D image modalities, among others, include X-ray imaging, most microscopic images, and dermatoscopic images. However, it's worth noting that biomedical images don't always fit neatly into distinct categories. While our classification provides a general overview, there are emerging techniques that merge different modalities, blurring the classification boundaries presented here.
 
 \subsection{3D Modalities}
 
-In medicine, 3D imaging of the patient allows experts to look below the patient's skin. It is hard to overstate the importance of modalities such as CT and MRI on modern medical developments and patient outcomes. These modalities are often captured and stored as voxel-based 3D files, where a voxel is the smallest 3D unit equivalent to a pixel in 3D. They are usually stored alongside patient data such as age, sex, imaging parameters and other relevant information.
+It is hard to overstate the importance of 3D modalities such as CT and MRI in contemporary medical practice, scientific advancements, and patient outcomes. These techniques offer medical professionals a non-invasive window into the patient's body, allowing much safer and more reliable diagnosis, treatment, and surgical planning. 
+
+The foundational principle behind these modalities revolves around emitting a signal capable of penetrating tissues. This signal interacts variably with different tissue types. After transmission through the body, the residual signal is detected and used to create an image. By repeating this process across various planes of the body and leveraging computational algorithms, a 3D volume of the patient's anatomy is constructed. From there, these modalities are often stored as voxel-based 3D files, where a voxel is the smallest 3D unit equivalent to a pixel in 2D images. They are usually stored alongside patient data such as age, sex, imaging parameters, and other relevant information.
+
+In the subsequent sections, we will delve deeper into the specifics of the two predominant 3D biomedical imaging modalities: CT and MRI.
 
 \subsubsection{Computed Tomography (CT)}
 
-Computed tomography is an x-ray-based imaging technique where different planes of the subject are captured and then reconstructed into a 3D image using a process called tomography. CT, as opposed to MRI, uses ionizing radiation that can be harmful in large doses. This makes it important to evaluate the cost and benefit of each scan since each scan presents a risk of harming the subject. In addition, image quality is correlated with radiation dose, and the dose is carefully selected based on the required level of image quality so as to not unnecessarily radiate the subject.
+Computed tomography is an X-ray-based imaging technique where different planes of the subject are captured and then reconstructed into a 3D image using a process called tomography. CT, as opposed to MRI, uses ionizing radiation that can be harmful in large doses. As such, the benefit of each scan should be weighed against potential hazards. Notably, there is a relationship between radiation dose and image quality. The radiation dose has to be carefully balanced to achieve the required image quality without subjecting the patient to undue radiation.
 
-Low-dose and high-dose CT images differ enough to cause issues in the segmentation model's performance across these two domains \todo{cite}. High-quality images result in better neural network models, but their availability is much more limited than low-dose scans.
+This balance between radiation dose and image quality has implications for segmentation methods. Low-dose and high-dose CT images visually differ --- enough to cause issues in the segmentation model's performance across these two domains. High-quality images result in better neural network models, but their availability is much more limited than low-dose scans.
 
-CT can be enhanced using a contrast agent. The contrast agent is usually injected intravenously and is chosen to appear with a high intensity on the resulting image. This makes it easier to delineate blood vessels from surrounding tissue, as is the case e.g. in angiography (CTA).
+Another way to enhance the quality of CT images is the use of contrast agents. Typically administered intravenously, these agents are designed to have a high intensity on the resulting CT image. A common example of this is CT angiography where contrast is used to make it easier to delineate blood vessels from surrounding tissue.
 
-In the image itself, the values of a CT scan are usually stored as $W \times H \times D$ values, where $W$, $H$, and $D$ are the x, y, and z dimensions, respectively. Each value represents a voxel, \textit{volumetric pixel}, in a 3D volume. The voxels are usually not cubes and can have different lengths along each dimension. In the z-axis, the voxel length is known as slice thickness, and it is chosen based on the task at hand. Thinner slices increase the spatial detail in the image, leading to more details in small tissues. However, thinner slices generally also increase the level of noise in the image, so slice thickness is selected to maintain a tradeoff between spatial resolution and level of noise. The resolution along the x- and y-axes is governed by the field of view and the scanner itself.
+CT images are generally stored as $W \times H \times D$ matrices, with each element indicating the grayscale intensity of a voxel (\textit{volumetric pixel}) within the 3D volume. In contrast with regular pixels, voxels can have different lengths along each dimension and usually aren't cubes. The voxel's depth (along the z-axis) is known as slice thickness, and it is chosen based on the task at hand. Thinner slices increase the spatial detail in the image making it easier to see minute details. However, thinner slices generally also increase the noise in the image. Slice thickness is selected to maintain a tradeoff between spatial resolution and level of noise. The width and height of the voxel are governed by the field of view and the scanner itself.
 
-The values of the voxels are usually stored as 12 bit signed integer values. The value corresponds to the attenuation of the X-ray as it passes through the tissue. Denser structures such as bones attenuate the radiation more strongly than adipose tissue, and thus result in higher values. This results in higher-intensity voxels in the resulting CT image. To maintain consistency across scans and machines, the attenuation values are linearly transformed such that air has a value of -1000 while water has a value of 0 at standard pressure temperature, as:
+Voxel values in CT images are typically stored as 12-bit signed integers. These values represent the attenuation of the X-ray as it passes through various tissues. Denser structures such as bones attenuate the radiation more strongly than fat tissue and thus result in higher intensity values.
+
+The values of the voxels are usually stored as 12-bit signed integer values. The value corresponds to the attenuation of the X-ray as it passes through the tissue. Denser structures such as bones attenuate the radiation more strongly than fat tissue and thus result in higher intensity values. 
+
+To maintain consistency across scans and machines, the attenuation values in a CT are linearly transformed. Specifically, air is assigned a value of -1000, while water is attributed a value of 0, under standard temperature and pressure conditions. Mathematically, this transformation is expressed as:
+
 
 \begin{equation}
-	{\operatorname{HU}(\mu)}=1000 \cdot {\frac {\mu -\mu _{\textrm {water}}}{\mu _{\textrm {water}}-\mu _{\textrm {air}}}}
+	{\operatorname{HU}(\mu)}=1000 \cdot {\frac {\mu -\mu _{\textrm {water}}}{\mu _{\textrm {water}}-\mu _{\textrm {air}}}},
 \end{equation}
 
-where $\mu$ is the attenuation value of a voxel, and $\mu _{\textrm {water}}$ and $\mu _{\textrm {air}}$ are attenuation values of water and air, respectively. This transformation is called the Hounsfield unit (HU) scale. When calibrated in this way, the attenuation of each tissue is represented as relative to the attenuation of water, and thus values are standardized across images, CT machines, imaging parameters, and centers. Various tissues broadly fall into Hounsfield unit values as is shown in \tabref{tab:hu-tissues}.
+where $\mu$ is the attenuation value of a given voxel while $\mu_{\textrm {water}}$ and $\mu_{\textrm {air}}$ are attenuation values of water and air, respectively. This transformation is called the \textbf{Hounsfield unit} (HU) scale. Calibration according to this scale ensures that the attenuation of any tissue is always relative to water's attenuation. As a result, values remain standardized across different images, CT machines, imaging parameters, and institutions. The approximate Hounsfield unit values corresponding to various tissues are shown in \tabref{tab:hu-tissues}.
 
 \begin{table}[h!]
 \centering
@@ -47,9 +56,9 @@ where $\mu$ is the attenuation value of a voxel, and $\mu _{\textrm {water}}$ an
 \label{tab:hu-tissues}
 \end{table}
 
-Hounsfield values are a crucial tool in analyzing medical images. Aside from getting a better understanding of what tissues or objects are present, measured Hounsfield values can have diagnostic significance. For instance, clotted blood has a higher HU value than unclotted blood, and so the Hounsfield value is used as an indicator of intracranial hemorrhage \cite{kamalianComputedTomographyImaging2016}. Another example is using the average HU value of epicardial fat as a sign of myocardial infarction \cite{mahabadiCardiacComputedTomographyderived2017}.
+The Hounsfield unit values play a pivotal role in the analysis of CT scans. Beyond facilitating the identification of specific tissues or structures, variations in Hounsfield values of the same tissues across patients or scans can hold significant diagnostic implications. For example, clotted blood exhibits a higher HU value than its unclotted counterpart, establishing the Hounsfield value as a potential marker for intracranial hemorrhage \cite{kamalianComputedTomographyImaging2016}. In another context, the mean HU value of epicardial fat can be indicative of myocardial infarction \cite{mahabadiCardiacComputedTomographyderived2017}.
 
-Since the human eye recognizes much fewer gray levels than are available on a CT scan, the scan is typically windowed when viewed by an expert. Windowing refers to the process of shrinking the value range using two thresholds ($t_1$, $t_2$) as:
+The range of gray levels in a CT scan is far wider than what the human eye can discern. Therefore, it's standard practice for professionals to employ a technique called ``windowing'' when reviewing scans. In essence, windowing compresses the value range by applying two specific thresholds ($t_1$, $t_2$), as defined by:
 
 \begin{equation}
 y(x) = 
@@ -60,7 +69,7 @@ y(x) =
     \end{cases}
 \end{equation}
 
-where $x$ is a given HU value. This allows the software to visually stretch the remaining range of gray values to more easily see smaller differences in attenuation, as seen in \figref{fig:windowing-example}. This technique is not limited to human experts. It is common to window CT image inputs into segmentation neural networks. For instance, if segmenting fat, it is often beneficial to discard all voxels outside of the fat tissue range \cite{bencevicRecentProgressEpicardial2022}.
+where $x$ is a given HU value. This allows CT visualization software to visually stretch the remaining range of gray values, thus enhancing the differences in attenuation, as seen in \figref{fig:windowing-example}. This technique isn't limited to human experts; it finds applications in image segmentation as well. It is common to window CT image inputs into segmentation neural networks. For example, if segmenting fat, it is often beneficial to discard all voxels outside of the fat tissue range \cite{bencevicRecentProgressEpicardial2022}, reducing the number of voxels that the network needs to process.
 
 \begin{figure}[h]
  \centering
@@ -71,13 +80,15 @@ where $x$ is a given HU value. This allows the software to visually stretch the 
 
 \subsubsection{Magnetic Resonance Imaging (MRI)}
 
-Much like CT, MRI visualizes the insides of an object using a voxel-based image. MRI works by first applying a strong magnetic field such that protons align parallel to the z-axis. The protons are then excited using a radio frequency pulse which causes them to become misaligned. After the pulse, the protons gradually return back to alignment and induce an electric current. Unlike CT which measures the attention of X-rays, MRI measures this induced current while protons are returning to equilibrium alignment. The time to reach the equilibrium state depends on the specific tissue type. The use of magnetic fields instead of ionizing radiation means that MRI does not cause harm to the patient due to radiation. Unlike CT, MRI values are not standardized across scans and MRI machines, and the specific values can not be used diagnostically across scans, only in relation to surrounding tissues.
+Much like CT, MRI produces voxel-based images that visualize the insides of an object. The process of obtaining an MRI image can be separated into several steps: 
 
-MRI generally provides a better contrast than CT, especially in soft tissues. This makes MRI the gold standard of imaging for a large number of tissues and diagnostic procedures. Much like CT, this contrast can be further enhanced using contrast agents. However, MRI imaging is slower when compared to CT which causes patient discomfort, especially for claustrophobic and non-neurotypical patients. MRIs are also not possible in cases where the subject has non-removable magnetic objects such as coronary pacemakers and other implants.
+\begin{enumerate}
+	\item The machine applies a strong magnetic field to the subject. This causes protons in the body to align in the same direction --- parallel to the z-axis.
+	\item Next, the machine emits a brief radio frequency pulse, perturbing the aligned protons and causing them to deviate from their uniform alignment.
+	\item After the pulse is turned off, the protons gradually return back to alignment. As they realign, the movement of their positive charge induces an electric current in a coil inside the MRI machine. In contrast to CT, which gauges the attenuation of X-rays, MRI measures this induced current.
+\end{enumerate}
 
-The voxels in an MRI, much like a CT, are generally rectangular solids and can different in the x-, y- and z-axis lengths. The resolution is government by the field of view, the MRI scanner as well as imaging parameters. Generally, increasing resolution leads to higher levels of noise and a longer acquisition time. Thus, a compromise needs to be determined for each imaged tissue and diagnostic task. 
-
-The voxel values are weighted based on the time to reach the equilibrium state which is achieved through two independent processes called T1 and T2. T1 measures the time it takes the protons to reach equilibrium longitudinal magnetization, while T2 measures the time to regain its equilibrium transverse magnetization. Different tissues regain equilibrium states in T2 and T2 at different rates, so MRI images can be weighted according to T1 or T2 time. Water has a long T1 time while fat has a short T1 time, so in T1-weighted images fat appears with a higher intensity than water. On the other hand, water has a high T2 and appears as high-intensity on T2-weighted images. This can be seen in \figref{fig:t1-t2-example}.
+The time to reach the equilibrium state depends on the specific tissue type, so the measured current allows the differentiation of tissues in the image. The equilibrium state is achieved through two independent processes: T1 and T2. T1 measures the time it takes the protons to reach equilibrium longitudinal alignment, while T2 measures the time to regain its equilibrium transverse alignment. Different tissues return to their equilibrium states at varying rates for T1 and T2, enabling two different types of MRI images: T1- or T2-weighted. For example, water exhibits a long T1 time, while fat has a shorter one. This means that in T1-weighted images, fat appears brighter than water, while the opposite is true in T2-weighted images. This can be seen in \figref{fig:t1-t2-example}.
 
 \begin{figure}[h]
  \centering
@@ -85,72 +96,82 @@ The voxel values are weighted based on the time to reach the equilibrium state w
  \caption{An example T1-weighted MRI (left) and a T2-weighted MRI (right) showing a diffuse glioma. \cite{calabreseUniversityCaliforniaSan2022}}
  \label{fig:t1-t2-example}
  \end{figure}
-
-The relative differences in T1 and T2 images make the two weightings more or less beneficial for imaging certain tissues. T1 weighting is useful, among others, for identifying fatty tissue or detecting liver lesions. T2 weighting is useful, among others, for identifying white matter lesions or edemas.
+ 
+ The relative differences in T1 and T2 images make each more suitable for imaging specific tissues. For instance, T1-weighted images allow for identifying fatty tissue or detecting liver lesions, while T2-weighted images are more effective for identifying white matter lesions and edemas.
+  
+ The voxels in an MRI, much like a CT, are generally rectangular solids and can be different in width, height, and depth. The image resolution is determined by several factors, including the scanner's field of view, the MRI machine itself, and specific imaging parameters. Generally, increasing resolution leads to higher levels of noise and a longer acquisition time. Consequently, an optimal balance between resolution, noise, and scan time must be found, tailored to the tissue being imaged and the specific diagnostic objective.
+ 
+ MRI has several advantages over CT. For one, MRI usually offers superior contrast, especially when imaging soft tissues. This has established MRI as the gold standard for a large number of diagnostic procedures. Much like with CT scans, MRI contrast can be further enhanced using contrast agents. Furthermore, as MRI uses magnetic fields instead of ionizing radiation, it poses no radiation-induced risks to patients.
+ 
+However, MRI has its own set of limitations. MRI scans typically take longer than CT scans, which can be uncomfortable for patients, particularly those who are claustrophobic or have mental and cognitive disabilities. MRI is contraindicated for individuals with certain non-removable magnetic objects, like coronary pacemakers and specific implants. A notable drawback is the lack of standardization in MRI values across different scans and machines. Contrary to CT scans, an MRI voxel's intensity isn't consistent across different scans and can only be reliably interpreted in relation to adjacent tissue in the same scan.
 
 \subsection{2D Modalities}
 
-While 3D modalities offer a detailed view of a subject, they are often time-consuming and invasive in the case of CT. 2D modalities such as X-ray and diagnostic ultrasound are often quicker and more available, making them ideal for screening and simpler diagnostics. The same reason also results in a much larger amount of publicly available datasets in 2D modalities compared to 3D ones. Segmentation, object detection, and classification in X-ray images, for instance, is one of the most active fields in computerized medical image analysis research \cite{nguyen2020vindrcxr, irvinCheXpertLargeChest2019}.
+3D modalities, while offering a detailed view of a subject, often entail time-consuming and infeasible procedures in common clinical use. 2D modalities such as X-ray and diagnostic ultrasound are often quicker and more readily available. This ease and speed of 2D modalities contribute to the large amount of publicly available datasets in 2D modalities compared to 3D ones. For example, analyzing X-ray images is one of the most active fields in computerized medical image analysis research \cite{nguyen2020vindrcxr, irvinCheXpertLargeChest2019}.
 
 \subsubsection{X-ray imaging}
 
-Similarly to CT, X-ray imaging or radiography uses ionizing radiation emitted on one side of the object and detected on the other. The intensity of the image corresponds to the attenuation of the emitted radiation. Denser materials appear with a higher intensity on the resulting image due to their high attenuation.
+X-ray imaging, also known as radiography, can be thought of as the 2D equivalent of a CT as it also relies on ionizing radiation. To obtain an image, X-rays are emitted on one side of the subject and captured on the opposite side. The intensity of the pixels corresponds to the attenuation of the emitted radiation. Denser materials appear with a higher intensity on the resulting image due to their high attenuation.
 
-When capturing an X-ray image, an expert manually positions the generator. The position of the generator and the object determine the magnification and field of view in the image. If the distance between the detector and the object is larger than the distance between the generator and the object, the object will appear larger on the resulting image. This magnification means that the scale on an X-ray image is relative to the image itself and so objective measurements cannot be made on an X-ray.
+When capturing an X-ray image, an expert manually positions the generator. The relative positioning of this generator and the subject directly influences the image's magnification and field of view. If the subject is closer to the detector than the generator, it will appear magnified on the resulting image. Such magnification makes the scale on an X-ray image non-standard and precludes the possibility of making objective length and area measurements.
 
-The expert also determines various parameters that ultimately change the quality and quantity of the X-ray beams. The quality measures the ability of an X-ray to penetrate tissue and is proportional to the X-ray energy level. Quantity, on the other hand, measures the number of photons that constitute the beam. Increasing the beam quality allows for imaging denser tissues such as bones or through large bodies but results in lower contrast in soft tissues. This means that intensity in X-rays is not standardized across images like it is in CT, and so there is no objective unit of measuring X-ray intensity.
+The expert also determines various parameters that ultimately change the quality and quantity of the X-ray beams. The quality measures the ability of an X-ray to penetrate tissue and is proportional to the X-ray energy level. Quantity, on the other hand, measures the number of photons constituting the beam. A high beam quality is advantageous for imaging denser tissues, like bones, or traversing larger volumes. However, high-quality beams reduce the contrast in soft tissues. Owing to the variability introduced by these parameters, X-ray image intensities lack the uniform standardization found in CT scans. Consequently, there's no standardized unit for gauging X-ray intensity across images.
 
 \subsubsection{Dermatological images (clinical and dermatoscopic)}
 
-An increasingly active application of deep learning-based models is in dermatological applications, namely skin lesion analysis. This is driven in part by organisations such as the International Skin Imaging Collaboration (ISIC) that curates large dermatological datasets \cite{rotembergPatientcentricDatasetImages2021}. These datasets consists of clinical and dermatoscopic images. Clinical images are regular photographs of skin lesions, while dermatoscopic images are captured with a digital epiluminescence dermatoscope. This dermatoscope consists of a camera attached to a magnifying lens with a built-in light source. It allows capturing detailed and magnified images of a skin lesion while filtering out skin reflections.
+The application of deep learning models to dermatology, especially skin lesion analysis, has gained significant momentum. This is driven in part by organizations such as the International Skin Imaging Collaboration (ISIC) which curates large dermatological datasets \cite{rotembergPatientcentricDatasetImages2021}. These datasets consist of two primary types of dermatological images: dermatoscopic and clinical. Clinical images are regular photographs of skin lesions, while dermatoscopic images are captured with a device called a digital epiluminescence dermatoscope. A dermatoscope consists of a camera attached to a magnifying lens with a built-in light source. It allows capturing detailed and magnified images of a skin lesion while filtering out skin reflections.
 
-The primary application of deep learning in dermatological images is for classification --- predicting whether a lesion is benign or not or detecting the type of skin disease. However, skin lesion segmentation plays a role in the detection as delineating the skin lesion border can be used to provide more objective attributes of the skin lesion \cite{rotembergPatientcentricDatasetImages2021}.
+The primary application of deep learning in dermatological images is for classification, e.g. predicting whether a lesion is benign or not or detecting the type of skin disease. However, by precisely outlining the boundary of a skin lesion, segmentation techniques can yield more consistent and objective descriptors of the lesion, aiding classification algorithms \cite{rotembergPatientcentricDatasetImages2021}.
 
 \subsubsection{Microscopy}
 
-In biomedicine, one of the most used applications of computer vision is in segmenting, analyzing, and quantifying microscopic images. This encompasses various tasks in digital pathology such as detecting cancerous cells, segmenting nuclei, or counting white blood cells.
+In biomedicine, one of the predominant uses of computer vision is in segmenting, analyzing, and quantifying microscopic images \cite{khanAutoCellSegRobustAutomatic2018}. This covers a broad array of tasks in digital pathology, from identifying cancerous cells and segmenting nuclei to quantifying white blood cell counts.
 
-Publicly available microscopic images of cells are abundant due to how frequently they are captured and that they don't contain any personally identifiable information. However, these images sometimes present a challenge due to their size. Microscopic images can have an area of multiple megapixels, far too large for current deep-learning models. Therefore, the images are often split into patches, downscaled or analyzed in a coarse-to-fine manner \cite{jhaInstanceSegmentationWhole2021a}.
+Publicly available microscopic images of cells are abundant due to how frequently they are captured and that they don't contain any personally identifiable information. However, the large size of these images can present a challenge. Often spanning multiple megapixels, they exceed the capacity of current deep-learning models and machines. Consequently, to make them more manageable, these images are typically divided into smaller patches, downscaled, or processed using a coarse-to-fine approach \cite{jhaInstanceSegmentationWhole2021a}.
 
-With those modalities in mind, we can now cover the process of segmenting the images.
+As can be seen, both 2D and 3D biomedical images are exceedingly diverse in their appearance, use, technical details, and format. Yet, many segmentation techniques prove versatile enough to be applied across different modalities. In the next section, we will provide a general outline of how image segmentation works, highlighting commonly used methods.
 
 \section{Image Segmentation: From Images to Segmentation Maps}
 
-Image segmentation is the process of categorizing each pixel (or voxel) of an image as belonging to one of several predefined classes. For instance, a 3-class problem of segmenting CT images could be liver, liver tumour, and background. Each class gets assigned an arbitrary class label, such as `0', `1' and `2' for the background, liver and tumour, respectively. The segmentation output is another image of the same size, only the value for each voxel corresponds to the class label of that voxel. Voxels belonging to the liver would each have a value of `1', etcetera. This resulting image is called a \textbf{segmentation map}, since it acts as a map for the original image. In medical image segmentation commonly only target is segmented, which is called \textbf{binary segmentation} since we are using two classes, the target, and the background.
+Image segmentation is the process of categorizing each pixel (or voxel) of an image into one of several predefined classes. Consider a 3-class segmentation scenario for CT images, with classes being liver, liver tumor, and background. Each of these classes is assigned a distinct numeric identifier, termed the \textbf{class label}. For illustration, the labels could be `0', `1', and `2' for the background, liver, and tumor respectively. The segmentation process outputs an image identical in dimensions to the original but with each pixel's value corresponding to the class label of that position in the original image. As an example, pixels corresponding to the liver will all have the value `1'. This resulting image is called a \textbf{segmentation map} since it, like a map, delineates important regions on the original image. 
 
-However, multi-class segmentation problems can be reduced to a set of binary segmentation problems where a separate class-vs-background segmentation map is constructed for each class. Mathematically, given a set of $K$ classes, and an input $d$-dimensional image of $N$ channels $I(A)$, $I \in \mathbb{R}^{N}$, $A \in \mathbb{Z}_{\geq0}^d$ where A is a vector representing the location of each voxel, the segmentation map can be expressed as a function $M : \mathbb{Z}_{\geq0}^d \rightarrow \mathbb{R}^K$ mapping each pixel location to a vector of class probabilities:
+In medical image segmentation, it's common to extract only a single tissue type against the backdrop, a technique known as \textbf{binary segmentation}. Additionally, multi-class segmentation challenges can be decomposed into multiple binary segmentation tasks, with each class having its individual class-vs-background segmentation map. Therefore, one can frame any segmentation problem as a set of binary segmentation problems.
+
+Mathematically, given a set of $K$ classes, and an input $d$-dimensional image of $N$ channels $I(A)$, $I \in \mathbb{R}^{N}$, $A \in \mathbb{N}^d$ where A is the location of each voxel, the segmentation map $M : \mathbb{N}^d \rightarrow \mathbb{R}^K$ maps each pixel location to a vector of class probabilities:
 
 \begin{equation}
 M(A) = (\;\prg{C_1}{I(A)},\; \prg{C_2}{I(A)},\; \cdots\!,\;  \prg{C_{K}}{I(A)}\;),
 \end{equation}
 
-where $\operatorname{Pr} (C_i \!\mid\! I(A))$ denotes the probability that the voxel $I(A)$ contains an object of class $C_i$. Expressed this way, the segmentation map is a $K$-channel image of the same size as $I$, where each channel corresponds to a probability map of finding an object of a given class at a given voxel location. 
+where $\operatorname{Pr} (C_i \!\mid\! I(A))$ is the probability that the voxel $I(A)$ contains an object of class $C_i$. Expressed this way, the segmentation map is a $K$-channel image of the same size as $I(A)$. Each channel of the image corresponds to a probability map of finding an object of a given class at a given voxel location. 
 
-In the case of binary segmentation where $C_1$ is the background and the $C_2$ is the target object, $\prg{C_2}{I(A)} = 1 - \prg{C_1}{I(A)}\; \forall A$ and therefore $M(A)$ can be treated as a scalar value $M(A) = \prg{C_2}{I(A)}$. This representation is very common as many medical image segmentation problems are binary segmentation problems, such as segmenting organs, cell nuclei, skin lesions, etc.
+In binary segmentation, where $K=2$, the classes can be denoted as $C_1$ for the background and $C_2$ for the target object. Given this, for all voxel locations $A$, the relation $\prg{C_2}{I(A)} = 1 - \prg{C_1}{I(A)}$ holds true. Therefore $M(A)$ simplifies to a scalar value $M(A) = \prg{C_2}{I(A)}$. This representation is very common in medical image segmentation problems such as segmenting organs, cell nuclei, and skin lesions, among others.
 
-Ultimately, to delineate tissues the segmentation masks $M(A)$ are commonly binarized such that voxels containing the target object become `1' and the background becomes `0'. This is why $M(A)$ is also commonly called a \textbf{segmentation mask}. In computer vision, the term mask refers to a binary image $M_{01}(A) \in \{0, 1\}$ that hides (masks) regions in another image producing a masked image $I_m(A) = I(A) M_{01}(A)$. In the context of deep learning-based image segmentation, the terms segmentation map and segmentation mask are often used interchangeably.
+Often, the next step in the process is to binarize the segmentation map $M(A)$. Voxels corresponding to the target object are set to `1', while the background is marked as `0'. In such cases, $M(A)$ is frequently termed a \textbf{segmentation mask}. In computer vision, ``mask'' refers to a binary image $M_{01}(A) \in \{0, 1\}$ that hides (masks) regions in another image, resulting in a masked image $I_m(A) = I(A) M_{01}(A)$. Within the context of deep learning-based image segmentation, the terms ``segmentation map'' and ``segmentation mask'' are often used interchangeably.
 
-What follows is a broad overview of commonly used medical image segmentation methods, from traditional ones based on heuristics to complex model-based approaches broadly used today.
+Having laid the foundation for the mathematical framework of image segmentation, we can now transition to exploring specific segmentation techniques. The next section presents an overview of common segmentation methods, from traditional ones based on heuristics to complex model-based approaches prevalent today.
 
 \subsection{Traditional Image Processing Methods}
 
-For the purpose of this review, traditional image processing methods include techniques like thresholding, region growing, active contours, as well as morphological operations. These are often combined with heuristic strategies to refine the segmentation area, establish an initial contour, or enhance advanced methods. Heuristics are best-practice rules derived from previous samples and experiences. For instance, the longest component in the bone intensity range of an X-ray image is usually the femur.
+Despite the popularity of deep learning, traditional techniques, rooted in fundamental image characteristics, still play a vital role in modern medical image segmentation. Traditional techniques are often used as methods for pre-processing and data augmentation, as well as refining deep learning model outputs. As we will show later in the dissertation, traditional methods can increase the robustness and data efficiency of deep learning-based segmentation models.
 
-These methods are usually developed with a very specific application in mind and are hard to translate to other tasks and domains without significant changes. They are also sensitive to parameter selection and properties of the image such as intensity level. However, since they don't use a learning component they are easily explainable and their limitations can be known ahead of time. Their validity can also be confirmed using fewer samples than is the case for learning-based methods.
+Rather than relying on data-intensive training phases, these techniques often operate deterministically, using explicit algorithms that manipulate image characteristics. They directly use image properties such as intensity and texture, combined with heuristic strategies that draw from empirical observations and domain knowledge. Heuristics are best-practice rules derived from previous samples and experiences. For instance, the longest component in the bone intensity range of an X-ray image is usually the femur. These methods provide a clear, interpretable pathway to segmentation.
 
-Despite the popularity of deep learning, these techniques still play a vital role in modern medical image segmentation. Traditional techniques are often used as methods for pre-processing and data augmentation, as well as refining deep learning model outputs. As we will show later in the dissertation, this can both increase the robustness and data efficiency of deep learning-based segmentation models.
+However, traditional methods are usually developed with a very specific application in mind and are hard to translate to other tasks and domains without significant changes. They are also sensitive to parameter selection and properties of the image such as intensity level. Helpfully, since they don't use a learning component their limitations can be known ahead of time. Their validity can also be confirmed using fewer samples than is the case for learning-based methods.
 
 \subsubsection{Image Thresholding}
 
-As mentioned earlier in this chapter, voxel intensities on CT scans are measured using the Hounsfield scale, which represents the tissue's X-ray radiation attenuation at each pixel. Pixels indicative of adipose tissue usually fall between -250 HU and -30 HU. This range provides a means to segment adipose tissue by applying image thresholding. A large number of studies presenting CT segmentation methods use thresholding, at least partially, to segment an object. Hounsfield unit thresholding is an easy and safe way to discard irrelevant voxels and allow the model to focus on a few number of voxels. 
+Thresholding is a fundamental technique that isolates regions in an image based on a specified range of intensities. In essence, it removes or retains portions of the image where the intensity either falls outside or within a given threshold.
 
-It can be also used to greatly simplify a model's task. In the case of epicardial fat segmentation, the fatty tissue is sparsely distributed in a complex shape inside the pericardium. However, the pericardium itself has a smooth, elliptical shape and is comparatively easy to segment. By segmenting the pericardium and then thresholding the pericardium region to the fatty tissue range, we can find epicardial fat without having to segment its complex shape directly \cite{bencevicRecentProgressEpicardial2022}.
+To illustrate the use of thresholding, consider an example of segmenting adipose tissue on a CT scan. As mentioned earlier in this chapter, voxel intensities on CT scans quantify a tissue's X-ray radiation attenuation as measured in Hounsfield units. Typically, fatty tissue lies between -250 HU and -30 HU. Thresholding the entire scan to this range segments fatty tissue from all other tissues on the scan with no need for additional complex models. For preprocessing, Hounsfield unit thresholding is an efficient way to discard irrelevant voxels, allowing the rest of the segmentation process to focus on fewer voxels.
+
+Thresholding can be also used to greatly simplify a model's task using domain knowledge. Take, for instance, the segmentation of epicardial fat, which refers to the fat in proximity to the heart wall. Epicardial fat is sparsely distributed in a complex shape inside the pericardium. Yet, the pericardium itself has a smooth, elliptical shape and is comparatively easy to segment. By first segmenting the pericardium and subsequently thresholding the pericardium region to the fatty tissue range, we can find epicardial fat without having to segment its complex shape directly \cite{bencevicRecentProgressEpicardial2022}.
 
 \subsubsection{Region Growing Techniques}
 
-Region growing is a voxel-based image segmentation method \citep{regionGrowing}. Beginning from a designated seed voxel, the method assesses neighboring pixels in successive steps. If these pixels meet a specified criterion, often related to pixel values or textures, they are integrated into the region. Despite being a straightforward method, region growing's effectiveness relies heavily on the seed point selection and may struggle with nuanced transitions between regions. This process is shown in \figref{fig:region-growing}.
+Region growing is a voxel-based image segmentation method \citep{regionGrowing}. Beginning from a designated seed voxel, the method assesses neighboring pixels in successive steps. If these pixels meet a specified criterion, often related to pixel values or textures, they are integrated into the region. This process continues until all image pixels are assessed. Despite being a straightforward method, region growing is very sensitive to the selected seed point and may struggle with nuanced transitions between regions. This process is shown in \figref{fig:region-growing}.
 
-\begin{figure}[h]
+\begin{figure}[h!]
  \centering
  \includegraphics[width=0.7\linewidth]{images/region_growing.png}
  \caption{A demonstration of region growing for delineating the internal and external areas of the pericardium on a CT slice, set to the adipose tissue intensity range. The left image is the original input, and the right image depicts the segmented outcome with the heart exterior in red and the interior in blue. The green dots represent the manually chosen seed points initiating the region-growing technique. \cite{bencevicRecentProgressEpicardial2022}}
@@ -160,9 +181,9 @@ Region growing is a voxel-based image segmentation method \citep{regionGrowing}.
 
 \subsubsection{Active Contours or Snakes}
 
-Active contours, often termed "snakes", are segmentation methods that employ dynamic curves to outline image parts \citep{Kass1988}. The process involves tightening a preliminary curve around an object iteratively until it conforms to the object's shape. The adaptation is guided by an energy function that evaluates the curve's smoothness and proximity to edges. A practical depiction of active contours is displayed in \figref{fig:active-contour}.
+Active contours, often termed ``snakes'', are segmentation methods that employ dynamic curves to outline image parts \citep{Kass1988}. The process involves tightening a preliminary curve around an object iteratively until it conforms to the object's shape. The adaptation is guided by an energy function that evaluates the curve's smoothness and proximity to edges. A practical depiction of active contours is displayed in \figref{fig:active-contour}.
 
- \begin{figure}[h]
+ \begin{figure}[h!]
  \centering
  \includegraphics[width=0.65\linewidth]{images/active_contour.png}
  \caption{A demonstration of employing active contours to complete the absent segments of the pericardium line, displayed in white. The contour, illustrated in blue, starts as a complete circle surrounding the image. With every iteration, the contour adapts more closely to the image's shape. \cite{bencevicRecentProgressEpicardial2022}}
@@ -171,63 +192,54 @@ Active contours, often termed "snakes", are segmentation methods that employ dyn
 
 \subsubsection{Atlas-Based Segmentation}
 
-Atlas-based methods, differing from contour-based ones, leverage the spatial relationships among structures \citep{Rohlfing2005}. An expert typically creates an atlas by manually segmenting and labeling structures in an image. Due to anatomical variations, multiple atlas images are often merged to produce a representative version. This consolidated atlas can then be employed to segment new images using a registration algorithm. Image registration is an optimization problem where one image, called the moving image, is deformed to best align with a target image according to some scoring function. In atlas-based segmentation, a new moving image is deformed to be aligned with the target image that was used to construct the atlas. The atlas can then be used as a segmentation map for the moving image, as it is now aligned with the atlas. 
+Atlas-based methods, differing from contour-based ones, leverage the spatial relationships among identified structures in an image \citep{Rohlfing2005}. First, a template image is selected and an expert creates an atlas (a segmentation map) by manually segmenting and labeling structures in the template image. Due to anatomical variations, multiple representative images are often merged to produce a template image. The atlas can then be employed to segment new images using a registration algorithm. Image registration is an optimization problem where one image, called the moving image, is deformed to best align with a target image according to some scoring function. The scoring function usually uses the distance between heuristic-based landmarks in the target and moving images to determine how well the two images align. In atlas-based segmentation, a new moving image is deformed to be aligned with the template image that was used to construct the atlas. The atlas can then be used as a segmentation map for the moving image, as it is now aligned with the atlas. The atlas-based registration process is illustrated in \figref{fig:registration}.
 
-The scoring function usually uses the distance between heuristic-based landmarks in the target and moving images to determine how well the two images align. The atlas-based registration process is illustrated in \figref{fig:registration}. A disadvantage of this approach is that the process can lead to a complete failure to segment the image if the target and moving images are too dissimilar.
-
-\begin{figure}[h]
+\begin{figure}[h!]
  \centering
  \includegraphics[width=0.7\linewidth]{images/registration.png}
  \caption{A schematic representation of the registration procedure. Initially, input and target images are chosen. Throughout the registration phase, the input image (shown in green) undergoes deformation to align with the fixed target image (shown in red). \cite{bencevicRecentProgressEpicardial2022}}
  \label{fig:registration}
  \end{figure}
 
-Atlas-based segmentation has fallen out of favor due to the emergence of deep learning-based methods. However, recently there has been significant progress in image registration and atlas-based segmentation using deep learning-based techniques \cite{sinclairAtlasISTNJointSegmentation2022a}. These approaches offer good potential for merging traditional and newer approaches will be discussed later in the chapter.
+A disadvantage of this approach is that the process can lead to a complete failure to segment the image if the target and moving images are too dissimilar. Therefore, atlas-based segmentation has fallen out of favor due to the emergence of deep learning-based methods. However, recently there has been significant progress in image registration and atlas-based segmentation using deep learning-based techniques \cite{sinclairAtlasISTNJointSegmentation2022a}. These approaches offer good potential for merging traditional and newer approaches will be discussed later in the chapter.
 
 \subsection{Machine Learning}
 
-While deep learning generally falls within the machine learning umbrella term, in this dissertation the term ``machine learning'' will be used to describe techniques that are not based on deep neural networks. These include methods like support vector machines, deep forests or manual feature engineering.
+While deep learning generally falls within the machine learning umbrella term, in this dissertation the term ``machine learning'' will be used to refer to techniques that are not based on deep neural networks. This encompasses methods such as support vector machines, random forests, and other statistical learning techniques that rely on manually engineered image features.
 
-Within this context, it is possible to define a segmentation problem as a per-voxel classification problem. Let there be a classifier of $K$ classes,
+In this context, image segmentation can be viewed as a voxel-wise classification problem expressed as:
 
 \begin{equation}
 H(x; \theta) = (\;\operatorname{Pr}(C_0\!\mid\!x),\; \operatorname{Pr}(C_1\!\mid\!x),\; \cdots,\; \operatorname{Pr}(C_{K-1}\!\mid\!x)\;),
 \end{equation}
 
-parameterized by $\theta$ with input voxel-level feature vector $x$. The features are manually selected and constructed to represent each pixel and its surrounding region. Commonly, these include the pixel's intensity, mean intensity of the area, image moments, and other information deemed relevant for the classification. The classifier is trained to minimize a loss function by feeding each pixel's features to the classifier and comparing the output to the ground truth output. A visual demonstration of this machine-learning process for image segmentation is shown in \figref{fig:machine-learning}.
+where $H$ is a classification function parameterized by $\theta$, which maps an input vector $x$ of voxel-level features to the probability that the voxel contains the class $C_i$. The features are manually constructed based on domain knowledge and represent each pixel and its surrounding region. Commonly, these include the pixel's intensity, mean intensity of the area, image moments, and other information deemed relevant for the classification. The classifier is trained to minimize a predefined loss function by feeding each pixel's features to the classifier and comparing the output to the ground truth output. This is presented visually in \figref{fig:machine-learning}.
 
-\begin{figure}[h]
+\begin{figure}[h!]
  \centering
  \includegraphics[width=\linewidth]{images/machine_learning.png}
  \caption{A schematic of a supervised linear classifier in a machine learning workflow. The upper section illustrates the training phase. Here, features are color-coded according to their known class from training data, depicted in red and blue. The parameters of the decision boundary, which demarcates the zones of the two classes (highlighted in light red and grey), are determined during training. The lower part of the diagram depicts the inference stage. In this phase, features are extracted from new images, and the trained model is employed to classify each pixel in the image. \cite{bencevicRecentProgressEpicardial2022}}
  \label{fig:machine-learning}
  \end{figure}
 
-Another common approach is splitting the image into smaller patches, and then using a machine learning classifier to class each patch into belonging to one of a set of $K$ classes. The classifications are then fused together to form a segmentation map.
+Another common approach is to divide the image into smaller patches and then employ a machine learning classifier to categorize each patch into one of the predefined $K$ classes. The classifications are then fused together to form a segmentation map. Both patch- and voxel-based machine learning approaches can be more data efficient than deep learning-based approaches \cite{bencevicRecentProgressEpicardial2022}, but they often lack the ability to model complex features and dependencies. 
 
-These approaches can be more data efficient than deep learning-based approaches \cite{bencevicRecentProgressEpicardial2022} but have a limited ability to model complex features and dependencies. 
+It is clear that these traditional techniques have inspired and paved the way for more complex deep learning methods --- while still playing a vital role as parts of segmentation pipelines today. In the next section, we will provide an overview of how deep learning builds on traditional machine learning to achieve more powerful models that can segment very complex regions.
 
-Now that we have an overview of more traditional methods, we can dive into deep learning-based ones.
+\pagebreak
 
 \section{Deep Learning-Based Segmentation Methods}
 
-While machine learning encompasses a broad range of techniques for building statistical models, deep learning focuses on using artificial neural networks. Artificial neural networks consist of simple nodes called neurons. Each neuron is a non-linear function of the sum of its inputs. This non-linear function is called the \textbf{activation function}. The neurons are all arranged in a graph where the outputs of one set of neurons are connected to the input of another set of neurons. Each connection has an associated \textbf{weight} and \textbf{bias} parameter that either multiplies by the weight or adds the bias value to the output before it goes into the next neuron. The exact configuration of the graph, i.e. the number of neurons and how they are connected, is determined by hand and is referred to as the \textbf{neural network architecture}. A typical neural network architecture can be seen in \figref{fig:nn-typical}.
+Machine learning encompasses a broad range of techniques for building statistical models, which includes deep learning --- a subset of machine learning that focuses on using artificial neural networks. Artificial neural networks consist of simple nodes called \textbf{neurons}. Each neuron is a non-linear function of the sum of its inputs. This non-linear function is called the \textbf{activation function}. The neurons are all arranged in a graph where the outputs of one set of neurons are connected to the input of another set of neurons. Each connection has an associated \textbf{weight} and \textbf{bias} parameter. The value on the connection is multiplied by the weight and the bias is added before it's fed into the subsequent neuron. The exact configuration of the graph, including the number of neurons and how they are connected, is determined by hand and is referred to as the \textbf{neural network architecture}. Typically neurons are arranged into \textbf{layers}, where neurons of one layer connect only to the next layer. Current deep-learning networks usually have between ten and 100 layers. A typical neural network architecture can be seen in \figref{fig:nn-typical}.
 
-Typically, neurons are arranged into \textbf{layers}, where neurons of a layer connect only to the next layer, without skipping layers in between. Current deep-learning networks usually have between ten and 100 layers.
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=0.5\linewidth]{images/nn-typical}
+ \caption{A small neural network with three layers, wherein each layer is connected to every neuron in the next layer. \cite{hastieElementsStatisticalLearning2009}}
+ \label{fig:nn-typical}
+ \end{figure}
 
-As an example of a simple neuron, we can imagine a neuron that receives a 3-valued vector as an input and produces an output using the rectified linear unit (ReLU) function:
-
-\begin{equation}
-ReLU(x) = 
-    \begin{cases}
-        x, & \text{if } x > 0,\\
-        x, & \text{otherwise.}\\
-    \end{cases}
-\end{equation}
-
-ReLU can be seen as a simple thresholding function that clamps values below zero to zero. In spite of its simplicity, ReLU is one of the most activation functions in neural networks.
-
-First, the input vector $x = [x_0\; x_1\; \cdots\; x_{n - 1}]$ is multiplied by the weights column vector $w$ and added with the bias vector $b$:
+Mathematically, a neuron is a function that maps some input vector to a scalar value. First, the dot product between the input vector $x = [x_0\; x_1\; \cdots\; x_{n - 1}]$ and the weights column vector $w$ is calculated and added with the bias vector $b$:
 
 \begin{equation}
 z(x;w, b) =
@@ -246,55 +258,78 @@ b_0 & b_1 & \cdots & b_{n - 1}
 \end{bmatrix}
 \end{equation}
 
-Then, all of the inputs are summed and the neuron output is produced using the activation function $af$ (in the case of this example ReLU):
+Then, all of the inputs are summed and the neuron output is produced using the activation function $af$:
 
 \begin{equation}
 f(x;w,b) = af\left(\sum_{i=0}^{n - 1} z(x;w,b)_i\right).
 \end{equation}
 
-The parameters $b$ and $w$ of each neuron can be stored inside a large matrix $\theta$. This matrix is called the \textbf{parameters of the network}. Current deep learning networks usually have multiple millions of parameters.
+The parameters $b$ and $w$ associated with each neuron can be consolidated into a large matrix, denoted as $\theta$. This matrix is called the \textbf{parameters of the network}. Current deep learning networks usually have multiple millions of parameters.
+
+One example of an activation function is the rectified linear unit (ReLU) function:
+
+\begin{equation}
+ReLU(x) = 
+    \begin{cases}
+        x, & \text{if } x > 0,\\
+        0, & \text{otherwise.}\\
+    \end{cases}
+\end{equation}
+
+ReLU can be seen as a simple thresholding function that sets all negative values to zero. Despite its simplicity, ReLU is one of the most prevalent activation functions in neural networks.
 
 \subsection{Neural Network Training, Validation and Testing}
 
-Initially, the values of these parameters are usually set to random numbers. Their exact values are determined automatically through a process called \textbf{training}. During training, the values of the network's parameters are iteratively adjusted to minimize the value of a \textbf{loss function}. The loss function measures how well the network is performing its task based on known correct values. For instance, in image segmentation, the loss function would measure the similarity between a hand-labeled segmentation map and the one produced by the network. Using a process called backpropagation, each parameter is updated in the direction that will decrease the loss function's value. This is repeated multiple times for each image in a \textbf{training dataset}.
+Initially, the parameters of a neural network are often initialized with random values. These values are then fine-tuned during a procedure called \textbf{training}, which iteratively adjusts the parameters to minimize a \textbf{loss function}. The loss function measures how well the network is performing its task by comparing its output to known correct values. For example, in image segmentation, the loss function would measure the similarity between the network's segmentation map and a hand-labeled counterpart. Through a process called \textbf{backpropagation}, each parameter is updated in the direction that will decrease the loss. This is repeated multiple times for each image in a \textbf{training dataset}.
 
-The training dataset, much like any statistical data, is a sampling of the real world. Depending on the size and quality of the dataset, it is possible that the training dataset is not representative of the true distribution of the data. Moreover, it is also possible that the network learns to produce correct solutions for each training image individually instead of learning general patterns in the data. This is called \textbf{overfitting} --- the network learns to minimize the loss in the training data but does not generalize to data outside the training domain. To overcome this, two other datasets are used besides the training dataset.
+However, there's a caveat. The training dataset, much like any statistical data, is a sampling of the ``real world'' data from some unknown distribution. Depending on the size and quality of the dataset, it is possible that the training dataset does not represent the true distribution of the data. Moreover, the network can learn to produce correct solutions for each training image individually instead of learning general patterns in the data. This is called \textbf{overfitting} --- the model excels on the training data but fails on unseen data. To detect and mitigate this, two additional datasets are introduced: the \textbf{validation} and \textbf{test} datasets.
 
-The \textbf{validation dataset} is used to assess the model's performance during model development. While creating a model, one has to make decisions about the architecture, data processing, and other implementation details. To evaluate these decisions, inference is performed on the validation dataset (with known correct values) to estimate its real-world performance. However, the network is never trained on the validation dataset, it is only validated after the training process. The third \textbf{test dataset} (sometimes called a hold-out dataset) is used only once the development process is completed as a final estimate of real-world performance.
+The \textbf{validation dataset} serves a critical role during model development. After training, the model is assessed using this dataset to inform decisions about its architecture, preprocessing, and other facets. During the development cycle, the network is constantly modified and re-evaluated on the validation dataset. Since adjustments to the model are based on its performance on the validation dataset, there's a risk of inadvertently tailoring the model to the specific distribution of the validation data. To counteract this potential bias, a \textbf{test dataset} (often termed a hold-out dataset) is used. This dataset is reserved exclusively for a final evaluation, offering the least biased estimate of the model's real-world performance.
 
-The training, validation, and testing datasets are created before the model development process. Usually, they are sampled randomly from a larger dataset with ratios such as 80\%, 10\% and 10\% for the training, validation, and testing datasets, respectively. In the next chapter, we will discuss overfitting in more detail.
+The training, validation, and testing datasets are created before the model development process. Usually, they are sampled randomly from a larger dataset with ratios such as 80\%, 10\% and 10\% for the training, validation, and testing datasets, respectively. 
+
+In the next chapter, we will further discuss overfitting in neural networks. For now, we will move on to describing neural network architectures in more detail.
 
 \subsection{Encoders and Decoders}
 
-Machine and deep learning-based segmentation methods can be framed as consisting of two stages:
+Machine and deep learning-based segmentation methods can be conceptualized as a two-stage process. The first stage, termed the \textbf{encoder} stage, is a function $En : \mathbb{R}^{D \times C} \rightarrow \mathbb{R}^{n \times m \times d}$. In other words, a $D$-dimensional image with $C$ channels is mapped to a feature vector. This vector has an arbitrary size and depth determined by the network architecture. The encoder effectively compresses the image by distilling salient information into a smaller representation, the feature vector. In deep learning parlance sometimes this is referred to as the \textbf{backbone} of the network.
 
-The first stage is an \textbf{encoder} stage $En : \mathbb{R}^{W \times H \times C} \rightarrow \mathbb{R}^{n \times m \times d}$ which maps an image of size $W \times H$ and $C$ channels into a feature vector. This stage can be seen as encoding salient information in the image in a smaller representation, effectively compressing the image --- leading to the name encoder. In deep learning parlance sometimes this is referred to as the \textbf{backbone} of the network.
+The output of the encoder then goes to the second stage called the \textbf{decoder} or the \textbf{head}. The decoder is a function $De : \mathbb{R}^{n \times m \times d} \rightarrow \mathbb{R}^{D \times K}$ that maps a given feature vector into a segmentation map. 
 
-The output of the encoder is given to the second stage called the \textbf{decoder} or the \textbf{segmentation head}. The decoder is a function $De : \mathbb{R}^{n \times m \times d} \rightarrow \mathbb{R}^K$ that maps a given feature map into a segmentation map. Given an image $I(A)$, the segmentation process can then be written as:
+Given an image $I(A)$, the segmentation process can then be written as:
 
 \begin{equation}
-M(A) = (En \circ De)(I(A))
+M(A) = (En(\theta_{En}) \circ De(\theta_{De}))(I(A)),
 \end{equation}
 
-$En$ is a function parameterized by a vector of parameters $\theta_{En}$, while $De$ is parameterized by $\theta_{De}$. In machine learning approaches, $En$ is not a trainable function and $\theta_{En}$ consists of hand-selected parameters such that it extracts pre-selected features from the image. The value of $\theta_{De}$, on the other hand, is determined by minimizing a loss function. The loss function measures how well the model segments an image compared to a ground truth known segmentation of that same image. However, in deep learning approaches, both $\theta_{En}$ and $\theta_{De}$ are determined by minimizing a loss function.
+where $En$ and $De$ are functions parameterized by a $\theta_{En}$ and $\theta_{De}$, respectively. In conventional machine learning, $En$ is not a trainable function. Instead, $\theta_{En}$ consists of hand-selected parameters to extract pre-selected features from the image. The value of $\theta_{De}$, on the other hand, is determined by minimizing a loss function. In deep learning, both $\theta_{En}$ and $\theta_{De}$ are determined by minimizing a loss function.
 
-Thus, the difference between traditional machine learning and deep learning is in the encoder stage. In deep learning, the values of the features are determined by a neural network, while in machine learning they a produced using a hand-crafted function.
+Thus, the difference between traditional machine learning and deep learning is in the encoder stage. Deep learning utilizes neural networks to define features, whereas traditional machine learning uses handcrafted functions.
 
-The separation of segmentation models into encoder and decoder stages is a crucial aspect of current research in deep learning. This separation allows for independent improvement of both stages and an easy combination of different encoders and decoders. For instance, a classification and segmentation network could use the same encoder architecture. The classification model would use a simpler decoder that maps the input features into a vector of length $K$ representing the score for each of the $K$ classes. The segmentation model would use a comparatively complex backbone that produces a segmentation map. However, both models would use the exact same encoder. In fact, there are models such as Mask R-CNN \cite{heMaskRCNN2018} that use two parallel decoders for different tasks, both connected to the same encoder. Throughout the rest of this thesis, when describing neural network architectures, we will describe them in terms of their encoder and decoder and how the two are connected.
+The separation of segmentation models into encoder and decoder stages is a crucial aspect of current research in deep learning. This separation allows for independent improvement of both stages and an easy combination of different encoders and decoders. For instance, a classification and segmentation network could use the same encoder architecture. While the classifier would utilize a simpler decoder to map input features to a class probability vector, the segmentation model would employ a more complex decoder to produce a segmentation map. However, both models would use the exact same encoder. In fact, there are models such as Mask R-CNN \cite{heMaskRCNN2017b} that use two parallel decoders, one for segmentation and another for object detection, both connected to the same encoder. Throughout the rest of this thesis, when describing neural network architectures, we will describe them in terms of their encoder and decoder and how the two are connected.
 
 \subsection{Convolutional Neural Networks}
 
-Convolutional neural networks have spurred a revolution in computer vision and made deep learning the de facto standard for solving complex computer vision tasks. The central aspect of a \ac{cnn} is the convolutional layer. The convolutional layer replaces the standard neuron mentioned earlier in this chapter with a convolution-like operation.
+Convolutional neural networks have profoundly impacted computer vision, establishing deep learning as the prevailing approach for complex computer vision tasks. The foundational element of a \ac{cnn} is its convolutional layer, which uses a convolution-like operation in place of the conventional neurons mentioned earlier in this chapter.
 
-Generally, convolution is a mathematical operation between two functions, but for the purposes of this introduction, we will only consider 2D convolutions between two square images, as that is most relevant for image segmentation. Convolution is an operation $I(A) \star k(B)$ where $I(A)$ is an image $I(A) \in \mathbb{R}^{W \times H}$ and $k(B)$ is a matrix $k(B) \in \mathbb{R}^{w \times h}$ indexed by locations $B \in \mathbb{Z}_{\geq0}^2$ for 2-dimensional images. The second matrix is called the \textbf{convolutional kernel}. The convolution operation at $A = (a_x, a_y)$ can then be defined as:
+\subsubsection{Convolution}
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=\linewidth]{images/convolution-explainer.png}
+ \caption{A visual depiction of a convolution procedure step-by-step. In each step, the kernel slides over the image (shown in blue). The overlapping elements between the kernel and the image are multiplied and then summed to produce a value in the resultant image (shown in green). \cite{dumoulinGuideConvolutionArithmetic2018}}
+ \label{fig:convolution-explanation}
+ \end{figure}
+
+Generally, convolution is a mathematical operation between two functions. In the context of this thesis, however, we will focus on discrete 2D convolution between two square images, as that is most relevant for image segmentation. Convolution is denoted as $I(A) \star k(B)$ where $I(A)$ is an image $I(A) \in \mathbb{R}^{W \times H}$ and $k(B)$ is a matrix $k(B) \in \mathbb{R}^{w \times h}$ indexed by locations $B \in \mathbb{N}^2$ for called the \textbf{convolutional kernel}. At position $A = (a_x, a_y)$, the convolution operation is defined as:
 
 \begin{equation}
 (I \star k)(a_x, a_y) = \sum_{j=-\infty}^{\infty} \sum_{i=-\infty}^{\infty} I[i, j] k[a_x - i, a_y - j].
 \end{equation}
  
-Explained differently, the resulting image is produced by sliding the kernel over the input image, one pixel at a time. At each pixel location, values where the kernel and the image overlap are multiplied, and all of the products are summed together to form the value of that pixel in the resulting image. This is shown visually in \figref{fig:convolution-explanation}.
+Explained differently, the resulting image is produced by sliding the kernel over the input image pixel by pixel. At each pixel location, values where the kernel and the image overlap are multiplied, and all of the products are summed together to form the corresponding pixel's value in the output image. This is shown visually in \figref{fig:convolution-explanation}.
 
-While mathematically a simple operation, convolution is exceedingly powerful and can produce almost endless transformations of an image. It's most commonly used for filtering: A convolution can elegantly find patterns in the image. One such example is the convolution with a kernel called the Prewitt operator:
+While mathematically a simple operation, convolution is exceedingly powerful and can produce almost endless transformations of an image. It's most commonly used for filtering --- a convolution can elegantly find patterns in the image and increase their intensity in the image. One such example is the convolution with a kernel called the Prewitt operator:
 
 \begin{equation}
 I_y(A) = I(A) \star \begin{bmatrix}
@@ -306,13 +341,18 @@ I_y(A) = I(A) \star \begin{bmatrix}
 
 When convolved with this kernel, the resulting image has high-intensity pixels in regions where vertical edges are present, and low intensity everywhere else. This can be seen in \figref{fig:prewitt-example}.
 
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=\linewidth]{images/prewitt-example.png}
+ \caption{An example of an input image (left) convolved with the Prewitt operator (right). Note that vertical edges are accentuated in the convolution result.}
+ \label{fig:prewitt-example}
+ \end{figure}
 
+Vertical edges necessarily have to have a large jump in values going from left to right or right to left. Otherwise, there would be no perceptible edge. This kernel takes advantage of that fact to accentuate parts of the image where there is such a jump. It does this by replacing each pixel with the difference between the pixels on its left and its right.
 
-In the image, the values of vertical edges necessarily have to have a large jump in values going from left to right or right to left. Otherwise, there would be no perceptible edge. This kernel takes advantage of that fact to accentuate parts of the image where there is such a jump. It does this by replacing each pixel with the difference between the pixels on its left and its right.
+This process happens as follows. For each pixel of the input image, the kernel is placed such that it is centered on that pixel. This means that the values of the pixel as well as its neighbors above and below are all multiplied by zero. The neighbors on the left are multiplied by -1, and the ones on the right are multiplied by 1. Summed together, the result represents the sum of the values on the right of the pixel, minus the sum of the values on the left.
 
-Here is how this happens: for each pixel of the input image, the kernel is placed such that it is centered on that pixel. This means that the values of the pixel as well as its neighbors above and below are all multiplied by zero. The neighbors on the left are multiplied by -1, and the ones on the right are multiplied by 1. Summed together, the result represents the sum of the values on the right of the pixel, minus the sum of the values on the left.
-
-To illustrate this, let us zoom into a region of the image where no vertical edges are present:
+To illustrate this, let us consider $1 \times 3$ region of the image where no vertical edges are present:
 
 \[
 \begin{bmatrix}
@@ -358,15 +398,17 @@ However, consider some section of the image where a vertical edge is indeed pres
 = 68
 \]
 
-The value is now much larger due to the difference between the left and right sides of the image.
+The value is now much larger due to the difference between the left and right sides of the image. This example demonstrates how a relatively simple kernel can capture complex features of an image.
 
-Aside from edge detection, there are many commonly used convolution kernels to perform common task such as blurring, sharpening, or denoising images. A \ac{cnn} can leverage the power of the convolution by stringing together kernels to match complex and intricate patterns in the image.
+Beyond edge detection, there are many commonly used convolution kernels to perform tasks such as blurring, sharpening, or denoising images. A \ac{cnn} can leverage the power of the convolution by stringing together sequences of intricate kernels to match complex patterns in the image.
 
-In a \ac{cnn}, convolutional layers are connected to one another in a similar fashion to neurons in a regular neural network. One convolutional layer performs a user-defined number of convolutions $n$, and stores the result in an $n$-channeled matrix called a \textbf{feature map} where each channel is a convolution of the input with a new kernel. Thus, a convolutional layer holds $n$ convolutional kernels. The values of the kernels are the parameters of the layer --- i.e. they are set during training to minimize a loss function. Finally, a convolutional layer also has an activation function and it is applied to the resulting feature map. Just like in a regular neural network, this allows non-linear operations between convolutional layers, giving them the ability to find more complex features.
+\subsubsection{Convolutional Layers}
 
-The actual operation inside a convolutional neural network differs from the mathematical convolution we described earlier but achieves a similar effect. Firstly, both the kernel and the image are three-dimensional --- after all, the input image usually has 3 channels, and convolutional layers themselves can have thousands of channels. The kernel is therefore a $w \times h \times c$ matrix. 
+A \ac{cnn} operates by passing an image through a sequence of convolutions. The output from one convolution serves as the input for the next. Interspersed between these convolutions are non-linear transformations of the outputs. This layered approach enables the network to successively find more and more intricate features by combining simpler ones. For instance, combining edges into corners, corners into shapes, and ultimately detecting objects from shapes. The addition of non-linearity drastically increases the complexity of features the network is able to detect and combine.
 
-In each step, the kernel volume slides across the spatial (width and height) dimensions of the input, and stretches across the input since it has the same number of channels. Just like in the 2D convolution described above, all of the values are multiplied and the products are summed to produce one scalar value. Thus, the result of each convolution is still two-dimensional, since the kernel only slides along the width and the height of the input. This is visualized in \figref{fig:cnn-conv-explained}.
+More technically, in a \ac{cnn}, convolutional layers are connected to one another in a similar fashion to neurons in a regular neural network. Each layer performs a set number of convolutions, denoted by $n$. The results are stored in an $n$-channeled \textbf{feature map}. Each channel corresponds to a convolution with a distinct kernel. Hence, a convolutional layer contains $n$ unique kernels. The values of the kernels are the parameters of the layer, optimized during training to minimize a loss function like weights and biases of standard neurons. Finally, a convolutional layer also applies a non-linear activation function to the resulting feature map.
+
+It's worth noting that the operation within a convolutional layer differs from a standard 2D discrete convolution. Here, both the kernel and the input are three-dimensional and have the same depth, but the kernel is usually much smaller in width and height. Since the kernel has the same width as the input, during the operation the kernel only slides along the width and height dimensions. The output of each sliding window step is still a single scalar since all overlapping elements in the sliding window volume are multiplied and summed together. This means that the output of the whole operation is a two-dimensional image. This is visualized in \figref{fig:cnn-conv-explained}.
 
 \begin{figure}[h!]
  \centering
@@ -374,8 +416,10 @@ In each step, the kernel volume slides across the spatial (width and height) dim
  \caption{A view of one step of a single convolution operation inside a \ac{cnn} layer. The layer performs multiple convolutions, each with a different kernel that has an equal number of channels as the input image. In each step, the whole kernel slides over the width and height of the image, and the overlapping channels are multiplied together and summed to produce a single output value. The output of the convolution is one channel of a $n$-channel image where $n$ is the number of different kernels in the layer.}
  \label{fig:cnn-conv-explained}
  \end{figure}
+ 
+\subsubsection{Pooling Layers}
 
-Generally, most \ac{cnn}-based encoders follow a similar pattern of gradually reducing the width and height of the feature maps while increasing their depth. Depth is increased by giving each successive convolutional layer more kernels, thus increasing the output depth since each channel is the output of a convolution using one of the kernels. The spatial (width and height) dimensions are reduced using \textbf{pooling layers}. These layers downsample the image in some way, such as averaging each surrounding neighborhood of pixels. By doing so, a convolutional neural network achieves two goals. First, detailed spatial information is gradually removed from the image, compressing the relevant information into a smaller matrix. Secondly, the network is gradually able to build up large intricate features by combining small and general features. Such an architecture is shown in \figref{fig:cnn-encoder-achitecture}.
+Most \ac{cnn}-based encoders follow a pattern of gradually reducing the width and height of the feature maps while increasing their depth. Depth is increased by giving each successive convolutional layer more kernels. Since each channel represents the result of a convolution with a specific kernel, having more kernels directly increases the output depth. To reduce the width and height, \textbf{pooling layers} are employed. These layers downsample the image, often by averaging pixel values within a defined neighborhood. This downsampling serves dual purposes in a CNN. Firstly, it compresses the image by gradually removing spatial information and retaining relevant semantic information. Secondly, the network is gradually able to build up large complex features by combining small general features. Such an architecture is shown in \figref{fig:cnn-encoder-achitecture}.
 
 \begin{figure}[h]
  \centering
@@ -384,11 +428,13 @@ Generally, most \ac{cnn}-based encoders follow a similar pattern of gradually re
  \label{fig:cnn-encoder-achitecture}
  \end{figure}
 
-To illustrate this, we can think of a contrived example of a \ac{cnn} feature detector to detect grapes on a vine. The first few layers could do a simple operation such as edge detection, and for that, they need a lot of spatial information. The next layer could combine the edges to detect a specific shape, such as a circle. For this, it needs less spatial information as the edges are already detected. A third layer could combine several circle locations to detect a cluster of grapes on a vine. For this, it only needs a very rough location of the circles, and thus does not need detailed width and height-wise information.
+To illustrate this, consider a contrived example of a \ac{cnn} encoder trained to detect grapes on a vine. The first few layers might focus on simple operations such as edge detection, requiring a large amount of spatial information. The next layer could use the edge information to detect circles. This layer doesn't need as much spatial detail since the edges are already identified. A third layer might then combine the locations of the circles to detect a cluster of grapes. By this stage, the spatial information is even less important, with the overall arrangement of circles being the primary focus.
 
-A convolutional decoder can work in much the same way, but reversed. Instead of adding channels, a convolutional decoder successively removes channels and upsamples the image until the resulting image is a segmentation map $M(A) \in C \times W \times H$. 
+A convolutional decoder essentially reverses the encoder process. Instead of adding channels, a convolutional decoder successively removes channels up to and upsamples the image. By the end, the output matches the input image's width and height, and the number of output channels equals the number of classes.
 
-Another way to achieve upsampling is using a \textbf{transposed convolutional layer}. These layers are very common in segmentation neural networks and allow for dynamic, learned upsampling of the image. Regular convolutions as described earlier cannot increase the image dimension, the output is always of equal size or smaller than the input image since convolution slides along each pixel of the input. To get around this, a transposed convolution performs scalar multiplication of the whole kernel and the pixel it is sliding over during each sliding window step. To illustrate this, let us look at an example. Assume one $2 \times 2$ channel $i$ of an input feature map $m(A)$ and one $2 \times 2$ kernel $k(B)$. The transposed convolution would be calculated as follows:
+One way in which upsampling is implemented in a convolutional decoder is with a \textbf{transposed convolutional layer}. These layers are very common in segmentation neural networks and allow for dynamic, learned upsampling of the image. Regular convolutions cannot increase the image dimension width and height. To overcome this, a transposed convolution produces an output matrix for each step of the sliding window process, instead of just a scalar value. For instance, a transposed convolution with a $2 \times 2$ kernel produces 4 new values for each pixel in the input image. This is done by performing scalar multiplication of the whole kernel and the pixel it is sliding over during each sliding window step. All of the sliding window results are joined as a grid to form a final, larger, image.
+
+To better understand this, consider an example of upscaling a $2 \times 2$ 2D input image $m$ with a $2 \times 2$ kernel $k$. The transposed convolution can be calculated as follows:
 
 \begin{align*}
 m \star^T k = & 
@@ -418,38 +464,36 @@ m_{21}k_{21} & m_{21}k_{22} & 0\\
 \end{bmatrix}
 \end{align*}
 
-The procedure can be similarly calculated for an arbitrarily sized image and kernel. Commonly, transposed convolution is referred to as \textit{deconvolution}, however, in this thesis, we do not use the term to avoid confusion with the more standard definition of deconvolution outside of the deep learning context.
+This method can be similarly applied to images and kernels of any size. While transposed convolution is often referred to as \textit{deconvolution}, in this thesis, we will avoid using the term to prevent confusion with the meaning of deconvolution outside of the context of deep learning.
 
-Segmentation models that use only convolutional and pooling layers are called \textbf{fully convolutional models} and are one of the most widely used types of models for medical image segmentation.
+Segmentation models that use only convolutional and pooling layers are called \textbf{fully convolutional models} and are one of the most widely used types of models for medical image segmentation. In the following section, we will describe these and other commonly used CNN architectures in medical image segmentation.
 
 \section{CNN Architectures for Medical Image Segmentation}
 
-A majority of deep learning-based medical image segmentation models to date use convolutional layers to achieve their task. Over the years, a large number of architectures have been proposed and standardized. Some of the them have been created for the task of natural image classification or segmentation, while others are made for more domain-specific domains in medical imaging. In this chapter, we will go over some of the most seminal architectures for medical image segmentation in chronological order.
+Deep learning's application in medical image segmentation has predominantly seen the use of convolutional neural networks. This field has witnessed a rapid evolution, giving rise to a diverse range of architectures. While some of these architectures were initially designed for general image classification and segmentation tasks, others have been specifically tailored to overcome challenges specific to medical imaging. In this section, we will highlight the most influential CNN architectures that have shaped medical image segmentation, presented in their chronological development.
 
 \subsection{Fully Convolutional Network (FCN)}
 
-One of the simplest contemporary architectures for image segmentation is the fully convolutional network (FCN) \cite{long2015fully}. FCN aims to solve the problem of how do we produce an output value for each pixel of the input while leveraging convolutional encoders. As mentioned earlier, convolutional encoders gradually downsample the image while increasing the number of channels in the feature maps. There is then a need to reverse the process and decode the features into an image of equal width and height of the input image. 
+The fully convolutional network (FCN), one of the more straightforward contemporary CNN architectures for image segmentation, was introduced in \cite{long2015fully}. As mentioned earlier, convolutional encoders gradually downsample the image while increasing the number of channels in the feature maps. There is then a need to reverse the process and decode the features into an image of equal width and height as the original input image. FCN achieves this using convolutional layers and upscaling.
 
-FCN solves this by using convolutional layers to reverse the encoding process. In a sense, they interpret the last layer of the encoder as a very downsampled heatmap of features in the original image. They then connected that heatmap to a convolutional layer with a number of channels equal to the number of channels in the segmentation map. This produces a very coarse segmentation map for each class that needs to be segmented. 
+In FCN, the output of the encoder is interpreted as a coarse heatmap of detected features. An output segmentation map needs to be constructed based on these features and have a number of channels equal to the number of classes. FCN does this by using a convolutional layer with $1 \times 1$ kernels --- one kernel for each class. The resulting convolutions combine the features depth-wise to form a class prediction for each location of the image. However, the resulting segmentation map has a very low spatial resolution. To be useful, it needs to be upsampled using transposed convolution to the original image resolution.
 
-To be useful, this segmentation map needs to be upsampled to the original image resolution. They achieve this using deconvolution as explained earlier in this chapter. However, as noted earlier, the high-level feature maps have very coarse spatial information. To inject additional spatial information into the final segmentation, FCN combines outputs of multiple encoder layers to form the final prediction. They do this by upsampling outputs of different layers to the same size and summing the feature maps together. The summed feature map is then upsampled to the final image resolution. This process is shown in \figref{fig:fcn-arch}. A slightly simpler variant of this architecture is U-Net, which we will look at next.
+As noted earlier, the encoder's output feature map is only a rudimentary representation of spatial details. To inject additional spatial information into the final segmentation, FCN combines predictions from multiple encoder layers to form the final prediction. This is done by upsampling $1 \times 1$ convolution results from different encoder layers to a uniform size and summing them together. The composite prediction is then upsampled to the original image resolution. This process is shown in \figref{fig:fcn-arch}. 
 
 \begin{figure}[h!]
  \centering
  \includegraphics[width=\linewidth]{images/fcn-arch}
- \caption{A diagram of how FCN forms predictions based on the output of different encoder layers. Encoder layers are shown on the left and the grid represents the coarseness of the feature map. The maps are combined at three different levels to produce three predictions. Each prediction is compared with the ground truth during training, but for inference only the 8x upsampled prediction is used, as it retains the most spatial information. \cite{long2015fully}}
+ \caption{A diagram of how FCN forms predictions based on the output of different encoder layers. Encoder layers are shown on the left and the grid represents the coarseness of the feature map. The maps are combined at three different levels to produce three predictions. Each prediction is compared with the ground truth during training, but for inference only the 8x upsampled prediction is used. \cite{long2015fully}}
  \label{fig:fcn-arch}
  \end{figure}
  
  \subsection{U-Net and Its Variants}
 
-U-Net \cite{ronnebergerUNetConvolutionalNetworks2015d} is one of the most influential and commonly used architectures in medical image segmentation. Aside from being a standard baseline model, a well-tuned U-Net network with data preprocessing is the state of the art for various medical image segmentation tasks including segmenting various organs, cerebral aneurysms, infarctions, edemas, tumors and other tasks on CT and MRI images \cite{isenseeNnUNetSelfconfiguringMethod2021}.
+U-Net \cite{ronnebergerUNetConvolutionalNetworks2015d} is one of the most influential and commonly used architectures in medical image segmentation. Aside from being a standard baseline model, a well-tuned U-Net network with data preprocessing has reached state-of-the-art performance in various segmentation challenges across different domains and modalities \cite{isenseeNnUNetSelfconfiguringMethod2021}.
 
-U-Net follows a relatively simple architectural pattern. Like other networks, it consists of an encoder and decoder branch. Both the encoder and decoder are fully convolutional, meaning that they consist only of convolutions, pooling layers and transposed convolutions. They have a symmetrical structure where the encoder gradually decreases the width and height of the feature maps while increasing the number of channels, and the decoder does the opposite using upsampling or transposed convolutions.
+At its core, U-Net follows a straightforward architectural pattern, comprised of a fully convolutional encoder and decoder with only convolutional and pooling layers. The encoder and decoder have a symmetrical structure: the encoder gradually decreases the width and height of the feature maps while increasing the number of channels, while the decoder does the opposite using upsampling or transposed convolutions. While FCN uses only one $1 \times 1$ convolutional layer and upsampling to form a prediction, U-Net uses a sequence of several convolutional and upsampling layers to gradually build a segmentation map. This progressive structure allows U-Net to produce more detailed feature maps.
 
-Earlier we mentioned that encoders gradually reduce spatial information while detecting features in the image. For segmentation, however, the spatial information is important for the precise localization of the features. To overcome this issue, FCN used the feature maps of multiple layers in the encoder. U-Net also takes advantage of feature maps at various levels but does so in a different way.
-
-In U-Net, the output of every encoder layer is added to the input of its corresponding decoder layer on the other side of the network. This gives each of the decoder's layer access to spatial information in the form of feature maps that are the same size as the layer's input. The architecture can be seen in \figref{fig:unet-arch}.
+Earlier we that spatial information is important for the precise localization of the features. Like FCN, U-Net also uses the outputs of different encoder layers to maintain spatial information in the decoder but does so in a different way. In U-Net, the output of every encoder layer is added to the input of its corresponding decoder layer on the other side of the network. This gives each decoder layer concurrent access to information about which features are on the image and where they are located. U-Net's architecture can be seen in \figref{fig:unet-arch}.
 
 \begin{figure}[h!]
  \centering
@@ -458,13 +502,15 @@ In U-Net, the output of every encoder layer is added to the input of its corresp
  \label{fig:unet-arch}
  \end{figure}
 
-Because of its symmetrical structure and skip connections, U-Net is often visualized in the shape of the letter U, giving it its name. U-Net is only one of a class of networks that are sometimes called U-shaped networks. Aside from being a state-of-the-art architecture for medical image segmentation, U-Net is also widely used as a component of networks in other domains such as image generation \cite{rombach2021highresolution} and registration \cite{sinclairAtlasISTNJointSegmentation2022a}.
+Because of its symmetrical structure and skip connections, U-Net is often visualized in the shape of the letter U, giving it its name. U-Net is only one of a class of networks that are sometimes called U-shaped networks. Aside from being a state-of-the-art architecture for medical image segmentation, U-Net is also widely used as a component of influential deep learning models in other domains such as image generation \cite{rombach2021highresolution} and registration \cite{sinclairAtlasISTNJointSegmentation2022a}.
 
 \subsubsection{nnU-Net}
 
-U-Net is a powerful baseline model that can be carefully tuned using various heretics and combined with beneficial data preprocessing to achieve state-of-the-art results, even when compared to much more complex models. This process has been automated in nnU-Net \cite{isenseeNnUNetSelfconfiguringMethod2021}. nnU-Net is a general method that automatically produces a data pre- and postprocessing pipeline and a U-Net-based architecture to achieve optimal segmentation. This is achieved through a set of heuristics, rules, and optimization techniques.
+U-Net is a powerful baseline model that can be carefully tuned using various heuristics and combined with beneficial data preprocessing to achieve state-of-the-art results, even when compared to much more complex models. However, tuning the parameters of the model and preprocessing is a laborious process that requires experise and empirical research. nnU-Net \cite{isenseeNnUNetSelfconfiguringMethod2021} aims to automate this tuning process by producing an optimal data pre- and postprocessing pipeline and a U-Net-based architecture for a given dataset. This is achieved through a set of heuristics, rules, and optimization techniques.
 
-nnU-Net first calculates various parameters about the data distribution such as the intensity distribution and median image size. These parameters are used as inputs into an interdependent set of rules that produces parameters of the network such as the number of layers, training parameters, and preprocessing strategy, among others. Using these parameters, nnU-Net trains three different networks, one using only 2D slices of the input data, one using the whole 3D volume, and finally, one using only the region of interest in the 3D volume. During inference, the result of each model is preprocessed and combined to form an ensemble prediction. Some of the process can be seen in \figref{fig:nnunet-arch}.
+The nnU-Net framework begins by calculating key parameters of the data distribution, such as intensity distribution and median image size. These parameters feed into a set of predefined rules that determine the network's architecture and training strategy, including the number of layers, training parameters, and preprocessing approach.
+
+Using the determined parameters, nnU-Net trains three models: one using 2D slices of the data, another using the entire 3D volume, and the third using a cropped 3D region of interest. During inference, outputs from these models are combined through preprocessing to form an ensemble prediction, enhancing the overall accuracy and robustness of the segmentation. This process is shown in \figref{fig:nnunet-arch}.
 
 \begin{figure}[h!]
  \centering
@@ -473,57 +519,138 @@ nnU-Net first calculates various parameters about the data distribution such as 
  \label{fig:nnunet-arch}
  \end{figure}
  
- nnU-Net achieved state-of-the-art results in a wide variety of tasks in CT and MRI segmentation and still remains state-of-the-art in many of those tasks. Aside from that, nnU-Net is a hugely important tool for both academia and industry, as it allows for creating well-tuned baseline models with very little manual intervention or technical know-how.
+ nnU-Net has demonstrated exceptional performance, establishing itself as a state-of-the-art solution in a variety of CT and MRI segmentation tasks. nnU-Net is a hugely important tool for both academia and industry, as it allows for creating well-tuned baseline models with very little manual intervention or technical expertise.
  
- nnU-Net also makes it plainly obvious how much of an impact preprocessing and parameter tuning can have on model results when training on small datasets. This is one of the central premises of this thesis and is what allows us to achieve data efficiency with small neural networks.
+ Furthermore, nnU-Net exemplifies the critical role of preprocessing and parameter tuning in improving model performance, particularly when working with small datasets. This is the cornerstone of this thesis: improving data efficiency through preprocessing. The success of nnU-Net serves as a validation of this approach.
  
  \subsubsection{U-Net++}
  
- U-Net has motivated many variants over the years that are state-of-the-art models for a variety of tasks in medical image segmentation. In this section, we will cover the most seminal of these U-Net modifications, however, there are many more presented in the literature.
+In standard U-Net, skip connections link encoder layer outputs to decoder layer inputs through basic concatenation operations. This approach leaves room for more intricate integration of the decoder and encoder outputs. Additionally, U-Net only merges features at corresponding levels of the encoder and decoder. An enhancement to this could be to allow each decoder layer access to features from multiple encoder layers. U-Net++ \cite{zhou2019unetplusplus} takes advantage of these opportunities with a flexible architectural design.
+
+In U-Net++, skip connections are reimagined as a network of convolutional layers. This setup connects each encoder layer to its respective decoder layer through multiple convolutional layers.  This enhances the information fed into the skip convolutional layers. Additionally, the outputs of these skip connections are further upscaled and fed into the subsequent decoder layers. This design results in a significantly more complex network architecture. Here, each decoder layer not only receives features from its direct encoder counterpart but also from all deeper encoder layers. This multifaceted connection system is visually represented in \figref{fig:unetpp-arch}.
+
  
- In the standard U-Net, the skip connections, i.e. the connections between the outputs of the encoder layers and inputs to the decoder layers, are simple concatenation operations. The outputs are placed to the beginning of the input matrix. However, there is an opportunity here to further combine the two in more complex ways. Furthermore, U-Net only combines features at the same level of encoder and decoder. There is, then, an opportunity to enhance U-Net by giving each decoder layer access to features of multiple encoder layers. U-Net++ \cite{zhou2019unetplusplus} takes advantage of both of these opportunities.
- 
- In U-Net++, the skip connections are designed as a set of convolutional layers. Each encoder layer is connected to a decoder layer via several convolutional layers. In addition, each encoder layer's output (except for the first one) is upsampled and given to the skip connection of the earlier layer as an additional input to the skip convolutional layers. The outputs of the skip connections themselves are also upscaled and given to the next corresponding decoder layer. What results is a much more complex network where each decoder layer is receives features not just from its corresponding encoder layer but for every encoder layer deeper than the corresponding one. Visually, this is presented in \figref{fig:unetpp-arch}.
+ In U-Net++, skip connections are reimagined as a network of convolutional layers instead of simple concatenation. Moreover, outputs from each encoder layer (except the first) are upscaled and then supplied as additional inputs to the skip connections of the preceding layer. The outputs of the skip connections themselves are also upscaled and given to the next corresponding decoder layer. Thus, each decoder layer not only receives features from its direct encoder counterpart but also from all deeper encoder layers. This architecture is presented in \figref{fig:unetpp-arch}.
  
  \begin{figure}[h!]
  \centering
  \includegraphics[width=\linewidth]{images/unetpp-arch}
- \caption{A comparison between U-Net (left) and U-Net++ (right). Each node in the graph represents convolutional layers. The dashed arrows represent skip connections, while full arrows are downsampling or upsampling operations. \cite{zhou2019unetplusplus}}
+ \caption{A comparison between U-Net (left) and U-Net++ (right). Each node in the graph represents a convolutional layer. The dashed arrows represent skip connections, while full arrows are downsampling or upsampling operations. \cite{zhou2019unetplusplus}}
  \label{fig:unetpp-arch}
  \end{figure}
- 
-There are several advantages to U-Net++ over U-Net. Each decoder layer has access to multi-scale features of the input image and thus can produce more accurate outputs. In addition, U-Net++ can be seen as multiple U-Nets of varying depths. This also improves the time it takes the network to converge when compared to a U-Net of similar depth. Further, instead of finding the optimal U-Net depth, due to the flexibility of neural networks, in U-Net++ the optimal network depth is learned via the parameters of the network. U-Net++ results in a more flexible architecture as less design decisions need to be made by hand. However, U-Net++ still has a large parameter count and does not necessarily improve data efficiency. In some cases, the performance advantages achieved by using U-Net++ can be surpassed using a U-net with better data preprocessing and a well-tuned network \cite{isenseeNnUNetSelfconfiguringMethod2021}.
+  
+There are several advantages to U-Net++ over U-Net. Each decoder layer has access to multi-scale features of the input image and thus can produce more accurate outputs. Conceptually, U-Net++ can be viewed as an ensemble of U-Nets with varying depths, which helps in faster convergence compared to a standard U-Net of similar depth. Further, instead of finding the optimal U-Net depth, due to the flexibility of neural networks, U-Net++ learns the optimal depth during training. This makes U-Net++ more flexible, requiring fewer design decisions. However, U-Net++ has a higher parameter count and does not necessarily enhance data efficiency. In some cases, its performance benefits can be matched or surpassed by a well-preprocessed and tuned U-Net \cite{isenseeNnUNetSelfconfiguringMethod2021}.
 
 \subsection{Mask R-CNN}
 
-Earlier in the chapter we mentioned that CNN-based segmentation networks generally consist of encoder and decoder stages. In segmentation networks, as seen in U-Net and other architectures, the decoder branch progressively upsamples the features map and builds out a segmentation map using convolutional layers. This differs in object detection networks.
+Earlier in the chapter we mentioned that CNN-based segmentation networks generally consist of encoder and decoder stages. Segmentation architectures such as U-Net employ a decoder that progressively upsamples the feature maps to construct a segmentation map. This differs from how object detection decoders work.
 
-Object detection aims to find the location of an object in an image. Instead of classifying each pixel as in segmentation, object detection usually aims to find a bounding box of the object. Therefore, instead of producing segmentation maps, object detection networks generally produce the coordinates of the object's bounding box. In technical terms, the output is not an image but rather a vector of four numbers for each object. As such, the decoders in object detection networks are usually much shallower and employ fully connected layers instead of convolutional layers. 
+Object detection aims to find the location of an object in an image. Instead of classifying each pixel as in segmentation, object detection typically outputs the coordinates of a bounding box surrounding the object. In technical terms, the output is not an image but rather a vector of four numbers for each object. As such, the decoders in object detection networks are usually much shallower and employ fully connected layers instead of convolutional layers.
 
-However, CNN-based object detection and segmentation networks still use the same encoders. Therefore it is possible to combine object detection and segmentation into a single network by using two decoder branches --- this is done by Mask R-CNN \cite{heMaskRCNN2017b}.
+Despite these differences, both object detection and segmentation networks share similar encoder designs. Mask R-CNN \cite{heMaskRCNN2017b} takes advantage of this to combine object detection and segmentation into a single network. In Mask R-CNN, a standard CNN encoder generates a feature map from an input image. This map is then given to two parallel decoders: one for segmentation and the other for object detection. The segmentation decoder, akin to those in standard segmentation networks, uses convolutional layers and upsampling to generate a segmentation map for each object. The detection decoder, in contrast, employs downsampling and fully connected layers to output the bounding box and class label of each object. The Mask R-CNN architecture can be seen in \figref{maskrcnn-arch}.
 
-In Mask R-CNN, a standard CNN encoder is used to encode a given image into a feature map. This feature map is then given to two separate decoder branches. One branch consists of convolutional layers and upsampling to produce a segmentation map, just like in other segmentation CNNs. The other branch consists of downsampling and fully connected layers in order to produce a bounding box and class label for each object on the image. This means that, for each object, the network outputs a bounding box, a class label as well as a segmentation mask for that object. The network is trained using a combination of segmentation, detection, and classification loss functions such that all three tasks are optimized jointly.
+ \begin{figure}[h!]
+ \centering
+ \includegraphics[width=0.6\linewidth]{images/maskrcnn-arch}
+ \caption{A diagram of the Mask R-CNN architecture. Two parallel decoder branches are used to achieve segmentation and object detection simultaneously. \cite{heMaskRCNN2017b}}
+ \label{fig:maskrcnn-arch}
+ \end{figure}
 
-The three tasks have synergy between them, as the information learned for e.g. classifying an object is relevant to its detection (for instance, parrots are more likely to be purple than dogs). Similarly, by using a bounding box the segmentation decoder can only focus on the relevant portion of the image and be invariant to the scale of the object on the image. Jointly learning the three tasks results in better performance on each than training them using separate networks. Mask R-CNN, however, due to its relative complexity, presents challenges when trained on very small datasets compared to simpler segmentation-focused architectures like U-Net.
+Consequently, for every detected object, Mask R-CNN provides a bounding box, a class label, and a segmentation mask. The network is trained using a composite loss function, optimizing for segmentation, detection, and classification simultaneously.
+
+The integration of these tasks in Mask R-CNN takes advantage of synergies between them. The information learned for classifying an object is relevant to its detection. Similarly, by using a bounding box the segmentation decoder can focus on the relevant portion of the image and be invariant to the scale of the object on the image. This joint learning approach enhances performance across all tasks compared to training separate networks for each. However, Mask R-CNN's complexity can pose challenges, particularly when trained on very small datasets, where simpler segmentation-focused architectures like U-Net might be more effective.
 
 \subsection{Other Notable Segmentation CNNs}
 
-One of the key challenges of CNN-based segmentation is the tradeoff between spatial information and feature complexity. As the network increases the feature map depth and decreases width and height, spatial information is erased but more complex features can be detection on the image. For segmentation, however, both sources of information are necessary. U-Net solves this problem using skip connections, but there are many other ways to combine features at various spatial scales. 
+A central challenge in CNN-based segmentation is balancing spatial information with feature complexity. As the network increases the feature map depth and decreases width and height, spatial information is erased but more complex features can be detected on the image. Effective segmentation requires both elements. While U-Net addresses this with skip connections, other architectures use different methods to integrate multi-scale features.
 
-One approach is by using pyramid pooling, as is suggested in PSPNet \cite{zhao2017pspnet}. PSPNet first employs a standard decoder to derive a feature map. This feature map is then upscaled to various scales, and each scale go through convolutional layers to further decode each scale separately. The outputs of these layers are all upsampled to the same spatial size, concatenated together, and given to a final set of convolutional layers that produces a segmentation map.
+One approach involves pyramid pooling, as utilized in PSPNet \cite{zhao2017pspnet}. Initially, PSPNet uses a standard encode to create a feature map. This map is then rescaled to various sizes, and each rescaled map undergoes processing through a series of convolutional layers. The resulting outputs from these layers are resized to a uniform spatial dimension and concatenated. This combined feature map is then fed into a decoder to produce the final segmentation map.
 
-Pyramid pooling is also employed by DeepLabV3 \cite{chen2017rethinking} albeit in a different way. Like in PSPNet, the encoder first encodes the image into a feature map. This feature map then goes through a series of parallel convolutional layers that each use an atrous convolution. Atrous convolution, also known as dilated convolution, works by dilating the kernel such that there are gaps between the kernel values. During each sliding window step, the gaps are ignored and otherwise a regular convolution procedure is done by multiplying and summing the overlapping values. This allows the kernel to access a larger region of the image without having to increase the number of parameters in the network. In DeepLabV3, each of the parallel layers has a different number of gap pixels between each kernel element. This produces features at different scales that are all upsampled and concatenated together to be further decoded into a segmentation map.
+Pyramid pooling is also employed by DeepLabV3 \cite{chen2017rethinking} albeit in a different way. Like in PSPNet, the encoder first creates a feature map. This feature map then goes through a series of parallel layers that each use an atrous convolution. In atrous convolution, the kernel is dilated by introducing gaps between its values. During each sliding window step, the gaps are ignored and the result is convolved regularly for non-empty kernel values. This technique enables covering a larger area of the image without increasing kernel parameters. Each parallel layer uses different gap sizes in the kernel, creating multi-scale features. These features are upscaled, merged, and further decoded into a segmentation map.
 
-MA-Net \cite{manet} attempts to combine multi-scale features using an attention mechanism. Instead of concatenating the skip connections as U-Net does, MANet introduces a multi-scale attention block. This block aims to capture the interdependencies of different features to focus on more salient ones before they are concatenated to the decoder layer input. In addition, the last decoder layer goes through a position-wise attention block that aims to emphasize features in important locations on the image. MA-Net was applied to the task of liver tumor segmentation in CT images reaching performance improvements over both U-Net and U-Net++.
+MA-Net \cite{manet} takes a different route by incorporating an attention mechanism for combining multi-scale features. Rather than directly concatenating in skip connections like U-Net, MA-Net introduces a multi-scale attention block. This block aims to capture the interdependencies of different features to focus on more salient ones before they are concatenated to the decoder layer input. Additionally, the final decoder layer is processed through a position-wise attention block to highlight significant features in specific image locations. MA-Net has shown performance improvements in liver tumor segmentation on CT images compared to U-Net and U-Net++.
 
 \section{Fully Connected Transformers for Medical Image Segmentation}
 
+So far most of this chapter dealt with CNNs. However, another class of networks --- transformers \cite{attnAllYouNeed} --- has recently gained traction and even surpassed the segmentation quality of CNNs for many tasks. The key to the transformer's impressive performance is the ability to support very deep neural networks. Empirical observations suggest that with enough data, network performance tends to increase with the depth of the network. Hence, transformers have become state-of-the-art in tasks where a large amount of data is available. Notably, current transformers used in natural language processing contain more than 100 layers and trillions of parameters, orders of magnitude more than CNN-based models.
 
+Transformers first became broadly used in the field of natural language processing and achieved groundbreaking results in text generation, machine translation, and understanding natural language. Broadly, transformers employ a combination of regular (non-convolutional) fully connected layers and attention mechanisms, which are the key to their success. Attention allows a layer to learn the interdependencies between parts of its input or across different input values. In linguistic contexts, this leads to a more nuanced understanding of syntactic relationships, enabling the network to learn concepts such as the interplay between subjects and objects or the likelihood of certain adjectives preceding specific nouns.
 
+\subsection{Attention}
 
+For each element $x_i$ of an input sequence of length $n$, an attention mechanism aims to produce a vector $v_i = (v_{i1}, v_{i2}, \cdots, v_{in})$ where $v_{ij}$ measures how dependent $x_i$ is on $x_j$. In a natural language scenario, if we consider a sentence as our input sequence, this mechanism can be envisioned as going word by word, and for each word producing relevance scores for every other word in the sentence. For instance, in the sentence ``Susan has a brown dog that she loves.'', the word ``she'' should have a high relevance score for ``Susan'', and a low score for ``brown'' since it is not pertinent to encoding the meaning of ``she'' in this sentence.
 
+Mathematically, attention can be expressed as a series of matrix multiplications. First, each input sequence element is transformed into a query vector. This transformation represents a learned encoding by the network, converting an input element into a lower-dimension vector. The query serves to identify the current input element in the sequence. Let $X$ be an input matrix where each row is a new element of the sequence. Let $W_Q$ be a matrix of weights learned by the network that encodes each element of the input sequences into a vector. The query matrix $Q$ can then be calculated as:
 
+\begin{equation}
+Q = W_Q X
+\end{equation}
 
+Where each row $Q_i$ represents the query for $X_i$. Remember that the goal of attention is to score the relevance between an input element $X_i$ and some other element $X_j$ of the same input sequence. Having encoded each element $X_i$ in the form of $Q_i$, we need to similarly encode each $X_j$ in a different matrix $K$ where $K_j$ is called the \textbf{key} for some input sequence element $X_j$. We can do so as:
 
+\begin{equation}
+K = W_K X,
+\end{equation}
+
+where $W_K$ is another weight matrix that the model optimizes during training. Given $K$ and $Q$, we can compute the relevance scores for every combination of input elements $x_i$ and $x_j$ as:
+
+\begin{equation}
+A = Q K^T,
+\end{equation}
+
+Here, $A_{ij}$ represents the relevance score between $x_j$ and $x_i$. It is important to note that this is only one of many ways the matrix $A$ can be calculated. In practice, $A$ is scaled to be in $[0, 1]$ or transformed in some other way.
+
+Finally, to get the output $Z$ of the self-attention layer, we weigh each element of the original input sequence $X$ by the attention scores $A$:
+
+\begin{equation}
+Z = A V,
+\end{equation}
+
+$Z$ consists of $X$ elements weighted by how relevant they are to the encoding of the whole sequence. Visually, this process for one element of the input sequence can be seen in \figref{fig:attention-explainer}.
+
+ \begin{figure}[h!]
+ \centering
+ \includegraphics[width=0.8\linewidth]{images/attention-explainer}
+ \caption{A visualization of a single encoder layer in a transformer network. This shows the encoding process for one element of the input sequence.}
+ \label{fig:attention-explainer}
+ \end{figure}
+ 
+ Encoder and decoder layers in a transformer include an attention layer followed by a fully connected layer. In the encoder, the attention layers are generally \textit{self-attention}, where both the key and the query come from the input sequence. In contrast, the decoder layers employ both self-attention and \textbf{encoder-decoder attention}. In the latter, the keys and values come from the encoded features of the last layer of the encoder. Finally, each attention layer performs $Z$ calculation multiple times using different $W$ and $K$ weights, and the weighted values are concatenated together. This design enables the network to simultaneously learn and apply various types of attention within each individual layer.
+ 
+ \subsection{Positional Encoding}
+ 
+The position of each word in a sentence carries important information. The sentence ``The yellow notebook is on top of the red notebook.'' has a different meaning than ``The red notebook is on top of the yellow notebook.'', even though both sentences contain the same words. To capture this in transformers, the position of each input element is encoded and included as part of the input.
+ 
+Each input sequence element index is mapped to a matrix via a function $f : \mathbb{Z}^{+} \rightarrow \mathbb{R}^d$ where $d$ is the dimensionality of the layer's input. Mapped that way, the positional encoding can simply be concatenated to the layer's input with no additional changes in the network. While it's possible for this encoding function to be represented as neural network layers and learned during training, a common approach is to use a predefined, fixed function. For instance, in cite{attnAllYouNeed}, given an element index $pos$, the $i$-th element of the positional encoding is calculated as:
+
+\begin{equation}
+PE(pos, i) = \begin{cases}
+	\sin(pos/1000^{2i/d}), & \text{$i$ is even}\\
+	\cos(pos/1000^{2i/d}), & \text{$i$ is odd.}\\
+\end{cases}
+\end{equation}
+
+The choice of positional encoding functions is guided by their numerical characteristics, ensuring they are efficiently processed by the neural network.
+  
+ \subsection{Adapting Transformers to Image Segmentation}
+ 
+ Convolutional Neural Networks (CNNs) have traditionally dominated image processing due to their efficiency in handling large inputs. Consider a $128 \times 128$ pixel image which, when flattened into a row vector, results in 16,384 elements. In a fully connected network, where each input element connects to every output element, this translates into $16,384^2$ parameters for just one layer. Even if the image were to be heavily downscaled and ignore the loss of information this would create, managing such a network on current GPUs is infeasible.
+ 
+ Transformers that use fully connected layers face a challenge when applied to image data due to this very issue. The key solution, as utilized in the Vision Transformer (ViT) \cite{dosovitskiy2021an}, is treating an image as a sequence of small patches, allowing the image to be processed similarly to text.
+ 
+ ViT, primarily designed for image classification, begins by partitioning each image into uniform square patches (e.g. $32 \times 32$ pixels). The patches, ordered starting from the top-left of the image, form an input sequence $X$. Each patch is then flattened to a row vector and given to a fully connected layer to encode it as a $d$-dimensional vector. Then, a $d$-dimensional positional encoding is added to the encoding as a function of the patch index. The resultant matrix serves as the input for the encoder, which operates identically to a standard transformer network. This architecture can be seen visually in \figref{fig:vit-arch}.
+ 
+  \begin{figure}[h!]
+ \centering
+ \includegraphics[width=\linewidth]{images/vit-arch}
+ \caption{The ViT architecture for image classification. \cite{dosovitskiy2021an}}
+ \label{fig:vit-arch}
+ \end{figure}
+ 
+ While ViT originally used a classification decoder, it is possible to combine the ViT encoder with a segmentation decoder to obtain a segmentation map. There are several ways this has been achieved. For instance, the Segmentation Transformer (SETR) \cite{SETR} introduces two distinct CNN-based segmentation decoders connected to a ViT encoder. The first variant follows a conventional convolutional decoder design, where the encoder's output goes through a series of upsampling and convolutional layers, producing a segmentation map in the original image resolution. The second decoder variant is similar to the way FCN works --- outputs from various encoder layers are resized to a uniform resolution, merged, and then decoded into a segmentation map.
+
+ Later transformer-based segmentation networks modified the ViT encoder as well. For instance, the authors of the Swin Transformer \cite{liu2021Swin} argue that neural networks for computer vision need to be built with translation and scale invariance in mind. Swin Transformer starts with small patches, similar to ViT, but in each successive encoder layer neighboring patches are merged. Rather than computing self-attention within individual patches, Swin uses non-overlapping windows of multiple patches to perform self-attention. This ensures that Swin’s computational demand increases linearly with image size, a significant improvement over ViT’s exponential growth. A key aspect of Swin is that each successive layer shifts the window by half of the window size. This allows self-attention between two different windows and more global information about the image. Finally, Swin's encoder output is fed into a DeepLab-like decoder to produce the segmentation map.
+ 
+ Transformers have demonstrated exceptional performance in image segmentation, particularly in large datasets and benchmarks with upwards of 20,000 natural images \cite{liu2021Swin, SETR, chen2022vitadapter}. However, their advantage is less pronounced in smaller datasets. This aligns with observations from \cite{attnAllYouNeed} --- convolutional layers have properties that are naturally a good fit for extracting information out of images. Transformers need to compensate for their lack of convolutions by using more layers. However, as we will see in the next chapter, there is a relationship between the number of parameters of a network and the number of samples required to train that network.
 
 
