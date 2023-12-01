@@ -120,38 +120,74 @@ Both approaches have been applied to medical image segmentation, such as in \cit
 
 While allowing improvements in transfer learning performance, domain adaptation methods require labeled data for the source domain. Approaches which could leverage unlabelled data can learn to recognize features on images from the same domain as the segmentation task. We will discuss such approaches next.
 
-	\subsection{Semi-Supervised Learning}
+	\subsection{Semi-Supervised and Self-Supervised Learning}
 	
 Semi-supervised learning involves the combination of labeled and unlabeled data to train a neural network. The network can use the unlabeled data to learn to extract general image features that are useful for the downstream segmentation task. This feature extractor is then employed to train the final network on the labeled target dataset. This makes the network more label-efficient, as it can effectively learn without having to label a large amount of data.
-	
-		\subsubsection{Weakly-supervised Learning}
-		\subsubsection{Self-supervised Learning}
-			
-\section{Label-Efficient Methods}
 
-	\subsection{Active Learning} % Maybe there is something else here?
+The goal of this approach is to train a feature extractor that has a general ability to extract salient features from the image. Even though the exact segmentation task is not known, one can construct synthetic tasks without requiring labels that would force the network to extract features.
+
+One such approach is \textbf{self-supervised learning}, where a feature extractor can be trained in a completely unsupervised manner using a large number of images. Then, that feature extractor can used and fine-tuned in a downstream segmentation model to segment images similar to the ones the extractor was trained on.
+
+SSL is a method of unsupervised neural network training where the
+goal is to train an encoder that will understand useful features for a downstream
+task such as object detection, classification, or similar. SSL has
+been shown to improve data efficiency
+\cite{chenSimpleFrameworkContrastive2020} as well as robustness to dataset imbalance
+\cite{liuSelfsupervisedLearningMore2021}.
+
+There are several approaches to training the encoder such that it learns useful features.
+One approach is to use a constructed \textbf{pretext task} for which one
+can automatically obtain the correct solution from unlabeled data so that the correct solution can be used
+for supervised training. An example of this approach is presented by 
+\citet{norooziUnsupervisedLearningVisual2016} where the neural network is trained to 
+solve a jigsaw constructed from an unlabeled dataset. An image is cut into $3 \times 3$ tiles that are randomly shuffled to construct an input image. The task of the network is to reorder the tiles (i.e. solve the jigsaw puzzle) to reconstruct the original image. By solving this task, the network is forced to learn features of the image.
+
+\todo{contrastive learning diagram maybe?}
+
+Recently, a more common approach to SSL is \textbf{contrastive learning}.
+In contrastive learning, the encoder is trained to minimize the distance between feature
+vectors of positive examples and maximize the distance between negative examples. The
+positive examples are constructed in an unsupervised manner by e.g. randomly augmenting
+an image twice, thus producing two examples for which the feature vectors should be
+similar. Among others, notable examples of such approaches are SimCLR 
+\cite{chenSimpleFrameworkContrastive2020} and MoCo \cite{he2019moco}.
 
 \section{Synthetic Data}
 
-	\subsection{Data Augmentation}
+So far, the data efficiency methods discussed have been focused on pre-training the networks on unlabelled or similar data. However, an alternative approach would be to synthetically generate data from the target distribution. This can be achieved using techniques or varying complexity and generation quality. One of the simplest and most well-known ways of synthetically increasing the size of a dataset is \textbf{data augmentation}. 
 
-	\subsection{Data Generation}
+\textbf{Data augmentation} involves applying randomized transformations to the input images to artificially increase their diversity. These transformations range from simple ones like changing brightness or contrast, horizontally mirroring the image all the way to more complex random deformations of the image. Data augmentation is commonplace in segmentation models and is usually in conjunction with other methods for data efficiency. However, it is usually implemented using simple deformation or transformation procedures and thus has limited ability to generate truly diverse samples.
 
+Recently, the field of deep learning-based image generation, especially generative adversarial networks and diffusion models, have sparked a large interest in generating synthetic medical images. \todo{cite} 
 % That paper with vessel segmentation with fractal generation
 
-\section{Reducing Model Complexity}
+\section{Regularization}
 
-	\subsection{Leveraging Inductive Bias}
-	
-The core of achieving data and label efficiency is in manipulating the \textbf{inductive bias} of a model. If we are trying to approximate functions, we quickly run into a problem --- for any given set of finite points, we can find an infinite set of functions that can correctly approximate those points. Thus, we need to constrain the space of possible functions in some way. In the previous section, we assumed our functions were polynomial with a fixed number of degrees. That is an inductive bias --- we have biased our model to only consider polynomial relationships between the inputs and the labels.
+As mentioned earlier, aside from getting new data, the easiest way to reduce the estimation error is by limiting the size of the function class our model optimizes. In a traditional machine learning approach, this would be done by hand-selecting a class of functions with a lower number of parameters and then training the model. In deep learning, however, this approach is usually replaced with regularization, where the parameters themselves are manipulated to simplify the model.\footnote{Often, any method of reducing the estimation error of a model is broadly termed as regularization.} Instead of selecting the number of parameters, we can penalize the network for the complexity and size of parameters. \todo{cite Deep learning book 7.1.1 https://www.deeplearningbook.org/contents/regularization.html} In other words, the loss function used during training has the form:
 
-We can use inductive bias to our advantage. With a more constrained function space, the model can more easily converge to an optimal set of parameters. We have observed this effect in Figure \figref{fig:reg-deg-2}, where the 1 and 2-degree polynomials are able to closely fit the underlying function even with a few datapoints.
+\begin{equation}
+	L(\theta; I, y) = L_{seg}(\theta; I, y) + \alpha\Omega(\theta)
+\end{equation}
 
-We can also extend this to CNN architectures. Simply by using convolutions are their fundamental operation, a CNN has beneficial inductive biases for processing images. \todo{todo}
+where $L_{seg}$ is the segmentation loss function while $\Omega(\theta)$ is a parameter norm penalty, i.e. a measure of the complexity of the model. As we increase $\alpha$, the strength of the regularization increases and the loss is more impacted by the complexity of the model. As the network is being trained, it will seek to both reduce $\Omega(\theta)$ as well as $L_{seg}$, leading to a more constrained model.
+
+A commonly used parameter norm penalty is the $L^2$ regularization, also known as \textbf{weight decay} in deep learning contexts. Assuming $\theta$ consists of a set of weights $w, |w| = n$ and biases $b$, the $L^2$ norm is defined as $\Omega(w) = \frac{1}{2}\sqrt{(w_1^2 + w_2^2 + \cdots + w_n^2)}$. In other words, the network is exponentially penalized for moving weights away from zero. This regularisation, in effect, forces the network to use as few parameters as possible to achieve its task.
+
+\subsection{Conclusion}
+
+As we have seen, there are a number of approaches to increasing the data efficiency of neural network-based segmentation of medical images. This thesis focuses on using regularisation by transforming the input data in such a way as to allow the network to use fewer parameters to achieve its segmentation task. We do so by combining predictions of neural networks with more traditional approaches from image processing and data augmentation. In the next chapter, we will introduce this idea and some specific applications.
+
+%	\subsection{Leveraging Inductive Bias}
+%	
+%The core of achieving data and label efficiency is in manipulating the \textbf{inductive bias} of a model. If we are trying to approximate functions, we quickly run into a problem --- for any given set of finite points, we can find an infinite set of functions that can correctly approximate those points. Thus, we need to constrain the space of possible functions in some way. In the previous section, we assumed our functions were polynomial with a fixed number of degrees. That is an inductive bias --- we have biased our model to only consider polynomial relationships between the inputs and the labels.
+%
+%We can use inductive bias to our advantage. With a more constrained function space, the model can more easily converge to an optimal set of parameters. We have observed this effect in Figure \figref{fig:reg-deg-2}, where the 1 and 2-degree polynomials are able to closely fit the underlying function even with a few datapoints.
+%
+%We can also extend this to CNN architectures. Simply by using convolutions are their fundamental operation, a CNN has beneficial inductive biases for processing images. \todo{todo}
+%	
+%	\subsection{Transforming the Data}
 	
-	\subsection{Transforming the Data}
-	
-\section{Model-guided Transformations}
+%\section{Model-guided Transformations}
 
 % todo in the book he mentions different feature representation
 % 25.2 Feature Manipulation and Normalization
