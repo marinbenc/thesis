@@ -3,23 +3,31 @@
 \chapter{Data Efficiency in Neural Network-Based Image Segmentation}
 \label{chap:data-efficiency}
 
-Above all, the accuracy of neural networks is governed by three factors: problem complexity, number of network parameters, and size of the dataset. All of these factors contribute to accuracy in different ways and there is a complex interplay between them. To understand data efficiency, it is key to clearly understand these concepts. We will begin this chapter by exploring neural networks as function approximators. We still start with a simple example of a neural network and build an understanding of the four factors in general terms. After that, we will expand our example to include image segmentation.
+Above all, the accuracy of neural networks is governed by three factors: problem complexity, model complexity, and the sample size. Each of these factors contribute to accuracy in different ways and they have complex interdependent relationships. Grasping the concept of data efficiency necessitates an understanding of these three aspects. In this chapter, we will elucidate how the three factors impact model error by examining neural networks as function approximators.
 
-Let us consider a statistical learning problem of estimating the 10-year risk of heart disease given age. In this case, there exists some unknown underlying dependency between age and risk of heart disease. However, there is no way to know what this function is. All we can do is collect a set of data points and try to approximate a function that explains those data points. In other words, we want to find a curve that tries to minimize some criterion that takes into account the distance between the curve and the collected data points.
+Consider a machine learning scenario where we estimate the 10-year risk of heart disease based on age. However, we don't know the underlying function, Our only recourse is to gather data points and strive to approximate this hidden function. Essentially, our goal is to discover a function that minimizes a criterion, which measures the discrepancy between the theoretical curve and our collected data points.
 
-There are an infinite number of functions that can minimize this criterion. Therefore, we have to choose a class of functions to evaluate. One of the simplest classes of functions we could use are lines --- leading to a simple linear regression. A line is defined by two parameters, its slope $\theta_1$ and intersect $\theta_0$:
+Consider a machine learning scenario where we estimate the 10-year risk of heart disease based on age. Here, some underlying function maps age to heart disease risk. However, there is no way to know what this function is. Our only recourse is to collect a set of data points and try to approximate the underlying function. Essentially, our goal is to find a function by minimizing some criterion which measures the error between the function and our collected data points.
+
+Given any number of points, one can construct an infinite number of functions that fit those points equally well under a selected criterion. Therefore, to derive a single solution, we have to choose a finite class of functions to evaluate. One of the simplest classes of functions we could use are lines -- leading to a simple linear regression. A line is defined by two parameters, its slope $\theta_1$ and intersect $\theta_0$:
 
 \begin{equation}
 	f(x) = \theta_1 x + \theta_0
 \end{equation}
 
-Here, $f(x)$ is our regression model. Our goal is to find the optimal values of $\alpha$ and $\beta$ that best explain the collected data samples in the form of $(x_i, y_i)$. We can do so by minimizing the mean squared distance between the line and each data point:
+In this equation, $f(x)$ represents our regression model. The objective is to determine the optimal value of $\theta = \{ \theta_1, \theta_2 \}$ that most accurately represent the collected data pairs $(x_i, y_i)$. This can be achieved by minimizing the mean squared distance between the line and each data point:
 
 \begin{equation}
-	\min_{\theta_1, \theta_0} \sum_{i=1}^N (y_i - f(x_i))
+	\min_{\theta} \sum_{i=1}^N (y_i - f(x_i))^2.
 \end{equation}
 
-Given a set data points, we will use the above equations to fit a line between them. In \figref{fig:slr-points} we show this line for a different number of datapoints. As can be seen, the number of samples impacts the results drastically. As is intuitive, more samples gives us a line that better matches the real data distribution.
+We will conduct a simulated experiment where our underlying function is a cosine function, with each point sampled having additive Gaussian noise:
+
+\begin{equation}
+	y(x) = -(\cos(0.01 \pi x) - 1) \cdot 0.4 + Z, Z \sim \mathcal{N}(0, 0.1).
+\end{equation}
+
+We'll generate several $(x_i, y_i)$ pairs and apply the previously discussed linear model and criterion to fit a line through these points. In real world conditions, the underlying function and the nature of the measurement noise remain unknown. However, for this simulation, knowing these details is useful to demonstrate the divergence between the fitted function and the underlying one. Figure \ref{fig:t1-t2-example} illustrates the fitted line using varying numbers of data points.
 
 \begin{figure}[h!]
  \hfill
@@ -27,19 +35,18 @@ Given a set data points, we will use the above equations to fit a line between t
  \hfill
  \subfloat{\includegraphics[width=0.5\linewidth]{images/3/heart_disease_risk_samples}}
  \hfill
- \label{fig:t1-t2-example}
- \caption{A simulated example of heart disease risk prediction using simple linear regression. The plots on the right show how the approximated function depends on the sample size.}
+ \caption{A simulated example of heart disease risk prediction using simple linear regression. The plots on the right show how the approximated function depends on the sample size.\label{fig:t1-t2-example}}
 \end{figure}
 
-Clearly, having only three points results in an approximated function that does not match the underlying one. As we increase the sample size, the approximated function becomes much closer to the underlying one. However, note that even for 20 measurements, the linear function differs from the underlying one. The underlying function is a non-linear cosine function. Even with infinitely many data points, our function will never approximate the underlying function perfectly with just two parameters.
+The simulation with only three points clearly demonstrates a mismatch between the approximated and underlying functions. This discrepancy is known as \textbf{overfitting}. Overfitting occurs when the model is overly influenced by the specific sample of data, particularly the noise, and fails to generalize to new, unseen examples. As the number of samples increases, the approximated function aligns more closely with the underlying one. However, even with 20 measurements, there is a notable difference between the approximated and underlying functions. The underlying function is a non-linear cosine function. No matter how many data points we use, a model with only two parameters cannot perfectly approximate this non-linear function. This is an example of \textbf{underfitting}, where the model lacks sufficient parameters to capture the complexity of the underlying function.
 
-To overcome this, we need a more complex model. We can think of our regression so far as fitting a polynomial function to our dataset. For the initial example, we have used polynomials with a degree of 1 --- lines. We can generalize our function to an $n$-degree polynomial as:
+To address underfitting, a more complex model is required, meaning we need a broader class of functions for optimization. Our current regression can be viewed as fitting a polynomial function to the dataset. Initially, we have employed polynomials of degree 1 — lines. We can generalize our model to an $n$-degree polynomial:
 
 \begin{equation}
-	f(x) = \theta_n x^n + \theta_{n-1}x^{n-1} + \cdots + \theta_1 x + \theta_0
+	f(x) = \theta_n x^n + \theta_{n-1}x^{n-1} + \cdots + \theta_1 x + \theta_0.
 \end{equation}
 
-To model heart disease risk, we will choose a polynomial degree $n$ and minimize the mean squared distance to obtain $\theta_n$ through $\theta_0$. By increasing the degree increasing the complexity of the model, i.e. the model will be able to represent more complex curves than simple lines. We can observe what happens when we choose degrees 2, 3, or 5 in \figref{fig:reg-deg-2}.
+To increase our function class, we will choose a larger polynomial degree and again minimize the mean squared distance to obtain $\theta_n$ through $\theta_0$. By increasing the degree we are increasing the complexity of the model and the model will be able to represent more complex underlying functions. We can observe what happens when we choose degrees 2, 3, or 5 in \figref{fig:reg-deg-2}.
 
 \begin{figure}[h!]
  \centering
@@ -48,9 +55,9 @@ To model heart disease risk, we will choose a polynomial degree $n$ and minimize
  \label{fig:reg-deg-2}
 \end{figure}
 
-When looking at the example with 10 measurements, we can see that for $n = 2$ the approximated polynomial follows the underlying function somewhat well. However, as we increase the degree the function quickly deteriorates. This is called \textbf{overfitting} --- the model has fit a particular sampling of the data but does not generalize to unseen examples. In other words, the model is impacted by the noise present in the training set. This is contrasted by \textbf{underfitting}, where the model does not have enough parameters to fit a complex function, as exemplified by our linear model in Figure \ref{fig:t1-t2-example}.
+In the case with 10 measurements, we observe that the approximated polynomial with $n = 2$ follows the underlying function somewhat well. However, as we increase the degree the function quickly begins to overfit. This experiment demonstrates that the likelihood of overfitting escalates with increased model complexity. Yet, we need complex models to approximate complex functions.
 
-This fundamental problem is called the bias--complexity tradeoff (or sometimes the bias--variance tradeoff). Formally, as shown in \todo{cite ML book}, we can decompose the error of a deep learning model into two components. Let there be a function $L(f)$ that measures the error of some model $f$ compared to the true function we are approximating. Assume that our trained model $f_\theta$ with parameters $\theta$ comes from a class of functions $F$. The error of such a model can be expressed as:
+The inherent conflict between overfitting and underfitting is known as the \textbf{bias--complexity tradeoff} (alternatively, the bias–variance tradeoff). Let us investigate this problem more formally. We can decompose the error of a deep learning model into two components \cite{shalev-shwartzUnderstandingMachineLearning2014}. Consider a trained model $f_\theta$ with optimal parameter values $\theta$ from a class of functions $\mathcal{F}$. Let there be a function $L(f)$ that measures the error between any model $f \in \mathcal{F}$ and the underlying function we are approximating. The total error of the trained model can be expressed as:
 
 \begin{equation}
 	L(f_\theta) = \epsilon_{app} + \epsilon_{est}
@@ -58,56 +65,50 @@ This fundamental problem is called the bias--complexity tradeoff (or sometimes t
 	\epsilon_{est} = L(f_\theta) - \epsilon_{app},
 \end{equation}
 
-where $\epsilon_{app}$ is the \textbf{approximation error} and $\epsilon_{est}$ is the \textbf{estimation error}. The approximation error represents the error we are left with when we use the best possible estimator within our class of functions $F$. In the earlier example of function approximation, when use used a 1st degree polynomial, even given infinite data we would always have some error compared to the underlying function. The approximation error depends entirely on the class of functions we use, and can only be changed by using a different class of functions, such as higher-degree polynomials.
+where $\epsilon_{app}$ is the \textbf{approximation error} and $\epsilon_{est}$ is the \textbf{estimation error}. The approximation error is the residual error when using the best possible approximator within our chosen class of functions $F$. For instance, in the earlier function approximation example with a 1st-degree polynomial, even with infinite data, there would always be some discrepancy in approximation compared to the underlying function. The approximation error solely depends entirely on the class of functions we use and can only be reduced by adopting a different class, such as polynomials of a higher degree. The remaining estimation error depends on the quality of our parameters $\theta$. It is possible to have a class of functions capable of perfectly approximating the underlying function but still fail to precisely identify the optimal function within that class.
 
-The remainder of the error depends on the quality of our parameters $\theta$. It is possible to choose a class of functions that can perfectly approximate the underlying function and still not correctly approximate it due to a difference in the underlying and trained parameters. As we saw in earlier examples, this error depends heavily on the data sample we have. A small or unrepresentative sample is bound to give a poor estimate of optimal parameters.
-
-We can investigate the bounds of the estimation error so see what it depends on. We can do so by using the concept of \textbf{sample complexity}. In this context, sample complexity $n(\epsilon, \delta)$ for chosen $\epsilon, \delta \in (0, 1)$ measures how many samples we need in order for some function $f$ chosen from a finite class of functions $F$ to be correct within $\epsilon$ with a probability of $1 - \delta$, or in other words:
-
-\begin{equation}
-	L(f) \leq \epsilon.
-	\label{eq:erm-hyp}
-\end{equation}
-
-Assuming there exists some unknown $f' \in F$ for which $L(f') = 0$, it can be shown \todo{cite ml book page 41} that (\ref{eq:erm-hyp}) holds if:
+In our previous experiment, we observed that the estimation error is influenced by both the sample size and the complexity of the model. To formally analyze this, we can explore the concept of \textbf{sample complexity}. Sample complexity, denoted as $n(\epsilon, \delta)$ for chosen $\epsilon, \delta \in (0, 1)$ measures the number of samples needed for a model $f$ chosen from a finite class of functions $\mathcal{F}$ to be \textbf{probably approximately correct}. This means that, across different samplings of data points, there is a probability of $1 - \delta$ that the model is correct within some margin of error $\epsilon$, i.e. $L(f) \leq \epsilon$. Assuming there exists some unknown $f' \in F$ for which $L(f') = 0$, it can be shown \cite{shalev-shwartzUnderstandingMachineLearning2014} that:
 
 \begin{equation}
 	n(\epsilon, \delta) \geq \frac{\log(\lvert F \rvert \delta)}{\epsilon}.
 \end{equation}
 
-In other words, as we increase the size of the function class $|F|$ (in other words, make our model more complex), we need a larger sample size $n$ to approximate the underlying function. Going back to our error decomposition from earlier, we see that if we restrict the model complexity too much, we will suffer from a high approximation error or underfitting. On the other hand, as we increase the model's complexity, we have a higher requirement for data and a greater chance of overfitting. 
+We can see that increasing the function class $\lvert \mathcal{F} \rvert$ necessitates a larger sample size $n$ to probably approximately correctly approximate the underlying function. Thus, we conclude that the estimation error can be reduced either by adding more data samples or by decreasing the size of the function class we are optimizing over.
 
-A third component is the complexity of the underlying function. If the underlying truly resembles a line, then it can be successfully approximated using a few parameters. However, most problems in medical image segmentation involve very complex high-dimensional functions and thus require very complex models to usefully approximate the functions. 
+In medical image segmentation we have an unfortunate stalemate between the three factors governing estimation and approximation errors. The complexity of medical image segmentation demands a large number of parameters, which in turn increases the estimation error. Ideally, this error could be mitigated by adding more data samples, but in the realm of medical imaging, acquiring ample data is often impractical.
 
-Thus, in medical image segmentation we have an unfortunate stalemate between three interdependent conditions. Medical image segmentation is complex and requires a large number of parameters. Having a large number of parameters requires sufficient data samples for the model to be probably approximately correct. However, we usually do not have a sufficient amount of samples. Therefore, we need methods to reduce the estimation and approximation errors other than adding more data samples for the problem at hand.
+To reduce the estimation error, we are left with reducing the size of the function class. We can do so in two ways. The first involves reducing the parameters of the model itself, shrinking the class of functions and allowing the model to more easily find the optimal function. This usually requires transforming the data such that it can be easily segmented with a less complex model. The second method involves initializing the model with parameters that are already near-optimal. In this case, the model starts close to the optimal function, needing only to search within a local space around these parameters. This is typically achieved by first optimizing the model on similar data for a related task that involves learning features pertinent to segmentation, followed by further optimization for the specific segmentation task.
 
-Approximation error can be decreased by using a less restrictive class of functions. However, when dealing with neural networks and small datasets, approximation error is typically small since neural networks naturally have access to a very large class of complex functions. Instead, the focus should be on reducing estimation error. The easiest way to do so would be to increase the sample size. However, we have already mentioned that this is infeasible in medical image segmentation. Therefore, we need to leverage other methods of reducing the estimation error.
-
-The we way can achieve a lower estimation error is by reducing the class of functions the final model needs to optimize over. We can do so in two directions. One, we can reduce the parameters of the model itself. The class of functions is then smaller and the model can more easily find the optimal function. This usually requires transforming the data such that it can be easily segmented with a less complex function. Two, we can initialize the model with near-optimal parameters. The model is then already in the neighborhood of the optimal function, and only needs to search a local space near the given parameters. This latter method usually requires optimizing a model on similar data using a task that requires learning features relevant for segmentation. We then take the pre-optimized parameters and optimize them further for the segmentation task at hand.
-
-The first method -- transforming the data -- leverages domain knowledge to guide transformations of the image beneficial to segmentation. However, these transformations are deterministic and therefore have a limited understanding of the contents of the image. It is hard to adapt them to each subject and different locations of the target tissue to be segmented. The second method can better handle these dynamic image features, but still requires a sufficient amount of data that is similar enough to the downstream segmentation task. In the following sections, we will cover these methods in detail with examples of how they are used in neural network-based medical image segmentation.
+In the subsequent sections, we will delve into specific techniques from these two approaches, providing examples of their application in neural network-based medical image segmentation.
 
 \section{Transfer Learning}
 
-Transfer learning is the process of initializing the parameters of one neural network with those of another. For instance, we might be dealing with the problem of segmenting liver tumors on CT scans. We have a limited number of labeled liver tumor regions but a larger number of labeled liver regions. Therefore, we first train a neural network for liver segmentation. We assume that the majority of the parameters learned by the network are close to the ones needed for liver tumor segmentation. Therefore, when we are developing the liver tumor segmentation network, we copy the valus of the parameters learned in the liver segmentation network. We then say that the network was \textbf{pre-trained} or \textbf{initialized} on a liver segmentation dataset and \textbf{fine-tuned} on the liver tumor segmentation dataset.
+For example, consider the task of segmenting liver tumors in CT scans. Suppose we have a limited dataset of labeled liver tumor regions, but a more extensive collection of labeled liver regions. In such a scenario, the first step would be to train a neural network for liver segmentation. The rationale here is that most of the parameters learned for liver segmentation will be relevant and close to those needed for liver tumor segmentation. Therefore, when we are developing the liver tumor segmentation network, we copy the values of the parameters learned in the liver segmentation network. We can then say that the network was \textbf{pre-trained} or \textbf{initialized} on a liver segmentation dataset and \textbf{fine-tuned} on the liver tumor segmentation dataset.
 
-This example, where we use transfer learning from one related segmentation task to another is usually referred to as just transfer learning. However, transfer learning can also be achieved using much more complex methods of pre-training. Therefore, in this thesis, we use the term simple transfer learning to referer to this basic method. Other methods include semi-supervised learning as well as domain adaption, which will be described later in this section.
+In this thesis, we refer to this basic technique as ``simple transfer learning''. There are many other more complex ways of achieving pre-training and fine tuning. In this section, we will present an overview of some of these methods.
 
 	\subsection{Simple Transfer Learning}
 	
-Simple transfer learning is used extensively in medical image segmentation. Segmentation neural networks are commonly initialized using weights trained on the ImageNet dataset \todo{cite}. ImageNet is a dataset of natural images and its distribution is drastically different from medical images. Therefore, this initialization does not typically lead to increases in accuracy, but can make the network converge faster as it ``skips'' having to learn to detect base-level image features common to all images.
+	Simple transfer learning is a prevalent technique in medical image segmentation. Typically, segmentation neural networks in this field are initialized with weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet comprises a collection of natural images, which significantly differ in distribution from medical images. As a result, initializing with ImageNet-trained weights doesn't usually enhance accuracy directly in medical image tasks. However, it aids in expediting the network's convergence. This is because such initialization 'skips' the phase of learning fundamental image features that are common across various types of images, including medical ones. Figure \ref{fig:stl-diagram} illustrates this process.
+	
+Simple transfer learning is used extensively in medical image segmentation. Segmentation neural networks are commonly initialized using weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet is a dataset of natural images and its distribution is drastically different from medical images. Therefore, this initialization does not typically lead to increases in accuracy, but can make the network converge faster as it ``skips'' having to learn to detect base-level image features common to all images. This process is shown in \figref{fig:stl-diagram}.
 
-\todo{diagram here}
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=\linewidth]{images/3/simple-transfer-learning-diagram}
+ \caption{An overview of the simple transfer learning procedure. First, a model is pretrained on some related segmentation task. Then, part of the trained model's weights are copied to a new model that is then fine-tuned on the target segmentation task.}
+ \label{fig:stl-diagram}
+\end{figure}
 
-However, there are more recent datasets \cite{wasserthalTotalSegmentatorRobustSegmentation2023} that include >1000 subjects and are commonly used for transfer learning, improving the accuracy of downstream tasks \cite{monaiconsortiumMONAIMedicalOpen2023, myronenkoAutomated3DSegmentation2023}. While these approaches can result in impressive performance improvements, their use is limited to areas where a sufficient amount of similar data is available. For more niche modalities or segmentation problems, the knowledge learned during pre-training can be insufficient to improve the accuracy of the task at hand. One way to alleviate this issue is to somehow adapt the pre-trained model to the target domain. We will discuss this next.
+Recent datasets, like those referenced in \cite{wasserthalTotalSegmentatorRobustSegmentation2023}, comprising over 1000 subjects, are increasingly utilized for transfer learning, improving the accuracy of downstream tasks \cite{monaiconsortiumMONAIMedicalOpen2023, myronenkoAutomated3DSegmentation2023}. While these approaches can result in impressive performance improvements, their application is constrained to fields where ample, similar data is accessible. In more specialized modalities or segmentation problems, the knowledge learned during pre-training may not be adequate for improving downstream accuracy.  A potential solution to bridge this gap involves adapting the pre-trained model to the specific target domain, a topic we'll explore in the following section.
 
 	\subsection{Domain Adaptation}
 	
-Neural networks trained on one dataset often fail to generalise to other datasets, even within similar domains \cite{torralbaUnbiasedLookDataset2011}. This is referred to as the ``domain shift'' problem. Overcoming this problem could lead to an increase in data efficiency, since a model trained on some similar large dataset can perform well on a smaller target dataset. There are various domain adaptation methods that aim to overcome the domain shift problem.
+Neural networks often struggle to generalize across different datasets, even within similar domains \cite{torralbaUnbiasedLookDataset2011}. This is referred to as the ``domain shift'' problem. Overcoming this problem could lead to an increase in data efficiency, since a model trained on some similar large dataset can perform well on a smaller target dataset. Various domain adaptation techniques have been developed to tackle this challenge.
 
-There are several ways to achieve domain adaptation. One class of methods aims to explicitly penalize domain shift by including an estimate of domain shift in the loss function during training. For instance, \citet{liuUnsupervisedDeepDomain2018} use an approach where they first train a network on a source domain where there is a large amount of data available. This network is then used to perform segmentation on a target domain with a low amount of data. During the adaptation phase, the loss function includes a maximum mean discrepancy term between the encoded feature vectors of the source and target domains. By minizing maximum mean discrepancy, the encoder is forced to keep producing feature representations from a constant distribution, instead of shifting the distribution.
+One class of methods aims to explicitly penalize domain shift by including an estimate of domain shift in the loss function. For instance, \citet{liuUnsupervisedDeepDomain2018} first train a network on a source domain with abundant data. This network is then adapted to perform segmentation on a target domain with limited data. During adaptation, the loss function includes a term for maximum mean discrepancy between the encoded feature vectors of the source and target domains. Minimizing this discrepancy forces the encoder to maintain consistent feature representations rather than shifting the distribution of the encoded feature maps.
 
-Another class of methods focuses on minimizing a network's ability to differentiate between the source and target domains. For instance, \citet{ganinDA2015} add a parallel classification head to the network that aims to detect the domain of the input. Normally, during each iteration the network adjusts its parameters in such a way to reduce the loss. However, in \cite{ganinDA2015} the gradients of the domain classifier are inverted, and so the network updates its parameters to make it harder to differentiate between the two datasets. This approach can be seen in \figref{fig:unsup-dom-adpt}.
+Another approach involves reducing the network's ability to distinguish between source and target domains, thereby removing information that leads to domain shift. \citet{ganinDA2015} add a classification head to the network to identify the input's domain. Typically, networks adjust their parameters to minimize loss during each iteration. However, in \cite{ganinDA2015}, the gradients from the domain classifier are inverted so the network updates its parameters to make it harder to differentiate between the two datasets. This method is illustrated in \figref{fig:unsup-dom-adpt}.
 
 \begin{figure}[h!]
  \centering
@@ -116,62 +117,57 @@ Another class of methods focuses on minimizing a network's ability to differenti
  \label{fig:unsup-dom-adpt}
 \end{figure}
 	
-Both approaches have been applied to medical image segmentation, such as in \citet{bermudez-chaconDomainadaptiveTwostreamUNet2018} where U-Net like architecture is used with two encoder branches. Each branch receives images of one image domain, and a shared decoder. The loss function includes a maximum mean discrepancy term between the decoder's final feature maps of inputs from the two domains. They apply their method to segmenting mitochondria and synapses in microscopic images. 
+Domain adaptation has been effectively applied to medical image segmentation, as demonstrated in the work of \citet{bermudez-chaconDomainadaptiveTwostreamUNet2018}. They utilized a U-Net-like architecture with dual encoder branches, each processing images from a different domain, paired with a shared decoder. Their loss function incorporates a maximum mean discrepancy term, comparing the decoder’s final feature maps from inputs of both domains. This method was employed for segmenting mitochondria and synapses in microscopic images.
 
-While allowing improvements in transfer learning performance, domain adaptation methods require labeled data for the source domain. Approaches which could leverage unlabelled data can learn to recognize features on images from the same domain as the segmentation task. We will discuss such approaches next.
+Although domain adaptation techniques enhance transfer learning performance, they generally require labeled data from the source domain. There is growing interest in methods that can utilize unlabeled data to identify general features in images from the target domain regardless of the specific task to be achieved. We'll explore these methods in the following section.
 
 	\subsection{Semi-Supervised and Self-Supervised Learning}
 	
-Semi-supervised learning involves the combination of labeled and unlabeled data to train a neural network. The network can use the unlabeled data to learn to extract general image features that are useful for the downstream segmentation task. This feature extractor is then employed to train the final network on the labeled target dataset. This makes the network more label-efficient, as it can effectively learn without having to label a large amount of data.
-
-The goal of this approach is to train a feature extractor that has a general ability to extract salient features from the image. Even though the exact segmentation task is not known, one can construct synthetic tasks without requiring labels that would force the network to extract features.
-
-One such approach is \textbf{self-supervised learning}, where a feature extractor can be trained in a completely unsupervised manner using a large number of images. Then, that feature extractor can used and fine-tuned in a downstream segmentation model to segment images similar to the ones the extractor was trained on.
-
-SSL is a method of unsupervised neural network training where the
-goal is to train an encoder that will understand useful features for a downstream
-task such as object detection, classification, or similar. SSL has
+Semi-supervised learning combines both labeled and unlabeled data to train neural networks. One such approach is \textbf{self-supervised learning}, where a feature extractor can be trained in a completely unsupervised manner using a large number of images. Then, that feature extractor can employed via transfer learning to train a network for some specific task such as segmentation. Self-supervised learning has
 been shown to improve data efficiency
-\cite{chenSimpleFrameworkContrastive2020} as well as robustness to dataset imbalance
-\cite{liuSelfsupervisedLearningMore2021}.
+\cite{chenSimpleFrameworkContrastive2020}. 
 
-There are several approaches to training the encoder such that it learns useful features.
-One approach is to use a constructed \textbf{pretext task} for which one
-can automatically obtain the correct solution from unlabeled data so that the correct solution can be used
-for supervised training. An example of this approach is presented by 
-\citet{norooziUnsupervisedLearningVisual2016} where the neural network is trained to 
-solve a jigsaw constructed from an unlabeled dataset. An image is cut into $3 \times 3$ tiles that are randomly shuffled to construct an input image. The task of the network is to reorder the tiles (i.e. solve the jigsaw puzzle) to reconstruct the original image. By solving this task, the network is forced to learn features of the image.
 
-\todo{contrastive learning diagram maybe?}
+Various methods exist for training the encoder to learn useful features. One common strategy involves a \textbf{pretext task}, where the network is trained on a task for which solutions can be automatically generated from unlabeled data, allowing for supervised training. An example is provided by \citet{norooziUnsupervisedLearningVisual2016}, where the network is trained to solve a jigsaw puzzle created from an unlabeled dataset. An image is divided into 
+3
+×
+3
+3×3 tiles, shuffled, and then fed into the network, which is tasked with reordering these tiles to reconstruct the original image. This process compels the network to learn various image features, as illustrated in \figref{fig:ssl-pretext}.
+
+One common strategy involves a \textbf{pretext task}, where the network is trained on a task for which solutions can be automatically generated from unlabeled data, using automatically generated labels to train the network. A pretext task could be, for instance, solving jigsaw puzzles \cite{norooziUnsupervisedLearningVisual2016}. An image is divided into $3 \times 3$ tiles, the tiles are randomly shuffled and fed into the network, which is tasked with reordering these tiles to reconstruct the original image. By solving this task, the network is forced to learn features such as recognizing a single object across multiple tiles. Such an approach is visualized in \figref{fig:ssl-pretext}.
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=\linewidth]{images/3/shuffle-to-learn}
+ \caption{A self-supervised learning approach using shuffling image tiles as a pretext task presented by \citet{carr2021shuffle}. The trained feature encoder learns to extract relevant features and its parameters are transferred to a model trained to perform the downstream task.}
+ \label{fig:ssl-pretext}
+\end{figure}
 
 Recently, a more common approach to SSL is \textbf{contrastive learning}.
-In contrastive learning, the encoder is trained to minimize the distance between feature
-vectors of positive examples and maximize the distance between negative examples. The
-positive examples are constructed in an unsupervised manner by e.g. randomly augmenting
-an image twice, thus producing two examples for which the feature vectors should be
-similar. Among others, notable examples of such approaches are SimCLR 
-\cite{chenSimpleFrameworkContrastive2020} and MoCo \cite{he2019moco}.
+This approach focuses on training the encoder to minimize the distance between feature vectors of similar (or positive) examples, while maximizing the distance between dissimilar (or negative) examples. Positive examples are generated in an unsupervised manner, often by applying random augmentations to an image to create two variants. The goal is for the feature vectors of these variants to be closely aligned. Notable implementations of contrastive learning include SimCLR \cite{chenSimpleFrameworkContrastive2020} and MoCo \cite{he2019moco}.
 
 \section{Synthetic Data}
 
-So far, the data efficiency methods discussed have been focused on pre-training the networks on unlabelled or similar data. However, an alternative approach would be to synthetically generate data from the target distribution. This can be achieved using techniques or varying complexity and generation quality. One of the simplest and most well-known ways of synthetically increasing the size of a dataset is \textbf{data augmentation}. 
+The data efficiency methods we've discussed so far revolve around pre-training networks with unlabeled or similar data. An alternative strategy involves generating synthetic data that mimics the target distribution. There are various techniques for this, each offering different levels of complexity and generation quality. A straightforward and commonly used method for expanding dataset size is \textbf{data augmentation}.
 
-\textbf{Data augmentation} involves applying randomized transformations to the input images to artificially increase their diversity. These transformations range from simple ones like changing brightness or contrast, horizontally mirroring the image all the way to more complex random deformations of the image. Data augmentation is commonplace in segmentation models and is usually in conjunction with other methods for data efficiency. However, it is usually implemented using simple deformation or transformation procedures and thus has limited ability to generate truly diverse samples.
+\textbf{Data augmentation} refers to the application of random transformations to input images, thereby artificially increasing their diversity. These transformations can be simple ones such as adjusting brightness or contrast, flipping the image horizontally, or more intricate, involving complex random deformations of the image. Generally the choice of transformations is governed by domain knowledge --- the network is forced to disregard transformations that we know it should be invariant to. Data augmentation is a standard practice in segmentation models, often employed alongside other data efficiency techniques. However, its implementation typically relies on simple deformation or transformation methods, which limits its capacity to create truly diverse samples.
 
-Recently, the field of deep learning-based image generation, especially generative adversarial networks and diffusion models, have sparked a large interest in generating synthetic medical images. \todo{cite} 
-% That paper with vessel segmentation with fractal generation
+Recently, the field of deep learning-based image generation, especially generative adversarial networks and diffusion models, have sparked a large interest in generating synthetic medical images. \textbf{Generative adversarial networks} \cite{goodfellowGenerativeAdversarialNetworks2014} consist of two neural networks, a generator and a discriminator, that are trained simultaneously. The generator creates synthetic images intended to be indistinguishable from real images, while the discriminator learns to differentiate between the two. The process continues until the generator produces images so convincing that the discriminator cannot easily distinguish them from real images. This technique has been particularly effective in generating realistic medical images for the purpose of data augmentation \cite{shinMedicalImageSynthesis2018}.
 
-\section{Regularization}
+Diffusion models \cite{ho2020denoising}, a more recent development in the field of generative models, offer an alternative approach to image generation. These models, inspired by the physical process of diffusion, work by gradually adding noise to an image and then learning to reverse this process. The end result is the generation of new images by reversing the noise addition process from a randomly sampled noise distribution. Diffusion models have been shown to generate high-quality images that can be particularly useful in medical imaging contexts \cite{khaderDenoisingDiffusionProbabilistic2023}.
 
-As mentioned earlier, aside from getting new data, the easiest way to reduce the estimation error is by limiting the size of the function class our model optimizes. In a traditional machine learning approach, this would be done by hand-selecting a class of functions with a lower number of parameters and then training the model. In deep learning, however, this approach is usually replaced with regularization, where the parameters themselves are manipulated to simplify the model.\footnote{Often, any method of reducing the estimation error of a model is broadly termed as regularization.} Instead of selecting the number of parameters, we can penalize the network for the complexity and size of parameters. \todo{cite Deep learning book 7.1.1 https://www.deeplearningbook.org/contents/regularization.html} In other words, the loss function used during training has the form:
 
-\begin{equation}
-	L(\theta; I, y) = L_{seg}(\theta; I, y) + \alpha\Omega(\theta)
-\end{equation}
-
-where $L_{seg}$ is the segmentation loss function while $\Omega(\theta)$ is a parameter norm penalty, i.e. a measure of the complexity of the model. As we increase $\alpha$, the strength of the regularization increases and the loss is more impacted by the complexity of the model. As the network is being trained, it will seek to both reduce $\Omega(\theta)$ as well as $L_{seg}$, leading to a more constrained model.
-
-A commonly used parameter norm penalty is the $L^2$ regularization, also known as \textbf{weight decay} in deep learning contexts. Assuming $\theta$ consists of a set of weights $w, |w| = n$ and biases $b$, the $L^2$ norm is defined as $\Omega(w) = \frac{1}{2}\sqrt{(w_1^2 + w_2^2 + \cdots + w_n^2)}$. In other words, the network is exponentially penalized for moving weights away from zero. This regularisation, in effect, forces the network to use as few parameters as possible to achieve its task.
+%\section{Regularization}
+%
+%As mentioned earlier, aside from getting new data, the easiest way to reduce the estimation error is by limiting the size of the function class our model optimizes. In a traditional machine learning approach, this would be done by hand-selecting a class of functions with a lower number of parameters and then training the model. In deep learning, however, this approach is usually replaced with regularization, where the parameters themselves are manipulated to simplify the model.\footnote{Often, any method of reducing the estimation error of a model is broadly termed as regularization.} Instead of selecting the number of parameters, we can penalize the network for the complexity and size of parameters. In other words, the loss function between a predicted model output $y_{pred}$ and a ground-truth label $y$ has the form:
+%
+%\begin{equation}
+%	L(\theta; y_{pred}, y) = L_{seg}(\theta; y_{pred}, y) + \alpha\Omega(\theta)
+%\end{equation}
+%
+%where $L_{seg}$ is the segmentation loss function while $\Omega(\theta)$ is a parameter norm penalty, i.e. a measure of the complexity of the model \cite{goodfellowDeepLearning2016}. As we increase $\alpha$, the strength of the regularization increases and the loss is more impacted by the complexity of the model. As the network is being trained, it will seek to both reduce $\Omega(\theta)$ as well as $L_{seg}$, leading to a more constrained model.
+%
+%A commonly used parameter norm penalty is the $L^2$ regularization, also known as \textbf{weight decay} in deep learning contexts. Assuming $\theta$ consists of a set of weights $w, \lvert w \rvert = n$ and biases $b$, the $L^2$ norm is defined as $\Omega(w) = \frac{1}{2}\sqrt{(w_1^2 + w_2^2 + \cdots + w_n^2)}$. In other words, the network is exponentially penalized for moving weights away from zero. This regularisation, in effect, forces the network to use fewer parameters.
 
 \subsection{Conclusion}
 
