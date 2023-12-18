@@ -94,7 +94,6 @@
 % ------ FIGURES ------
 \usepackage{graphicx}
 \usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
-\usepackage{subcaption} % Required for nested captions
 \usepackage{wrapfig} % Required for wrapping text around figures
 
 
@@ -115,6 +114,9 @@
 
 \usepackage{float}
 \restylefloat{table}
+
+% added packages:
+\usepackage{multirow}
 
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography; generates quotes with \enquote{Text}
 \hbadness=99999 %suppresses most underfull hbox warnings
@@ -279,6 +281,7 @@ language as front cover),
 \include{Chapters/01_introduction}
 \include{Chapters/02_foundations}
 \include{Chapters/03_data_efficiency}
+\include{Chapters/04_model_driven_preprocessing}
 
 
 %----------------------------------------------------------------------------------------
