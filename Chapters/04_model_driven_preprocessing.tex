@@ -8,7 +8,13 @@
 % next, the limitations of traditional preprocessing
 % next, using neural networks to find preprocessing parameters
 
-In this chapter, we will propose another way of achieving data efficiency in neural network-based medical image segmentation. We will first describe yet another way to view neural networks --- as algorithms to find a linearly separable transformation of an input space. To simplify, let us focus on a 2-class classification problem, with a dataset ${(X_i, Y_i)}, X_i \in \mathbb{R}^2, Y_i \in \{0, 1\}$. All of our input vectors $X_i$ come from an input space $\mathcal{X}$. The neural network is tasked with finding a decision boundary that splits the input space into two sides, one labeled 0 and the other labeled 2. For complex problems, this decision boundary is not linear in the input space. For instance, we can imagine a dataset where points belonging to class 0 are clustered around $(0, 0)$, while points belonging to class 1 are distributed along a circle with radius 2 with additive Gaussian noise, as is shown in \figref{fig:input-space-transform}(left). In the input space, the optimal decision boundary is circular, and therefore the input space cannot be linearly separated in its current form. Instead, a neural network learns a transformation $\mathcal{X} \rightarrow \mathcal{X'}$ such that a hyperplane can be drawn in $X'$ to optimally separate points belonging to classes 0 and 1. This is illustrated in \figref{fig:input-space-transform}(right). 
+In this chapter, we will propose another way of achieving data efficiency in neural network-based medical image segmentation. This approach relies on transforming the input data such that is it segmentable with fewer parameters. We achieve this by leveraging domain knowledge and traditional image-processing techniques to select image transformations. However, instead of manually selecting transformation parameters, we will model the parameters as functions of the image, and train a neural network to estimate optimal transformation parameters. As described in the previous chapter, regularization allows a network to use as few parameters as required by the problem's complexity. By transforming the image we reduce the segmentation problem complexity and therefore achieve segmentation with fewer parameters, i.e. we improve data efficiency.
+
+ We will first present some motivation to show how it is possible to transform data to be easier to model. Next, we will present a general description of our approach. Finally, we will show an empirical study of our approach to various medical image segmentation tasks.
+
+\section{Motivation: Using The Polar Transform for Preprocessing}
+
+We will first describe yet another way to view neural networks --- as algorithms to find a linearly separable transformation of an input space. To simplify, let us focus on a 2-class classification problem, with a dataset ${(X_i, Y_i)}, X_i \in \mathbb{R}^2, Y_i \in \{0, 1\}$. All of our input vectors $X_i$ come from an input space $\mathcal{X}$. The neural network is tasked with finding a decision boundary that splits the input space into two sides, one labeled 0 and the other labeled 2. For complex problems, this decision boundary is not linear in the input space. For instance, we can imagine a dataset where points belonging to class 0 are clustered around $(0, 0)$, while points belonging to class 1 are distributed along a circle with radius 2 with additive Gaussian noise, as is shown in \figref{fig:input-space-transform}(left). In the input space, the optimal decision boundary is circular, and therefore the input space cannot be linearly separated in its current form. Instead, a neural network learns a transformation $\mathcal{X} \rightarrow \mathcal{X'}$ such that a hyperplane can be drawn in $X'$ to optimally separate points belonging to classes 0 and 1. This is illustrated in \figref{fig:input-space-transform}(right). 
 
 	\begin{figure}[h]
 		\centering
@@ -30,16 +36,16 @@ Therefore, we will focus on finding transformations of the data such that the pr
 
 The goal of data efficiency is to find a decision boundary given fewer data samples. As discussed in the previous chapter, this necessitates reducing the function class space we are searching over, or in other words, reducing the number of neural network parameters. In this and the following chapters, we will focus on finding ways to pre-transform the data into some intermediary form $\mathcal{X}_{pre}$ that is more separable than the original input space $\mathcal{X}$. This allows networks with fewer parameters, as $\mathcal{X}_{pre}$ is closer to $X'$, and thus the network has to search a smaller space to find $X'$. We will call this transformation $\mathcal{T}$.
 
-An commonly used example of $\mathcal{T}$ is the polar transform, wherein an input vector $X_i = [x_0, x_1]$ is transformed into a vector $\mathcal{T}(X_i) = [\theta, r]$ as:
+A commonly used example of $\mathcal{T}$ is the polar transform. In the two-dimensional case, the polar transform $\mathcal{T}(X_i; C)$, parameterized by a chosen origin $C = [c_0, c_1]$, transforms an input vector $X_i = [x_0, x_1]$ into a vector $\mathcal{T}(X_i; C) = [\theta, r]$ as:
 
 \begin{equation}
     \begin{aligned}
-	r =& \sqrt{x_0^2 + x_1^2},\\
-	\theta =& atan2(x_1, x_0).
+	r =& \sqrt{(x_0 - c_0)^2 + (x_1 - c_1)^2},\\
+	\theta =& atan2(x_1 - c_1, x_0 - c_0).
     \end{aligned}
 \end{equation}
 
-The polar transforms turns a circular decision boundary into a linear one, allowing linear separability of our example dataset even given only one neuron in the neural network, as can be seen in \figref{fig:polar_dataset_neurons}
+The polar transform turns a circular decision boundary into a linear one, allowing linear separability of our example dataset even given only one neuron in the neural network, as can be seen in \figref{fig:polar_dataset_neurons}
 
 	\begin{figure}[h]
 		\centering
@@ -49,6 +55,93 @@ The polar transforms turns a circular decision boundary into a linear one, allow
 	\end{figure}
 
 Here, we have shown how using the polar transform already transforms the input space into a linearly separable form. The network effectively only needs to search the space of lines to find one that optimally separates the two classes.
+
+However, the effectiveness of the polar transform in easing separability rests in choosing the correct polar origin. As we shift the origin outside of the center of class 0, the decision boundary stops being linear in the polar space, as is shown in \figref{fig:polar-origin-selection}.
+
+ 	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\linewidth]{images/4/data_polar_origin}
+		\caption{The polar transformation of the simulated data using different polar origins ($C$).}
+		\label{fig:polar-origin-selection}
+	\end{figure}
+	
+With this example in mind, let us present a general approach of using model-driven preprocessing to achieve data efficiency in medical image segmentation.
+	
+\section{Model-driven Preprocessing}
+
+The example above with the polar transform can be extended to image segmentation. Similarly to the simulated data we used in the example, we can think of a single image as having pixels of one class arranged inside a circle, while the background lies outside the circle. The segmentation model would have to approximate the circular decision boundary to segment the image. When transformed with the polar transform, the circular decision boundary becomes a linear one, and the decision boundary can be predicted using a model with fewer parameters. 
+
+We propose a general formulation of this approach, wherein images are transformed to be more linearly separable using hand-constructed transformations using traditional image processing methods. Since the effectiveness of the transformation rests on choosing the correct parameters, we train neural networks to predict optimal transformation parameters. Thus, we use a model-driven approach to preprocess the image. The preprocessed image is then segmented using a regular neural network. However, because the image is easier to segment, the segmentation network can have fewer parameters than if we were segmenting the original, unprocessed images. In the remainder of this section, we will describe this approach in more detail.
+
+\todo{visual description}
+
+To pre-process the image, we may choose a transformation $\mathcal{T}_{\phi}(I)$ of the image $I$, parameterized by transformation parameters $\phi$, that will produce a transformed image $I'$ segmentable by fewer parameters than $I$. The choice of transformation function $\mathcal{T}$ depends on the problem at hand. When segmenting elliptically objects from their background, the polar transform is beneficial. When segmenting small objects, we might opt for an affine transformation that scales each object to a uniform scale. Just like designing the segmentation network architecture, we design $\mathcal{T}$ using domain knowledge and verify its effectiveness empirically. We may then perform the segmentation on the transformed image as:
+
+\begin{equation}
+	M(I) = (\mathcal{T}_{\phi}^{-1} \circ F_{seg} \circ \mathcal{T}_{\phi})(I),
+\end{equation}
+
+where $M(I)$ is the resulting segmentation mask for image $I$, $F_{seg}$ is a segmentation neural network. The transformation can be any transformation function including affine transformations, deformation fields, thresholding as well as the polar transform, as in the above example. The transformation needs to be invertible so that the segmentation mask $M(I)$ can be obtained in the original image space.
+
+Note that the correct value for of $\phi$ matters greatly to the effectiveness of the preprocessing, as we have observed with the polar transform. Moreover, $\phi$ is image-dependent: The origin, scale, location, and distribution of the object vary from image to image. Given this, we may train a model to estimate an optimal $\phi$ given an image:
+
+\begin{equation}
+	\phi(I) = F_{\mathcal{T}}(I; \theta_{\mathcal{T}}),
+\end{equation}
+
+where $F_{\mathcal{T}}$ is a neural network with parameters $\theta_{\mathcal{T}}$ trained to estimate the correct parameters for $\mathcal{T}$ given an image $I$. In our approach, we use various types of neural networks as $F_{\mathcal{T}}$, though it is also possible to use more traditional approaches.
+
+More specifically, $F_{\mathcal{T}}$ is structured similarly to a regular segmentation network, producing a segmentation mask $M_\phi(I)$ in its second-to-last layer. The final layer of the network is a non-trainable function $\phi(I) = f_\phi(M_\phi(I))$, which produces segmentation parameters given a predicted segmentation map. $F_{\mathcal{T}}$ can then be expressed as:
+
+\begin{equation}
+	F_{\mathcal{T}}(I; \theta_{\mathcal{T}}) = f_\phi(F_{\mathcal{T}seg}(I; \theta_{\mathcal{T}})),
+\end{equation}
+
+where $F_{\mathcal{T}seg}$ is the segmentation sub-network producing $M_\phi(I)$. $F_{\mathcal{T}seg}$ can then be trained using segmentation-like loss functions, where $M_\phi$ can be compared to a ground truth segmentation mask $M_\gt(I)$. 
+
+The function $f_\phi$ is hand-constructed using knowledge of the transformation. For instance, we know that for the polar transform where $\phi$ is the origin of the polar transformation, the optimal origin lies in the center of the object. Therefore, we may use the centroid of the ground truth segmentation labels as $f_\phi$. There are other examples of $f_\phi$:
+
+\begin{itemize}
+	\item For CT thresholding, the transformation parameters are the maximum and minimum Houndsfield values of some tissue. For $f_\phi$ we may use the minimum and maximum values within the predicted segmentation mask.
+	\item For rescaling, the transformation parameters are the $x$ and $y$ scaling factors. We may use the predicted segmentation mask to determine a scaling factor such that the object is of some given fixed width and height.
+	\item For translation, we can determine $x$ and $y$ translation parameters by calculating how far away the center of the object is from a desired location.
+\end{itemize}
+
+Note that $M_\phi(I)$ does not necessarily need to be a regular segmentation mask. Instead, we can construct pseudo-labels that better fit the task of predicting optimal transformation parameters. For instance, in cases where the transformation parameters depend on the centroid of the object, we can model $M_\phi(I)$ as a heatmap centered on the center point of the object. The network will then learn to predict object centroids instead of the object boundaries, and $f_\phi$ can calculate the centroid of the object by looking up the $x$ and $y$ coordinate of the maximal intensity pixel in $M_\phi(I)$.
+
+The core idea of our approach is that $\mathcal{T}$ will simplify the segmentation problem such that a regularized segmentation network $F_{seg}$ will be able to perform the segmentation using fewer parameters. To achieve this, both $F_{\mathcal{T}}$ and $F_{seg}$ need to be trained using specific training methods, as we will describe in the next section.
+
+Using this approach, data efficiency is achieved by reducing the total function class size when compared to a standard segmentation neural network. We do so by using two smaller neural networks instead of one large one. Since the decision boundaries of the preprocessed images are simplified, the segmentation network needs fewer parameters to model them. Transformation parameters often have a much smaller dimensionality than the segmentation mask, and therefore the network predicting transformation parameters can naturally use much fewer parameters.
+
+\subsection{Training Model-Driven Preprocessing Networks}
+
+As mentioned earlier, using the approach of model-driven preprocessing allows and requires specific neural network training techniques. In our approach, two separately trained neural networks are used: the transformation parameter predictor $F_{\mathcal{T}}$ and the segmentation network $F_{seg}$. 
+
+\subsubsection{Training the Transformation Parameter Predictor}
+
+$F_{\mathcal{T}}$ receives the original untransformed images as input and outputs the segmentation parameters $\phi(I)$. As mentioned earlier, the second-to-last layer of $F_{\mathcal{T}}$ outputs a segmentation-like mask $M_\phi(I)$. The data used to train $F_{\mathcal{T}}$ is in the form of $(I, M_{gt})$. Given a predicted segmentation mask $M_\phi = F_{\mathcal{T}seg}(I)$ and the transformation parameter function $f_\phi(M(I))$, the transformation parameters loss $L_\mathcal{T}$ can be calculated as:
+
+\begin{equation}
+	L_\mathcal{T}(I, M_\phi, M_{gt}) = \alpha L_\phi(f_\phi(M), f_\phi(M_{gt})) + \beta L_{M}(M_\phi, M_{gt}),
+\end{equation}
+
+where $L_\phi$ measures the error in predicting the transformation parameters, while $L_{M}$ is a segmentation-like loss that measures the error in predicting the segmentation mask used to calculate the transformation parameters. $\alpha$ and $\beta$ control the strength of the two terms and are chosen empirically.
+
+\subsubsection{Training the Segmentation Network}
+
+The segmentation network is trained using ground-truth $\phi$ values to transform each input image. For each image and ground truth segmentation label pair $(I, M_{gt})$, the transformation parameters are obtained as:
+
+\begin{equation}
+	\phi = f_\phi(M_{gt}) + z_\phi
+\end{equation}
+
+where $f_\phi$ is the same transformation parameter function used in the parameter predictor network, and $z$ is a random noise value of the same dimensions as $\phi$. This random noise acts as a type of augmentation, making the segmentation network more robust to suboptimal $\phi$ predictions.
+
+Given $\phi$, the input to the segmentation network is constructed as $I' = \mathcal{T}_\phi(I)$. The last layer of the network performs an inverse transformation of the output segmentation map as $\mathcal{T}^{-1}_\phi(M)$ and a standard segmentation loss $L_{seg}(M, M_{gt})$ is used to train the network.
+
+\subsection{Transfer Learning}
+
+
 
 % explain transformation parameters, origin is (0, 0), but doesn't have to be
 % explain how we need to predict the origin to produce useful transformation, we can use a neural network for this
@@ -68,54 +161,19 @@ Here, we have shown how using the polar transform already transforms the input s
 % maybe https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/
 % or maybe look for polar in goodfellow deep learning
 
-\todo{some sort of introduction}
+%\section{Motivation}
+%
+%As mentioned in the previous chapter, 
 
-\section{Motivation}
+%\section{Model-driven Preprocessing to Simplify Segmentation Problems}
 
-As mentioned in the previous chapter, aside from getting new data, the easiest way to reduce the estimation error is by limiting the size of the function class our model optimizes. In a traditional machine learning approach, this would be done by hand-selecting a class of functions with a lower number of parameters and then training the model. In deep learning, however, this approach is usually replaced with \textbf{regularization}, where the parameters themselves are manipulated to simplify the model.\footnote{Often, any method of reducing the estimation error of the model is broadly termed as regularization.} Instead of selecting the number of parameters, we can penalize the network for the complexity and size of the parameters. In other words, the loss function between a predicted model output $y_{pred}$ and a ground-truth label $y$ has the form:
-
-\begin{equation}
-	L(\theta; y_{pred}, y) = L_{seg}(\theta; y_{pred}, y) + \alpha\Omega(\theta)
-\end{equation}
-
-where $L_{seg}$ is the segmentation loss function while $\Omega(\theta)$ is a parameter norm penalty, i.e. a measure of the complexity of the model \cite{goodfellowDeepLearning2016}. As we increase $\alpha$, the strength of the regularization increases and the loss is more impacted by the complexity of the model. As the network is being trained, it will seek to both reduce $\Omega(\theta)$ as well as $L_{seg}$, leading to a more constrained model.
-
-A commonly used parameter norm penalty is the $L^2$ regularization, also known as \textbf{weight decay} in deep learning contexts. Assuming $\theta$ consists of a set of weights $w, \lvert w \rvert = n$ and biases $b$, the $L^2$ norm is defined as $\Omega(w) = \frac{1}{2}\sqrt{(w_1^2 + w_2^2 + \cdots + w_n^2)}$. In other words, the network is exponentially penalized for moving weights away from zero. This regularisation, in effect, forces the network to use fewer parameters.
-
-% TODO: Feature transformation from ML book?
-% TODO: A proxy measurement of segmentation complexity, how many parameters to model a decision boundary?
-
-Thus, a deep learning network can learn to use fewer parameters without necessarily changing the architecture of the network itself. However, what remains unsolved is how to transform the data such that the network can solve the problem with fewer parameters.
-
-\section{Model-driven Preprocessing to Simplify Segmentation Problems}
-
-We will illustrate this using an example of segmenting epicardial fat on CT scans. Epicardial fat has a complex and sparse distribution between the heart wall and the pericardium, a thin fibrous protective sac around the heart, as can be seen in \todo{figure}. This is a hard segmentation problem, as the complex shape requires a large amount of parameters to model. 
-
-We can simplify the segmentation problem with two transformations. First, we can use thresholding to remove irrelevant pixels from the image. In CT scans, each tissue falls within a known range of intensity values. Empirically, it has been determined that epicardial fat falls roughly in the range of $[-190, -30]$ HU. By removing all pixels outside of this range, we reduce the amount of information in the image without removing any epicardial fat pixels. This allows the model to more easily segment the image, as it does not need to learn to remove these irrelevant pixels itself.
-
-Next, we can further simplify the segmentation problem by segmenting a simpler shape. By definition, epicardial fat is located within the pericardium, which has a smooth elliptical shape around the heart. Since we have already thresholded the image, all pixels within the pericardium are epicardial fat. Thus, the problem of segmenting epicardial fat can be reduced to segmenting the pericardium. Given its smooth and simple shape, the model requires much fewer parameters to model the pericardium compared to the complex epicardial fat distribution. When formulated this way, the problem of segmenting epicardial fat can even be solved by using much simpler methods such as ellipse fitting instead of neural networks \todo{cite}.
-
-This example demonstrates an approach of preprocessing images guided by domain knowledge to allow segmentation with much fewer parameters. However, this approach suffers from a key problem. The preprocessing parameters, such as the thresholds for epicardial fat, need to be selected ahead of time and kept static. However, the exact Houndsfield range of epicardial fat varies from patient to patient \todo{cite}. 
-
-\subsection{Estimating Preprocessing Parameters Using Neural Networks}
-
-To overcome this problem, we propose an approach where the transformation parameters are determined by a neural network based on the input image. In the example of epicardial fat segmentation, the parameters would be the threshold values for the epicardial fat. Formally, we can express this approach as segmenting a transformed image:
-
-\begin{equation}
-	M(I) = F_{seg}(\mathcal{T}(\phi)(I); \theta_{seg}),
-\end{equation}
-
-where $M(I)$ is the resulting segmentation mask for image $I$, $F_{seg}$ is a segmentation neural network with parameters $\theta_{seg}$ and $\mathcal{T}$ is a functional giving a transformation functions for a given set of transformation parameters $\phi$. The transformation can be any transformation function including affine transformations, deformation fields as well as thresholding, as in the above example. The parameters $\phi$ are estimated with a second neural network:
-
-\begin{equation}
-	\phi(I) = F_{\mathcal{T}}(I; \theta_{\mathcal{T}}),
-\end{equation}
-
-where $F_{\mathcal{T}}$ is a neural network with parameters $\theta_{\mathcal{T}}$ trained to estimate the correct parameters for $\mathcal{T}$ given an image $I$.
-
-The core idea is that $\mathcal{T}$ will simplify the segmentation problem such that a regularized segmentation network $F_{seg}$ will be able to perform the segmentation using fewer parameters. To achieve this, both $F_{\theta}$ and $F_{seg}$ need to be trained using specific training methods, as we will describe in the next section.
-
-% TODO: benefits: transfer learning, weakly supervised, simpler networks instead of one large one
+%We will illustrate this using an example of segmenting epicardial fat on CT scans. Epicardial fat has a complex and sparse distribution between the heart wall and the pericardium, a thin fibrous protective sac around the heart, as can be seen in \todo{figure}. This is a hard segmentation problem, as the complex shape requires a large amount of parameters to model. 
+%
+%We can simplify the segmentation problem with two transformations. First, we can use thresholding to remove irrelevant pixels from the image. In CT scans, each tissue falls within a known range of intensity values. Empirically, it has been determined that epicardial fat falls roughly in the range of $[-190, -30]$ HU. By removing all pixels outside of this range, we reduce the amount of information in the image without removing any epicardial fat pixels. This allows the model to more easily segment the image, as it does not need to learn to remove these irrelevant pixels itself.
+%
+%Next, we can further simplify the segmentation problem by segmenting a simpler shape. By definition, epicardial fat is located within the pericardium, which has a smooth elliptical shape around the heart. Since we have already thresholded the image, all pixels within the pericardium are epicardial fat. Thus, the problem of segmenting epicardial fat can be reduced to segmenting the pericardium. Given its smooth and simple shape, the model requires much fewer parameters to model the pericardium compared to the complex epicardial fat distribution. When formulated this way, the problem of segmenting epicardial fat can even be solved by using much simpler methods such as ellipse fitting instead of neural networks \todo{cite}.
+%
+%This example demonstrates an approach of preprocessing images guided by domain knowledge to allow segmentation with much fewer parameters. However, this approach suffers from a key problem. The preprocessing parameters, such as the thresholds for epicardial fat, need to be selected ahead of time and kept static. However, the exact Houndsfield range of epicardial fat varies from patient to patient \todo{cite}. 
 
 \section{Preprocessing With the Polar Transform Using Centerpoint Prediction}
 
