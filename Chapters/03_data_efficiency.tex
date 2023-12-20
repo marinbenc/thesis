@@ -87,11 +87,11 @@ In this thesis, we refer to this basic technique as ``simple transfer learning''
 
 	\subsection{Simple Transfer Learning}
 	
-	Simple transfer learning is a prevalent technique in medical image segmentation. Typically, segmentation neural networks in this field are initialized with weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet comprises a collection of natural images, which significantly differ in distribution from medical images. As a result, initializing with ImageNet-trained weights doesn't usually enhance accuracy but it does make the network converge faster. This is because such initialization 'skips' the phase of learning fundamental image features that are common across various types of images, including medical ones. Figure \ref{fig:stl-diagram} illustrates this process.
+	Simple transfer learning is a prevalent technique in medical image segmentation. Typically, segmentation neural networks in this field are initialized with weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet comprises a collection of natural images, which significantly differ in distribution from medical images. As a result, initializing with ImageNet-trained weights doesn't usually enhance accuracy but it does make the network converge faster. This is because such initialization 'skips' the phase of learning fundamental image features that are common across various types of images, including medical ones. \figref{fig:stl-diagram} illustrates this process.
 	
 Simple transfer learning is used extensively in medical image segmentation. Segmentation neural networks are commonly initialized using weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet is a dataset of natural images and its distribution is drastically different from medical images. Therefore, this initialization does not typically lead to increases in accuracy but can make the network converge faster as it ``skips'' having to learn to detect base-level image features common to all images. This process is shown in \figref{fig:stl-diagram}.
 
-\begin{figure}[h!]
+\begin{figure}[h]
  \centering
  \includegraphics[width=\linewidth]{images/3/simple-transfer-learning-diagram}
  \caption{An overview of the simple transfer learning procedure. First, a model is pretrained on some related segmentation task. Then, part of the trained model's weights are copied to a new model that is then fine-tuned on the target segmentation task.}

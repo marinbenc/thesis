@@ -36,7 +36,7 @@ Therefore, we will focus on finding transformations of the data such that the pr
 
 The goal of data efficiency is to find a decision boundary given fewer data samples. As discussed in the previous chapter, this necessitates reducing the function class space we are searching over, or in other words, reducing the number of neural network parameters. In this and the following chapters, we will focus on finding ways to pre-transform the data into some intermediary form $\mathcal{X}_{pre}$ that is more separable than the original input space $\mathcal{X}$. This allows networks with fewer parameters, as $\mathcal{X}_{pre}$ is closer to $X'$, and thus the network has to search a smaller space to find $X'$. We will call this transformation $\mathcal{T}$.
 
-A commonly used example of $\mathcal{T}$ is the polar transform. In the two-dimensional case, the polar transform $\mathcal{T}(X_i; C)$, parameterized by a chosen origin $C = [c_0, c_1]$, transforms an input vector $X_i = [x_0, x_1]$ into a vector $\mathcal{T}(X_i; C) = [\theta, r]$ as:
+A commonly used example of $\mathcal{T}$ is the polar transform. In the two-dimensional case, the polar transform $\mathcal{T}(X_i; C)$, parameterized by a chosen origin $C = [c_0, c_1]$, transforms an input vector $X = [x_0, x_1]$ into a vector $\mathcal{T}_C(X) = [\theta, r]$ as:
 
 \begin{equation}
     \begin{aligned}
@@ -139,57 +139,35 @@ where $f_\phi$ is the same transformation parameter function used in the paramet
 
 Given $\phi$, the input to the segmentation network is constructed as $I' = \mathcal{T}_\phi(I)$. The last layer of the network performs an inverse transformation of the output segmentation map as $\mathcal{T}^{-1}_\phi(M)$ and a standard segmentation loss $L_{seg}(M, M_{gt})$ is used to train the network.
 
-\subsection{Transfer Learning}
+\subsubsection{Transfer Learning}
 
+Since the parameter predictor is structured as a segmentation network, we can use the same encoder and decoder in both networks. This allows us to use various forms of transfer learning. First, because we use a standard encoder in both networks, we can initialize both networks using weights trained on large medical or natural datasets. Secondly, we can begin the model development by first training a regular baseline segmentation model on untransformed data. We can then transfer those weights to both the segmentation and centerpoint predictor networks. The centerpoint predictor then already knows how to localize the object, and thus can much more easily predict optimal transformation parameters.
 
+Finally, we can also take advantage of synthetic data for the transformation parameter predictor network. This network is tasked with robustly transforming an input image. Domain shifts or unrealistic data is not a large issue as it is in the segmentation network. Therefore, we can use heavy forms of augmentation to train the parameter predictor network.
 
-% explain transformation parameters, origin is (0, 0), but doesn't have to be
-% explain how we need to predict the origin to produce useful transformation, we can use a neural network for this
+Now that we have described this approach theoretically, the remainder of this chapter presents one specific implementation of this approach in an empirical study on various medical imaging datasets.
 
-% tie in with regularization somehow
+\section{Model-Driven Polar Transform Using Centerpoint Prediction}
 
-% from understanding ml ben david:
-% The transformation from the real world object “papaya” into the scalar representing its softness or its color is called a feature function or a feature for short; namely, any measurement of the real world object can be regarded as a feature. If X is a subset of a vector space, each x ∈ X is sometimes referred to as a feature vector. It is important to understand that the way we encode real world objects as an instance space X is by itself prior knowledge about the problem.
-% Furthermore, even when we already have an instance space X which is rep- resented as a subset of a vector space, we might still want to change it into a different representation and apply a hypothesis class on top of it. That is, we may define a hypothesis class on X by composing some class H on top of a feature function which maps X into some other vector space X′.
+What we will propose in this section is a general way to improve neural network segmentation data efficiency and performance 
+on medical imaging segmentation tasks where the goal is to segment roughly 
+elliptically distributed objects. Our method is evaluated on 
+the tasks of polyp segmentation, liver segmentation, skin 
+lesion segmentation, and epicardial adipose tissue (EAT) segmentation.
+The proposed methods can be used as a pre-processing step for 
+existing neural network architectures, so we evaluate the methods using
+common neural network architectures for medical image segmentation including U-Net 
+\cite{ronnebergerUNetConvolutionalNetworks2015}, U-Net++ 
+\cite{zhou2019unetplusplus} with a ResNet \cite{heDeepResidualLearning2016} encoder, and DeepLabV3+ \cite{chenEncoderDecoderAtrousSeparable2018} with a ResNet \cite{heDeepResidualLearning2016} encoder. Evaluation of our approach as a pre-processing step shows that it improves segmentation performance across different datasets and neural network architectures while making the networks more robust to small dataset sample sizes.
 
-% maybe thresholding can be feature selection
+Earlier in the chapter, we have presented some motivation on how using the polar transform can transform complex decision boundaries into simpler ones. Using this intuition, this section presents an implementation of the model-driven preprocessing approach which uses the polar transform. As described above, this approach consists of two networks, a transformation parameter predictor and a segmentation network. In this case, we will predict the parameters of the polar transform, i.e. the polar origin, using a centerpoint predictor network. This network is tasked with finding the center of a single object on the image. We will present two different designs of the centerpoint predictor network: (1)
+a segmentation-like network finding the centroid of a segmentation mask and (2) a network predicting the centerpoint as a heatmap. Using the centerpoint, we will transform the image and give the transformed image to a segmentation network trained on polar images.
 
-% add sections about example transformations that are useful, with prior knowledge?
-
-
-
-% maybe https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/
-% or maybe look for polar in goodfellow deep learning
-
-%\section{Motivation}
-%
-%As mentioned in the previous chapter, 
-
-%\section{Model-driven Preprocessing to Simplify Segmentation Problems}
-
-%We will illustrate this using an example of segmenting epicardial fat on CT scans. Epicardial fat has a complex and sparse distribution between the heart wall and the pericardium, a thin fibrous protective sac around the heart, as can be seen in \todo{figure}. This is a hard segmentation problem, as the complex shape requires a large amount of parameters to model. 
-%
-%We can simplify the segmentation problem with two transformations. First, we can use thresholding to remove irrelevant pixels from the image. In CT scans, each tissue falls within a known range of intensity values. Empirically, it has been determined that epicardial fat falls roughly in the range of $[-190, -30]$ HU. By removing all pixels outside of this range, we reduce the amount of information in the image without removing any epicardial fat pixels. This allows the model to more easily segment the image, as it does not need to learn to remove these irrelevant pixels itself.
-%
-%Next, we can further simplify the segmentation problem by segmenting a simpler shape. By definition, epicardial fat is located within the pericardium, which has a smooth elliptical shape around the heart. Since we have already thresholded the image, all pixels within the pericardium are epicardial fat. Thus, the problem of segmenting epicardial fat can be reduced to segmenting the pericardium. Given its smooth and simple shape, the model requires much fewer parameters to model the pericardium compared to the complex epicardial fat distribution. When formulated this way, the problem of segmenting epicardial fat can even be solved by using much simpler methods such as ellipse fitting instead of neural networks \todo{cite}.
-%
-%This example demonstrates an approach of preprocessing images guided by domain knowledge to allow segmentation with much fewer parameters. However, this approach suffers from a key problem. The preprocessing parameters, such as the thresholds for epicardial fat, need to be selected ahead of time and kept static. However, the exact Houndsfield range of epicardial fat varies from patient to patient \todo{cite}. 
-
-\section{Preprocessing With the Polar Transform Using Centerpoint Prediction}
-
-Images are most commonly viewed in Cartesian coordinates, where the pixels are arranged along the x- and y-axes. The polar coordinate system has two axes: (1) the radial coordinate $
-\rho$, which is the distance 
-of a point from the origin of the polar transformation; and (2) the angular coordinate $\phi$, which is the angle 
-between the point and the reference direction. In other words, the x-axis of the polar image represents the 
-distance from an origin, while the y-axis represents the rotation around the origin. This makes polar coordinates 
-invariant to rotation.
+\subsection{Background and Related Work}
 
 Our intuition is that polar transformations can be especially beneficial to segmenting images where an 
-elliptical border must be found on the image. Consider a contrived example of predicting a 
-circular decision boundary on a single-channel image with a linear model. A circular decision boundary 
-must be modeled by a function of at least four dimensions. When transformed to 
-polar coordinates, a perfect circle in Cartesian coordinates becomes a straight line, as shown in 
-\figref{fig:polar-coords}. This linear decision boundary can be modeled with a simpler linear function 
+elliptical border must be found on the image. When transformed into 
+polar coordinates, a perfect circle in Cartesian coordinates becomes a straight line, as shown earlier in the chapter. This linear decision boundary can be modeled with a simpler linear function 
 in two dimensions. The image in polar coordinates would require a less complex model to predict a 
 border. It is possible that, even for more complex examples, the polar transform of an image of a roughly 
 elliptical object reduces the required segmentation model complexity, as shown visually in 
@@ -200,70 +178,24 @@ origin, without having to learn to localize the object.
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.6\linewidth]{images/4/polar-transform}
-		\caption{An example of a polar transformation.}
-		\label{fig:polar-coords}
-	\end{figure}
-
-
-	\begin{figure}[h]
-		\centering
 		\includegraphics[width=0.4\linewidth]{images/4/to_polar}
 		\caption{An example image and label from the lesion dataset and their corresponding polar transformation.}
 		\label{fig:polar-lesion}
 	\end{figure}
 
-To obtain a polar 
-transformation, the angle and magnitude of each pixel $(x, y)$ of the original image are 
-calculated using \eqref{eq:magang}:
+Given a polar origin $(c_x, c_y)$ of a Cartesian image $I(x, y)$ of resolution $H \times W$, we obtain each point $(\rho, \vartheta)$ of the polar transformation $I'(\rho, \vartheta)$ as:
 
   \begin{equation}
     \begin{aligned}
-      magnitude(x, y) &= \sqrt{x^2 + y^2} , \\ 
-      angle(x, y) &= atan2(y, x) [ \cdot 180 / \pi ]
-    \end{aligned}
-    \label{eq:magang}
-  \end{equation}
-
-Where $atan2$ is the 2-argument arctangent function.
-
-Given a polar origin $(c_x, c_y)$ of a Cartesian image $I(x, y)$ of resolution $H \times W$, we obtain each point $(\rho, \phi)$ of the polar transformation $I'(\rho, \phi)$ using 
-\eqref{eq:polar-transform}.
-
-  \begin{equation}
-    \begin{aligned}
-      \rho &= \frac{H}{2 \Pi} \cdot angle(x - c_x, y - c_y) \\
-      \phi &= \frac{W}{\sqrt{(W / 2)^2 + (H / 2)^2}} \cdot magnitude(x - c_x, y - c_y)
+      r &= \frac{H}{2 \Pi} \cdot atan2(y, x) [ \cdot 180 / \pi ] \\
+      \vartheta &= \frac{W}{\sqrt{(W / 2)^2 + (H / 2)^2}} \cdot \sqrt{x^2 + y^2},
     \end{aligned}
     \label{eq:polar-transform}
   \end{equation}
+  
+  where $atan2$ is the 2-argument arctangent function.
 
-\todo{formulate problem and introduce using the above framework}
-
-In this chapter, we propose a general way to improve neural network segmentation data efficiency and performance 
-on medical imaging segmentation tasks where the goal is to segment roughly 
-elliptically distributed objects.
-
-We propose and explore ways to train neural networks for biomedical image segmentation on polar transformations of images. The polar transformation transforms an image from Cartesian coordinates into a new coordinate system where the two
-axes are the rotation around an origin and radius from that origin. When the regions to be segmented are elliptical in shape or distribution, this transformation results in a reduction of dimensionality, allowing convergence in fewer epochs and good performance even in models with a low number of parameters. 
-
-Experimentally, we observed that selecting
-a correct polar origin is one of the key parameters that determine segmentation performance. Therefore, we propose two 
-different approaches of selecting an optimal polar origin: (1)
-estimation via a segmentation neural network trained on non-polar images and (2) estimation via a neural network trained
-to predict heatmaps.
-Our method is evaluated on 
-the tasks of polyp segmentation, liver segmentation, skin 
-lesion segmentation, and epicardial adipose tissue (EAT) segmentation.
-The proposed methods can be used as a pre-processing step for 
-existing neural network architectures, so we evaluate the methods using
-common neural network architectures for medical image segmentation including U-Net 
-\cite{ronnebergerUNetConvolutionalNetworks2015}, U-Net++ 
-\cite{zhou2019unetplusplus} with a ResNet \cite{heDeepResidualLearning2016} encoder, and DeepLabV3+ \cite{chenEncoderDecoderAtrousSeparable2018} with a ResNet \cite{heDeepResidualLearning2016} encoder.
-
-Evaluation of our approach as a pre-processing step shows that it improves segmentation performance across different datasets and neural network architectures while making the networks more robust to small dataset sample sizes.
-
-    \subsection{Previous work using the polar transform for medical image processing}
+    \subsubsection{Previous work using the polar transform for medical image processing}
     
 Several image segmentation methods were proposed that utilize polar coordinates. 
 \citet{liuDDNetCartesianpolarDualdomain2019a} proposed an approach they
@@ -286,7 +218,7 @@ classification. Note that "transformer network" here refers to spatial transform
 transformers.
 The network 
 consist of a polar origin predictor and a neural network that predicts a heatmap. The centroid of the heatmap is then used as the origin for a polar transformation of the input image. The polar image is classified using a CNN. This approach is most similar to our proposed method, 
-however, their approach focuses on image classification, not segmentation. Additionally, our approach differs in the ways the ground truth data is prepared, the used neural network architectures, as well as other details.
+however, their approach focuses on image classification, not segmentation. Additionally, our approach differs in the ways the ground truth data is prepared, the neural network architectures, as well as other details.
 
 While there are proposed methods that combine polar transformation with neural networks, most of them solve classification tasks. Some medical image segmentation methods use the polar transformation as a preprocessing step, however, the way they obtain the origin of the polar transformation is usually based on heuristics. To our knowledge, there is currently no work that explores using the polar transformation with a dynamic polar origin as a preprocessing step for semantic segmentation in a variety of medical image datasets.
 
@@ -434,7 +366,7 @@ perform four different experiments:
 
     \subsection{Datasets description}
 
-We used four different datasets to train the network. In this section, we give an overview of each used dataset and how it was preprocessed. Note that for training the center-point predictor, the input images were resized to a resolution of $256 \times 256$, while the generated heatmaps were resized to $64 \times 64$ pixels. Otherwise, all preprocessing steps described here are applied to the center-point model datasets as well. Each dataset was normalized and zero-centered to better facilitate network convergence. 
+We used four different datasets to train the network. In this section, we give an overview of each used dataset and how it was preprocessed. Note that for training the center-point predictor, the input images were resized to a resolution of $256 \times 256$, while the generated heatmaps were resized to $64 \times 64$ pixels. Otherwise, all preprocessing steps described here are applied to the center-point model datasets as well. Each dataset was normalized and zero-centered to facilitate better network convergence. 
 
 	\begin{figure*}
 	\subfloat[Polyp dataset]{\includegraphics[width=0.49\columnwidth]{images/4/polyp_example}}
@@ -703,7 +635,7 @@ We also train several models with both polar and Cartesian coordinates on subset
 		\label{fig:dataset-vs-dsc}
 	\end{figure}
 	
-	\section{Discussion}
+	\subsection{Discussion}
 	
 We obtain state-of-the-art results for polyp and lesion segmentation by training common biomedical image segmentation models. In the liver dataset, we achieve state-of-the-art results when compared to other 2D methods, but 3D methods 
 achieve the same or slightly better results \cite{valanarasuKiUNetOvercompleteConvolutional2020a}. 
@@ -764,12 +696,7 @@ Polar (Centerpoint predictor) & 0.9094 & +0.0176  \\
 
 Finally, we also perform an ablation study shown in \tabref{table:ablation}. Training on the polar coordinates with the polar origins predicted from the cartesian network yields the largest performance improvement. Predicting the polar origin from the center point predictor as well as adding center point augmentation to the predictor play a roughly equally important role in the performance. Lastly, a small performance improvement is further achieved by using data augmentation when training the polar network.
 
-A potential improvement of our method is to train a single neural network that combines the center-point 
-predictor and the segmentation network and is trained end-to-end. In our approach, polar origins are always 
-optimized towards the center of mass of the segmented object. Training an end-to-end network would allow 
-the polar origins to be optimized for that specific segmentation task. Additionally, the center points could 
-be obtained manually from experts, creating a user-guided segmentation approach similar to 
-\cite{kimCNNBasedUGS2018}. The center points could also be obtained by a more basic segmentation approach 
+The center points could also be obtained by a more basic segmentation approach 
 like thresholding or other traditional image processing method, leading to a possible reduction in the 
 number of required neural network parameters to achieve good segmentation. Furthermore, in our experiments,
 we found that the segmentation is dependent on choosing the correct standard deviation of the generated 
@@ -777,33 +704,131 @@ heatmaps for training the center point predictor. An improvement to our method c
 a method to automatically estimate the standard deviation from the training or validation data without needing
 to first train the center point predictor.
 
+\section{Supporting Multiple Transformations of an Image: Applications in Aorta Segmentation}
+
+\todo{todo}
+
+\subsection{Aorta Segmentation: Background and Related Work}
+
+The aorta is the largest artery of the human body and supplies oxygenated blood from the heart to all parts of the body. It is one of the most clinically significant structures to analyze for cardiovascular disease diagnosis and prevention. Several conditions could occur on the aorta which can be detected using 3D medical imaging, including aneurysms, dissections, stenoses, coarctations, or traumas. All of these conditions are potentially dangerous and require careful screening, following, and potentially surgical treatment, while a failure or delay in the diagnosis of these conditions could be fatal. Therefore, developing a fully automated method to efficiently and accurately segment the aorta could be beneficial for earlier detection of these conditions. By producing a 3D model of the aorta from CT or MRI scans, a computer algorithm could perform automatic measurements to screen and detect aortic aneurysms, dissections, and other conditions which are commonly diagnosed by imaging the aorta.
+
+\subsubsection{Related work}\label{related}
+
+\todo{mention chapter instead of paper}
+
+The method presented in this paper is an extension and improvement over the method presented in \cite{bencevicTrainingPolarImage2021}. The method uses a neural network to predict the center point of a single object in an input image. This center point is used as the origin of a polar transformation of the original input image. The transformed image is then segmented using a second neural network trained on polar image transformations. This approach works best when there is a single object on the image, i.e. one connected component in the segmentation label. In this paper, we modify the method to add support for multiple connected components by transforming each object to polar coordinates separately and then fusing the segmentations.
+
+Several methods based on deep learning were proposed for segmenting the aorta from CT images. \citet{fantazzini3DAutomaticSegmentation2020} use a cascade of U-Net-based networks. They first perform a rough segmentation on axial slices to extract a region of interest. They then use separate networks to segment axial, sagittal, and coronal slices of the region of interest. Several other papers have used 3D U-Net-based architectures for this task \cite{yuThreeDimensionalDeepConvolutional2021, chenMultistageLearningSegmentation2021}.
+
+The use of polar image transforms in neural networks was explored previously, including in the field of medical image segmentation \cite{liuDDNetCartesianpolarDualdomain2019a}. \citet{estevesPolarTransformerNetworks2018a} train an end-to-end network that predicts a polar origin, transforms the image to polar coordinates, and then performs classification. While similar to our approach, it differs in the application (segmentation and not classification) as well as in the neural network architectures used since we use two separate networks, making our approach simpler to adapt to existing architectures. \citet{salehinejadImageAugmentationUsing2018a} use multiple polar transformations of the same image as a method of data augmentation. The final labels are obtained using majority voting from predictions of multiple transforms of the same input image. In contrast, we employ per-object weighting and hysteresis thresholding to obtain the final prediction.
+
+\subsection{Methodology}
+
+\todo{change mentions to chapter not paper}
+\todo{add references to my own papers here and in previous section}
+
+The work presented in this paper is an extension of \cite{bencevicTrainingPolarImage2021}. We obtain the center points of the objects in the image using a rough segmentation from a U-Net-based network, instead of using a center point predictor as is described in the original paper. We refer readers to the original paper for more details. A summary of our approach is shown in \figref{fig:summary}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/4/summary}
+\caption{A summary of our approach. An input image is first segmented using a U-Net network. For each connected component in the segmentation, the input image is transformed to polar coordinates using the centroid of the connected component as the origin. These images are then fed into a U-Net trained on polar images, and the predictions for each object are fused, hysteresis thresholded and transformed back to cartesian coordinates. Note how one of the false positive connected components in the initial segmentation was removed during hysteresis thresholding, since the component was only predicted in one of the three polar predictions.}
+\label{fig:summary}
+\end{figure}
+
+In this paper, we perform several key modifications to allow the network to segment multiple objects on an image. During training of the polar network, we construct a dataset that contains one polar transformation per connected component in the ground truth segmentation label. The origins of these polar transformations are the centroid of each corresponding connected component. This has several advantages. First, one object is always the bottom part of the image to be segmented, so the network does not need to learn to first localize the object. Secondly, a consequence of this approach is that images with multiple connected components are over-sampled during training. This is a benefit since these images are both under-represented (when compared to images with a single connected component) and harder to segment (since they require segmenting multiple objects). In addition, during the training of the polar network, we use jittering of the center point when constructing the polar transformation to make the network more robust to inaccurate center point predictions. As an augmentation step, during each training step there is a $30\%$ chance that the polar origin will be shifted by a maximum of $\pm3$ pixels in any direction. This increases the robustness to inaccurate origin predictions during inference.
+
+We also employ prediction fusion during inference. First, a 2D U-Net-based network is used to obtain an initial rough segmentation. A separate polar transformation for each connected component in the rough segmentation is constructed using the centroid of each component as the origin. The polar network predicts a segmentation map for each transform, resulting in a number of predictions equal to the number of connected components. In the predicted image, a weight of 2 is assigned to the connected component which contains the origin for that prediction, and a weight of 1 to all other connected components. We then sum all of the weighted images together. As shown in \cite{bencevicTrainingPolarImage2021}, the polar network generally performs best on objects which contain the polar origin, and worse at predicting other objects on the image. Therefore, we assign a larger weight to that component as a proxy for a confidence measure. We then sum all of the weighted predictions together and normalize the prediction to a 0-1 range. This leads to a segmentation map where each non-zero pixel represents the confidence that the pixel belongs to the aorta class. To obtain the final segmentation, we use hysteresis thresholding where the bottom threshold is 0, and the top threshold is 0.4, empirically determined according to the best Dice coefficient on the validation dataset. An example of thresholding a prediction is shown in \figref{fig:thresh}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\columnwidth]{images/4/hyst}
+\caption{Hystersis-thresholded segmentation output. For each polar prediction, the component which contains the origin of the transform gets a weight of 2 assigned, while all other components get a weight of 1. This left-most image is the result of summing the predictions of 3 polar transformations of the original image (one for each connected component), converted to cartesian coordinates. Note how the thresholding removes the false positive object on the left of the image while keeping the true positive objects intact.}
+\label{fig:thresh}
+\end{figure}
+
+\subsubsection{Data description and preprocessing}
+
+We used a publicly available dataset of CT scans with corresponding aorta labels \cite{radlAVTMulticenterAortic2022} including the ascending aorta, the aortic arch as well as the descending and abdominal aorta. While the original dataset contains scans from three different centers, in our experiments, we only use the data from Dongyang Hospital. In total, we use 18 CT scans, each containing 122-251 slices, with a slice thickness of 2 or 3 mm.
+
+Each CT slice is windowed to a range of 200 to 500 HU to remove information from irrelevant tissues, then normalized to a range of -0.5 to 0.5, and zero centered using the global mean value across all slices in the validation set. The slices were each resized from $512 \times 666$ to $256 \times 256$ pixels. We use augmentation during training for both the cartesian and the polar network. The augmentations we use include a $50\%$ chance of a random combination of affine transforms including a shift of up to $6.25\%$, a scale of up to $10\%$ and a rotation of up to $15^{\circ}$; as well as a $30\%$ chance of a horizontal flip.
+
+All of our models were implemented using PyTorch 3.9 using an NVIDIA GeForce RTX 3080 GPU. We use the U-Net \cite{ronnebergerUNetConvolutionalNetworks2015d} architecture for both the cartesian and the polar network. For training, we use a batch size of 8 and the Adam optimizer with a learning rate of $0.001$. All models were trained for 60 epochs with checkpointing where the model with the best validation Dice coefficient was selected. We use the Dice loss function as described in the previous section of this chapter. All of the code, as well as the trained networks, can be found at \href{https://github.com/marinbenc/medical-polar-training}{github.com/marinbenc/medical-polar-training}
+
+\subsection{Results and Discussion}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\columnwidth]{images/4/examples_3}
+\caption{Random examples of predictions. Columns from left to right show: the input image, the initial prediction from the non-polar network, the final fused polar prediction, the ground truth segmentation label.}
+\label{fig:examples}
+\end{figure}
+\clearpage
+
+\begin{table}[h]
+\def\arraystretch{1.25}
+\centering
+\begin{tabular}{l c c c c} 
+ \hline
+ Method & DSC & mIoU & Prec. & Rec. \\ 
+ \hline
+U-Net (non-polar) & $0.886 \pm 0.049$ & $0.825 \pm 0.052$ & $0.901 \pm 0.074$ & $0.893 \pm 0.039$ \\
+Polar + GT centers & $0.937 \pm 0.053$ & $0.895 \pm 0.055$ & $0.944 \pm 0.064$ & $0.937 \pm 0.040$ \\
+Polar + NP centers* & $0.932 \pm 0.027$ & $0.895 \pm 0.033$ & $0.915 \pm 0.040$ & $0.973 \pm 0.018$ \\
+\hline
+\end{tabular}
+\caption{A summary of the mean segmentation results of our experiments. \textit{Non-polar} are the results of the U-Net trained using cartesian images. \textit{Polar + GT centers} are the results of the U-Net trained on polar images, using ground-truth connected component centers during inference, as an example of the best case possible results. \textit{Polar + NP centers} are the results when running inference on the polar model using center points obtained from the non-polar model predictions. *Our proposed method.}
+\label{table:results}
+\end{table}
+
+To perform evaluation, we use 3-fold cross-validation on the 18 scans. For each fold, we train a polar and non-polar model using the slices of 12 CT scans and run inference on the slices of the remaining 6 scans. All results presented in this section are averaged across each CT scan and then across the three folds.
+
+A summary of our segmentation results is presented in \tabref{table:results}. Random examples of segmentation results are shown in \figref{fig:examples}. In the experiments in \cite{bencevicTrainingPolarImage2021} the polar networks achieve the best segmentation performance when using accurate center points during inference. As the accuracy of the center points goes down, so does the segmentation performance. The experiments in this paper follow the same pattern, the polar networks perform significantly better than the cartesian networks when using ground truth centers. However, even with less accurate centers obtained from initial rough segmentation by the non-polar network, the results yield only slightly lower Dice coefficients than when using ground-truth centers directly. The non-polar network can also be seen as a baseline model, and our approach results in a significant improvement over this baseline in all segmentation metrics.
+
+In some problems in medical imaging, e.g. segmenting cancerous tissues, a higher recall is beneficial since the cost of missing tissues can be very high \cite{tahaMetricsEvaluating3D2015}. A key advantage of our approach is that by fusing multiple predictions and using hysteresis thresholding the threshold value can be used to impact the bias-variance tradeoff and thus increase the pixel-level recall of the segmentation. Our experiments show that the average per-patient pixel-level recall increased significantly when compared to the baseline model.
+
+We also present the standard deviation across CT scans as a measure of segmentation reliability. Using the polar coordinates decreases the standard deviation between patients of all performance metrics, indicating that the predictions are more reliable and more robust to inter-patient differences. To further emphasize this, we present a box plot of segmentation results for each patient in \figref{fig:box}. Note that, in contrast with the baseline model, when using our approach there are no outliers in the box plot.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\columnwidth]{images/4/box_plot}
+\caption{A box plot of the per-scan Dice coefficients of our experiments. \textit{Non-polar} are the results of the U-Net trained using cartesian images. \textit{Polar + GT centers} are the results of the U-Net trained on polar images, using ground-truth connected component centers during inference. \textit{Polar + NP centers} are the results when running inference on the polar model using center points obtained from the non-polar model predictions.}
+\label{fig:box}
+\end{figure}
+
+A comparison of our results with other deep learning-based approaches for aorta segmentation in the literature is shown in \tabref{table:comparison}. Our approach achieves performance comparable to the state of the art, and a large improvement over the baseline methods. Note that the results are evaluated on different datasets and with a different number of cases. Therefore, it is hard to objectively compare these approaches.
+
+\begin{table}[h]
+\def\arraystretch{1.25}
+\centering
+\begin{tabular}{l l l c}
+ \hline
+ Method & DSC & mIoU & n\\ 
+ \hline
+Yu \textit{et al.} \cite{yuThreeDimensionalDeepConvolutional2021} & 0.958 & - & 25 \\
+Fantazzini \textit{et al.} \cite{fantazzini3DAutomaticSegmentation2020} & $0.928 \pm 0.013$ & $0.866 \pm 0.023$ & 10 \\
+Cheung \textit{et al.} \cite{cheungComputationallyEfficientApproach2021} & $0.912$ & - & 14 \\
+Proposed method & $0.932 \pm 0.027$ & $0.895 \pm 0.033$ & 18 \\
+\hline
+\end{tabular}
+\caption{A comparison of our approach with results reported in papers describing deep learning-based aorta segmentation methods. Note that the datasets used for obtaining the results are not the same. $n$ is the number of cases used to obtain the evaluation.}
+\label{table:comparison}
+\end{table}
+
+% END AORTA PAPER
+\clearpage
+
+\todo{per-chapter bibliography}
+
   \section{Conclusion}
-  
-  \todo{rewrite this using formulation}
-  
-We explored training neural networks for biomedical image segmentation on polar transformations on images.
-We hypothesized that polar transformations would reduce the dimensionality of the input images, and allow
-the network to separately learn localization and fine segmentation of an object.
-We showed that training time improves when training on polar images for 
-tasks where a single object 
-which is roughly elliptical in shape or distribution needs to be segmented. Additionally, we show that training on polar
+    
+We have described an approach to achieving data efficiency in medical image segmentation using two smaller neural networks instead of one large one. The first network predicts parameters of a hand-selected transformation that is beneficial for reducing segmentation complexity, while the second network segments the transformed input images. We have shown empirically, using the polar transform, that this can improve data efficiency across a broad array of medical image segmentation tasks and domains. Specifically, we showed that training time improves when training on polar images for tasks where a single object 
+that is roughly elliptical in shape or distribution needs to be segmented. Additionally, we show that training on polar
 images achieves state-of-the-art results on small datasets, and achieves near state-of-the-art results on larger
-datasets using generic low-parameter-count models like U-Net. We also noted that choosing the correct 
-polar origin is essential for improving performance on polar images. Therefore, we proposed two different 
-ways of obtaining the polar origin automatically from unlabeled input images. We trained a center-point 
-predictor which predicts a heatmap to produce a polar origin, and showed that its performance is better 
-than predicting the origin from a segmentation network trained on Cartesian images.
-We noted that sometimes our method under segments in examples where multiple objects need to be segmented.
+datasets using generic low-parameter-count models like U-Net.
 
-While our approach already produces state-of-the-art results in some cases, our results could be further improved. 
-Our approach can be used as a pre-processing step for 
-existing and future semantic segmentation methods that use neural networks to provide additional 
-segmentation improvement. Therefore, it is possible that our approach could be used in a variety of 
-different biomedical and non-medical segmentation applications.
+We have further improved this approach by allowing multiple transformations of the same image, and fusing segmentations of each transformation using hysteresis thresholding. When applied to the polar transform, we showed that this leads to large improvements over baseline networks trained on cartesian images for segmenting the aorta. We see improvements across a variety of metrics without significantly increasing training times or the complexity of the used neural network architectures. In addition, by fusing separate predictions of different objects on the image with hysteresis thresholding we can increase pixel-level recall (at the cost of accuracy) which is often beneficial in medical image segmentation tasks. 
 
-
-
-
-
+This is a flexible approach that allows leveraging domain knowledge as it can be used with any invertible image transformation. Moreover, it is invariant to the downstream segmentation architecture as it is a separate network. Thus, it can be used as a general preprocessing step regardless of the segmentation method. Moreover, if the two networks share similar architectures, one can use transfer learning from the segmentation network to the transformation parameter predictor, and vice-versa.
 
 
