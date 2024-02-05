@@ -79,6 +79,17 @@
 \usepackage{amsmath}
 \usepackage{subfig}
 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{float}
+
+\usepackage{tabularx}
+
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.8\textwidth}
+
+\usepackage{bibentry}
+
 % ------ FONTS ------
 \usepackage[T1]{fontenc} % Output font encoding
 \usepackage[utf8]{inputenc} % Required for inputting international characters
@@ -87,7 +98,8 @@
 
 
 % ------ BIBLIOGRAPHY ------
-\usepackage[backend=bibtex,style=ieee,natbib=true]{biblatex}
+\usepackage[backend=biber,style=alphabetic,natbib=true]{biblatex}
+\usepackage{letltxmacro}\LetLtxMacro{\cite}{\parencite}
 \addbibresource{example.bib} % The filename of the bibliography
 
 
@@ -227,11 +239,13 @@ language as front cover),
 % Include quotation page
 % \input{Base/quotation.tex}
 
+% Include acknowledgements page
+\input{Base/acknowledgements.tex}
+
 % Include abstract page
 \input{Base/abstract.tex}
 
-% Include acknowledgements page
-\input{Base/acknowledgements.tex}
+
 
 
 %----------------------------------------------------------------------------------------
@@ -278,17 +292,42 @@ language as front cover),
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
+\begin{refsection}
 \include{Chapters/01_introduction}
+\printbibliography[heading=subbibintoc]
+\end{refsection}
+
+\begin{refsection}
 \include{Chapters/02_foundations}
+\printbibliography[heading=subbibintoc]
+\end{refsection}
+
+\begin{refsection}
 \include{Chapters/03_data_efficiency}
+\printbibliography[heading=subbibintoc]
+\end{refsection}
+
+\begin{refsection}
 \include{Chapters/04_model_driven_preprocessing}
+\printbibliography[heading=subbibintoc]
+\end{refsection}
+
+\begin{refsection}
+\include{Chapters/05_input_size_reduction}
+\printbibliography[heading=subbibintoc]
+\end{refsection}
+
+\begin{refsection}
+\include{Chapters/06_other_methods}
+\printbibliography[heading=subbibintoc]
+\end{refsection}
 
 
 %----------------------------------------------------------------------------------------
 %  THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
 
-\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+%\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
 
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
@@ -301,8 +340,6 @@ language as front cover),
 %----------------------------------------------------------------------------------------
 %  BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
-
-\printbibliography[heading=bibintoc]
 
 %----------------------------------------------------------------------------------------
 

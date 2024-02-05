@@ -1,0 +1,269 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Data Efficiency via Model-Driven Preprocessing}{39}{chapter.110}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chap:model-driven-preprocessing}{{4}{39}{Data Efficiency via Model-Driven Preprocessing}{chapter.110}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Motivation: Using The Polar Transform for Preprocessing}{39}{section.111}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces An example of how a 2-class classification neural network bends an input space (left) such that it is linearly separable with a hyperplane.\relax }}{40}{figure.caption.112}\protected@file@percent }
+\newlabel{fig:input-space-transform}{{4.1}{40}{An example of how a 2-class classification neural network bends an input space (left) such that it is linearly separable with a hyperplane.\relax }{figure.caption.112}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces The decision boundary (shown as the background color) according to a fully connected neural network with three layers where the second layer has one, two, or three neurons.\relax }}{40}{figure.caption.113}\protected@file@percent }
+\newlabel{fig:circ-datataset-neurons}{{4.2}{40}{The decision boundary (shown as the background color) according to a fully connected neural network with three layers where the second layer has one, two, or three neurons.\relax }{figure.caption.113}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces An example circular dataset transformed using the polar transform. The background color shows the decision boundary of a fully connected network with one neuron in the second layer.\relax }}{41}{figure.caption.115}\protected@file@percent }
+\newlabel{fig:polar_dataset_neurons}{{4.3}{41}{An example circular dataset transformed using the polar transform. The background color shows the decision boundary of a fully connected network with one neuron in the second layer.\relax }{figure.caption.115}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces The polar transformation of the simulated data using different polar origins ($C$).\relax }}{41}{figure.caption.116}\protected@file@percent }
+\newlabel{fig:polar-origin-selection}{{4.4}{41}{The polar transformation of the simulated data using different polar origins ($C$).\relax }{figure.caption.116}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Model-driven Preprocessing}{41}{section.117}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces A visual summary of the model-driven preprocessing approach. First, the transformation parameter predictor network predicts a segmentation-like map, from which the transformation parameters are calculated using a transformation parameter function. Then, the input image is transformed and the transformed representation is segmented by a segmentation neural network. The final segmentation map is obtained by inverting the transformation.\relax }}{42}{figure.caption.118}\protected@file@percent }
+\newlabel{fig:visual-summary-mdp}{{4.5}{42}{A visual summary of the model-driven preprocessing approach. First, the transformation parameter predictor network predicts a segmentation-like map, from which the transformation parameters are calculated using a transformation parameter function. Then, the input image is transformed and the transformed representation is segmented by a segmentation neural network. The final segmentation map is obtained by inverting the transformation.\relax }{figure.caption.118}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Training Model-Driven Preprocessing Networks}{43}{subsection.122}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Training the Transformation Parameter Predictor}{43}{section*.123}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Training the Segmentation Network}{44}{section*.125}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Transfer Learning}{44}{section*.127}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Model-Driven Polar Transform Using Centerpoint Prediction}{45}{section.131}\protected@file@percent }
+\newlabel{polar-paper}{{4.3}{45}{Model-Driven Polar Transform Using Centerpoint Prediction}{section.131}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Background and Related Work}{45}{subsection.132}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces An example image and label from the lesion dataset and their corresponding polar transformation. \blx@tocontentsinit {4}\cite {bencevicTrainingPolarImage2021}\relax }}{46}{figure.caption.133}\protected@file@percent }
+\newlabel{fig:polar-lesion}{{4.6}{46}{An example image and label from the lesion dataset and their corresponding polar transformation. \cite {bencevicTrainingPolarImage2021}\relax }{figure.caption.133}{}}
+\newlabel{eq:polar-transform}{{4.7}{46}{Background and Related Work}{equation.134}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Previous work using the polar transform for medical image processing}{46}{section*.135}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Methodology}{47}{subsection.136}\protected@file@percent }
+\newlabel{eq:moments}{{4.8}{47}{Methodology}{equation.137}{}}
+\newlabel{eq:center-mass}{{4.9}{47}{Methodology}{equation.138}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Centerpoint prediction}{47}{subsection.139}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{(A) Training the same neural network on cartesian and polar images}{48}{section*.140}\protected@file@percent }
+\newlabel{retraining-approach}{{4.3.3}{48}{(A) Training the same neural network on cartesian and polar images}{section*.140}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces A diagram of the approach of predicting polar origins from a Cartesian network. The first network performs an initial segmentation, which is then used to extract a polar origin for the polar transformation. The method does not rely on any specific neural network architecture. The Polar and Cartesian network can be any neural network that takes an input image and produces a binary segmentation mask as output. The red point shows the extracted polar origin. The Polar network is trained on polar image transformations. The polar transformation is not part of the network itself, but happens as a preprocessing step for the Polar network. \blx@tocontentsinit {4}\cite {bencevicTrainingPolarImage2021}\relax }}{48}{figure.caption.141}\protected@file@percent }
+\newlabel{fig:retraining-diagram}{{4.7}{48}{A diagram of the approach of predicting polar origins from a Cartesian network. The first network performs an initial segmentation, which is then used to extract a polar origin for the polar transformation. The method does not rely on any specific neural network architecture. The Polar and Cartesian network can be any neural network that takes an input image and produces a binary segmentation mask as output. The red point shows the extracted polar origin. The Polar network is trained on polar image transformations. The polar transformation is not part of the network itself, but happens as a preprocessing step for the Polar network. \cite {bencevicTrainingPolarImage2021}\relax }{figure.caption.141}{}}
+\@writefile{toc}{\contentsline {subsubsection}{(B) Training a centerpoint predictor}{48}{section*.142}\protected@file@percent }
+\newlabel{centerpoint-approach}{{4.3.3}{48}{(B) Training a centerpoint predictor}{section*.142}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces A diagram of the approach of using a centerpoint prediction network. The first network can be any neural network that predicts a heatmap from an input image, which is then used to extract the polar origin, shown as a red point. The Polar network can be any semantic segmentation neural network that produces a binary mask output from an input image. The Polar network is trained on polar image transformations. The polar transformation is not part of the network itself, but happens as a preprocessing step for the Polar network. \blx@tocontentsinit {4}\cite {bencevicTrainingPolarImage2021}\relax }}{49}{figure.caption.143}\protected@file@percent }
+\newlabel{fig:centerpoint-approach}{{4.8}{49}{A diagram of the approach of using a centerpoint prediction network. The first network can be any neural network that predicts a heatmap from an input image, which is then used to extract the polar origin, shown as a red point. The Polar network can be any semantic segmentation neural network that produces a binary mask output from an input image. The Polar network is trained on polar image transformations. The polar transformation is not part of the network itself, but happens as a preprocessing step for the Polar network. \cite {bencevicTrainingPolarImage2021}\relax }{figure.caption.143}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces Examples of heatmaps generated from the ground truth data. The heatmap is a Gaussian centered on the center of mass of the ground-truth label, shown as a blue point on the input images. \blx@tocontentsinit {4}\cite {bencevicTrainingPolarImage2021}\relax }}{49}{figure.caption.144}\protected@file@percent }
+\newlabel{fig:heatmap}{{4.9}{49}{Examples of heatmaps generated from the ground truth data. The heatmap is a Gaussian centered on the center of mass of the ground-truth label, shown as a blue point on the input images. \cite {bencevicTrainingPolarImage2021}\relax }{figure.caption.144}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Experiments}{50}{subsection.145}\protected@file@percent }
+\newlabel{experiments}{{4.3.4}{50}{Experiments}{subsection.145}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Datasets description}{50}{section*.150}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces Example input images and ground-truth labels for each dataset used in our experiments. \blx@tocontentsinit {4}\cite {bencevicTrainingPolarImage2021}\relax }}{51}{figure.caption.151}\protected@file@percent }
+\newlabel{fig:datasets}{{4.10}{51}{Example input images and ground-truth labels for each dataset used in our experiments. \cite {bencevicTrainingPolarImage2021}\relax }{figure.caption.151}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Polyp dataset}}}{51}{subfigure.10.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Lesion dataset}}}{51}{subfigure.10.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Liver dataset}}}{51}{subfigure.10.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {EAT dataset}}}{51}{subfigure.10.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Implementation details}{52}{section*.156}\protected@file@percent }
+\newlabel{eq:dice-loss}{{4.10}{52}{Implementation details}{equation.157}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.5}Results and Discussion}{52}{subsection.158}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Results of our proposed approaches for different tasks for three different neural network architectures. The Cartesian network is the network trained on Cartesian images. ``GT centers'' refers to obtaining a polar origin from the ground-truth labels and segmentation using the polar network.``Cartesian centers'' refers to predicting the polar origins from the Cartesian network and then performing segmentation using the polar network. ``Model centers'' refers to using the centerpoint predictor to obtain polar origins. (Continued on the next page.)\relax }}{53}{table.159}\protected@file@percent }
+\newlabel{table:results}{{4.1}{53}{Results of our proposed approaches for different tasks for three different neural network architectures. The Cartesian network is the network trained on Cartesian images. ``GT centers'' refers to obtaining a polar origin from the ground-truth labels and segmentation using the polar network.``Cartesian centers'' refers to predicting the polar origins from the Cartesian network and then performing segmentation using the polar network. ``Model centers'' refers to using the centerpoint predictor to obtain polar origins. (Continued on the next page.)\relax }{table.159}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Results of our proposed approaches (continued).\relax }}{54}{table.160}\protected@file@percent }
+\newlabel{table:results}{{4.1}{54}{Results of our proposed approaches (continued).\relax }{table.160}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces A comparison between our method (approach with best results) and the state of the art on the same datasets.\relax }}{55}{table.161}\protected@file@percent }
+\newlabel{table:comparison}{{4.2}{55}{A comparison between our method (approach with best results) and the state of the art on the same datasets.\relax }{table.161}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces The training and validation Dice coefficient (DSC) of the polar and Cartesian U-Net models during training. \blx@tocontentsinit {4}\cite {bencevicTrainingPolarImage2021}\relax }}{56}{figure.caption.162}\protected@file@percent }
+\newlabel{fig:training}{{4.11}{56}{The training and validation Dice coefficient (DSC) of the polar and Cartesian U-Net models during training. \cite {bencevicTrainingPolarImage2021}\relax }{figure.caption.162}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces The relationship between mean squared errors of the centers used for the polar transformation and segmentation performance of the polar network on the lesion dataset. The mean squared errors are calculated compared to the ground-truth centers. \blx@tocontentsinit {4}\cite {bencevicTrainingPolarImage2021}\relax }}{57}{figure.caption.163}\protected@file@percent }
+\newlabel{fig:centers-vs-performance}{{4.12}{57}{The relationship between mean squared errors of the centers used for the polar transformation and segmentation performance of the polar network on the lesion dataset. The mean squared errors are calculated compared to the ground-truth centers. \cite {bencevicTrainingPolarImage2021}\relax }{figure.caption.163}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces The best Dice coefficient by epoch 50 for models trained on subsets of the lesion training dataset. \blx@tocontentsinit {4}\cite {bencevicTrainingPolarImage2021}\relax }}{57}{figure.caption.164}\protected@file@percent }
+\newlabel{fig:dataset-vs-dsc}{{4.13}{57}{The best Dice coefficient by epoch 50 for models trained on subsets of the lesion training dataset. \cite {bencevicTrainingPolarImage2021}\relax }{figure.caption.164}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Discussion}{57}{section*.165}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces A random sampling of inverse polar transformed predictions from the polar network with the polar origins predicted from the centerpoint predictor for various datasets. The prediction is shown in green and overlaid on top of the original input image. EAT predictions (d) are cropped and zoomed to better show the predictions. \blx@tocontentsinit {4}\cite {bencevicTrainingPolarImage2021}\relax }}{58}{figure.caption.166}\protected@file@percent }
+\newlabel{fig:predictions}{{4.14}{58}{A random sampling of inverse polar transformed predictions from the polar network with the polar origins predicted from the centerpoint predictor for various datasets. The prediction is shown in green and overlaid on top of the original input image. EAT predictions (d) are cropped and zoomed to better show the predictions. \cite {bencevicTrainingPolarImage2021}\relax }{figure.caption.166}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Polyp predictions}}}{58}{subfigure.14.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Lesion predictions}}}{58}{subfigure.14.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Liver predictions}}}{58}{subfigure.14.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {EAT predictions}}}{58}{subfigure.14.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Ablation study of our approach for the polyp dataset.\relax }}{59}{table.171}\protected@file@percent }
+\newlabel{table:ablation}{{4.3}{59}{Ablation study of our approach for the polyp dataset.\relax }{table.171}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Supporting Multiple Transformations of an Image}{59}{section.172}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces A visual explanation of hysteresis thresholding. Kept regions are marked with green checkmarks, while deleted regions are marked with red crosses. The pixel intensity scale is shown on the right, where $t_1$ is marked in yellow and $t_2$ is marked in blue. All regions below $t_1$ are removed, while regions above $t_1$ are kept if they are connected to at least one pixel with intensity larger than $t_2$.\relax }}{61}{figure.caption.178}\protected@file@percent }
+\newlabel{fig:hysteresis-ccs}{{4.15}{61}{A visual explanation of hysteresis thresholding. Kept regions are marked with green checkmarks, while deleted regions are marked with red crosses. The pixel intensity scale is shown on the right, where $t_1$ is marked in yellow and $t_2$ is marked in blue. All regions below $t_1$ are removed, while regions above $t_1$ are kept if they are connected to at least one pixel with intensity larger than $t_2$.\relax }{figure.caption.178}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Model-Driven Preprocessing using Multiple Transformations for Aorta Segmentation}{61}{section.179}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Methodology}{62}{subsection.180}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces A summary of our approach. An input image is first segmented using a U-Net network. For each connected component in the segmentation, the input image is transformed to polar coordinates using the centroid of the connected component as the origin. These images are then fed into a U-Net trained on polar images, and the predictions for each object are fused, hysteresis thresholded, and transformed back to cartesian coordinates. Note how one of the false positive connected components in the initial segmentation was removed during hysteresis thresholding since the component was only predicted in one of the three polar predictions. \blx@tocontentsinit {4}\cite {bencevicUsingPolarTransform2022a}\relax }}{62}{figure.caption.181}\protected@file@percent }
+\newlabel{fig:summary}{{4.16}{62}{A summary of our approach. An input image is first segmented using a U-Net network. For each connected component in the segmentation, the input image is transformed to polar coordinates using the centroid of the connected component as the origin. These images are then fed into a U-Net trained on polar images, and the predictions for each object are fused, hysteresis thresholded, and transformed back to cartesian coordinates. Note how one of the false positive connected components in the initial segmentation was removed during hysteresis thresholding since the component was only predicted in one of the three polar predictions. \cite {bencevicUsingPolarTransform2022a}\relax }{figure.caption.181}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces Hystersis-thresholded segmentation output. For each polar prediction, the component that contains the origin of the transform gets a weight of 2 assigned, while all other components get a weight of 1. This left-most image is the result of summing the predictions of 3 polar transformations of the original image (one for each connected component), converted to cartesian coordinates. Note how the thresholding removes the false positive object on the left of the image while keeping the true positive objects intact. \blx@tocontentsinit {4}\cite {bencevicUsingPolarTransform2022a}\relax }}{63}{figure.caption.182}\protected@file@percent }
+\newlabel{fig:thresh}{{4.17}{63}{Hystersis-thresholded segmentation output. For each polar prediction, the component that contains the origin of the transform gets a weight of 2 assigned, while all other components get a weight of 1. This left-most image is the result of summing the predictions of 3 polar transformations of the original image (one for each connected component), converted to cartesian coordinates. Note how the thresholding removes the false positive object on the left of the image while keeping the true positive objects intact. \cite {bencevicUsingPolarTransform2022a}\relax }{figure.caption.182}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Data Description and Preprocessing}{63}{section*.183}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Results and Discussion}{63}{subsection.184}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces A summary of the mean segmentation results of our experiments. \textit  {Non-polar} are the results of the U-Net trained using cartesian images. \textit  {Polar + GT centers} are the results of the U-Net trained on polar images, using ground-truth connected component centers during inference, as an example of the best case possible results. \textit  {Polar + NP centers} are the results when running inference on the polar model using center points obtained from the non-polar model predictions. *Our proposed method.\relax }}{64}{table.185}\protected@file@percent }
+\newlabel{table:results}{{4.4}{64}{A summary of the mean segmentation results of our experiments. \textit {Non-polar} are the results of the U-Net trained using cartesian images. \textit {Polar + GT centers} are the results of the U-Net trained on polar images, using ground-truth connected component centers during inference, as an example of the best case possible results. \textit {Polar + NP centers} are the results when running inference on the polar model using center points obtained from the non-polar model predictions. *Our proposed method.\relax }{table.185}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Conclusion}{64}{section.189}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.18}{\ignorespaces Random examples of predictions. Columns from left to right show: the input image, the initial prediction from the non-polar network, the final fused polar prediction, and the ground truth segmentation label. \blx@tocontentsinit {4}\cite {bencevicUsingPolarTransform2022a}\relax }}{65}{figure.caption.186}\protected@file@percent }
+\newlabel{fig:examples}{{4.18}{65}{Random examples of predictions. Columns from left to right show: the input image, the initial prediction from the non-polar network, the final fused polar prediction, and the ground truth segmentation label. \cite {bencevicUsingPolarTransform2022a}\relax }{figure.caption.186}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.19}{\ignorespaces A box plot of the per-scan Dice coefficients of our experiments. \textit  {Non-polar} are the results of the U-Net trained using cartesian images. \textit  {Polar + GT centers} are the results of the U-Net trained on polar images, using ground-truth connected component centers during inference. \textit  {Polar + NP centers} are the results when running inference on the polar model using center points obtained from the non-polar model predictions. \blx@tocontentsinit {4}\cite {bencevicUsingPolarTransform2022a}\relax }}{66}{figure.caption.187}\protected@file@percent }
+\newlabel{fig:box}{{4.19}{66}{A box plot of the per-scan Dice coefficients of our experiments. \textit {Non-polar} are the results of the U-Net trained using cartesian images. \textit {Polar + GT centers} are the results of the U-Net trained on polar images, using ground-truth connected component centers during inference. \textit {Polar + NP centers} are the results when running inference on the polar model using center points obtained from the non-polar model predictions. \cite {bencevicUsingPolarTransform2022a}\relax }{figure.caption.187}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces A comparison of our approach with results reported in papers describing deep learning-based aorta segmentation methods. Note that the datasets used for obtaining the results are not the same. $n$ is the number of cases used to obtain the evaluation.\relax }}{66}{table.188}\protected@file@percent }
+\newlabel{table:comparison}{{4.5}{66}{A comparison of our approach with results reported in papers describing deep learning-based aorta segmentation methods. Note that the datasets used for obtaining the results are not the same. $n$ is the number of cases used to obtain the evaluation.\relax }{table.188}{}}
+\@setckpt{Chapters/04_model_driven_preprocessing}{
+\setcounter{page}{68}
+\setcounter{equation}{11}
+\setcounter{enumi}{4}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{0}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{chapter}{4}
+\setcounter{section}{6}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{19}
+\setcounter{table}{5}
+\setcounter{LT@tables}{0}
+\setcounter{LT@chunks}{0}
+\setcounter{caption@flags}{2}
+\setcounter{continuedfloat}{0}
+\setcounter{@todonotes@numberoftodonotes}{2}
+\setcounter{parentequation}{0}
+\setcounter{KVtest}{0}
+\setcounter{subfigure}{0}
+\setcounter{subfigure@save}{4}
+\setcounter{lofdepth}{1}
+\setcounter{subtable}{0}
+\setcounter{subtable@save}{0}
+\setcounter{lotdepth}{1}
+\setcounter{float@type}{16}
+\setcounter{algorithm}{0}
+\setcounter{ALG@line}{0}
+\setcounter{ALG@rem}{0}
+\setcounter{ALG@nested}{0}
+\setcounter{ALG@Lnr}{2}
+\setcounter{ALG@blocknr}{10}
+\setcounter{ALG@storecount}{0}
+\setcounter{ALG@tmpcounter}{0}
+\setcounter{tabx@nest}{0}
+\setcounter{listtotal}{0}
+\setcounter{listcount}{0}
+\setcounter{liststart}{0}
+\setcounter{liststop}{0}
+\setcounter{citecount}{0}
+\setcounter{citetotal}{0}
+\setcounter{multicitecount}{0}
+\setcounter{multicitetotal}{0}
+\setcounter{instcount}{0}
+\setcounter{maxnames}{3}
+\setcounter{minnames}{1}
+\setcounter{maxitems}{3}
+\setcounter{minitems}{1}
+\setcounter{citecounter}{0}
+\setcounter{maxcitecounter}{0}
+\setcounter{savedcitecounter}{0}
+\setcounter{uniquelist}{0}
+\setcounter{uniquename}{0}
+\setcounter{refsection}{4}
+\setcounter{refsegment}{0}
+\setcounter{maxextratitle}{0}
+\setcounter{maxextratitleyear}{0}
+\setcounter{maxextraname}{0}
+\setcounter{maxextradate}{0}
+\setcounter{maxextraalpha}{0}
+\setcounter{abbrvpenalty}{50}
+\setcounter{highnamepenalty}{50}
+\setcounter{lownamepenalty}{25}
+\setcounter{maxparens}{3}
+\setcounter{parenlevel}{0}
+\setcounter{blx@maxsection}{4}
+\setcounter{blx@maxsegment@0}{0}
+\setcounter{blx@sectionciteorder@0}{4}
+\setcounter{mincomprange}{10}
+\setcounter{maxcomprange}{100000}
+\setcounter{mincompwidth}{1}
+\setcounter{afterword}{0}
+\setcounter{savedafterword}{0}
+\setcounter{annotator}{0}
+\setcounter{savedannotator}{0}
+\setcounter{author}{0}
+\setcounter{savedauthor}{0}
+\setcounter{bookauthor}{0}
+\setcounter{savedbookauthor}{0}
+\setcounter{commentator}{0}
+\setcounter{savedcommentator}{0}
+\setcounter{editor}{0}
+\setcounter{savededitor}{0}
+\setcounter{editora}{0}
+\setcounter{savededitora}{0}
+\setcounter{editorb}{0}
+\setcounter{savededitorb}{0}
+\setcounter{editorc}{0}
+\setcounter{savededitorc}{0}
+\setcounter{foreword}{0}
+\setcounter{savedforeword}{0}
+\setcounter{holder}{0}
+\setcounter{savedholder}{0}
+\setcounter{introduction}{0}
+\setcounter{savedintroduction}{0}
+\setcounter{namea}{0}
+\setcounter{savednamea}{0}
+\setcounter{nameb}{0}
+\setcounter{savednameb}{0}
+\setcounter{namec}{0}
+\setcounter{savednamec}{0}
+\setcounter{translator}{0}
+\setcounter{savedtranslator}{0}
+\setcounter{shortauthor}{0}
+\setcounter{savedshortauthor}{0}
+\setcounter{shorteditor}{0}
+\setcounter{savedshorteditor}{0}
+\setcounter{labelname}{0}
+\setcounter{savedlabelname}{0}
+\setcounter{institution}{0}
+\setcounter{savedinstitution}{0}
+\setcounter{lista}{0}
+\setcounter{savedlista}{0}
+\setcounter{listb}{0}
+\setcounter{savedlistb}{0}
+\setcounter{listc}{0}
+\setcounter{savedlistc}{0}
+\setcounter{listd}{0}
+\setcounter{savedlistd}{0}
+\setcounter{liste}{0}
+\setcounter{savedliste}{0}
+\setcounter{listf}{0}
+\setcounter{savedlistf}{0}
+\setcounter{location}{0}
+\setcounter{savedlocation}{0}
+\setcounter{organization}{0}
+\setcounter{savedorganization}{0}
+\setcounter{origlocation}{0}
+\setcounter{savedoriglocation}{0}
+\setcounter{origpublisher}{0}
+\setcounter{savedorigpublisher}{0}
+\setcounter{publisher}{0}
+\setcounter{savedpublisher}{0}
+\setcounter{language}{0}
+\setcounter{savedlanguage}{0}
+\setcounter{origlanguage}{0}
+\setcounter{savedoriglanguage}{0}
+\setcounter{pageref}{0}
+\setcounter{savedpageref}{0}
+\setcounter{textcitecount}{0}
+\setcounter{textcitetotal}{0}
+\setcounter{textcitemaxnames}{0}
+\setcounter{biburlbigbreakpenalty}{100}
+\setcounter{biburlbreakpenalty}{200}
+\setcounter{biburlnumpenalty}{0}
+\setcounter{biburlucpenalty}{0}
+\setcounter{biburllcpenalty}{0}
+\setcounter{smartand}{1}
+\setcounter{bbx:relatedcount}{0}
+\setcounter{bbx:relatedtotal}{0}
+\setcounter{Item}{14}
+\setcounter{Hfootnote}{1}
+\setcounter{bookmark@seq@number}{51}
+\setcounter{lstnumber}{1}
+\setcounter{section@level}{1}
+\setcounter{lstlisting}{0}
+\setcounter{blx@sectionciteorder@2}{113}
+\setcounter{blx@sectionciteorder@4}{93}
+\setcounter{blx@sectionciteorder@5}{5}
+\setcounter{blx@sectionciteorder@6}{5}
+\setcounter{blx@maxsegment@1}{0}
+\setcounter{blx@sectionciteorder@1}{28}
+\setcounter{blx@maxsegment@2}{0}
+\setcounter{blx@maxsegment@3}{0}
+\setcounter{blx@sectionciteorder@3}{49}
+\setcounter{blx@maxsegment@4}{0}
+}

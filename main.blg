@@ -1,0 +1,21 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is '/Users/marinbenc/Projects/thesis/main.blg'
+[55] biber-darwin:340> INFO - === Fri Feb  2, 2024, 09:45:54
+[68] Biber.pm:418> INFO - Reading '/Users/marinbenc/Projects/thesis/main.bcf'
+[150] Biber.pm:972> INFO - Found 2 citekeys in bib section 0
+[151] Biber.pm:972> INFO - Found 14 citekeys in bib section 1
+[151] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[156] Biber.pm:972> INFO - Found 32 citekeys in bib section 2
+[156] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[157] Biber.pm:972> INFO - Found 18 citekeys in bib section 3
+[157] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[163] Biber.pm:972> INFO - Found 33 citekeys in bib section 4
+[163] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[165] Biber.pm:972> INFO - Found 27 citekeys in bib section 5
+[165] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[167] Biber.pm:972> INFO - Found 22 citekeys in bib section 6
+[167] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[205] Biber.pm:4383> INFO - Processing section 0
+[213] Biber.pm:4574> INFO - Looking for bibtex file 'example.bib' for section 0
+[224] bibtex.pm:1713> INFO - LaTeX decoding ...
+[437] bibtex.pm:1518> INFO - Found BibTeX data source 'example.bib'

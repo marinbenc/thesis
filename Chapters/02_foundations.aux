@@ -1,0 +1,256 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Neural Network-Based Segmentation of Biomedical Images}{4}{chapter.16}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chap:seg-background}{{2}{4}{Neural Network-Based Segmentation of Biomedical Images}{chapter.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Common Types of Biomedical Images}{4}{section.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}3D Modalities}{4}{subsection.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Computed Tomography (CT)}{5}{section*.19}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Approximate Hounsfield values of various tissues \blx@tocontentsinit {2}\cite {fosbinder2011essentials, kamalianComputedTomographyImaging2016}.\relax }}{6}{table.21}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:hu-tissues}{{2.1}{6}{Approximate Hounsfield values of various tissues \cite {fosbinder2011essentials, kamalianComputedTomographyImaging2016}.\relax }{table.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces A cardiac CTA in its full range (left) and windowed (right). \blx@tocontentsinit {2}\cite {radlAVTMulticenterAortic2022a}\relax }}{6}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:windowing-example}{{2.1}{6}{A cardiac CTA in its full range (left) and windowed (right). \cite {radlAVTMulticenterAortic2022a}\relax }{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Magnetic Resonance Imaging (MRI)}{7}{section*.24}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces An example T1-weighted MRI (left) and a T2-weighted MRI (right) showing a diffuse glioma. \blx@tocontentsinit {2}\cite {calabreseUniversityCaliforniaSan2022}\relax }}{7}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:t1-t2-example}{{2.2}{7}{An example T1-weighted MRI (left) and a T2-weighted MRI (right) showing a diffuse glioma. \cite {calabreseUniversityCaliforniaSan2022}\relax }{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}2D Modalities}{8}{subsection.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{X-ray imaging}{8}{section*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Dermatological images (clinical and dermatoscopic)}{9}{section*.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Microscopy}{9}{section*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Image Segmentation: From Images to Segmentation Maps}{9}{section.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Traditional Image Processing Methods}{10}{subsection.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Image Thresholding}{11}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Region Growing Techniques}{11}{section*.37}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces A demonstration of region growing for delineating the internal and external areas of the pericardium on a CT slice, set to the adipose tissue intensity range. The left image is the original input, and the right image depicts the segmented outcome with the heart exterior in red and the interior in blue. The green dots represent the manually chosen seed points initiating the region-growing technique. \blx@tocontentsinit {2}\cite {bencevicRecentProgressEpicardial2022}\relax }}{11}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:region-growing}{{2.3}{11}{A demonstration of region growing for delineating the internal and external areas of the pericardium on a CT slice, set to the adipose tissue intensity range. The left image is the original input, and the right image depicts the segmented outcome with the heart exterior in red and the interior in blue. The green dots represent the manually chosen seed points initiating the region-growing technique. \cite {bencevicRecentProgressEpicardial2022}\relax }{figure.caption.38}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Active Contours or Snakes}{12}{section*.39}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces A demonstration of employing active contours to complete the absent segments of the pericardium line, displayed in white. The contour, illustrated in blue, starts as a complete circle surrounding the image. With every iteration, the contour adapts more closely to the image's shape. \blx@tocontentsinit {2}\cite {bencevicRecentProgressEpicardial2022}\relax }}{12}{figure.caption.40}\protected@file@percent }
+\newlabel{fig:active-contour}{{2.4}{12}{A demonstration of employing active contours to complete the absent segments of the pericardium line, displayed in white. The contour, illustrated in blue, starts as a complete circle surrounding the image. With every iteration, the contour adapts more closely to the image's shape. \cite {bencevicRecentProgressEpicardial2022}\relax }{figure.caption.40}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Atlas-Based Segmentation}{12}{section*.41}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces A schematic representation of the registration procedure. Initially, input and target images are chosen. Throughout the registration phase, the input image (shown in green) undergoes deformation to align with the fixed target image (shown in red). \blx@tocontentsinit {2}\cite {bencevicRecentProgressEpicardial2022}\relax }}{13}{figure.caption.42}\protected@file@percent }
+\newlabel{fig:registration}{{2.5}{13}{A schematic representation of the registration procedure. Initially, input and target images are chosen. Throughout the registration phase, the input image (shown in green) undergoes deformation to align with the fixed target image (shown in red). \cite {bencevicRecentProgressEpicardial2022}\relax }{figure.caption.42}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Machine Learning}{13}{subsection.43}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces A schematic of a supervised linear classifier in a machine learning workflow. The upper section illustrates the training phase. Here, features are color-coded according to their known class from training data, depicted in red and blue. The parameters of the decision boundary, which demarcates the zones of the two classes (highlighted in light red and grey), are determined during training. The lower part of the diagram depicts the inference stage. In this phase, features are extracted from new images, and the trained model is employed to classify each pixel in the image. \blx@tocontentsinit {2}\cite {bencevicRecentProgressEpicardial2022}\relax }}{14}{figure.caption.45}\protected@file@percent }
+\newlabel{fig:machine-learning}{{2.6}{14}{A schematic of a supervised linear classifier in a machine learning workflow. The upper section illustrates the training phase. Here, features are color-coded according to their known class from training data, depicted in red and blue. The parameters of the decision boundary, which demarcates the zones of the two classes (highlighted in light red and grey), are determined during training. The lower part of the diagram depicts the inference stage. In this phase, features are extracted from new images, and the trained model is employed to classify each pixel in the image. \cite {bencevicRecentProgressEpicardial2022}\relax }{figure.caption.45}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Deep Learning-Based Segmentation Methods}{14}{section.46}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces A small neural network with three layers, wherein each layer is connected to every neuron in the next layer. \blx@tocontentsinit {2}\cite {hastieElementsStatisticalLearning2009}\relax }}{15}{figure.caption.47}\protected@file@percent }
+\newlabel{fig:nn-typical}{{2.7}{15}{A small neural network with three layers, wherein each layer is connected to every neuron in the next layer. \cite {hastieElementsStatisticalLearning2009}\relax }{figure.caption.47}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Neural Network Training, Validation and Testing}{15}{subsection.51}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Encoders and Decoders}{16}{subsection.52}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Convolutional Neural Networks}{17}{subsection.54}\protected@file@percent }
+\acronymused{cnn}
+\@writefile{toc}{\contentsline {subsubsection}{Convolution}{17}{section*.55}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces A visual depiction of a convolution procedure step-by-step. In each step, the kernel slides over the image (shown in blue). The overlapping elements between the kernel and the image are multiplied and then summed to produce a value in the resultant image (shown in green). \blx@tocontentsinit {2}\cite {dumoulinGuideConvolutionArithmetic2018}\relax }}{17}{figure.caption.56}\protected@file@percent }
+\newlabel{fig:convolution-explanation}{{2.8}{17}{A visual depiction of a convolution procedure step-by-step. In each step, the kernel slides over the image (shown in blue). The overlapping elements between the kernel and the image are multiplied and then summed to produce a value in the resultant image (shown in green). \cite {dumoulinGuideConvolutionArithmetic2018}\relax }{figure.caption.56}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces An example of an input image (left) convolved with the Prewitt operator (right). Note that vertical edges are accentuated in the convolution result.\relax }}{18}{figure.caption.59}\protected@file@percent }
+\newlabel{fig:prewitt-example}{{2.9}{18}{An example of an input image (left) convolved with the Prewitt operator (right). Note that vertical edges are accentuated in the convolution result.\relax }{figure.caption.59}{}}
+\acronymused{cnn}
+\@writefile{toc}{\contentsline {subsubsection}{Convolutional Layers}{19}{section*.60}\protected@file@percent }
+\acronymused{cnn}
+\acronymused{cnn}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.10}{\ignorespaces A view of one step of a single convolution operation inside a \ac {cnn} layer. The layer performs multiple convolutions, each with a different kernel that has an equal number of channels as the input image. In each step, the whole kernel slides over the width and height of the image, and the overlapping channels are multiplied together and summed to produce a single output value. The output of the convolution is one channel of a $n$-channel image where $n$ is the number of different kernels in the layer.\relax }}{20}{figure.caption.61}\protected@file@percent }
+\acronymused{cnn}
+\newlabel{fig:cnn-conv-explained}{{2.10}{20}{A view of one step of a single convolution operation inside a \ac {cnn} layer. The layer performs multiple convolutions, each with a different kernel that has an equal number of channels as the input image. In each step, the whole kernel slides over the width and height of the image, and the overlapping channels are multiplied together and summed to produce a single output value. The output of the convolution is one channel of a $n$-channel image where $n$ is the number of different kernels in the layer.\relax }{figure.caption.61}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Pooling Layers}{20}{section*.62}\protected@file@percent }
+\acronymused{cnn}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.11}{\ignorespaces A typical architecture of a \ac {cnn} encoder. The encoder consists of consecutive convolutional and pooling layers that gradually increase the feature map depth and decrease its width and height. The result is a map of features that tells the decoder what features are on the image but does not provide much spatial information about the location of those features. \blx@tocontentsinit {2}\cite {lecunGradientbasedLearningApplied1998}\relax }}{20}{figure.caption.63}\protected@file@percent }
+\acronymused{cnn}
+\newlabel{fig:cnn-encoder-achitecture}{{2.11}{20}{A typical architecture of a \ac {cnn} encoder. The encoder consists of consecutive convolutional and pooling layers that gradually increase the feature map depth and decrease its width and height. The result is a map of features that tells the decoder what features are on the image but does not provide much spatial information about the location of those features. \cite {lecunGradientbasedLearningApplied1998}\relax }{figure.caption.63}{}}
+\acronymused{cnn}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}CNN Architectures for Medical Image Segmentation}{21}{section.64}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Fully Convolutional Network (FCN)}{22}{subsection.65}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.12}{\ignorespaces A diagram of how FCN forms predictions based on the output of different encoder layers. Encoder layers are shown on the left and the grid represents the coarseness of the feature map. The maps are combined at three different levels to produce three predictions. Each prediction is compared with the ground truth during training, but for inference only the 8x upsampled prediction is used. \blx@tocontentsinit {2}\cite {long2015fully}\relax }}{22}{figure.caption.66}\protected@file@percent }
+\newlabel{fig:fcn-arch}{{2.12}{22}{A diagram of how FCN forms predictions based on the output of different encoder layers. Encoder layers are shown on the left and the grid represents the coarseness of the feature map. The maps are combined at three different levels to produce three predictions. Each prediction is compared with the ground truth during training, but for inference only the 8x upsampled prediction is used. \cite {long2015fully}\relax }{figure.caption.66}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}U-Net and Its Variants}{22}{subsection.67}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.13}{\ignorespaces A diagram of the U-Net model. The output of each layer of the encoder is concatenated to the input of its corresponding layer in the decoder. \blx@tocontentsinit {2}\cite {ronnebergerUNetConvolutionalNetworks2015d}\relax }}{23}{figure.caption.68}\protected@file@percent }
+\newlabel{fig:unet-arch}{{2.13}{23}{A diagram of the U-Net model. The output of each layer of the encoder is concatenated to the input of its corresponding layer in the decoder. \cite {ronnebergerUNetConvolutionalNetworks2015d}\relax }{figure.caption.68}{}}
+\@writefile{toc}{\contentsline {subsubsection}{nnU-Net}{23}{section*.69}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.14}{\ignorespaces A diagram of the nnU-Net procedure of creating a training configuration. \blx@tocontentsinit {2}\cite {isenseeNnUNetSelfconfiguringMethod2021}\relax }}{24}{figure.caption.70}\protected@file@percent }
+\newlabel{fig:nnunet-arch}{{2.14}{24}{A diagram of the nnU-Net procedure of creating a training configuration. \cite {isenseeNnUNetSelfconfiguringMethod2021}\relax }{figure.caption.70}{}}
+\@writefile{toc}{\contentsline {subsubsection}{U-Net++}{24}{section*.71}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.15}{\ignorespaces A comparison between U-Net (left) and U-Net++ (right). Each node in the graph represents a convolutional layer. The dashed arrows represent skip connections, while full arrows are downsampling or upsampling operations. \blx@tocontentsinit {2}\cite {zhou2019unetplusplus}\relax }}{25}{figure.caption.72}\protected@file@percent }
+\newlabel{fig:unetpp-arch}{{2.15}{25}{A comparison between U-Net (left) and U-Net++ (right). Each node in the graph represents a convolutional layer. The dashed arrows represent skip connections, while full arrows are downsampling or upsampling operations. \cite {zhou2019unetplusplus}\relax }{figure.caption.72}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}Mask R-CNN}{25}{subsection.73}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.16}{\ignorespaces A diagram of the Mask R-CNN architecture. Two parallel decoder branches are used to achieve segmentation and object detection simultaneously. \blx@tocontentsinit {2}\cite {heMaskRCNN2017b}\relax }}{26}{figure.caption.74}\protected@file@percent }
+\newlabel{fig:maskrcnn-arch}{{2.16}{26}{A diagram of the Mask R-CNN architecture. Two parallel decoder branches are used to achieve segmentation and object detection simultaneously. \cite {heMaskRCNN2017b}\relax }{figure.caption.74}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.4}Other Notable Segmentation CNNs}{26}{subsection.75}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Fully Connected Transformers for Medical Image Segmentation}{27}{section.76}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Attention}{27}{subsection.77}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.17}{\ignorespaces A visualization of a single encoder layer in a transformer network. This shows the encoding process for one element of the input sequence.\relax }}{28}{figure.caption.82}\protected@file@percent }
+\newlabel{fig:attention-explainer}{{2.17}{28}{A visualization of a single encoder layer in a transformer network. This shows the encoding process for one element of the input sequence.\relax }{figure.caption.82}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Positional Encoding}{29}{subsection.83}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Adapting Transformers to Image Segmentation}{29}{subsection.85}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.18}{\ignorespaces The ViT architecture for image classification. \blx@tocontentsinit {2}\cite {dosovitskiy2021an}\relax }}{30}{figure.caption.86}\protected@file@percent }
+\newlabel{fig:vit-arch}{{2.18}{30}{The ViT architecture for image classification. \cite {dosovitskiy2021an}\relax }{figure.caption.86}{}}
+\@setckpt{Chapters/02_foundations}{
+\setcounter{page}{31}
+\setcounter{equation}{15}
+\setcounter{enumi}{3}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{0}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{chapter}{2}
+\setcounter{section}{5}
+\setcounter{subsection}{3}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{18}
+\setcounter{table}{1}
+\setcounter{LT@tables}{0}
+\setcounter{LT@chunks}{0}
+\setcounter{caption@flags}{2}
+\setcounter{continuedfloat}{0}
+\setcounter{@todonotes@numberoftodonotes}{2}
+\setcounter{parentequation}{0}
+\setcounter{KVtest}{0}
+\setcounter{subfigure}{0}
+\setcounter{subfigure@save}{0}
+\setcounter{lofdepth}{1}
+\setcounter{subtable}{0}
+\setcounter{subtable@save}{0}
+\setcounter{lotdepth}{1}
+\setcounter{float@type}{16}
+\setcounter{algorithm}{0}
+\setcounter{ALG@line}{0}
+\setcounter{ALG@rem}{0}
+\setcounter{ALG@nested}{0}
+\setcounter{ALG@Lnr}{2}
+\setcounter{ALG@blocknr}{10}
+\setcounter{ALG@storecount}{0}
+\setcounter{ALG@tmpcounter}{0}
+\setcounter{tabx@nest}{0}
+\setcounter{listtotal}{0}
+\setcounter{listcount}{0}
+\setcounter{liststart}{0}
+\setcounter{liststop}{0}
+\setcounter{citecount}{0}
+\setcounter{citetotal}{0}
+\setcounter{multicitecount}{0}
+\setcounter{multicitetotal}{0}
+\setcounter{instcount}{0}
+\setcounter{maxnames}{3}
+\setcounter{minnames}{1}
+\setcounter{maxitems}{3}
+\setcounter{minitems}{1}
+\setcounter{citecounter}{0}
+\setcounter{maxcitecounter}{0}
+\setcounter{savedcitecounter}{0}
+\setcounter{uniquelist}{0}
+\setcounter{uniquename}{0}
+\setcounter{refsection}{2}
+\setcounter{refsegment}{0}
+\setcounter{maxextratitle}{0}
+\setcounter{maxextratitleyear}{0}
+\setcounter{maxextraname}{0}
+\setcounter{maxextradate}{0}
+\setcounter{maxextraalpha}{0}
+\setcounter{abbrvpenalty}{50}
+\setcounter{highnamepenalty}{50}
+\setcounter{lownamepenalty}{25}
+\setcounter{maxparens}{3}
+\setcounter{parenlevel}{0}
+\setcounter{blx@maxsection}{2}
+\setcounter{blx@maxsegment@0}{0}
+\setcounter{blx@sectionciteorder@0}{4}
+\setcounter{mincomprange}{10}
+\setcounter{maxcomprange}{100000}
+\setcounter{mincompwidth}{1}
+\setcounter{afterword}{0}
+\setcounter{savedafterword}{0}
+\setcounter{annotator}{0}
+\setcounter{savedannotator}{0}
+\setcounter{author}{0}
+\setcounter{savedauthor}{0}
+\setcounter{bookauthor}{0}
+\setcounter{savedbookauthor}{0}
+\setcounter{commentator}{0}
+\setcounter{savedcommentator}{0}
+\setcounter{editor}{0}
+\setcounter{savededitor}{0}
+\setcounter{editora}{0}
+\setcounter{savededitora}{0}
+\setcounter{editorb}{0}
+\setcounter{savededitorb}{0}
+\setcounter{editorc}{0}
+\setcounter{savededitorc}{0}
+\setcounter{foreword}{0}
+\setcounter{savedforeword}{0}
+\setcounter{holder}{0}
+\setcounter{savedholder}{0}
+\setcounter{introduction}{0}
+\setcounter{savedintroduction}{0}
+\setcounter{namea}{0}
+\setcounter{savednamea}{0}
+\setcounter{nameb}{0}
+\setcounter{savednameb}{0}
+\setcounter{namec}{0}
+\setcounter{savednamec}{0}
+\setcounter{translator}{0}
+\setcounter{savedtranslator}{0}
+\setcounter{shortauthor}{0}
+\setcounter{savedshortauthor}{0}
+\setcounter{shorteditor}{0}
+\setcounter{savedshorteditor}{0}
+\setcounter{labelname}{0}
+\setcounter{savedlabelname}{0}
+\setcounter{institution}{0}
+\setcounter{savedinstitution}{0}
+\setcounter{lista}{0}
+\setcounter{savedlista}{0}
+\setcounter{listb}{0}
+\setcounter{savedlistb}{0}
+\setcounter{listc}{0}
+\setcounter{savedlistc}{0}
+\setcounter{listd}{0}
+\setcounter{savedlistd}{0}
+\setcounter{liste}{0}
+\setcounter{savedliste}{0}
+\setcounter{listf}{0}
+\setcounter{savedlistf}{0}
+\setcounter{location}{0}
+\setcounter{savedlocation}{0}
+\setcounter{organization}{0}
+\setcounter{savedorganization}{0}
+\setcounter{origlocation}{0}
+\setcounter{savedoriglocation}{0}
+\setcounter{origpublisher}{0}
+\setcounter{savedorigpublisher}{0}
+\setcounter{publisher}{0}
+\setcounter{savedpublisher}{0}
+\setcounter{language}{0}
+\setcounter{savedlanguage}{0}
+\setcounter{origlanguage}{0}
+\setcounter{savedoriglanguage}{0}
+\setcounter{pageref}{0}
+\setcounter{savedpageref}{0}
+\setcounter{textcitecount}{0}
+\setcounter{textcitetotal}{0}
+\setcounter{textcitemaxnames}{0}
+\setcounter{biburlbigbreakpenalty}{100}
+\setcounter{biburlbreakpenalty}{200}
+\setcounter{biburlnumpenalty}{0}
+\setcounter{biburlucpenalty}{0}
+\setcounter{biburllcpenalty}{0}
+\setcounter{smartand}{1}
+\setcounter{bbx:relatedcount}{0}
+\setcounter{bbx:relatedtotal}{0}
+\setcounter{Item}{3}
+\setcounter{Hfootnote}{0}
+\setcounter{bookmark@seq@number}{28}
+\setcounter{lstnumber}{1}
+\setcounter{section@level}{2}
+\setcounter{lstlisting}{0}
+\setcounter{blx@sectionciteorder@2}{81}
+\setcounter{blx@sectionciteorder@4}{13}
+\setcounter{blx@sectionciteorder@5}{5}
+\setcounter{blx@sectionciteorder@6}{5}
+\setcounter{blx@maxsegment@1}{0}
+\setcounter{blx@sectionciteorder@1}{28}
+\setcounter{blx@maxsegment@2}{0}
+}

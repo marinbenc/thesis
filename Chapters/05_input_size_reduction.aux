@@ -1,0 +1,235 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Reducing Model Input Sizes with Model-Driven Crops}{68}{chapter.190}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chap:reducing-input-size}{{5}{68}{Reducing Model Input Sizes with Model-Driven Crops}{chapter.190}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Model-Driven Image Cropping}{69}{section.193}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces A visual summary of our approach. (1) An image is uniformly downsampled from its original resolution. (2) A rough segmentation is predicted by a neural network, and the bounding box of each connected component is calculated. (3) The bounding boxes are scaled to the original image space and crops of the input image are taken in the original resolution and scaled to a common input size. (4) Each crop is segmented separately by a second neural network specifically trained on cropped images. These crops are fused to form a final segmentation in the original high resolution. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{69}{figure.caption.194}\protected@file@percent }
+\newlabel{fig:summary}{{5.1}{69}{A visual summary of our approach. (1) An image is uniformly downsampled from its original resolution. (2) A rough segmentation is predicted by a neural network, and the bounding box of each connected component is calculated. (3) The bounding boxes are scaled to the original image space and crops of the input image are taken in the original resolution and scaled to a common input size. (4) Each crop is segmented separately by a second neural network specifically trained on cropped images. These crops are fused to form a final segmentation in the original high resolution. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.194}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Cropping}{70}{section*.198}\protected@file@percent }
+\newlabel{cropping}{{5.1}{70}{Cropping}{section*.198}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Inference algorithm for one input image\relax }}{71}{algorithm.197}\protected@file@percent }
+\newlabel{alg:crop}{{1}{71}{Inference algorithm for one input image\relax }{algorithm.197}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Fine Segmentation and Fusion}{72}{section*.199}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Training the Fine Segmentation Network}{72}{section*.200}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Related work}{72}{subsection.201}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Detect-then-segment}{72}{section*.202}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Coarse-to-fine Segmentation}{73}{section*.203}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Non-uniform Downsampling}{73}{section*.204}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Other Approaches to Reducing Input Resolution}{74}{section*.205}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Results}{74}{subsection.206}\protected@file@percent }
+\newlabel{tab:hyperparams}{{5.1}{75}{The hyper-parameters used for each of the models in our experiments.\relax }{table.207}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces The hyper-parameters used for each of the models in our experiments.\relax }}{75}{table.207}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Datasets}{75}{section*.208}\protected@file@percent }
+\newlabel{datasets}{{5.1.2}{75}{Datasets}{section*.208}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Quantitative Assessment}{75}{section*.209}\protected@file@percent }
+\newlabel{tab:seg-then-seg-results}{{5.2}{76}{The results of our approach using U-Net as the underlying architecture.\relax }{table.210}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces The results of our approach using U-Net as the underlying architecture.\relax }}{76}{table.210}\protected@file@percent }
+\newlabel{tab:other-sota}{{5.3}{77}{A comparison of the Dice Score Coefficients of our approach using other underlying architectures at 4x and 2x downscaled images.\relax }{table.211}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces A comparison of the Dice Score Coefficients of our approach using other underlying architectures at 4x and 2x downscaled images.\relax }}{77}{table.211}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces The relationship between input dimensions and the mean Dice Score Coefficient (DSC) and recall for different datasets. The points are measured values from our experiments.\relax }}{77}{figure.caption.212}\protected@file@percent }
+\newlabel{fig:dsc-vs-size}{{5.2}{77}{The relationship between input dimensions and the mean Dice Score Coefficient (DSC) and recall for different datasets. The points are measured values from our experiments.\relax }{figure.caption.212}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Violin plots of Dice Score Coefficients of our approach compared to the baseline models at various input dimensions. The dashed lines represent quartiles of the distributions.\relax }}{78}{figure.caption.213}\protected@file@percent }
+\newlabel{fig:box-plots}{{5.3}{78}{Violin plots of Dice Score Coefficients of our approach compared to the baseline models at various input dimensions. The dashed lines represent quartiles of the distributions.\relax }{figure.caption.213}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Qualitative Assessment}{78}{section*.214}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Example outputs from the models for the cells dataset at various input sizes. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{79}{figure.caption.215}\protected@file@percent }
+\newlabel{fig:examples-cells}{{5.4}{79}{Example outputs from the models for the cells dataset at various input sizes. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.215}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Example outputs from the models for the polyp dataset at various input sizes. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{80}{figure.caption.216}\protected@file@percent }
+\newlabel{fig:examples-polyp}{{5.5}{80}{Example outputs from the models for the polyp dataset at various input sizes. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.216}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Example outputs from the models for the aorta dataset at various input sizes. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{80}{figure.caption.217}\protected@file@percent }
+\newlabel{fig:examples-aa}{{5.6}{80}{Example outputs from the models for the aorta dataset at various input sizes. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.217}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Computational Performance Characteristics}{81}{section*.218}\protected@file@percent }
+\newlabel{tab:performance}{{5.4}{81}{Performance characteristics of our approach compared to the baseline model with similar mean test Dice Score Coefficients.\relax }{table.219}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Performance characteristics of our approach compared to the baseline model with similar mean test Dice Score Coefficients.\relax }}{81}{table.219}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Mean per-input inference time across different input sizes for the U-Net-based models. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{81}{figure.caption.220}\protected@file@percent }
+\newlabel{fig:inf-time}{{5.7}{81}{Mean per-input inference time across different input sizes for the U-Net-based models. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.220}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Discussion}{82}{subsection.221}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}An End-to-End Extension of Model-Driven Image Cropping}{83}{section.222}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}End-to-end Network Architecture and Training}{83}{subsection.223}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces An illustration of the end-to-end model-driven cropping architecture, comprising two interconnected modules: a coarse and a fine segmentation module, linked via a cropping layer. Both modules are designed to handle images of small, fixed input sizes. The first module processes a downscaled version of the input image. Its segmentation output determines the region of interest in the high-resolution image, which, along with the cropped initial segmentation, is fed into the fine segmentation module. Before being fine-tuned together, both networks are pre-trained as standard segmentation networks.\relax }}{83}{figure.caption.224}\protected@file@percent }
+\newlabel{fig:e2e-diagram}{{5.8}{83}{An illustration of the end-to-end model-driven cropping architecture, comprising two interconnected modules: a coarse and a fine segmentation module, linked via a cropping layer. Both modules are designed to handle images of small, fixed input sizes. The first module processes a downscaled version of the input image. Its segmentation output determines the region of interest in the high-resolution image, which, along with the cropped initial segmentation, is fed into the fine segmentation module. Before being fine-tuned together, both networks are pre-trained as standard segmentation networks.\relax }{figure.caption.224}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Experiments in Clinical Dermatological Image Segmentation}{84}{subsection.225}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Results and Discussion}{84}{section*.226}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces Randomly chosen examples of out-of-sample segmentation results. The columns, from left to right, show the input image with the ground truth segmentation mask, the final output segmentation mask of our approach, the rough segmentation of our approach, and the output of a baseline U-Net model. The images are zoomed in on the lesion region.\relax }}{86}{figure.caption.227}\protected@file@percent }
+\newlabel{fig:visual}{{5.9}{86}{Randomly chosen examples of out-of-sample segmentation results. The columns, from left to right, show the input image with the ground truth segmentation mask, the final output segmentation mask of our approach, the rough segmentation of our approach, and the output of a baseline U-Net model. The images are zoomed in on the lesion region.\relax }{figure.caption.227}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces Results of our approach and the baseline model in terms of the Dice Coefficient (DSC) as well as the thresholded Jaccard index (Th. Jacc.) for various experiments. Results are shown in the form of mean $\pm $ standard deviation. The top two groups show in-sample performance within the DermIS and DermQuest datasets, while the bottom two groups show out-of-sample performance when trained on DermIS and tested on DermQuest, and vice-versa.\relax }}{87}{table.228}\protected@file@percent }
+\newlabel{tab:results}{{5.5}{87}{Results of our approach and the baseline model in terms of the Dice Coefficient (DSC) as well as the thresholded Jaccard index (Th. Jacc.) for various experiments. Results are shown in the form of mean $\pm $ standard deviation. The top two groups show in-sample performance within the DermIS and DermQuest datasets, while the bottom two groups show out-of-sample performance when trained on DermIS and tested on DermQuest, and vice-versa.\relax }{table.228}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces A box plot of Jaccard indices above or equal to 0.65 (above) and the number of Jaccard indices below 0.65 (below). The first two columns show in-sample results, while the last two columns show out-of-sample results for models trained on DermIS and tested on DermQuest and vice-versa.\relax }}{88}{figure.caption.229}\protected@file@percent }
+\newlabel{fig:box-plot}{{5.10}{88}{A box plot of Jaccard indices above or equal to 0.65 (above) and the number of Jaccard indices below 0.65 (below). The first two columns show in-sample results, while the last two columns show out-of-sample results for models trained on DermIS and tested on DermQuest and vice-versa.\relax }{figure.caption.229}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Conclusion}{89}{section.230}\protected@file@percent }
+\@writefile{tdo}{\contentsline {todo}{cite mostart paper}{89}{section*.231}\protected@file@percent }
+\@setckpt{Chapters/05_input_size_reduction}{
+\setcounter{page}{90}
+\setcounter{equation}{4}
+\setcounter{enumi}{4}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{0}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{chapter}{5}
+\setcounter{section}{3}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{10}
+\setcounter{table}{5}
+\setcounter{LT@tables}{0}
+\setcounter{LT@chunks}{0}
+\setcounter{caption@flags}{2}
+\setcounter{continuedfloat}{0}
+\setcounter{@todonotes@numberoftodonotes}{3}
+\setcounter{parentequation}{0}
+\setcounter{KVtest}{0}
+\setcounter{subfigure}{0}
+\setcounter{subfigure@save}{4}
+\setcounter{lofdepth}{1}
+\setcounter{subtable}{0}
+\setcounter{subtable@save}{0}
+\setcounter{lotdepth}{1}
+\setcounter{float@type}{16}
+\setcounter{algorithm}{1}
+\setcounter{ALG@line}{27}
+\setcounter{ALG@rem}{27}
+\setcounter{ALG@nested}{0}
+\setcounter{ALG@Lnr}{2}
+\setcounter{ALG@blocknr}{10}
+\setcounter{ALG@storecount}{0}
+\setcounter{ALG@tmpcounter}{0}
+\setcounter{tabx@nest}{0}
+\setcounter{listtotal}{0}
+\setcounter{listcount}{0}
+\setcounter{liststart}{0}
+\setcounter{liststop}{0}
+\setcounter{citecount}{0}
+\setcounter{citetotal}{0}
+\setcounter{multicitecount}{0}
+\setcounter{multicitetotal}{0}
+\setcounter{instcount}{0}
+\setcounter{maxnames}{3}
+\setcounter{minnames}{1}
+\setcounter{maxitems}{3}
+\setcounter{minitems}{1}
+\setcounter{citecounter}{0}
+\setcounter{maxcitecounter}{0}
+\setcounter{savedcitecounter}{0}
+\setcounter{uniquelist}{0}
+\setcounter{uniquename}{0}
+\setcounter{refsection}{5}
+\setcounter{refsegment}{0}
+\setcounter{maxextratitle}{0}
+\setcounter{maxextratitleyear}{0}
+\setcounter{maxextraname}{0}
+\setcounter{maxextradate}{0}
+\setcounter{maxextraalpha}{0}
+\setcounter{abbrvpenalty}{50}
+\setcounter{highnamepenalty}{50}
+\setcounter{lownamepenalty}{25}
+\setcounter{maxparens}{3}
+\setcounter{parenlevel}{0}
+\setcounter{blx@maxsection}{5}
+\setcounter{blx@maxsegment@0}{0}
+\setcounter{blx@sectionciteorder@0}{4}
+\setcounter{mincomprange}{10}
+\setcounter{maxcomprange}{100000}
+\setcounter{mincompwidth}{1}
+\setcounter{afterword}{0}
+\setcounter{savedafterword}{0}
+\setcounter{annotator}{0}
+\setcounter{savedannotator}{0}
+\setcounter{author}{0}
+\setcounter{savedauthor}{0}
+\setcounter{bookauthor}{0}
+\setcounter{savedbookauthor}{0}
+\setcounter{commentator}{0}
+\setcounter{savedcommentator}{0}
+\setcounter{editor}{0}
+\setcounter{savededitor}{0}
+\setcounter{editora}{0}
+\setcounter{savededitora}{0}
+\setcounter{editorb}{0}
+\setcounter{savededitorb}{0}
+\setcounter{editorc}{0}
+\setcounter{savededitorc}{0}
+\setcounter{foreword}{0}
+\setcounter{savedforeword}{0}
+\setcounter{holder}{0}
+\setcounter{savedholder}{0}
+\setcounter{introduction}{0}
+\setcounter{savedintroduction}{0}
+\setcounter{namea}{0}
+\setcounter{savednamea}{0}
+\setcounter{nameb}{0}
+\setcounter{savednameb}{0}
+\setcounter{namec}{0}
+\setcounter{savednamec}{0}
+\setcounter{translator}{0}
+\setcounter{savedtranslator}{0}
+\setcounter{shortauthor}{0}
+\setcounter{savedshortauthor}{0}
+\setcounter{shorteditor}{0}
+\setcounter{savedshorteditor}{0}
+\setcounter{labelname}{0}
+\setcounter{savedlabelname}{0}
+\setcounter{institution}{0}
+\setcounter{savedinstitution}{0}
+\setcounter{lista}{0}
+\setcounter{savedlista}{0}
+\setcounter{listb}{0}
+\setcounter{savedlistb}{0}
+\setcounter{listc}{0}
+\setcounter{savedlistc}{0}
+\setcounter{listd}{0}
+\setcounter{savedlistd}{0}
+\setcounter{liste}{0}
+\setcounter{savedliste}{0}
+\setcounter{listf}{0}
+\setcounter{savedlistf}{0}
+\setcounter{location}{0}
+\setcounter{savedlocation}{0}
+\setcounter{organization}{0}
+\setcounter{savedorganization}{0}
+\setcounter{origlocation}{0}
+\setcounter{savedoriglocation}{0}
+\setcounter{origpublisher}{0}
+\setcounter{savedorigpublisher}{0}
+\setcounter{publisher}{0}
+\setcounter{savedpublisher}{0}
+\setcounter{language}{0}
+\setcounter{savedlanguage}{0}
+\setcounter{origlanguage}{0}
+\setcounter{savedoriglanguage}{0}
+\setcounter{pageref}{0}
+\setcounter{savedpageref}{0}
+\setcounter{textcitecount}{0}
+\setcounter{textcitetotal}{0}
+\setcounter{textcitemaxnames}{0}
+\setcounter{biburlbigbreakpenalty}{100}
+\setcounter{biburlbreakpenalty}{200}
+\setcounter{biburlnumpenalty}{0}
+\setcounter{biburlucpenalty}{0}
+\setcounter{biburllcpenalty}{0}
+\setcounter{smartand}{1}
+\setcounter{bbx:relatedcount}{0}
+\setcounter{bbx:relatedtotal}{0}
+\setcounter{Item}{14}
+\setcounter{Hfootnote}{1}
+\setcounter{bookmark@seq@number}{60}
+\setcounter{lstnumber}{1}
+\setcounter{section@level}{1}
+\setcounter{lstlisting}{0}
+\setcounter{blx@sectionciteorder@2}{113}
+\setcounter{blx@sectionciteorder@4}{126}
+\setcounter{blx@sectionciteorder@5}{49}
+\setcounter{blx@sectionciteorder@6}{5}
+\setcounter{blx@maxsegment@1}{0}
+\setcounter{blx@sectionciteorder@1}{28}
+\setcounter{blx@maxsegment@2}{0}
+\setcounter{blx@maxsegment@3}{0}
+\setcounter{blx@sectionciteorder@3}{49}
+\setcounter{blx@maxsegment@4}{0}
+\setcounter{blx@maxsegment@5}{0}
+}

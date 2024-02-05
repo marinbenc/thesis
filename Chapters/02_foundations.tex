@@ -42,16 +42,15 @@ where $\mu$ is the attenuation value of a given voxel while $\mu_{\textrm {water
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{l l} 
- \hline
+\def\arraystretch{1.2}
+\begin{tabularx}{\textwidth}{X X}
  \textbf{Tissue} & \textbf{Hounsfield value} \\
  \hline
  Fat & -30 to -70 HU\\
  Muscle & 20 to 40 HU\\
  Bone & 1000 HU \\
  Blood & 13 to 50 HU\\
- \hline
-\end{tabular}
+\end{tabularx}
 \caption{Approximate Hounsfield values of various tissues \cite{fosbinder2011essentials, kamalianComputedTomographyImaging2016}.}
 \label{tab:hu-tissues}
 \end{table}
@@ -652,5 +651,4 @@ The choice of positional encoding functions is guided by their numerical charact
  Later transformer-based segmentation networks modified the ViT encoder as well. For instance, the authors of the Swin Transformer \cite{liu2021Swin} argue that neural networks for computer vision need to be built with translation and scale invariance in mind. Swin Transformer starts with small patches, similar to ViT, but in each successive encoder layer neighboring patches are merged. Rather than computing self-attention within individual patches, Swin uses non-overlapping windows of multiple patches to perform self-attention. This ensures that Swin’s computational demand increases linearly with image size, a significant improvement over ViT’s exponential growth. A key aspect of Swin is that each successive layer shifts the window by half of the window size. This allows self-attention between two different windows and more global information about the image. Finally, Swin's encoder output is fed into a DeepLab-like decoder to produce the segmentation map.
  
  Transformers have demonstrated exceptional performance in image segmentation, particularly in large datasets and benchmarks with upwards of 20,000 natural images \cite{liu2021Swin, SETR, chen2022vitadapter}. However, their advantage is less pronounced in smaller datasets. This aligns with observations from \cite{attnAllYouNeed} --- convolutional layers have properties that are naturally a good fit for extracting information out of images. Transformers need to compensate for their lack of convolutions by using more layers. However, as we will see in the next chapter, there is a relationship between the number of parameters of a network and the number of samples required to train that network.
-
 
