@@ -59,13 +59,17 @@
 \IfFileExists{Base/author_info.tex}{\input{Base/author_info.tex}}{\input{Base/author_info.dist.tex}}
 
 % Thesis information
-\thesistitle{Catchy Title} % Your thesis title, print it elsewhere with \ttitle
-\degree{Master Thesis} % Your degree name, print it elsewhere with \degreename
+\thesistitle{Data Efficient Deep Learning Models for Biomedical Image Segmentation} % Your thesis title, print it elsewhere with \ttitle
+
+\newcommand{\ttitlenl}[0]{Data-efficiënte deep learning-modellen voor biomedische beeldsegmentatie}
+\newcommand{\ttitlehr}[0]{Podatkovno učinkoviti modeli dubokog učenja za segmentaciju biomedicinskih slika}
+
+\degree{Doctoral Dissertation} % Your degree name, print it elsewhere with \degreename
 \subject{Computer Sciences} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
 \keywords{\LaTeX, Master Thesis, Programming} % List of keywords, print it elsewhere with \keywordnames
 
 % Environment information
-\supervisor{Dr. Supervisor} % Your supervisor's name, print it elsewhere with \supname
+\supervisor{prof. Irena Galić, prof. Aleksandra Pižurica, dr. Danilo Babin} % Your supervisor's name, print it elsewhere with \supname
 \examiner{Prof. Dr. Examiner} % Your examiner's name, print it elsewhere with \examname
 \university{\href{https://myserver.com/}{University}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
 \faculty{\href{https://myserver.com/}{Faculty}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
@@ -89,6 +93,7 @@
 \setlength{\epigraphwidth}{0.8\textwidth}
 
 \usepackage{bibentry}
+\usepackage{enumitem}
 
 % ------ FONTS ------
 \usepackage[T1]{fontenc} % Output font encoding
@@ -216,23 +221,56 @@
 % Include title page
 \input{Base/titlepage.tex}
 
-\cleardoublepage
+\clearpage
 
-First printed interior sheet:
- Recto: same text and formatting as front cover.
-o Verso: ISBN, theme code, NUR code(s) and legal depot number. Position: bottom of the page.
+{\setlength{\parindent}{0cm}
+{\Large \ttitle\\[1em]}
+{\Large \ttitlehr\\[1em]}
+{\Large \ttitlenl\\[1em]}
+}
+
+\textbf{Marin Benčević}, \copyright~February, 2023.
+
+\vfill
+\vfill
+
+This doctoral dissertation was made at the Department of Software Engineering of the Faculty of Electrical Engineering, Computer Science and Information Technology Osijek, J. J. Strossmayer University of Osijek, Croatia, and the Department of Telecommunications and Information Processing of the Faculty of Engineering and Architecture, Ghent University, Belgium.
+
+\vfill
+
+{\setlength{\parindent}{0cm}
+\textsc{Supervisors}\\[0.35em]
+
+prof. Irena Galić, Ph.D.$^1$\\
+prof. Aleksandra Pižurica, Ph.D.$^2$\\
+Danilo Babin, Ph.D.$^2$\\
+
+\begin{enumerate}[label={\expandafter\textsuperscript 1},leftmargin=*]
+	\item Faculty of Electrical Engineering, Computer Science\\and Information Technology Osijek, J. J. Strossmayer University of Osijek, Croatia
+	\item Department of Telecommunications and Information Processing,\\ Ghent University, Belgium
+\end{enumerate}
+}
 
 \clearpage
 
-Second printed interior sheet, recto: Members of the examination board
-- Title: ‘Members of the Examination Board’ / ‘Leden van de examencommissie’ (same
-language as front cover),
-- Members, per category:
-- Chair / Voorzitter
-- Other members entitled to vote / Andere stemgerechtigde leden
-- Supervisor(s) / Promotor(en) (they are members!)
-- (it is no longer needed to indicate the secretary)
-- Every member is listed as Title Name, Affiliation (incl. country if not BE)
+\vfill
+
+{\setlength{\parindent}{0cm}
+\textsc{\textbf{Members of the examination board}}\\[0.35em]
+
+\textsc{Chairs}\\[0.35em]
+
+prof. Krešimir Nenadić, Ph.D., J. J. Strossmayer University of Osijek\\
+prof. TODO\todo{TODO}\\[0.35em]
+
+\textsc{Other members entitled to vote}\\[0.35em]
+
+prof. Hrvoje Leventić, Ph.D., J. J. Strossmayer University of Osijek\\
+prof. Jan Aelterman, Ph.D., Ghent University\\
+Srđan Lazendić, Ph.D., Ghent University\\
+prof. Ivica Botički, Ph.D., University of Zagreb\\
+prof. Lazar Velicki, M.D., Ph.D., University of Novi Sad
+}
 
 \clearpage
 
@@ -245,8 +283,11 @@ language as front cover),
 % Include abstract page
 \input{Base/abstract.tex}
 
+% Include abstract page
+\input{Base/abstract-nl.tex}
 
-
+% Include abstract page
+\input{Base/abstract-hr.tex}
 
 %----------------------------------------------------------------------------------------
 %  LIST OF CONTENTS/FIGURES/TABLES PAGES
@@ -254,8 +295,8 @@ language as front cover),
 
 {\hypersetup{linkcolor=black} % Black links in all lists
   \tableofcontents % Prints the main table of contents
-  \listoffigures % Prints the list of figures
-  \listoftables % Prints the list of tables
+%  \listoffigures % Prints the list of figures
+%  \listoftables % Prints the list of tables
 %  \lstlistoflistings % Prints the list of (code) listings
 %  \addchaptertocentry{Listings} % Add the list of listings to the table of contents
 }
@@ -265,10 +306,10 @@ language as front cover),
 %  ABBREVIATIONS
 %----------------------------------------------------------------------------------------
   
-\chapter{\abbrevname}
-\begin{acronym}[AAAAAA]
-  \acro{cnn}[CNN]{convolutional neural network}
-\end{acronym}
+%\chapter{\abbrevname}
+%\begin{acronym}[AAAAAA]
+%  \acro{cnn}[CNN]{convolutional neural network}
+%\end{acronym}
 % Use 
 % - \ac{id} for standard behavior (\Ac{id} for first letter capitalized)
 % - \acs{id} for acronym
@@ -322,12 +363,36 @@ language as front cover),
 \printbibliography[heading=subbibintoc]
 \end{refsection}
 
+\begin{refsection}
+\include{Chapters/07_conclusion}
+\printbibliography[heading=subbibintoc]
+\end{refsection}
+
 
 %----------------------------------------------------------------------------------------
 %  THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
 
 %\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+
+
+\pagestyle{plain}
+\chapter{Curriculum Vitae}
+
+Marin Benčević was born on November 5, 1996\@. in Vinkovci, Croatia. He has graduated from Zrinskih elementary school in Nuštar, Croatia, and the Matija Antun Reljković Gymnasium in Vinkovci, Croatia. He has obtained a Bachelor of Computer Engineering degree from the Faculty of Electrical Engineering, Computer Science and Information Technology Osijek at the J. J. Strossmayer University of Osijek, Croatia. He later obtained a Master of Computer Engineering in Information and Data Science. He is enrolled in a joint Ph.D. program to obtain a degree of Doctor of Computer Science at J. J. Strossmayer University of Osijek, and Doctor of Computer Science Engineering at Ghent University.
+
+He is currently employed as a teaching and research assistant at the Faculty of Electrical Engineering, Computer Science, and Information Technology Osijek. During his Ph.D. studies, he has published four research papers in scientific journals (all as first author) and four papers presented at international scientific conferences (of which three as first author).
+
+\vspace{3cm}
+
+\begin{flushright}
+Marin Benčević\\
+in Osijek, Croatia, \today
+
+\includegraphics[width=5cm]{images/signature.png}
+\end{flushright}
+
+
 
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices

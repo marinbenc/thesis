@@ -62,8 +62,6 @@ However, the key to the polar transform's success in facilitating separability l
 	
 	Building on the example of the polar transform, we propose a methodology where key transformation parameters, like the polar origin, are dynamically estimated using a neural network. We call this approach model-driven preprocessing, specifically tailored to enhance data efficiency in medical image segmentation.
 	
-% TODO: ChatGPT editing up to here
-	
 \section{Model-driven Preprocessing}
 
 The concept illustrated with the polar transform can be effectively applied to image segmentation. Imagine an image where pixels belonging to one class form a circular pattern, with the background occupying the space outside this circle. A segmentation model tasked with this scenario needs to approximate a circular boundary to segment the image accurately. By applying the polar transform, this circular boundary is converted into a linear one, significantly simplifying the task and allowing for segmentation with a less complex model.

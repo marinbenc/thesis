@@ -2344,10 +2344,6 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">example.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">ganinDA2015</bcf:citekey>
-    <bcf:citekey order="2">ganinDA2015</bcf:citekey>
-    <bcf:citekey order="3">carr2021shuffle</bcf:citekey>
-    <bcf:citekey order="4">carr2021shuffle</bcf:citekey>
   </bcf:section>
   <!-- SECTION 1 -->
   <bcf:bibdata section="1">
@@ -2412,10 +2408,565 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">example.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="2">
-    <bcf:citekey order="17">fosbinder2011essentials</bcf:citekey>
-    <bcf:citekey order="17">kamalianComputedTomographyImaging2016</bcf:citekey>
-    <bcf:citekey order="18">fosbinder2011essentials</bcf:citekey>
-    <bcf:citekey order="18">kamalianComputedTomographyImaging2016</bcf:citekey>
-    <bcf:citekey order="19">kamalianComputedTomographyImaging2016</bcf:citekey>
-    <bcf:citekey order="20">mahabadiCardiacComputedTomographyderived2017</bcf:citekey>
-    <bcf:citekey order="21">bencevicRecentProgressEpicardial2022</bcf:cit
+    <bcf:citekey order="1">fosbinder2011essentials</bcf:citekey>
+    <bcf:citekey order="1">kamalianComputedTomographyImaging2016</bcf:citekey>
+    <bcf:citekey order="2">fosbinder2011essentials</bcf:citekey>
+    <bcf:citekey order="2">kamalianComputedTomographyImaging2016</bcf:citekey>
+    <bcf:citekey order="3">kamalianComputedTomographyImaging2016</bcf:citekey>
+    <bcf:citekey order="4">mahabadiCardiacComputedTomographyderived2017</bcf:citekey>
+    <bcf:citekey order="5">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="6">radlAVTMulticenterAortic2022a</bcf:citekey>
+    <bcf:citekey order="7">radlAVTMulticenterAortic2022a</bcf:citekey>
+    <bcf:citekey order="8">calabreseUniversityCaliforniaSan2022</bcf:citekey>
+    <bcf:citekey order="9">calabreseUniversityCaliforniaSan2022</bcf:citekey>
+    <bcf:citekey order="10">nguyen2020vindrcxr</bcf:citekey>
+    <bcf:citekey order="10">irvinCheXpertLargeChest2019</bcf:citekey>
+    <bcf:citekey order="11">rotembergPatientcentricDatasetImages2021</bcf:citekey>
+    <bcf:citekey order="12">rotembergPatientcentricDatasetImages2021</bcf:citekey>
+    <bcf:citekey order="13">khanAutoCellSegRobustAutomatic2018</bcf:citekey>
+    <bcf:citekey order="14">jhaInstanceSegmentationWhole2021a</bcf:citekey>
+    <bcf:citekey order="15">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="16">regionGrowing</bcf:citekey>
+    <bcf:citekey order="17">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="18">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="19">Kass1988</bcf:citekey>
+    <bcf:citekey order="20">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="21">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="22">Rohlfing2005</bcf:citekey>
+    <bcf:citekey order="23">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="24">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="25">sinclairAtlasISTNJointSegmentation2022a</bcf:citekey>
+    <bcf:citekey order="26">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="27">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="28">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="29">hastieElementsStatisticalLearning2009</bcf:citekey>
+    <bcf:citekey order="30">hastieElementsStatisticalLearning2009</bcf:citekey>
+    <bcf:citekey order="31">heMaskRCNN2017b</bcf:citekey>
+    <bcf:citekey order="32">dumoulinGuideConvolutionArithmetic2018</bcf:citekey>
+    <bcf:citekey order="33">dumoulinGuideConvolutionArithmetic2018</bcf:citekey>
+    <bcf:citekey order="34">lecunGradientbasedLearningApplied1998</bcf:citekey>
+    <bcf:citekey order="35">lecunGradientbasedLearningApplied1998</bcf:citekey>
+    <bcf:citekey order="36">long2015fully</bcf:citekey>
+    <bcf:citekey order="37">long2015fully</bcf:citekey>
+    <bcf:citekey order="38">long2015fully</bcf:citekey>
+    <bcf:citekey order="39">ronnebergerUNetConvolutionalNetworks2015d</bcf:citekey>
+    <bcf:citekey order="40">isenseeNnUNetSelfconfiguringMethod2021</bcf:citekey>
+    <bcf:citekey order="41">ronnebergerUNetConvolutionalNetworks2015d</bcf:citekey>
+    <bcf:citekey order="42">ronnebergerUNetConvolutionalNetworks2015d</bcf:citekey>
+    <bcf:citekey order="43">rombach2021highresolution</bcf:citekey>
+    <bcf:citekey order="44">sinclairAtlasISTNJointSegmentation2022a</bcf:citekey>
+    <bcf:citekey order="45">isenseeNnUNetSelfconfiguringMethod2021</bcf:citekey>
+    <bcf:citekey order="46">isenseeNnUNetSelfconfiguringMethod2021</bcf:citekey>
+    <bcf:citekey order="47">isenseeNnUNetSelfconfiguringMethod2021</bcf:citekey>
+    <bcf:citekey order="48">zhou2019unetplusplus</bcf:citekey>
+    <bcf:citekey order="49">zhou2019unetplusplus</bcf:citekey>
+    <bcf:citekey order="50">zhou2019unetplusplus</bcf:citekey>
+    <bcf:citekey order="51">isenseeNnUNetSelfconfiguringMethod2021</bcf:citekey>
+    <bcf:citekey order="52">heMaskRCNN2017b</bcf:citekey>
+    <bcf:citekey order="53">heMaskRCNN2017b</bcf:citekey>
+    <bcf:citekey order="54">heMaskRCNN2017b</bcf:citekey>
+    <bcf:citekey order="55">zhao2017pspnet</bcf:citekey>
+    <bcf:citekey order="56">chen2017rethinking</bcf:citekey>
+    <bcf:citekey order="57">manet</bcf:citekey>
+    <bcf:citekey order="58">attnAllYouNeed</bcf:citekey>
+    <bcf:citekey order="59">dosovitskiy2021an</bcf:citekey>
+    <bcf:citekey order="60">dosovitskiy2021an</bcf:citekey>
+    <bcf:citekey order="61">dosovitskiy2021an</bcf:citekey>
+    <bcf:citekey order="62">SETR</bcf:citekey>
+    <bcf:citekey order="63">liu2021Swin</bcf:citekey>
+    <bcf:citekey order="64">liu2021Swin</bcf:citekey>
+    <bcf:citekey order="64">SETR</bcf:citekey>
+    <bcf:citekey order="64">chen2022vitadapter</bcf:citekey>
+    <bcf:citekey order="65">attnAllYouNeed</bcf:citekey>
+    <bcf:citekey order="66">fosbinder2011essentials</bcf:citekey>
+    <bcf:citekey order="67">kamalianComputedTomographyImaging2016</bcf:citekey>
+    <bcf:citekey order="68">mahabadiCardiacComputedTomographyderived2017</bcf:citekey>
+    <bcf:citekey order="69">bencevicRecentProgressEpicardial2022</bcf:citekey>
+    <bcf:citekey order="70">radlAVTMulticenterAortic2022a</bcf:citekey>
+    <bcf:citekey order="71">calabreseUniversityCaliforniaSan2022</bcf:citekey>
+    <bcf:citekey order="72">nguyen2020vindrcxr</bcf:citekey>
+    <bcf:citekey order="73">irvinCheXpertLargeChest2019</bcf:citekey>
+    <bcf:citekey order="74">rotembergPatientcentricDatasetImages2021</bcf:citekey>
+    <bcf:citekey order="75">khanAutoCellSegRobustAutomatic2018</bcf:citekey>
+    <bcf:citekey order="76">jhaInstanceSegmentationWhole2021a</bcf:citekey>
+    <bcf:citekey order="77">regionGrowing</bcf:citekey>
+    <bcf:citekey order="78">Kass1988</bcf:citekey>
+    <bcf:citekey order="79">Rohlfing2005</bcf:citekey>
+    <bcf:citekey order="80">sinclairAtlasISTNJointSegmentation2022a</bcf:citekey>
+    <bcf:citekey order="81">hastieElementsStatisticalLearning2009</bcf:citekey>
+    <bcf:citekey order="82">heMaskRCNN2017b</bcf:citekey>
+    <bcf:citekey order="83">dumoulinGuideConvolutionArithmetic2018</bcf:citekey>
+    <bcf:citekey order="84">lecunGradientbasedLearningApplied1998</bcf:citekey>
+    <bcf:citekey order="85">long2015fully</bcf:citekey>
+    <bcf:citekey order="86">ronnebergerUNetConvolutionalNetworks2015d</bcf:citekey>
+    <bcf:citekey order="87">isenseeNnUNetSelfconfiguringMethod2021</bcf:citekey>
+    <bcf:citekey order="88">rombach2021highresolution</bcf:citekey>
+    <bcf:citekey order="89">zhou2019unetplusplus</bcf:citekey>
+    <bcf:citekey order="90">zhao2017pspnet</bcf:citekey>
+    <bcf:citekey order="91">chen2017rethinking</bcf:citekey>
+    <bcf:citekey order="92">manet</bcf:citekey>
+    <bcf:citekey order="93">attnAllYouNeed</bcf:citekey>
+    <bcf:citekey order="94">dosovitskiy2021an</bcf:citekey>
+    <bcf:citekey order="95">SETR</bcf:citekey>
+    <bcf:citekey order="96">liu2021Swin</bcf:citekey>
+    <bcf:citekey order="97">chen2022vitadapter</bcf:citekey>
+  </bcf:section>
+  <!-- SECTION 0 (cont.) -->
+  <bcf:section number="0">
+  </bcf:section>
+  <!-- SECTION 3 -->
+  <bcf:bibdata section="3">
+    <bcf:datasource type="file" datatype="bibtex" glob="false">example.bib</bcf:datasource>
+  </bcf:bibdata>
+  <bcf:section number="3">
+    <bcf:citekey order="1">shalev-shwartzUnderstandingMachineLearning2014</bcf:citekey>
+    <bcf:citekey order="2">shalev-shwartzUnderstandingMachineLearning2014</bcf:citekey>
+    <bcf:citekey order="3">dengImageNetLargescaleHierarchical2009a</bcf:citekey>
+    <bcf:citekey order="4">dengImageNetLargescaleHierarchical2009a</bcf:citekey>
+    <bcf:citekey order="5">wasserthalTotalSegmentatorRobustSegmentation2023</bcf:citekey>
+    <bcf:citekey order="6">wasserthalTotalSegmentatorRobustSegmentation2023</bcf:citekey>
+    <bcf:citekey order="7">monaiconsortiumMONAIMedicalOpen2023</bcf:citekey>
+    <bcf:citekey order="7">myronenkoAutomated3DSegmentation2023</bcf:citekey>
+    <bcf:citekey order="8">torralbaUnbiasedLookDataset2011</bcf:citekey>
+    <bcf:citekey order="9">liuUnsupervisedDeepDomain2018</bcf:citekey>
+    <bcf:citekey order="10">liuUnsupervisedDeepDomain2018</bcf:citekey>
+    <bcf:citekey order="11">ganinDA2015</bcf:citekey>
+    <bcf:citekey order="12">ganinDA2015</bcf:citekey>
+    <bcf:citekey order="13">ganinDA2015</bcf:citekey>
+    <bcf:citekey order="14">ganinDA2015</bcf:citekey>
+    <bcf:citekey order="15">ganinDA2015</bcf:citekey>
+    <bcf:citekey order="16">ganinDA2015</bcf:citekey>
+    <bcf:citekey order="17">ganinDA2015</bcf:citekey>
+    <bcf:citekey order="18">bermudez-chaconDomainadaptiveTwostreamUNet2018</bcf:citekey>
+    <bcf:citekey order="19">bermudez-chaconDomainadaptiveTwostreamUNet2018</bcf:citekey>
+    <bcf:citekey order="20">norooziUnsupervisedLearningVisual2016</bcf:citekey>
+    <bcf:citekey order="21">carr2021shuffle</bcf:citekey>
+    <bcf:citekey order="22">carr2021shuffle</bcf:citekey>
+    <bcf:citekey order="23">carr2021shuffle</bcf:citekey>
+    <bcf:citekey order="24">carr2021shuffle</bcf:citekey>
+    <bcf:citekey order="25">chenSimpleFrameworkContrastive2020</bcf:citekey>
+    <bcf:citekey order="26">he2019moco</bcf:citekey>
+    <bcf:citekey order="27">goodfellowGenerativeAdversarialNetworks2014</bcf:citekey>
+    <bcf:citekey order="28">shinMedicalImageSynthesis2018</bcf:citekey>
+    <bcf:citekey order="29">ho2020denoising</bcf:citekey>
+    <bcf:citekey order="30">khaderDenoisingDiffusionProbabilistic2023</bcf:citekey>
+    <bcf:citekey order="31">goodfellowDeepLearning2016</bcf:citekey>
+    <bcf:citekey order="32">shalev-shwartzUnderstandingMachineLearning2014</bcf:citekey>
+    <bcf:citekey order="33">dengImageNetLargescaleHierarchical2009a</bcf:citekey>
+    <bcf:citekey order="34">wasserthalTotalSegmentatorRobustSegmentation2023</bcf:citekey>
+    <bcf:citekey order="35">monaiconsortiumMONAIMedicalOpen2023</bcf:citekey>
+    <bcf:citekey order="36">myronenkoAutomated3DSegmentation2023</bcf:citekey>
+    <bcf:citekey order="37">torralbaUnbiasedLookDataset2011</bcf:citekey>
+    <bcf:citekey order="38">liuUnsupervisedDeepDomain2018</bcf:citekey>
+    <bcf:citekey order="39">ganinDA2015</bcf:citekey>
+    <bcf:citekey order="40">bermudez-chaconDomainadaptiveTwostreamUNet2018</bcf:citekey>
+    <bcf:citekey order="41">norooziUnsupervisedLearningVisual2016</bcf:citekey>
+    <bcf:citekey order="42">carr2021shuffle</bcf:citekey>
+    <bcf:citekey order="43">chenSimpleFrameworkContrastive2020</bcf:citekey>
+    <bcf:citekey order="44">he2019moco</bcf:citekey>
+    <bcf:citekey order="45">goodfellowGenerativeAdversarialNetworks2014</bcf:citekey>
+    <bcf:citekey order="46">shinMedicalImageSynthesis2018</bcf:citekey>
+    <bcf:citekey order="47">ho2020denoising</bcf:citekey>
+    <bcf:citekey order="48">khaderDenoisingDiffusionProbabilistic2023</bcf:citekey>
+    <bcf:citekey order="49">goodfellowDeepLearning2016</bcf:citekey>
+  </bcf:section>
+  <!-- SECTION 0 (cont.) -->
+  <bcf:section number="0">
+  </bcf:section>
+  <!-- SECTION 4 -->
+  <bcf:bibdata section="4">
+    <bcf:datasource type="file" datatype="bibtex" glob="false">example.bib</bcf:datasource>
+  </bcf:bibdata>
+  <bcf:section number="4">
+    <bcf:citekey order="1">ronnebergerUNetConvolutionalNetworks2015</bcf:citekey>
+    <bcf:citekey order="2">zhou2019unetplusplus</bcf:citekey>
+    <bcf:citekey order="3">heDeepResidualLearning2016</bcf:citekey>
+    <bcf:citekey order="4">chenEncoderDecoderAtrousSeparable2018</bcf:citekey>
+    <bcf:citekey order="5">heDeepResidualLearning2016</bcf:citekey>
+    <bcf:citekey order="6">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="7">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="8">liuDDNetCartesianpolarDualdomain2019a</bcf:citekey>
+    <bcf:citekey order="9">liuDDNetCartesianpolarDualdomain2019a</bcf:citekey>
+    <bcf:citekey order="10">salehinejadImageAugmentationUsing2018</bcf:citekey>
+    <bcf:citekey order="11">salehinejadImageAugmentationUsing2018</bcf:citekey>
+    <bcf:citekey order="12">kimCyCNNRotationInvariant2020a</bcf:citekey>
+    <bcf:citekey order="13">kimCyCNNRotationInvariant2020a</bcf:citekey>
+    <bcf:citekey order="14">kimCNNBasedUGS2018</bcf:citekey>
+    <bcf:citekey order="15">kimCNNBasedUGS2018</bcf:citekey>
+    <bcf:citekey order="16">estevesPolarTransformerNetworks2018a</bcf:citekey>
+    <bcf:citekey order="17">estevesPolarTransformerNetworks2018a</bcf:citekey>
+    <bcf:citekey order="18">jaderbergSpatialTransformerNetworks2016</bcf:citekey>
+    <bcf:citekey order="19">estevesPolarTransformerNetworks2018a</bcf:citekey>
+    <bcf:citekey order="20">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="21">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="22">newellStackedHourglassNetworks2016</bcf:citekey>
+    <bcf:citekey order="23">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="24">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="25">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="26">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="27">info11020125</bcf:citekey>
+    <bcf:citekey order="28">newellStackedHourglassNetworks2016</bcf:citekey>
+    <bcf:citekey order="29">ronnebergerUNetConvolutionalNetworks2015</bcf:citekey>
+    <bcf:citekey order="30">zhouUNetNestedUNet2018a</bcf:citekey>
+    <bcf:citekey order="31">chenEncoderDecoderAtrousSeparable2018a</bcf:citekey>
+    <bcf:citekey order="32">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="33">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="34">bernalWMDOVAMapsAccurate2015</bcf:citekey>
+    <bcf:citekey order="35">jhaDoubleUNetDeepConvolutional2020</bcf:citekey>
+    <bcf:citekey order="36">bilicLiverTumorSegmentation2019</bcf:citekey>
+    <bcf:citekey order="37">codellaSkinLesionAnalysis2018</bcf:citekey>
+    <bcf:citekey order="37">tschandlHAM10000DatasetLarge2018</bcf:citekey>
+    <bcf:citekey order="38">jhaDoubleUNetDeepConvolutional2020</bcf:citekey>
+    <bcf:citekey order="39">rodriguesNovelApproachAutomated2016</bcf:citekey>
+    <bcf:citekey order="40">newellStackedHourglassNetworks2016</bcf:citekey>
+    <bcf:citekey order="41">fanPraNetParallelReverse2020</bcf:citekey>
+    <bcf:citekey order="42">tomarFANetFeedbackAttention2021a</bcf:citekey>
+    <bcf:citekey order="43">chenEncoderDecoderAtrousSeparable2018</bcf:citekey>
+    <bcf:citekey order="44">jhaDoubleUNetDeepConvolutional2020</bcf:citekey>
+    <bcf:citekey order="45">ronnebergerUNetConvolutionalNetworks2015</bcf:citekey>
+    <bcf:citekey order="46">valanarasuKiUNetOvercompleteConvolutional2020a</bcf:citekey>
+    <bcf:citekey order="47">ronnebergerUNetConvolutionalNetworks2015</bcf:citekey>
+    <bcf:citekey order="48">zhangAutomaticEpicardialFat2020a</bcf:citekey>
+    <bcf:citekey order="49">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="50">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="51">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="52">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="53">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="54">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="55">valanarasuKiUNetOvercompleteConvolutional2020a</bcf:citekey>
+    <bcf:citekey order="56">zhangAutomaticEpicardialFat2020a</bcf:citekey>
+    <bcf:citekey order="57">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="58">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="59">fantazzini3DAutomaticSegmentation2020</bcf:citekey>
+    <bcf:citekey order="60">fantazzini3DAutomaticSegmentation2020</bcf:citekey>
+    <bcf:citekey order="61">yuThreeDimensionalDeepConvolutional2021</bcf:citekey>
+    <bcf:citekey order="61">chenMultistageLearningSegmentation2021</bcf:citekey>
+    <bcf:citekey order="62">bencevicUsingPolarTransform2022a</bcf:citekey>
+    <bcf:citekey order="63">bencevicUsingPolarTransform2022a</bcf:citekey>
+    <bcf:citekey order="64">bencevicUsingPolarTransform2022a</bcf:citekey>
+    <bcf:citekey order="65">bencevicUsingPolarTransform2022a</bcf:citekey>
+    <bcf:citekey order="66">radlAVTMulticenterAortic2022</bcf:citekey>
+    <bcf:citekey order="67">ronnebergerUNetConvolutionalNetworks2015d</bcf:citekey>
+    <bcf:citekey order="68">bencevicUsingPolarTransform2022a</bcf:citekey>
+    <bcf:citekey order="69">bencevicUsingPolarTransform2022a</bcf:citekey>
+    <bcf:citekey order="70">tahaMetricsEvaluating3D2015</bcf:citekey>
+    <bcf:citekey order="71">bencevicUsingPolarTransform2022a</bcf:citekey>
+    <bcf:citekey order="72">bencevicUsingPolarTransform2022a</bcf:citekey>
+    <bcf:citekey order="73">yuThreeDimensionalDeepConvolutional2021</bcf:citekey>
+    <bcf:citekey order="74">yuThreeDimensionalDeepConvolutional2021</bcf:citekey>
+    <bcf:citekey order="75">fantazzini3DAutomaticSegmentation2020</bcf:citekey>
+    <bcf:citekey order="76">fantazzini3DAutomaticSegmentation2020</bcf:citekey>
+    <bcf:citekey order="77">cheungComputationallyEfficientApproach2021</bcf:citekey>
+    <bcf:citekey order="78">cheungComputationallyEfficientApproach2021</bcf:citekey>
+    <bcf:citekey order="79">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="80">bencevicUsingPolarTransform2022a</bcf:citekey>
+    <bcf:citekey order="81">ronnebergerUNetConvolutionalNetworks2015</bcf:citekey>
+    <bcf:citekey order="82">zhou2019unetplusplus</bcf:citekey>
+    <bcf:citekey order="83">heDeepResidualLearning2016</bcf:citekey>
+    <bcf:citekey order="84">chenEncoderDecoderAtrousSeparable2018</bcf:citekey>
+    <bcf:citekey order="85">bencevicTrainingPolarImage2021</bcf:citekey>
+    <bcf:citekey order="86">liuDDNetCartesianpolarDualdomain2019a</bcf:citekey>
+    <bcf:citekey order="87">salehinejadImageAugmentationUsing2018</bcf:citekey>
+    <bcf:citekey order="88">kimCyCNNRotationInvariant2020a</bcf:citekey>
+    <bcf:citekey order="89">kimCNNBasedUGS2018</bcf:citekey>
+    <bcf:citekey order="90">estevesPolarTransformerNetworks2018a</bcf:citekey>
+    <bcf:citekey order="91">jaderbergSpatialTransformerNetworks2016</bcf:citekey>
+    <bcf:citekey order="92">newellStackedHourglassNetworks2016</bcf:citekey>
+    <bcf:citekey order="93">info11020125</bcf:citekey>
+    <bcf:citekey order="94">zhouUNetNestedUNet2018a</bcf:citekey>
+    <bcf:citekey order="95">chenEncoderDecoderAtrousSeparable2018a</bcf:citekey>
+    <bcf:citekey order="96">bernalWMDOVAMapsAccurate2015</bcf:citekey>
+    <bcf:citekey order="97">jhaDoubleUNetDeepConvolutional2020</bcf:citekey>
+    <bcf:citekey order="98">bilicLiverTumorSegmentation2019</bcf:citekey>
+    <bcf:citekey order="99">codellaSkinLesionAnalysis2018</bcf:citekey>
+    <bcf:citekey order="100">tschandlHAM10000DatasetLarge2018</bcf:citekey>
+    <bcf:citekey order="101">rodriguesNovelApproachAutomated2016</bcf:citekey>
+    <bcf:citekey order="102">fanPraNetParallelReverse2020</bcf:citekey>
+    <bcf:citekey order="103">tomarFANetFeedbackAttention2021a</bcf:citekey>
+    <bcf:citekey order="104">valanarasuKiUNetOvercompleteConvolutional2020a</bcf:citekey>
+    <bcf:citekey order="105">zhangAutomaticEpicardialFat2020a</bcf:citekey>
+    <bcf:citekey order="106">fantazzini3DAutomaticSegmentation2020</bcf:citekey>
+    <bcf:citekey order="107">yuThreeDimensionalDeepConvolutional2021</bcf:citekey>
+    <bcf:citekey order="108">chenMultistageLearningSegmentation2021</bcf:citekey>
+    <bcf:citekey order="109">bencevicUsingPolarTransform2022a</bcf:citekey>
+    <bcf:citekey order="110">radlAVTMulticenterAortic2022</bcf:citekey>
+    <bcf:citekey order="111">ronnebergerUNetConvolutionalNetworks2015d</bcf:citekey>
+    <bcf:citekey order="112">tahaMetricsEvaluating3D2015</bcf:citekey>
+    <bcf:citekey order="113">cheungComputationallyEfficientApproach2021</bcf:citekey>
+  </bcf:section>
+  <!-- SECTION 0 (cont.) -->
+  <bcf:section number="0">
+  </bcf:section>
+  <!-- SECTION 5 -->
+  <bcf:bibdata section="5">
+    <bcf:datasource type="file" datatype="bibtex" glob="false">example.bib</bcf:datasource>
+  </bcf:bibdata>
+  <bcf:section number="5">
+    <bcf:citekey order="1">tanEfficientNetRethinkingModel2020</bcf:citekey>
+    <bcf:citekey order="2">tanEfficientNetRethinkingModel2020</bcf:citekey>
+    <bcf:citekey order="3">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="4">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="5">Qiu2018</bcf:citekey>
+    <bcf:citekey order="6">Qiu2018</bcf:citekey>
+    <bcf:citekey order="7">girshickRichFeatureHierarchies2014</bcf:citekey>
+    <bcf:citekey order="7">heMaskRCNN2017</bcf:citekey>
+    <bcf:citekey order="8">girshickRichFeatureHierarchies2014</bcf:citekey>
+    <bcf:citekey order="9">heMaskRCNN2017</bcf:citekey>
+    <bcf:citekey order="10">zhouFixedPointModelPancreas2017</bcf:citekey>
+    <bcf:citekey order="11">zhouFixedPointModelPancreas2017</bcf:citekey>
+    <bcf:citekey order="12">pmlr-v28-li13b</bcf:citekey>
+    <bcf:citekey order="13">zhu3DCoarsetoFineFramework2018</bcf:citekey>
+    <bcf:citekey order="14">zhu3DCoarsetoFineFramework2018</bcf:citekey>
+    <bcf:citekey order="15">jhaInstanceSegmentationWhole2021</bcf:citekey>
+    <bcf:citekey order="16">jhaInstanceSegmentationWhole2021</bcf:citekey>
+    <bcf:citekey order="17">marinEfficientSegmentationLearning2019</bcf:citekey>
+    <bcf:citekey order="18">marinEfficientSegmentationLearning2019</bcf:citekey>
+    <bcf:citekey order="19">jin2022learning</bcf:citekey>
+    <bcf:citekey order="20">jin2022learning</bcf:citekey>
+    <bcf:citekey order="21">xie2021segformer</bcf:citekey>
+    <bcf:citekey order="22">liu2021Swin</bcf:citekey>
+    <bcf:citekey order="23">dosovitskiy2020vit</bcf:citekey>
+    <bcf:citekey order="24">nazeriTwoStageConvolutionalNeural2018</bcf:citekey>
+    <bcf:citekey order="24">houPatchBasedConvolutionalNeural2016</bcf:citekey>
+    <bcf:citekey order="25">radlAVTMulticenterAortic2022</bcf:citekey>
+    <bcf:citekey order="26">caicedoNucleusSegmentationImaging2019</bcf:citekey>
+    <bcf:citekey order="27">jha2020kvasir</bcf:citekey>
+    <bcf:citekey order="28">jhaResUNetAdvancedArchitecture2019</bcf:citekey>
+    <bcf:citekey order="28">zhouUNetNestedUNet2018b</bcf:citekey>
+    <bcf:citekey order="29">chenEncoderDecoderAtrousSeparable2018b</bcf:citekey>
+    <bcf:citekey order="30">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="31">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="32">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="33">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="34">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="35">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="36">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="37">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="38">Qiu2018</bcf:citekey>
+    <bcf:citekey order="39">https://doi.org/10.48550/arxiv.2205.09723</bcf:citekey>
+    <bcf:citekey order="40">waterloo</bcf:citekey>
+    <bcf:citekey order="41">uwaterlooSkinCancer</bcf:citekey>
+    <bcf:citekey order="42">dermisDermIS</bcf:citekey>
+    <bcf:citekey order="43">codellaSkinLesionAnalysis2018</bcf:citekey>
+    <bcf:citekey order="44">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="45">tanEfficientNetRethinkingModel2020</bcf:citekey>
+    <bcf:citekey order="46">bencevicSegmentthenSegmentContextPreservingCropBased2023a</bcf:citekey>
+    <bcf:citekey order="47">Qiu2018</bcf:citekey>
+    <bcf:citekey order="48">girshickRichFeatureHierarchies2014</bcf:citekey>
+    <bcf:citekey order="49">heMaskRCNN2017</bcf:citekey>
+    <bcf:citekey order="50">zhouFixedPointModelPancreas2017</bcf:citekey>
+    <bcf:citekey order="51">pmlr-v28-li13b</bcf:citekey>
+    <bcf:citekey order="52">zhu3DCoarsetoFineFramework2018</bcf:citekey>
+    <bcf:citekey order="53">jhaInstanceSegmentationWhole2021</bcf:citekey>
+    <bcf:citekey order="54">marinEfficientSegmentationLearning2019</bcf:citekey>
+    <bcf:citekey order="55">jin2022learning</bcf:citekey>
+    <bcf:citekey order="56">xie2021segformer</bcf:citekey>
+    <bcf:citekey order="57">liu2021Swin</bcf:citekey>
+    <bcf:citekey order="58">dosovitskiy2020vit</bcf:citekey>
+    <bcf:citekey order="59">nazeriTwoStageConvolutionalNeural2018</bcf:citekey>
+    <bcf:citekey order="60">houPatchBasedConvolutionalNeural2016</bcf:citekey>
+    <bcf:citekey order="61">radlAVTMulticenterAortic2022</bcf:citekey>
+    <bcf:citekey order="62">caicedoNucleusSegmentationImaging2019</bcf:citekey>
+    <bcf:citekey order="63">jha2020kvasir</bcf:citekey>
+    <bcf:citekey order="64">jhaResUNetAdvancedArchitecture2019</bcf:citekey>
+    <bcf:citekey order="65">zhouUNetNestedUNet2018b</bcf:citekey>
+    <bcf:citekey order="66">chenEncoderDecoderAtrousSeparable2018b</bcf:citekey>
+    <bcf:citekey order="67">https://doi.org/10.48550/arxiv.2205.09723</bcf:citekey>
+    <bcf:citekey order="68">waterloo</bcf:citekey>
+    <bcf:citekey order="69">uwaterlooSkinCancer</bcf:citekey>
+    <bcf:citekey order="70">dermisDermIS</bcf:citekey>
+    <bcf:citekey order="71">codellaSkinLesionAnalysis2018</bcf:citekey>
+  </bcf:section>
+  <!-- SECTION 0 (cont.) -->
+  <bcf:section number="0">
+  </bcf:section>
+  <!-- SECTION 6 -->
+  <bcf:bibdata section="6">
+    <bcf:datasource type="file" datatype="bibtex" glob="false">example.bib</bcf:datasource>
+  </bcf:bibdata>
+  <bcf:section number="6">
+    <bcf:citekey order="1">zhu3DCoarsetoFineFramework2018</bcf:citekey>
+    <bcf:citekey order="2">isenseeNnUNetSelfconfiguringMethod2021</bcf:citekey>
+    <bcf:citekey order="3">wenConvolutionalNeuralNetworks2020</bcf:citekey>
+    <bcf:citekey order="4">sahariaPhotorealisticTexttoImageDiffusion2022</bcf:citekey>
+    <bcf:citekey order="5">Sacks2007</bcf:citekey>
+    <bcf:citekey order="5">Marwan2013</bcf:citekey>
+    <bcf:citekey order="6">Chenn2009</bcf:citekey>
+    <bcf:citekey order="7">Iacobellis2011</bcf:citekey>
+    <bcf:citekey order="8">Gorter2008</bcf:citekey>
+    <bcf:citekey order="9">Goeller2018</bcf:citekey>
+    <bcf:citekey order="10">Iacobellis2009-2</bcf:citekey>
+    <bcf:citekey order="11">Militello2019</bcf:citekey>
+    <bcf:citekey order="12">Marwan2013</bcf:citekey>
+    <bcf:citekey order="13">wenConvolutionalNeuralNetworks2020</bcf:citekey>
+    <bcf:citekey order="14">sahariaPhotorealisticTexttoImageDiffusion2022</bcf:citekey>
+    <bcf:citekey order="15">Coppini2010</bcf:citekey>
+    <bcf:citekey order="16">Coppini2010</bcf:citekey>
+    <bcf:citekey order="17">Militello2019</bcf:citekey>
+    <bcf:citekey order="18">Militello2019</bcf:citekey>
+    <bcf:citekey order="19">Ding2014</bcf:citekey>
+    <bcf:citekey order="20">Ding2014</bcf:citekey>
+    <bcf:citekey order="21">Coppini2010</bcf:citekey>
+    <bcf:citekey order="22">Coppini2010</bcf:citekey>
+    <bcf:citekey order="23">Rodrigues2016</bcf:citekey>
+    <bcf:citekey order="24">Rodrigues2016</bcf:citekey>
+    <bcf:citekey order="25">Commandeur2018</bcf:citekey>
+    <bcf:citekey order="26">Commandeur2018</bcf:citekey>
+    <bcf:citekey order="27">Li2019</bcf:citekey>
+    <bcf:citekey order="28">Li2019</bcf:citekey>
+    <bcf:citekey order="29">he2020</bcf:citekey>
+    <bcf:citekey order="30">he2020</bcf:citekey>
+    <bcf:citekey order="31">Zhang2020</bcf:citekey>
+    <bcf:citekey order="32">Zhang2020</bcf:citekey>
+    <bcf:citekey order="33">Rodrigues2016</bcf:citekey>
+    <bcf:citekey order="34">Rodrigues2016</bcf:citekey>
+    <bcf:citekey order="35">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="36">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="37">ronneberger2015unet</bcf:citekey>
+    <bcf:citekey order="38">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="39">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="40">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="41">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="42">MARTINBLAND1986307</bcf:citekey>
+    <bcf:citekey order="43">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="44">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="45">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="46">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="47">Zhang2020</bcf:citekey>
+    <bcf:citekey order="48">he2020</bcf:citekey>
+    <bcf:citekey order="49">Commandeur2018</bcf:citekey>
+    <bcf:citekey order="49">Li2019</bcf:citekey>
+    <bcf:citekey order="49">he2020</bcf:citekey>
+    <bcf:citekey order="50">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="51">zhu3DCoarsetoFineFramework2018</bcf:citekey>
+    <bcf:citekey order="52">isenseeNnUNetSelfconfiguringMethod2021</bcf:citekey>
+    <bcf:citekey order="53">wenConvolutionalNeuralNetworks2020</bcf:citekey>
+    <bcf:citekey order="54">sahariaPhotorealisticTexttoImageDiffusion2022</bcf:citekey>
+    <bcf:citekey order="55">Sacks2007</bcf:citekey>
+    <bcf:citekey order="56">Marwan2013</bcf:citekey>
+    <bcf:citekey order="57">Chenn2009</bcf:citekey>
+    <bcf:citekey order="58">Iacobellis2011</bcf:citekey>
+    <bcf:citekey order="59">Gorter2008</bcf:citekey>
+    <bcf:citekey order="60">Goeller2018</bcf:citekey>
+    <bcf:citekey order="61">Iacobellis2009-2</bcf:citekey>
+    <bcf:citekey order="62">Militello2019</bcf:citekey>
+    <bcf:citekey order="63">Coppini2010</bcf:citekey>
+    <bcf:citekey order="64">Ding2014</bcf:citekey>
+    <bcf:citekey order="65">Rodrigues2016</bcf:citekey>
+    <bcf:citekey order="66">Commandeur2018</bcf:citekey>
+    <bcf:citekey order="67">Li2019</bcf:citekey>
+    <bcf:citekey order="68">he2020</bcf:citekey>
+    <bcf:citekey order="69">Zhang2020</bcf:citekey>
+    <bcf:citekey order="70">bencevicEpicardialAdiposeTissue2021</bcf:citekey>
+    <bcf:citekey order="71">ronneberger2015unet</bcf:citekey>
+    <bcf:citekey order="72">MARTINBLAND1986307</bcf:citekey>
+  </bcf:section>
+  <!-- SECTION 0 (cont.) -->
+  <bcf:section number="0">
+  </bcf:section>
+  <!-- SECTION 7 -->
+  <bcf:bibdata section="7">
+    <bcf:datasource type="file" datatype="bibtex" glob="false">example.bib</bcf:datasource>
+  </bcf:bibdata>
+  <bcf:section number="7">
+  </bcf:section>
+  <!-- SECTION 0 (cont.) -->
+  <bcf:section number="0">
+  </bcf:section>
+  <!-- SORTING TEMPLATES -->
+  <bcf:sortingtemplate name="anyt">
+    <bcf:sort order="1">
+      <bcf:sortitem order="1">presort</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="2">
+      <bcf:sortitem order="1">labelalpha</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="3" final="1">
+      <bcf:sortitem order="1">sortkey</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="4">
+      <bcf:sortitem order="1">sortname</bcf:sortitem>
+      <bcf:sortitem order="2">author</bcf:sortitem>
+      <bcf:sortitem order="3">editor</bcf:sortitem>
+      <bcf:sortitem order="4">translator</bcf:sortitem>
+      <bcf:sortitem order="5">sorttitle</bcf:sortitem>
+      <bcf:sortitem order="6">title</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="5">
+      <bcf:sortitem order="1">sortyear</bcf:sortitem>
+      <bcf:sortitem order="2">year</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="6">
+      <bcf:sortitem order="1">sorttitle</bcf:sortitem>
+      <bcf:sortitem order="2">title</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="7">
+      <bcf:sortitem order="1">volume</bcf:sortitem>
+      <bcf:sortitem literal="1" order="2">0</bcf:sortitem>
+    </bcf:sort>
+  </bcf:sortingtemplate>
+  <!-- DATALISTS -->
+  <bcf:datalist section="1"
+                name="anyt/global//global/global"
+                type="entry"
+                sortingtemplatename="anyt"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+  <bcf:datalist section="2"
+                name="anyt/global//global/global"
+                type="entry"
+                sortingtemplatename="anyt"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+  <bcf:datalist section="3"
+                name="anyt/global//global/global"
+                type="entry"
+                sortingtemplatename="anyt"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+  <bcf:datalist section="4"
+                name="anyt/global//global/global"
+                type="entry"
+                sortingtemplatename="anyt"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+  <bcf:datalist section="5"
+                name="anyt/global//global/global"
+                type="entry"
+                sortingtemplatename="anyt"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+  <bcf:datalist section="6"
+                name="anyt/global//global/global"
+                type="entry"
+                sortingtemplatename="anyt"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+  <bcf:datalist section="7"
+                name="anyt/global//global/global"
+                type="entry"
+                sortingtemplatename="anyt"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+</bcf:controlfile>

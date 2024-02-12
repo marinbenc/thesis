@@ -1,64 +1,64 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Reducing Model Input Sizes with Model-Driven Crops}{77}{chapter.200}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Reducing Model Input Sizes with Model-Driven Crops}{77}{chapter.210}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:reducing-input-size}{{5}{77}{Reducing Model Input Sizes with Model-Driven Crops}{chapter.200}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Model-Driven Image Cropping}{78}{section.203}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces A visual summary of our approach. (1) An image is uniformly downsampled from its original resolution. (2) A rough segmentation is predicted by a neural network, and the bounding box of each connected component is calculated. (3) The bounding boxes are scaled to the original image space and crops of the input image are taken in the original resolution and scaled to a common input size. (4) Each crop is segmented separately by a second neural network specifically trained on cropped images. These crops are fused to form a final segmentation in the original high resolution. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{78}{figure.caption.204}\protected@file@percent }
-\newlabel{fig:summary}{{5.1}{78}{A visual summary of our approach. (1) An image is uniformly downsampled from its original resolution. (2) A rough segmentation is predicted by a neural network, and the bounding box of each connected component is calculated. (3) The bounding boxes are scaled to the original image space and crops of the input image are taken in the original resolution and scaled to a common input size. (4) Each crop is segmented separately by a second neural network specifically trained on cropped images. These crops are fused to form a final segmentation in the original high resolution. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.204}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Cropping}{79}{section*.208}\protected@file@percent }
-\newlabel{cropping}{{5.1}{79}{Cropping}{section*.208}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Inference algorithm for one input image\relax }}{80}{algorithm.207}\protected@file@percent }
-\newlabel{alg:crop}{{1}{80}{Inference algorithm for one input image\relax }{algorithm.207}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Fine Segmentation and Fusion}{81}{section*.209}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Training the Fine Segmentation Network}{81}{section*.210}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Related work}{81}{subsection.211}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Detect-then-segment}{81}{section*.212}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Coarse-to-fine Segmentation}{82}{section*.213}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Non-uniform Downsampling}{82}{section*.214}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Other Approaches to Reducing Input Resolution}{83}{section*.215}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Results}{83}{subsection.216}\protected@file@percent }
-\newlabel{tab:hyperparams}{{5.1}{84}{The hyper-parameters used for each of the models in our experiments.\relax }{table.217}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces The hyper-parameters used for each of the models in our experiments.\relax }}{84}{table.217}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Datasets}{84}{section*.218}\protected@file@percent }
-\newlabel{datasets}{{5.1.2}{84}{Datasets}{section*.218}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Quantitative Assessment}{84}{section*.219}\protected@file@percent }
-\newlabel{tab:seg-then-seg-results}{{5.2}{85}{The results of our approach using U-Net as the underlying architecture.\relax }{table.220}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces The results of our approach using U-Net as the underlying architecture.\relax }}{85}{table.220}\protected@file@percent }
-\newlabel{tab:other-sota}{{5.3}{86}{A comparison of the Dice Score Coefficients of our approach using other underlying architectures at 4x and 2x downscaled images.\relax }{table.221}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces A comparison of the Dice Score Coefficients of our approach using other underlying architectures at 4x and 2x downscaled images.\relax }}{86}{table.221}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces The relationship between input dimensions and the mean Dice Score Coefficient (DSC) and recall for different datasets. The points are measured values from our experiments.\relax }}{86}{figure.caption.222}\protected@file@percent }
-\newlabel{fig:dsc-vs-size}{{5.2}{86}{The relationship between input dimensions and the mean Dice Score Coefficient (DSC) and recall for different datasets. The points are measured values from our experiments.\relax }{figure.caption.222}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Violin plots of Dice Score Coefficients of our approach compared to the baseline models at various input dimensions. The dashed lines represent quartiles of the distributions.\relax }}{87}{figure.caption.223}\protected@file@percent }
-\newlabel{fig:box-plots}{{5.3}{87}{Violin plots of Dice Score Coefficients of our approach compared to the baseline models at various input dimensions. The dashed lines represent quartiles of the distributions.\relax }{figure.caption.223}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Qualitative Assessment}{87}{section*.224}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Example outputs from the models for the cells dataset at various input sizes. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{88}{figure.caption.225}\protected@file@percent }
-\newlabel{fig:examples-cells}{{5.4}{88}{Example outputs from the models for the cells dataset at various input sizes. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.225}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Example outputs from the models for the polyp dataset at various input sizes. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{89}{figure.caption.226}\protected@file@percent }
-\newlabel{fig:examples-polyp}{{5.5}{89}{Example outputs from the models for the polyp dataset at various input sizes. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.226}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Example outputs from the models for the aorta dataset at various input sizes. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{89}{figure.caption.227}\protected@file@percent }
-\newlabel{fig:examples-aa}{{5.6}{89}{Example outputs from the models for the aorta dataset at various input sizes. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.227}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Computational Performance Characteristics}{90}{section*.228}\protected@file@percent }
-\newlabel{tab:performance}{{5.4}{90}{Performance characteristics of our approach compared to the baseline model with similar mean test Dice Score Coefficients.\relax }{table.229}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Performance characteristics of our approach compared to the baseline model with similar mean test Dice Score Coefficients.\relax }}{90}{table.229}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Mean per-input inference time across different input sizes for the U-Net-based models. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{90}{figure.caption.230}\protected@file@percent }
-\newlabel{fig:inf-time}{{5.7}{90}{Mean per-input inference time across different input sizes for the U-Net-based models. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.230}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Discussion}{91}{subsection.231}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}An End-to-End Extension of Model-Driven Image Cropping}{92}{section.232}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}End-to-end Network Architecture and Training}{92}{subsection.233}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces An illustration of the end-to-end model-driven cropping architecture, comprising two interconnected modules: a coarse and a fine segmentation module, linked via a cropping layer. Both modules are designed to handle images of small, fixed input sizes. The first module processes a downscaled version of the input image. Its segmentation output determines the region of interest in the high-resolution image, which, along with the cropped initial segmentation, is fed into the fine segmentation module. Before being fine-tuned together, both networks are pre-trained as standard segmentation networks.\relax }}{92}{figure.caption.234}\protected@file@percent }
-\newlabel{fig:e2e-diagram}{{5.8}{92}{An illustration of the end-to-end model-driven cropping architecture, comprising two interconnected modules: a coarse and a fine segmentation module, linked via a cropping layer. Both modules are designed to handle images of small, fixed input sizes. The first module processes a downscaled version of the input image. Its segmentation output determines the region of interest in the high-resolution image, which, along with the cropped initial segmentation, is fed into the fine segmentation module. Before being fine-tuned together, both networks are pre-trained as standard segmentation networks.\relax }{figure.caption.234}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Experiments in Clinical Dermatological Image Segmentation}{93}{subsection.235}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Results and Discussion}{93}{section*.236}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces Randomly chosen examples of out-of-sample segmentation results. The columns, from left to right, show the input image with the ground truth segmentation mask, the final output segmentation mask of our approach, the rough segmentation of our approach, and the output of a baseline U-Net model. The images are zoomed in on the lesion region.\relax }}{94}{figure.caption.237}\protected@file@percent }
-\newlabel{fig:visual}{{5.9}{94}{Randomly chosen examples of out-of-sample segmentation results. The columns, from left to right, show the input image with the ground truth segmentation mask, the final output segmentation mask of our approach, the rough segmentation of our approach, and the output of a baseline U-Net model. The images are zoomed in on the lesion region.\relax }{figure.caption.237}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces Results of our approach and the baseline model in terms of the Dice Coefficient (DSC) as well as the thresholded Jaccard index (Th. Jacc.) for various experiments. Results are shown in the form of mean $\pm $ standard deviation. The top two groups show in-sample performance within the DermIS and DermQuest datasets, while the bottom two groups show out-of-sample performance when trained on DermIS and tested on DermQuest, and vice-versa.\relax }}{95}{table.238}\protected@file@percent }
-\newlabel{tab:results}{{5.5}{95}{Results of our approach and the baseline model in terms of the Dice Coefficient (DSC) as well as the thresholded Jaccard index (Th. Jacc.) for various experiments. Results are shown in the form of mean $\pm $ standard deviation. The top two groups show in-sample performance within the DermIS and DermQuest datasets, while the bottom two groups show out-of-sample performance when trained on DermIS and tested on DermQuest, and vice-versa.\relax }{table.238}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces A box plot of Jaccard indices above or equal to 0.65 (above) and the number of Jaccard indices below 0.65 (below). The first two columns show in-sample results, while the last two columns show out-of-sample results for models trained on DermIS and tested on DermQuest and vice-versa.\relax }}{96}{figure.caption.239}\protected@file@percent }
-\newlabel{fig:box-plot}{{5.10}{96}{A box plot of Jaccard indices above or equal to 0.65 (above) and the number of Jaccard indices below 0.65 (below). The first two columns show in-sample results, while the last two columns show out-of-sample results for models trained on DermIS and tested on DermQuest and vice-versa.\relax }{figure.caption.239}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Conclusion}{97}{section.240}\protected@file@percent }
-\@writefile{tdo}{\contentsline {todo}{cite mostart paper}{97}{section*.241}\protected@file@percent }
+\newlabel{chap:reducing-input-size}{{5}{77}{Reducing Model Input Sizes with Model-Driven Crops}{chapter.210}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Model-Driven Image Cropping}{78}{section.213}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces A visual summary of our approach. (1) An image is uniformly downsampled from its original resolution. (2) A rough segmentation is predicted by a neural network, and the bounding box of each connected component is calculated. (3) The bounding boxes are scaled to the original image space and crops of the input image are taken in the original resolution and scaled to a common input size. (4) Each crop is segmented separately by a second neural network specifically trained on cropped images. These crops are fused to form a final segmentation in the original high resolution. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{78}{figure.caption.214}\protected@file@percent }
+\newlabel{fig:summary}{{5.1}{78}{A visual summary of our approach. (1) An image is uniformly downsampled from its original resolution. (2) A rough segmentation is predicted by a neural network, and the bounding box of each connected component is calculated. (3) The bounding boxes are scaled to the original image space and crops of the input image are taken in the original resolution and scaled to a common input size. (4) Each crop is segmented separately by a second neural network specifically trained on cropped images. These crops are fused to form a final segmentation in the original high resolution. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.214}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Cropping}{79}{section*.218}\protected@file@percent }
+\newlabel{cropping}{{5.1}{79}{Cropping}{section*.218}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Inference algorithm for one input image\relax }}{80}{algorithm.217}\protected@file@percent }
+\newlabel{alg:crop}{{1}{80}{Inference algorithm for one input image\relax }{algorithm.217}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Fine Segmentation and Fusion}{81}{section*.219}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Training the Fine Segmentation Network}{81}{section*.220}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Related work}{81}{subsection.221}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Detect-then-segment}{81}{section*.222}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Coarse-to-fine Segmentation}{82}{section*.223}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Non-uniform Downsampling}{82}{section*.224}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Other Approaches to Reducing Input Resolution}{83}{section*.225}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Results}{83}{subsection.226}\protected@file@percent }
+\newlabel{tab:hyperparams}{{5.1}{84}{The hyper-parameters used for each of the models in our experiments.\relax }{table.227}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces The hyper-parameters used for each of the models in our experiments.\relax }}{84}{table.227}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Datasets}{84}{section*.228}\protected@file@percent }
+\newlabel{datasets}{{5.1.2}{84}{Datasets}{section*.228}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Quantitative Assessment}{84}{section*.229}\protected@file@percent }
+\newlabel{tab:seg-then-seg-results}{{5.2}{85}{The results of our approach using U-Net as the underlying architecture.\relax }{table.230}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces The results of our approach using U-Net as the underlying architecture.\relax }}{85}{table.230}\protected@file@percent }
+\newlabel{tab:other-sota}{{5.3}{86}{A comparison of the Dice Score Coefficients of our approach using other underlying architectures at 4x and 2x downscaled images.\relax }{table.231}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces A comparison of the Dice Score Coefficients of our approach using other underlying architectures at 4x and 2x downscaled images.\relax }}{86}{table.231}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces The relationship between input dimensions and the mean Dice Score Coefficient (DSC) and recall for different datasets. The points are measured values from our experiments.\relax }}{86}{figure.caption.232}\protected@file@percent }
+\newlabel{fig:dsc-vs-size}{{5.2}{86}{The relationship between input dimensions and the mean Dice Score Coefficient (DSC) and recall for different datasets. The points are measured values from our experiments.\relax }{figure.caption.232}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Violin plots of Dice Score Coefficients of our approach compared to the baseline models at various input dimensions. The dashed lines represent quartiles of the distributions.\relax }}{87}{figure.caption.233}\protected@file@percent }
+\newlabel{fig:box-plots}{{5.3}{87}{Violin plots of Dice Score Coefficients of our approach compared to the baseline models at various input dimensions. The dashed lines represent quartiles of the distributions.\relax }{figure.caption.233}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Qualitative Assessment}{87}{section*.234}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Example outputs from the models for the cells dataset at various input sizes. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{88}{figure.caption.235}\protected@file@percent }
+\newlabel{fig:examples-cells}{{5.4}{88}{Example outputs from the models for the cells dataset at various input sizes. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.235}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Example outputs from the models for the polyp dataset at various input sizes. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{89}{figure.caption.236}\protected@file@percent }
+\newlabel{fig:examples-polyp}{{5.5}{89}{Example outputs from the models for the polyp dataset at various input sizes. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.236}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Example outputs from the models for the aorta dataset at various input sizes. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{89}{figure.caption.237}\protected@file@percent }
+\newlabel{fig:examples-aa}{{5.6}{89}{Example outputs from the models for the aorta dataset at various input sizes. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.237}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Computational Performance Characteristics}{90}{section*.238}\protected@file@percent }
+\newlabel{tab:performance}{{5.4}{90}{Performance characteristics of our approach compared to the baseline model with similar mean test Dice Score Coefficients.\relax }{table.239}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Performance characteristics of our approach compared to the baseline model with similar mean test Dice Score Coefficients.\relax }}{90}{table.239}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Mean per-input inference time across different input sizes for the U-Net-based models. \blx@tocontentsinit {5}\cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }}{90}{figure.caption.240}\protected@file@percent }
+\newlabel{fig:inf-time}{{5.7}{90}{Mean per-input inference time across different input sizes for the U-Net-based models. \cite {bencevicSegmentthenSegmentContextPreservingCropBased2023a}\relax }{figure.caption.240}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Discussion}{91}{subsection.241}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}An End-to-End Extension of Model-Driven Image Cropping}{92}{section.242}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}End-to-end Network Architecture and Training}{92}{subsection.243}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces An illustration of the end-to-end model-driven cropping architecture, comprising two interconnected modules: a coarse and a fine segmentation module, linked via a cropping layer. Both modules are designed to handle images of small, fixed input sizes. The first module processes a downscaled version of the input image. Its segmentation output determines the region of interest in the high-resolution image, which, along with the cropped initial segmentation, is fed into the fine segmentation module. Before being fine-tuned together, both networks are pre-trained as standard segmentation networks.\relax }}{92}{figure.caption.244}\protected@file@percent }
+\newlabel{fig:e2e-diagram}{{5.8}{92}{An illustration of the end-to-end model-driven cropping architecture, comprising two interconnected modules: a coarse and a fine segmentation module, linked via a cropping layer. Both modules are designed to handle images of small, fixed input sizes. The first module processes a downscaled version of the input image. Its segmentation output determines the region of interest in the high-resolution image, which, along with the cropped initial segmentation, is fed into the fine segmentation module. Before being fine-tuned together, both networks are pre-trained as standard segmentation networks.\relax }{figure.caption.244}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Experiments in Clinical Dermatological Image Segmentation}{93}{subsection.245}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Results and Discussion}{93}{section*.246}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces Randomly chosen examples of out-of-sample segmentation results. The columns, from left to right, show the input image with the ground truth segmentation mask, the final output segmentation mask of our approach, the rough segmentation of our approach, and the output of a baseline U-Net model. The images are zoomed in on the lesion region.\relax }}{94}{figure.caption.247}\protected@file@percent }
+\newlabel{fig:visual}{{5.9}{94}{Randomly chosen examples of out-of-sample segmentation results. The columns, from left to right, show the input image with the ground truth segmentation mask, the final output segmentation mask of our approach, the rough segmentation of our approach, and the output of a baseline U-Net model. The images are zoomed in on the lesion region.\relax }{figure.caption.247}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces Results of our approach and the baseline model in terms of the Dice Coefficient (DSC) as well as the thresholded Jaccard index (Th. Jacc.) for various experiments. Results are shown in the form of mean $\pm $ standard deviation. The top two groups show in-sample performance within the DermIS and DermQuest datasets, while the bottom two groups show out-of-sample performance when trained on DermIS and tested on DermQuest, and vice-versa.\relax }}{95}{table.248}\protected@file@percent }
+\newlabel{tab:results}{{5.5}{95}{Results of our approach and the baseline model in terms of the Dice Coefficient (DSC) as well as the thresholded Jaccard index (Th. Jacc.) for various experiments. Results are shown in the form of mean $\pm $ standard deviation. The top two groups show in-sample performance within the DermIS and DermQuest datasets, while the bottom two groups show out-of-sample performance when trained on DermIS and tested on DermQuest, and vice-versa.\relax }{table.248}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces A box plot of Jaccard indices above or equal to 0.65 (above) and the number of Jaccard indices below 0.65 (below). The first two columns show in-sample results, while the last two columns show out-of-sample results for models trained on DermIS and tested on DermQuest and vice-versa.\relax }}{96}{figure.caption.249}\protected@file@percent }
+\newlabel{fig:box-plot}{{5.10}{96}{A box plot of Jaccard indices above or equal to 0.65 (above) and the number of Jaccard indices below 0.65 (below). The first two columns show in-sample results, while the last two columns show out-of-sample results for models trained on DermIS and tested on DermQuest and vice-versa.\relax }{figure.caption.249}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Conclusion}{97}{section.250}\protected@file@percent }
+\@writefile{tdo}{\contentsline {todo}{Will cite the paper when it is published.}{97}{section*.251}\protected@file@percent }
 \@setckpt{Chapters/05_input_size_reduction}{
 \setcounter{page}{98}
 \setcounter{equation}{4}
@@ -81,7 +81,7 @@
 \setcounter{LT@chunks}{0}
 \setcounter{caption@flags}{2}
 \setcounter{continuedfloat}{0}
-\setcounter{@todonotes@numberoftodonotes}{2}
+\setcounter{@todonotes@numberoftodonotes}{3}
 \setcounter{parentequation}{0}
 \setcounter{KVtest}{0}
 \setcounter{subfigure}{0}
@@ -108,7 +108,7 @@
 \setcounter{citetotal}{0}
 \setcounter{multicitecount}{0}
 \setcounter{multicitetotal}{0}
-\setcounter{instcount}{403}
+\setcounter{instcount}{359}
 \setcounter{maxnames}{3}
 \setcounter{minnames}{1}
 \setcounter{maxitems}{3}
@@ -132,7 +132,7 @@
 \setcounter{parenlevel}{0}
 \setcounter{blx@maxsection}{5}
 \setcounter{blx@maxsegment@0}{0}
-\setcounter{blx@sectionciteorder@0}{4}
+\setcounter{blx@sectionciteorder@0}{0}
 \setcounter{mincomprange}{10}
 \setcounter{maxcomprange}{100000}
 \setcounter{mincompwidth}{1}
@@ -215,21 +215,20 @@
 \setcounter{smartand}{1}
 \setcounter{bbx:relatedcount}{0}
 \setcounter{bbx:relatedtotal}{0}
-\setcounter{Item}{18}
+\setcounter{Item}{28}
 \setcounter{Hfootnote}{1}
-\setcounter{bookmark@seq@number}{67}
+\setcounter{bookmark@seq@number}{66}
 \setcounter{lstnumber}{1}
 \setcounter{section@level}{1}
 \setcounter{lstlisting}{0}
-\setcounter{blx@sectionciteorder@2}{113}
-\setcounter{blx@sectionciteorder@4}{126}
-\setcounter{blx@sectionciteorder@5}{49}
-\setcounter{blx@sectionciteorder@6}{5}
 \setcounter{blx@maxsegment@1}{0}
 \setcounter{blx@sectionciteorder@1}{49}
 \setcounter{blx@maxsegment@2}{0}
+\setcounter{blx@sectionciteorder@2}{97}
 \setcounter{blx@maxsegment@3}{0}
 \setcounter{blx@sectionciteorder@3}{49}
 \setcounter{blx@maxsegment@4}{0}
+\setcounter{blx@sectionciteorder@4}{113}
 \setcounter{blx@maxsegment@5}{0}
+\setcounter{blx@sectionciteorder@5}{44}
 }

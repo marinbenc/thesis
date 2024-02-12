@@ -1,0 +1,25 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Approximate Hounsfield values of various tissues \blx@tocontentsinit {2}\cite {fosbinder2011essentials, kamalianComputedTomographyImaging2016}.\relax }}{7}{table.41}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Results of our proposed approaches for different tasks for three different neural network architectures. The Cartesian network is the network trained on Cartesian images. ``GT centers'' refers to obtaining a polar origin from the ground-truth labels and segmentation using the polar network.``Cartesian centers'' refers to predicting the polar origins from the Cartesian network and then performing segmentation using the polar network. ``Model centers'' refers to using the centerpoint predictor to obtain polar origins. (Continued on the next page.)\relax }}{54}{table.179}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Results of our proposed approaches (continued).\relax }}{55}{table.180}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces A comparison between our method (approach with best results) and the state of the art on the same datasets.\relax }}{56}{table.181}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Ablation study of our approach for the polyp dataset.\relax }}{60}{table.191}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces A summary of the mean segmentation results of our experiments. \textit {Non-polar} are the results of the U-Net trained using cartesian images. \textit {Polar + GT centers} are the results of the U-Net trained on polar images, using ground-truth connected component centers during inference, as an example of the best case possible results. \textit {Polar + NP centers} are the results when running inference on the polar model using center points obtained from the non-polar model predictions. *Our proposed method.\relax }}{65}{table.205}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces A comparison of our approach with results reported in papers describing deep learning-based aorta segmentation methods. Note that the datasets used for obtaining the results are not the same. $n$ is the number of cases used to obtain the evaluation.\relax }}{67}{table.208}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces The hyper-parameters used for each of the models in our experiments.\relax }}{76}{table.227}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces The results of our approach using U-Net as the underlying architecture.\relax }}{77}{table.230}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces A comparison of the Dice Score Coefficients of our approach using other underlying architectures at 4x and 2x downscaled images.\relax }}{78}{table.231}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Performance characteristics of our approach compared to the baseline model with similar mean test Dice Score Coefficients.\relax }}{82}{table.239}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Results of our approach and the baseline model in terms of the Dice Coefficient (DSC) as well as the thresholded Jaccard index (Th. Jacc.) for various experiments. Results are shown in the form of mean $\pm $ standard deviation. The top two groups show in-sample performance within the DermIS and DermQuest datasets, while the bottom two groups show out-of-sample performance when trained on DermIS and tested on DermQuest, and vice-versa.\relax }}{88}{table.248}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Mean results of the cross-validation. The Corr. value is the Pearson correlation between the total number of EAT pixels for each slice of the validation dataset ($p<0.0001$).\relax }}{96}{table.266}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces A comparison of our approach with other deep-learning-based approaches for EAT segmentation.\relax }}{97}{table.269}%

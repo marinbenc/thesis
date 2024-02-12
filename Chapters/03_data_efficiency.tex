@@ -36,6 +36,13 @@ We will generate several $(x_i, y_i)$ pairs and apply the previously discussed l
  \caption{A simulated example of heart disease risk prediction using simple linear regression. The plots on the right show how the approximated function depends on the sample size.\label{fig:t1-t2-example}}
 \end{figure}
 
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=\columnwidth]{images/3/heart_disease_risk_samples_degrees}
+ \caption{Fitting a polygonal function of various degrees on three different sample sizes.}
+ \label{fig:reg-deg-2}
+\end{figure}
+
 The simulation with only three points clearly demonstrates a mismatch between the approximated and underlying functions. This discrepancy is known as \textbf{overfitting}. Overfitting occurs when the model is overly influenced by the specific sample of data, particularly the noise, and fails to generalize to new, unseen examples. As the number of samples increases, the approximated function aligns more closely with the underlying one. However, even with 20 measurements, there is a notable difference between the approximated and underlying functions. The underlying function is a non-linear cosine function. No matter how many data points we use, a line cannot perfectly approximate this non-linear function. This is an example of \textbf{underfitting}, where the model lacks sufficient parameters to capture the complexity of the underlying function.
 
 To address underfitting, a more complex model is required, meaning we need a broader class of functions for optimization. Our current regression can be viewed as fitting a polynomial function to the dataset. Initially, we have employed polynomials of degree 1 — lines. We can generalize our model to an $n$-degree polynomial:
@@ -45,13 +52,6 @@ To address underfitting, a more complex model is required, meaning we need a bro
 \end{equation}
 
 To increase our function class, we will choose a larger polynomial degree and again minimize the mean squared distance to obtain $\theta_n$ through $\theta_0$. By increasing the degree we are increasing the complexity of the model and the model will be able to represent more complex underlying functions. We can observe what happens when we choose degrees 2, 3, or 5 in \figref{fig:reg-deg-2}.
-
-\begin{figure}[h]
- \centering
- \includegraphics[width=\columnwidth]{images/3/heart_disease_risk_samples_degrees}
- \caption{Fitting a polygonal function of various degrees on three different sample sizes.}
- \label{fig:reg-deg-2}
-\end{figure}
 
 In the case with 10 measurements, we observe that the approximated polynomial with $n = 2$ follows the underlying function somewhat well. However, as we increase the degree the function quickly begins to overfit. This experiment demonstrates that the likelihood of overfitting increases with model complexity. Yet, we need complex models to approximate complex functions.
 
