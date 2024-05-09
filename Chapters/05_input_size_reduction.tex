@@ -43,13 +43,13 @@ Given $N$ connected components of $M_{rough}$, a set of bounding boxes $\{b_i\},
 The crops are used to generate a set of fine segmentation masks $Y_f$ using:
 
 \begin{equation}
-Y_f = \{Y_{fi}: Y_{fi} = g_{\phi_2}(C_i(I_i))\},\! i \in [1..N],
+Y_f = \{Y_{fi}: Y_{fi} = g_{\phi_2}(C_i(I_i)), i \in 1..N\},
 \end{equation}
 
 where $g_{\phi_2}$ is a CNN of the same architecture as $g_{\phi_1}$ and size $S \times S$, parameterized by $\phi_2$, and $C_i$ is a scaling operation from the width and height of $I_i$ to $S \times S$. A final segmentation $y$ is formed using:
 
 \begin{equation}
-y = max(\{(T_i \circ C^{-1}_i)(Y_{fi})\},\! i \in [1..N],
+y = max(\{(T_i \circ C^{-1}_i)(Y_{fi}), i \in 1..N\}),
 \end{equation}
 
 where $y$ is the resulting segmentation formed as the maximum value in all of the fine segmentations, transformed to their corresponding regions in $W \times H$ space. This process is described in more detail in Algorithm \ref{alg:crop}. 
@@ -105,7 +105,7 @@ The cropping procedure is as follows. First, a bounding box fully encompassing e
 
 The box is then squared, i.e. its height and width are set to the larger of the two dimensions. The box is also shifted (maintaining its width and height) to be fully inside the region of the image. Finally, the bounding box is used as a region to crop the original high-resolution image. The rough segmentation sometimes results in noisy regions, so each crop whose width or height is less than 5 pixels is discarded.
 
-\clearpage
+\pagebreak
 
 \subsubsection{Fine Segmentation and Fusion}
 
@@ -183,7 +183,7 @@ This section briefly describes the datasets used in our experiments as well as t
 
 \subsubsection{Quantitative Assessment}
 
-The results of our experiments are shown in Table \ref{tab:seg-then-seg-results}. Our approach, using low input sizes, results in segmentations on par or better than baseline models trained on larger input sizes using downscaled images. This is especially apparent at large downscaling factors of 4 and more, where the baseline models quickly deteriorate in their performance but our models were still able to achieve results that are close to those on full-size images. The biggest improvement is seen in terms of recall. For instance, on the 4x downscaled cells dataset, our approach leads to a 4.3 times larger recall. Likewise, for the polyp images, the recall improves from 0.039 to 0.799, a 20 times improvement. Recall is especially important in medical image segmentation since the cost of false negatives can often far outweigh the cost of false positives.
+The results of our experiments are shown in Table \ref{tab:seg-then-seg-results}. Our approach, using low input sizes, results in segmentation DSC on par or better than baseline models trained on larger input sizes using downscaled images. This is especially apparent at large downscaling factors of 4 and more, where the baseline models quickly deteriorate in their performance but our models were still able to achieve results that are close to those on full-size images. The biggest improvement is seen in terms of recall. For instance, on the 4x downscaled cells dataset, our approach leads to a 4.3 times larger recall. Likewise, for the polyp images, the recall improves from 0.039 to 0.799, a 20 times improvement. Recall is especially important in medical image segmentation since the cost of false negatives can often far outweigh the cost of false positives.
 
 \begin{table}[H]
 \caption{The results of our approach using U-Net as the underlying architecture.\label{tab:seg-then-seg-results}}
@@ -352,19 +352,9 @@ This increase is explained by two key features of our approach. Firstly, croppin
 
 While these increases seem large in relative terms, it should be noted that in absolute terms the increases are in the order of magnitude of tens of milliseconds. We argue that such an increase in inference time does not limit the applicability of our approach in practical use cases.
 
-\subsection{Discussion}
-
-Downscaling is a common source of segmentation errors in neural networks. In this chapter, we present an approach to training neural networks that reduces downscaling by utilizing two neural networks and salient crops. We showed how training a second neural network on cropped image regions can improve segmentation performance on small input sizes with few downsides. Our approach improves segmentation metrics on downscaled images across different modalities and image sizes, especially in terms of recall. We showed that, while this approach increases inference time, it allows for training using much larger batch sizes while maintaining the same segmentation metrics.
-
 Note that the goal of our method is not to produce state-of-the-art segmentation results on high-resolution images. Instead, the goal is to allow training on heavily downscaled images without sacrificing segmentation performance.
 
-Our approach is a general preprocessing method and can be applied to a variety of different segmentation tasks regardless of the underlying architecture, so long as the two networks output a segmentation mask. In addition, the rough segmentation portion can be substituted with any method that produces a bounding box for each object. Aside from object detection methods, the bounding boxes could also be determined manually by an expert, as shown in \cite{Qiu2018}. While we did not evaluate our approach on 3D networks in this chapter, there is nothing in our approach that is specific to 2D images. Our approach can be extended to 3D images by using 3D neural network architectures and 3D bounding boxes for crop regions.
-
-In addition, our approach could greatly benefit from using transfer learning, as the two networks use the same underlying architecture. It is possible that the results could be further improved with good transfer learning datasets as well as more complex training regimes such as contrastive learning \cite{https://doi.org/10.48550/arxiv.2205.09723}.
-
-We believe that this approach will allow future researchers to train standard semantic segmentation neural networks on downscaled versions of very high-resolution images without sacrificing segmentation performance. We also show that these results are general across a variety of biomedical images and thus can be applied to a very large number of problems in this space.
-
-\clearpage
+This initial version of the approach presents a promising avenue for future research. One way to improve the approach is to use a single end-to-end trainable network. We describe this kind of extension in the next section.
 
 \section{An End-to-End Extension of Model-Driven Image Cropping}
 
@@ -462,7 +452,7 @@ The thresholded Jaccard index assumes that any segmentation with a Jaccard index
 
 Downscaling is a common source of segmentation errors in neural networks. In this chapter, we presented an approach to training neural networks that reduces downscaling by utilizing two neural networks and salient crops. We show how training a second neural network on cropped image regions can improve segmentation performance on small input sizes with few downsides. Our approach improves segmentation metrics on downscaled images across different modalities and image sizes, especially in terms of recall. We show that, while this approach increases inference time, it allows for training using much larger batch sizes while maintaining the same segmentation metrics. By utilizing transfer learning, we successfully addressed issues related to network convergence and provided an end-to-end extension of this method. Using our approach, we were able to reduce input sizes by at least half while retaining the same segmentation quality.
 
-A significant advantage of our approach is the reduced requirement for detailed segmentation labels in the rough segmentation stage. This stage only necessitates approximate object localization, achievable through simpler, potentially unsupervised methods like heuristic-based and traditional image processing techniques. Moreover, one can use weakly supervised training using pseudo-labels, instead of segmentation masks.
+A significant advantage of our approach is the reduced requirement for detailed segmentation labels in the rough segmentation stage. This stage only necessitates approximate object localization, achievable through simpler, potentially unsupervised methods like heuristic-based and traditional image processing techniques. Moreover, one can use weakly supervised training using pseudo-labels, instead of segmentation masks. While we did not evaluate our approach on 3D networks in this chapter, there is nothing in our approach that is specific to 2D images. Our approach can be extended to 3D images by using 3D neural network architectures and 3D bounding boxes for crop regions.
 
 However, our approach has certain limitations. Notably, from our experiments in datasets with large sample sizes, our method did not substantially improve segmentation quality. We speculate that our approach acts as a form of regularization, beneficial in scenarios where overfitting is a concern due to small sample sizes and high-capacity networks. This regularization may be redundant in cases with ample sample sizes. Nonetheless, the primary aim of our approach is to improve data efficiency in terms of both input size and sample size.
 

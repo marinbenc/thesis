@@ -13,7 +13,14 @@ Therefore, there is a need for methods that can effectively integrate depth info
 
 One potential solution to incorporate depth information into 2D segmentation networks is to condition the network's output on the slice depth by adding the slice depth coordinate as an additional input feature. This would give the network more information about the expected segmentation shape as a function of slice depth both globally and individually for that slice. However, integrating such scalar information into a fully convolutional network like U-Net is not straightforward.
 
-This problem has been solved in the field of image generation, where the condition is added as a separate input channel. For an image \(I \in \mathbb{R}^{W \times H \times C}\) and a condition vector \(x\), the image is augmented to include \(\lvert x \rvert\) additional channels. Each new channel \(c(i) \in \mathbb{R}^{W \times H}\) is constructed so that every pixel \(c(i)_{xy}\) equals \(x(i)\) for all \(x, y\) coordinates \cite{sahariaPhotorealisticTexttoImageDiffusion2022}.
+This problem has been solved in the field of image generation, where the condition is added as a separate input channel. For an image \(I \in \mathbb{R}^{W \times H \times C}\) and a condition vector \(x\), the image is augmented to include \(\lvert x \rvert\) additional channels. Each new channel \(c(i) \in \mathbb{R}^{W \times H}\) is constructed so that every pixel \(c(i)_{xy}\) equals \(x(i)\) for all \(x, y\) coordinates \cite{mirzaConditionalGenerativeAdversarial2014}. This approach is illustrated in \figref{fig:conditioned-image}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\columnwidth]{images/6/conditioned-image}
+    \caption{An illustration of conditioning an image by adding a channel to the image where each pixel is equal to the condition value.}
+    \label{fig:conditioned-image}
+\end{figure}
 
 Drawing inspiration from this, we propose a new and simple way of incorporating 3D information into 2D fully-convolutional neural networks for medical image segmentation. Consider a 3D scan comprising \(D\) slices:
 
@@ -120,7 +127,7 @@ The network provides better results for pericardium segmentation than EAT segmen
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\columnwidth]{images/6/examples.png}
+    \includegraphics[width=0.7\columnwidth]{images/6/examples.png}
     \caption{Examples of EAT predictions compared to the ground truth images. \cite{bencevicEpicardialAdiposeTissue2021}}
     \label{fig:examples}
 \end{figure}
@@ -129,7 +136,7 @@ The Bland-Altman analysis of our method is presented in \figref{fig:corr}. The a
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.65\columnwidth]{images/6/blaltman.jpg}
+    \includegraphics[width=0.75\columnwidth]{images/6/blaltman.jpg}
     \caption{The Bland-Altman analysis of the number of pixels predicted as EAT on each slice of the test dataset for each fold. The dashed lines indicate a 95\% confidence interval. \cite{bencevicEpicardialAdiposeTissue2021}}
     \label{fig:corr}
 \end{figure}
@@ -150,8 +157,6 @@ Additionally, we compare our results to using a U-Net to directly segment the pe
 \end{tabularx}
 \label{tab:comparison}
 \end{table}
-
-\clearpage
 
 \section{Conclusion}\label{conclusion}
 
