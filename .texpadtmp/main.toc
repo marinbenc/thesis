@@ -96,7 +96,7 @@
 \contentsline {subsubsection}{Non-uniform Downsampling}{85}{section*.221}%
 \contentsline {subsubsection}{Other Approaches to Reducing Input Resolution}{86}{section*.222}%
 \contentsline {subsection}{\numberline {5.1.2}Results}{86}{subsection.223}%
-\contentsline {subsubsection}{Datasets}{86}{section*.225}%
+\contentsline {subsubsection}{Datasets}{87}{section*.225}%
 \contentsline {subsubsection}{Quantitative Assessment}{87}{section*.226}%
 \contentsline {subsubsection}{Qualitative Assessment}{91}{section*.231}%
 \contentsline {subsubsection}{Computational Performance Characteristics}{92}{section*.235}%

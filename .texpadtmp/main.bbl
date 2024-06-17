@@ -4149,6 +4149,39 @@
       \endverb
       \keyw{Computer Science - Computer Vision and Pattern Recognition}
     \endentry
+    \entry{mai2022sample}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=b16ad5fbf6efa6f2d2f4984c1c160910}{%
+           family={Mai},
+           familyi={M\bibinitperiod},
+           given={Vincent},
+           giveni={V\bibinitperiod}}}%
+        {{hash=dcd2aee4d42cd0fef5aed97d05ab0cd1}{%
+           family={Mani},
+           familyi={M\bibinitperiod},
+           given={Kaustubh},
+           giveni={K\bibinitperiod}}}%
+        {{hash=f3cc60b9900a00fd78f1896a99c71bf5}{%
+           family={Paull},
+           familyi={P\bibinitperiod},
+           given={Liam},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{afb923097aafdca0c1b27e45a029869b}
+      \strng{fullhash}{afb923097aafdca0c1b27e45a029869b}
+      \strng{bibnamehash}{afb923097aafdca0c1b27e45a029869b}
+      \strng{authorbibnamehash}{afb923097aafdca0c1b27e45a029869b}
+      \strng{authornamehash}{afb923097aafdca0c1b27e45a029869b}
+      \strng{authorfullhash}{afb923097aafdca0c1b27e45a029869b}
+      \field{labelalpha}{MMP22}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{International Conference on Learning Representations}
+      \field{title}{Sample Efficient Deep Reinforcement Learning via Uncertainty Estimation}
+      \field{year}{2022}
+    \endentry
     \entry{monaiconsortiumMONAIMedicalOpen2023}{misc}{}
       \name{author}{1}{}{%
         {{hash=62c18ee0018df1a9a368f361ed4fb933}{%
@@ -4305,6 +4338,67 @@
       \range{pages}{16}
       \verb{doi}
       \verb 10.1007/978-3-319-46466-4_5
+      \endverb
+    \endentry
+    \entry{nikoladosAccuracyDataEfficiency2022}{article}{}
+      \name{author}{5}{}{%
+        {{hash=f5c63e55755464fa5e6945d87e45e771}{%
+           family={Nikolados},
+           familyi={N\bibinitperiod},
+           given={Evangelos-Marios},
+           giveni={E\bibinithyphendelim M\bibinitperiod}}}%
+        {{hash=2d8ceea8b34616f44813b23adb027455}{%
+           family={Wongprommoon},
+           familyi={W\bibinitperiod},
+           given={Arin},
+           giveni={A\bibinitperiod}}}%
+        {{hash=049acd5eec421c88c65716c3d59b9397}{%
+           family={Aodha},
+           familyi={A\bibinitperiod},
+           given={Oisin\bibnamedelima Mac},
+           giveni={O\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=75ace771360eddb8b6cd0a62929b92df}{%
+           family={Cambray},
+           familyi={C\bibinitperiod},
+           given={Guillaume},
+           giveni={G\bibinitperiod}}}%
+        {{hash=f0bbae607dd90278830cd61172a3f009}{%
+           family={Oyarzún},
+           familyi={O\bibinitperiod},
+           given={Diego\bibnamedelima A.},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{5a3e749bb8a305ebff390b4ca164a15f}
+      \strng{fullhash}{05b63d8e6c421b20273157f739553894}
+      \strng{bibnamehash}{05b63d8e6c421b20273157f739553894}
+      \strng{authorbibnamehash}{05b63d8e6c421b20273157f739553894}
+      \strng{authornamehash}{5a3e749bb8a305ebff390b4ca164a15f}
+      \strng{authorfullhash}{05b63d8e6c421b20273157f739553894}
+      \field{labelalpha}{Nik+22}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract Synthetic biology often involves engineering microbial strains to express high-value proteins. Thanks to progress in rapid DNA synthesis and sequencing, deep learning has emerged as a promising approach to build sequence-to-expression models for strain optimization. But such models need large and costly training data that create steep entry barriers for many laboratories. Here we study the relation between accuracy and data efficiency in an atlas of machine learning models trained on datasets of varied size and sequence diversity. We show that deep learning can achieve good prediction accuracy with much smaller datasets than previously thought. We demonstrate that controlled sequence diversity leads to substantial gains in data efficiency and employed Explainable AI to show that convolutional neural networks can finely discriminate between input DNA sequences. Our results provide guidelines for designing genotype-phenotype screens that balance cost and quality of training data, thus helping promote the wider adoption of deep learning in the biotechnology sector.}
+      \field{issn}{2041-1723}
+      \field{journaltitle}{Nature Communications}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{number}{1}
+      \field{title}{Accuracy and Data Efficiency in Deep Learning Models of Protein Expression}
+      \field{urlday}{17}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{13}
+      \field{year}{2022}
+      \field{urldateera}{ce}
+      \field{pages}{7755}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s41467-022-34902-5
+      \endverb
+      \verb{file}
+      \verb /Users/marinbenc/Zotero/storage/E7EXUIAX/Nikolados et al_2022_Accuracy and data efficiency in deep learning models of protein expression.pdf
       \endverb
     \endentry
     \entry{shalev-shwartzUnderstandingMachineLearning2014}{book}{}

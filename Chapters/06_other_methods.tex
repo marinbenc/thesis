@@ -87,7 +87,7 @@ We apply several data preprocessing steps on the original dataset to achieve bet
 
 Furthermore, we utilize heavy data augmentation to increase model generalizability. In real-world distributions, anatomical structures can differ drastically from one person to the next. To simulate these differences, we add a random chance of augmenting each input image during the training phase. Each input image has a 50\% chance for a horizontal flip, and a 30\% chance of a random combination of affine image transformations, including (1) a translation of max. 6.25\% of the image's width, (2) a scaling of max. 10\% of the image's scale, and (3) a rotation of a max. 45 degrees. Additionally, each input image has a 20\% chance of a non-linear mesh deform. Examples of augmented images are shown in \figref{fig:augment}.
 
-\begin{figure}[b!]
+\begin{figure}[t!]
 \center
 \includegraphics[width=\textwidth]{images/6/augmentation.png}
 \caption{Different random augmentation examples of the same input image. \cite{bencevicEpicardialAdiposeTissue2021}}
@@ -96,15 +96,11 @@ Furthermore, we utilize heavy data augmentation to increase model generalizabili
 
 \subsection{Model Training}
 
-The neural network is implemented and trained using PyTorch 1.7.1 on an NVIDIA GeForce RTX 3080 GPU. The networks were trained for 200 epochs, with a checkpoint mechanism after each epoch. We select the model with the best validation loss during training. In our experiments, the model converged around epoch 100 after 5 minutes. The training was done using the Adam optimizer with a learning rate of 0.001. The used batch size was 8. We used a manual random seed value of 42 for all experiments. We use 2-fold per-patient cross-validation for all experiments. Each model was trained on the slices of 10 patients and validated on the remaining 10 patients.
+The neural network is implemented and trained using PyTorch 1.7.1 on an NVIDIA GeForce RTX 3080 GPU. The networks were trained for 200 epochs, with a checkpoint mechanism after each epoch. We select the model with the best validation loss during training. In our experiments, the model converged around epoch 100 after 5 minutes. The training was done using the Adam optimizer with a learning rate of 0.001. The used batch size was 8. These hyperparameters were chosen based on the resulting validation Dice Similarity Coefficient of the model. We arbitrarily choose a manual random seed value of 42 for all experiments to increase reproducibility. We use 2-fold per-patient cross-validation for all experiments. Each model was trained on the slices of 10 patients and validated on the remaining 10 patients.
 
 \section{Experiments and Results}\label{experiment}
 
 The results in this section are evaluated on the two cross-validation folds and averaged across folds. Segmentation quality is evaluated using the Dice Similarity Coefficient (DSC) and the Jaccard Index. We analyze the model's quantification quality with a Bland-Altman analysis \cite{MARTINBLAND1986307} as well as with the Pearson correlation coefficient. To calculate the Pearson correlation and to perform the Bland-Altman analysis, we threshold all segmented pericardium regions to obtain the EAT segmentation results and calculate the number of pixels labeled as EAT on each image. We also calculate the number of EAT pixels on the ground truth images. The pixel counts are used as a proxy for volume measurement, as the EAT volume of a patient is proportional to the number of segmented EAT pixels in the patient's CT scan.
-
-\subsection{Results}
-
-Our method's mean DSC and correlation results are presented in Table \ref{tab:results}. 
 
 \begin{table}[b!]
 \renewcommand{\arraystretch}{1.4}
@@ -119,7 +115,7 @@ Our method's mean DSC and correlation results are presented in Table \ref{tab:re
 \label{tab:results}
 \end{table}
 
-The network provides better results for pericardium segmentation than EAT segmentation, which is expected given the pericardium's smoother shape. The DSC for EAT indicates that our method performs slightly worse inter-observer variability, but still achieves good segmentation in a fraction of the time needed for manual segmentation. The precision and recall have similar values both for EAT and the pericardium, showing a good potential for future use to measure EAT volume. Examples of predictions from our model are presented in \figref{fig:examples}.
+Our method's mean DSC and correlation results are presented in Table \ref{tab:results}. The network provides better results for pericardium segmentation than EAT segmentation, which is expected given the pericardium's smoother shape. The DSC for EAT indicates that our method performs slightly worse inter-observer variability, but still achieves good segmentation in a fraction of the time needed for manual segmentation. The precision and recall have similar values both for EAT and the pericardium, showing a good potential for future use to measure EAT volume. Examples of predictions from our model are presented in \figref{fig:examples}.
 
 \begin{figure}[b!]
     \centering
@@ -156,4 +152,4 @@ Additionally, we compare our results to using a U-Net to directly segment the pe
 
 \section{Conclusion}\label{conclusion}
 
-Our approach achieved a mean Dice Similarity Coefficient (DSC) of 0.8574 and a correlation coefficient of 0.8864. Although these figures fall short of the state-of-the-art, it's important to note that our dataset underwent relabeling to minimize noise and errors, making direct comparisons to results from the original dataset challenging. In addition, our method uses a more direct neural network with fewer preprocessing steps and fewer parameters than existing deep-learning methods (\cite{Commandeur2018, Li2019, he2020}), leading to lower inference times.  We demonstrate the effectiveness of segmenting the pericardium region as a proxy for directly segmenting epicardial adipose tissue (EAT), leveraging the simpler task of learning the smooth contour of the pericardium compared to the more complex, irregular distribution of EAT. Furthermore, we explore incorporating depth information into an encoder-decoder neural network without resorting to 3D volume patch training. By adding slice depth as an extra channel we have improved segmentation performance without changing the underlying architecture and while maintaining the ability to use transfer learning from 2D datasets. The method presented in this chapter was published in \cite{bencevicEpicardialAdiposeTissue2021}.
+Our approach achieved a mean Dice Similarity Coefficient (DSC) of 0.8574 and a correlation coefficient of 0.8864. Although these figures fall short of the state-of-the-art, it is important to note that our dataset underwent relabeling to minimize noise and errors, making direct comparisons to results from the original dataset challenging. In addition, our method uses a more direct neural network with fewer preprocessing steps and fewer parameters than existing deep-learning methods (\cite{Commandeur2018, Li2019, he2020}), leading to lower inference times.  We demonstrate the effectiveness of segmenting the pericardium region as a proxy for directly segmenting epicardial adipose tissue (EAT), leveraging the simpler task of learning the smooth contour of the pericardium compared to the more complex, irregular distribution of EAT. Furthermore, we explore incorporating depth information into an encoder-decoder neural network without resorting to 3D volume patch training. By adding slice depth as an extra channel we have improved segmentation performance without changing the underlying architecture and while maintaining the ability to use transfer learning from 2D datasets. The method presented in this chapter was published in \cite{bencevicEpicardialAdiposeTissue2021}.

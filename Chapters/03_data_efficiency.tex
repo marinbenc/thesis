@@ -3,6 +3,8 @@
 \chapter{Data Efficiency in Neural Network-Based Image Segmentation}
 \label{chap:data-efficiency}
 
+In this chapter, we will introduce the concept of data or sample efficiency, as well as how it relates to various factors such as model complexity, problem complexity and sample size. In this thesis, we define data efficiency as a measure of the amount of training data needed for a model to adequately perform its task. While somewhat loosely defined, this term is widely used in the deep learning literature \cite{nikoladosAccuracyDataEfficiency2022}. In reinforcement learning, the term ``sample efficiency'' is commonly used to denote the same concept \cite{mai2022sample}. However, in the context of deep learning models, both the number of samples as well as the number of features in each sample matter to how well a model performs. Therefore, we will prefer the term data efficiency to encompass both the number of samples and features.
+
 Above all, the accuracy of neural networks is governed by three factors: problem complexity, model complexity, and sample size. Each of these factors contributes to accuracy in different ways and they have complex interdependent relationships. We need to understand these relationships to grasp the concept of data efficiency.  In this chapter, we will show how the three factors impact model error by examining neural networks as function approximators.
 
 Consider a machine learning scenario where we estimate the 10-year risk of heart disease based on age. Here, some underlying function maps age to heart disease risk, based on a complex physical process that is almost impossible to understand and model. Our only recourse is to collect a set of data points and try to approximate the underlying function. Our goal is to iteratively search for a function that minimizes some criterion that measures the discrepancy between the function and our collected data points.
@@ -11,9 +13,9 @@ One can construct an infinite number of functions that fit a set of data points 
 \begin{equation}
 	f(x) = \theta_1 x + \theta_0.
 \end{equation}
-In this equation, $f(x)$ represents our regression model. The objective is to determine the optimal value of $\theta = \{ \theta_1, \theta_2 \}$ that most accurately represents the collected data pairs $(x_i, y_i)$. This can be achieved by minimizing the mean squared distance between the line and each data point:
+In this equation, $f(x)$ represents our regression model. The objective is to determine the optimal value of $\theta = \{ \theta_1, \theta_2 \}$ that most accurately represents the collected data pairs $(x_i, y_i)$. This can be achieved by minimizing the squared distance between the line and each data point:
 \begin{equation}
-	\min_{\theta} \sum_{i=1}^N (y_i - f(x_i))^2.
+	\min_{\theta} \sum_{i=1}^N \lvert y_i - f(x_i) \rvert^2.
 \end{equation}
 
 We will conduct a simulated experiment. We will construct an underlying function as a cosine function with an added Gaussian noise:
@@ -76,9 +78,7 @@ In this thesis, we refer to this basic technique as ``simple transfer learning''
 
 	\subsection{Simple Transfer Learning}
 	
-	Simple transfer learning is a prevalent technique in medical image segmentation. Typically, segmentation neural networks in this field are initialized with weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet comprises a collection of natural images, which significantly differ in distribution from medical images. As a result, initializing with ImageNet-trained weights doesn't usually enhance accuracy but it does make the network converge faster. This is because such initialization 'skips' the phase of learning fundamental image features that are common across various types of images, including medical ones. \figref{fig:stl-diagram} illustrates this process.
-	
-Simple transfer learning is used extensively in medical image segmentation. Segmentation neural networks are commonly initialized using weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet is a dataset of natural images and its distribution is drastically different from medical images. Therefore, this initialization does not typically lead to increases in accuracy but can make the network converge faster as it ``skips'' having to learn to detect base-level image features common to all images. This process is shown in \figref{fig:stl-diagram}.
+	Simple transfer learning is a prevalent technique in medical image segmentation. Typically, segmentation neural networks in this field are initialized with weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet comprises a collection of natural images, which significantly differ in distribution from medical images. As a result, initializing with ImageNet-trained weights does not usually enhance accuracy but it does make the network converge faster. This is because such initialization `skips'' the phase of learning fundamental image features common across various types of images, including medical ones. \figref{fig:stl-diagram} illustrates this process.
 
 \begin{figure}[t!]
  \centering

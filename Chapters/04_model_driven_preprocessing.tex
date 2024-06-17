@@ -37,10 +37,10 @@ A commonly used example of $\mathcal{T}$ is the polar transform. In the two-dime
 \begin{equation}
     \begin{aligned}
 	r =& \sqrt{(x_0 - c_0)^2 + (x_1 - c_1)^2},\\
-	\theta =& arctan(x_1 - c_1, x_0 - c_0)
+	\theta =& \mathrm{atan2}(x_1 - c_1, x_0 - c_0)
     \end{aligned},
 \end{equation}
-where $arctan(x, y)$ is the two-argument arcus tangent function, defined as the angle between the vector $(x, y) \in \mathbb{R}^2 \backslash\{0\}$ and the positive x-axis.
+where $\mathrm{arctan}(x, y)$ is the two-argument arcus tangent function, defined as the angle between the vector $(x, y) \in \mathbb{R}^2 \backslash\{0\}$ and the positive x-axis.
 
 The polar transform effectively converts a circular decision boundary into a linear one. This transformation enables linear separability in our example dataset, which then requires only a single neuron in the second layer for effective classification. This is demonstrated in \figref{fig:polar_dataset_neurons}.
 
@@ -83,7 +83,7 @@ The transformation function \(\mathcal{T}\) can vary, encompassing affine transf
 \end{equation}
 where $M(I)$ is the resulting segmentation mask for image $I$, $F_{seg}$ is the segmentation neural network. 
 
-The effectiveness of preprocessing is highly dependent on the appropriate choice of \(\phi\), as illustrated with the polar transform. It's also important to note that \(\phi\) is specific to each image: the origin, scale, location, and distribution of objects differ across images. Acknowledging this, we propose training a model to estimate the optimal \(\phi\) for a given image:
+The effectiveness of preprocessing is highly dependent on the appropriate choice of \(\phi\), as illustrated with the polar transform. It is also important to note that \(\phi\) is specific to each image: the origin, scale, location, and distribution of objects differ across images. Acknowledging this, we propose training a model to estimate the optimal \(\phi\) for a given image:
 \begin{equation}
 	\phi(I) = F_{\mathcal{T}}(I; \theta_{\mathcal{T}}),
 \end{equation}
@@ -103,7 +103,7 @@ The function $f_\phi$ is hand-constructed using knowledge of the transformation.
 	\item \textbf{Translation}: The translation parameters, in terms of \( x \) and \( y \) shifts, can be calculated by measuring the distance between the object's center and a desired reference point.
 \end{itemize}
 
-It's important to note that \( M_\phi(I) \) doesn't have to be a conventional segmentation mask. Depending on the requirements for predicting optimal transformation parameters, we can create pseudo-labels that are more suitable for the task. For example,
+It is important to note that \( M_\phi(I) \) does not have to be a conventional segmentation mask. Depending on the requirements for predicting optimal transformation parameters, we can create pseudo-labels that are more suitable for the task. For example,
  in cases where transformation parameters are contingent on an object's centroid, \( M_\phi(I) \) could be modeled as a heatmap with its focus on the object's central point. This approach enables the network to learn to predict the centroids of objects rather than their boundaries. Consequently, \( f_\phi \) can determine the object's centroid by locating the pixel with the highest intensity in \( M_\phi(I) \).
 
 Using this approach, data efficiency is achieved by reducing the total function class size when compared to a standard segmentation neural network. We do so by using two smaller neural networks instead of one large one. Since the decision boundaries of the preprocessed images are simplified, the segmentation network needs fewer parameters to model them. Transformation parameters often have a much smaller dimensionality than the segmentation mask, and therefore the network predicting transformation parameters can naturally use much fewer parameters.
@@ -178,7 +178,7 @@ The polar transform's potential for simplifying the segmentation of images with 
 Given a polar origin $(c_x, c_y)$ of a Cartesian image $I(x, y)$ of resolution $H \times W$, we obtain each point $(r, \vartheta)$ of the polar transformed image $I'(r, \vartheta)$ as:
   \begin{equation}
     \begin{aligned}
-      r &= \frac{H}{2 \pi} \cdot arctan(x, y) [ \cdot 180 / \pi ], \\
+      r &= \frac{H}{2 \pi} \cdot \mathrm{atan2}(x, y) [ \cdot 180 / \pi ], \\
       \vartheta &= \frac{W}{\sqrt{(W / 2)^2 + (H / 2)^2}} \cdot \sqrt{x^2 + y^2}
     \end{aligned},
     \label{eq:polar-transform}
@@ -225,7 +225,7 @@ This section describes these methods, as well as methods to train the
 final segmentation model on the polar images.
       
 In each of our approaches, the final segmentation is done using a neural network trained on polar 
-transformations of the input images. In the rest of this paper, we refer to this network as the polar 
+transformations of the input images. In the rest of this section, we refer to this network as the polar 
 network. In all of the described approaches, the polar transformation is not part of the network architecture itself, but happens as a preprocessing step for the polar network.
 To transform each input image, the polar origin is determined as the center of mass of the 
 ground truth label for that image. The center of mass of an image $I(x, y)$ is calculated by first 
@@ -766,7 +766,7 @@ Polar + NP centers* & $0.932 \pm 0.027$ & $0.895 \pm 0.033$ & $0.915 \pm 0.040$ 
 
 To perform evaluation, we use 3-fold cross-validation on the 18 scans. For each fold, we train a polar and non-polar model using the slices of 12 CT scans and run inference on the slices of the remaining 6 scans. All results presented in this section are averaged across each CT scan and then across the three folds.
 
-A summary of our segmentation results is presented in \tabref{table:results}. Random examples of segmentation results are shown in \figref{fig:examples}. In the experiments in \ref{polar-paper} the polar networks achieve the best segmentation performance when using accurate center points during inference. As the accuracy of the center points goes down, so does the segmentation performance. The experiments in this paper follow the same pattern, the polar networks perform significantly better than the cartesian networks when using ground truth centers. However, even with less accurate centers obtained from initial rough segmentation by the non-polar network, the results yield only slightly lower Dice coefficients than when using ground-truth centers directly. The non-polar network can also be seen as a baseline model, and our approach results in a significant improvement over this baseline in all segmentation metrics.
+A summary of our segmentation results is presented in \tabref{table:results}. Random examples of segmentation results are shown in \figref{fig:examples}. In the experiments in \ref{polar-paper} the polar networks achieve the best segmentation performance when using accurate center points during inference. As the accuracy of the center points goes down, so does the segmentation performance. The experiments in this section follow the same pattern, the polar networks perform significantly better than the cartesian networks when using ground truth centers. However, even with less accurate centers obtained from initial rough segmentation by the non-polar network, the results yield only slightly lower Dice coefficients than when using ground-truth centers directly. The non-polar network can also be seen as a baseline model, and our approach results in a significant improvement over this baseline in all segmentation metrics.
 
 In some problems in medical imaging, e.g. segmenting cancerous tissues, a higher recall is beneficial since the cost of missing tissues can be very high \cite{tahaMetricsEvaluating3D2015}. A key advantage of our approach is that by fusing multiple predictions and using hysteresis thresholding the threshold value can be used to impact the precision--recall tradeoff. Our experiments show that the average per-patient pixel-level recall increased when compared to the baseline model.
 
