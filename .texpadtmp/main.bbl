@@ -804,6 +804,7 @@
       \strng{authorbibnamehash}{2a85c80bc3f0295a8beff4abfce838d7}
       \strng{authornamehash}{2a85c80bc3f0295a8beff4abfce838d7}
       \strng{authorfullhash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \field{extraname}{1}
       \field{labelalpha}{BHG21}
       \field{sortinit}{B}
       \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
@@ -819,6 +820,45 @@
       \verb{doi}
       \verb 10.1109/ELMAR52657.2021.9550936
       \endverb
+    \endentry
+    \entry{bencevicCropGuidedNeuralNetwork2024}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=84ca7406c65f195152055c9e9a496364}{%
+           family={Benčević},
+           familyi={B\bibinitperiod},
+           given={Marin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0b94e927d7867072d5ed0665dd88507c}{%
+           family={Habijan},
+           familyi={H\bibinitperiod},
+           given={Marija},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ce39cdee2bb4a806e4c06be2c787d0b1}{%
+           family={Galić},
+           familyi={G\bibinitperiod},
+           given={Irena},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{location}{2}{%
+        {Mostar, Bosnia}%
+        {Herzegovina}%
+      }
+      \strng{namehash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \strng{fullhash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \strng{bibnamehash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \strng{authorbibnamehash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \strng{authornamehash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \strng{authorfullhash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \field{extraname}{2}
+      \field{labelalpha}{BHG24}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{{{MOSTART2024}}: {{International Conference}} on {{Digital Transformation}} in {{Education}} and {{Artificial Intelligence Applications}}}
+      \field{month}{4}
+      \field{title}{Crop-{{Guided Neural Network Segmentation}} of {{High-Resolution Skin Lesion Images}}}
+      \field{year}{2024}
     \endentry
     \entry{choHowMuchData2016}{misc}{}
       \name{author}{5}{}{%
@@ -7056,6 +7096,44 @@
       \verb{doi}
       \verb 10.3390/s23020633
       \endverb
+    \endentry
+    \entry{bencevicCropGuidedNeuralNetwork2024}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=84ca7406c65f195152055c9e9a496364}{%
+           family={Benčević},
+           familyi={B\bibinitperiod},
+           given={Marin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0b94e927d7867072d5ed0665dd88507c}{%
+           family={Habijan},
+           familyi={H\bibinitperiod},
+           given={Marija},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ce39cdee2bb4a806e4c06be2c787d0b1}{%
+           family={Galić},
+           familyi={G\bibinitperiod},
+           given={Irena},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{location}{2}{%
+        {Mostar, Bosnia}%
+        {Herzegovina}%
+      }
+      \strng{namehash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \strng{fullhash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \strng{bibnamehash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \strng{authorbibnamehash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \strng{authornamehash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \strng{authorfullhash}{2a85c80bc3f0295a8beff4abfce838d7}
+      \field{labelalpha}{BHG24}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{{{MOSTART2024}}: {{International Conference}} on {{Digital Transformation}} in {{Education}} and {{Artificial Intelligence Applications}}}
+      \field{month}{4}
+      \field{title}{Crop-{{Guided Neural Network Segmentation}} of {{High-Resolution Skin Lesion Images}}}
+      \field{year}{2024}
     \endentry
     \entry{caicedoNucleusSegmentationImaging2019}{article}{}
       \name{author}{13}{}{%

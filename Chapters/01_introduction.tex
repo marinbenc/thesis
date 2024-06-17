@@ -33,7 +33,7 @@ Knowing that reducing network input sizes generally benefits data efficiency and
 
 \subsubsection{A new neural network architecture for high-resolution image segmentation that combines object detection in low-resolution images and segmentation in high-resolution images.}
 
-We expand upon our model-driven preprocessing techniques to make it end-to-end trainable. We do so by integrating a rough localization subnetwork with a segmentation subnetwork, connected via a cropping layer. The shared architecture between the two subnetworks allows us to use transfer learning to help the subnetworks converge. Additionally, pass information between the subnetworks to ensure gradient flow throughout the entire network. This integrated approach allows for the fine-tuning of the network as a whole, enhancing the robustness of each subnetwork to the potential inaccuracies of the other. We present this contribution in Chapter \ref{chap:reducing-input-size}. This contribution was published in a conference paper \todo{Will cite the paper when it is published.}.
+We expand upon our model-driven preprocessing techniques to make it end-to-end trainable. We do so by integrating a rough localization subnetwork with a segmentation subnetwork, connected via a cropping layer. The shared architecture between the two subnetworks allows us to use transfer learning to help the subnetworks converge. Additionally, pass information between the subnetworks to ensure gradient flow throughout the entire network. This integrated approach allows for the fine-tuning of the network as a whole, enhancing the robustness of each subnetwork to the potential inaccuracies of the other. We present this contribution in Chapter \ref{chap:reducing-input-size}. This contribution was published in a conference paper \cite{bencevicCropGuidedNeuralNetwork2024}.
 
 \subsubsection{A new method of embedding depth information in two-dimensional convolutional neural network input data.}
 
@@ -57,6 +57,7 @@ In the thesis, we show that using larger images necessitates higher-capacity mod
 	\item \cite{bencevicUsingPolarTransform2022a} \printpublication{bencevicUsingPolarTransform2022a}
 	\item \cite{bencevicSelfsupervisedLearningMeans2022} \printpublication{bencevicSelfsupervisedLearningMeans2022}
 	\item \cite{verchevalCounterfactualFunctionalConnectomes2023} \printpublication{verchevalCounterfactualFunctionalConnectomes2023}
+	\item \cite{bencevicCropGuidedNeuralNetwork2024} \printpublication{bencevicCropGuidedNeuralNetwork2024}
 \end{itemize}
 
 

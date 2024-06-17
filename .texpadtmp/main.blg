@@ -1,76 +1,76 @@
 [0] Config.pm:307> INFO - This is Biber 2.17
 [0] Config.pm:310> INFO - Logfile is '/Users/marinbenc/Projects/thesis/.texpadtmp/main.blg'
-[53] biber-darwin:340> INFO - === Mon Jun 17, 2024, 10:53:58
-[66] Biber.pm:418> INFO - Reading '/Users/marinbenc/Projects/thesis/.texpadtmp/main.bcf'
-[153] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[155] Biber.pm:972> INFO - Found 19 citekeys in bib section 1
-[155] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[160] Biber.pm:972> INFO - Found 32 citekeys in bib section 2
-[160] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[162] Biber.pm:972> INFO - Found 18 citekeys in bib section 3
-[162] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[168] Biber.pm:972> INFO - Found 32 citekeys in bib section 4
-[169] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[171] Biber.pm:972> INFO - Found 26 citekeys in bib section 5
-[171] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[174] Biber.pm:972> INFO - Found 23 citekeys in bib section 6
-[174] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[174] Biber.pm:972> INFO - Found 0 citekeys in bib section 7
-[174] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[216] Biber.pm:4383> INFO - Processing section 1
-[224] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 1
-[235] bibtex.pm:1713> INFO - LaTeX decoding ...
-[452] bibtex.pm:1518> INFO - Found BibTeX data source '/Users/marinbenc/Projects/thesis/example.bib'
-[662] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[662] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[662] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[662] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
-[683] Biber.pm:4383> INFO - Processing section 2
-[683] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 2
-[917] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[917] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[917] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[917] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
-[951] Biber.pm:4383> INFO - Processing section 3
-[951] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 3
-[1065] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[1066] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[1066] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[1066] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
-[1082] Biber.pm:4383> INFO - Processing section 4
-[1082] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 4
-[1358] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[1358] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[1358] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[1358] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
-[1395] Biber.pm:4383> INFO - Processing section 5
-[1395] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 5
-[1579] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[1579] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[1579] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[1579] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
-[1606] Biber.pm:4383> INFO - Processing section 6
-[1606] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 6
-[1758] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[1758] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[1758] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[1758] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
-[1782] bbl.pm:654> INFO - Writing '/Users/marinbenc/Projects/thesis/.texpadtmp/main.bbl' with encoding 'UTF-8'
-[1964] bbl.pm:757> INFO - Output to /Users/marinbenc/Projects/thesis/.texpadtmp/main.bbl
-[1964] Biber.pm:130> WARN - Duplicate entry key: 'info11020125' in file '/Users/marinbenc/Projects/thesis/example.bib', skipping ...
-[1964] Biber.pm:130> WARN - Duplicate entry key: 'liu2021Swin' in file '/Users/marinbenc/Projects/thesis/example.bib', skipping ...
-[1964] Biber.pm:130> WARN - ISBN '978-0-387-84857-0 978-0-387-84858-7' in entry 'hastieElementsStatisticalLearning2009' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - legacy year field 'Nov./1998' in entry 'lecunGradientbasedLearningApplied1998' is not an integer - this will probably not sort properly.
-[1964] Biber.pm:130> WARN - ISBN '978-1-107-05713-5 978-1-107-29801-9' in entry 'shalev-shwartzUnderstandingMachineLearning2014' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - ISBN '978-3-319-46465-7 978-3-319-46466-4' in entry 'norooziUnsupervisedLearningVisual2016' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - ISBN '978-3-030-00535-1 978-3-030-00536-8' in entry 'shinMedicalImageSynthesis2018' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - ISBN '978-3-319-24573-7 978-3-319-24574-4' in entry 'ronnebergerUNetConvolutionalNetworks2015' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - ISBN '978-3-030-01233-5 978-3-030-01234-2' in entry 'chenEncoderDecoderAtrousSeparable2018' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - ISBN '978-3-319-46483-1 978-3-319-46484-8' in entry 'newellStackedHourglassNetworks2016' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - ISBN '978-3-030-00888-8 978-3-030-00889-5' in entry 'zhouUNetNestedUNet2018' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - ISBN '978-3-030-59724-5 978-3-030-59725-2' in entry 'fanPraNetParallelReverse2020' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - ISBN '978-3-319-66181-0 978-3-319-66182-7' in entry 'zhouFixedPointModelPancreas2017' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - legacy year field '2013-06-17/2013-06-19' in entry 'pmlr-v28-li13b' is not an integer - this will probably not sort properly.
-[1964] Biber.pm:130> WARN - ISBN '978-3-030-00888-8 978-3-030-00889-5' in entry 'zhouUNetNestedUNet2018b' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:130> WARN - ISBN '978-3-030-01233-5 978-3-030-01234-2' in entry 'chenEncoderDecoderAtrousSeparable2018b' is invalid - run biber with '--validate_datamodel' for details.
-[1964] Biber.pm:132> INFO - WARNINGS: 16
+[77] biber-darwin:340> INFO - === Mon Jun 17, 2024, 11:11:40
+[91] Biber.pm:418> INFO - Reading '/Users/marinbenc/Projects/thesis/.texpadtmp/main.bcf'
+[194] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[200] Biber.pm:972> INFO - Found 20 citekeys in bib section 1
+[201] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[214] Biber.pm:972> INFO - Found 32 citekeys in bib section 2
+[215] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[216] Biber.pm:972> INFO - Found 18 citekeys in bib section 3
+[216] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[224] Biber.pm:972> INFO - Found 32 citekeys in bib section 4
+[224] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[227] Biber.pm:972> INFO - Found 27 citekeys in bib section 5
+[227] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[230] Biber.pm:972> INFO - Found 23 citekeys in bib section 6
+[230] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[230] Biber.pm:972> INFO - Found 0 citekeys in bib section 7
+[230] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[277] Biber.pm:4383> INFO - Processing section 1
+[286] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 1
+[297] bibtex.pm:1713> INFO - LaTeX decoding ...
+[533] bibtex.pm:1518> INFO - Found BibTeX data source '/Users/marinbenc/Projects/thesis/example.bib'
+[758] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[758] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[758] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[758] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[784] Biber.pm:4383> INFO - Processing section 2
+[785] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 2
+[1046] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1046] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1046] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[1046] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[1081] Biber.pm:4383> INFO - Processing section 3
+[1081] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 3
+[1214] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1214] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1215] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[1215] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[1236] Biber.pm:4383> INFO - Processing section 4
+[1236] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 4
+[1660] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1660] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1660] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[1660] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[1709] Biber.pm:4383> INFO - Processing section 5
+[1709] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 5
+[2014] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[2014] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[2014] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[2014] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[2046] Biber.pm:4383> INFO - Processing section 6
+[2046] Biber.pm:4574> INFO - Looking for bibtex file '/Users/marinbenc/Projects/thesis/example.bib' for section 6
+[2224] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[2224] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[2225] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[2225] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[2253] bbl.pm:654> INFO - Writing '/Users/marinbenc/Projects/thesis/.texpadtmp/main.bbl' with encoding 'UTF-8'
+[2491] bbl.pm:757> INFO - Output to /Users/marinbenc/Projects/thesis/.texpadtmp/main.bbl
+[2492] Biber.pm:130> WARN - Duplicate entry key: 'info11020125' in file '/Users/marinbenc/Projects/thesis/example.bib', skipping ...
+[2492] Biber.pm:130> WARN - Duplicate entry key: 'liu2021Swin' in file '/Users/marinbenc/Projects/thesis/example.bib', skipping ...
+[2492] Biber.pm:130> WARN - ISBN '978-0-387-84857-0 978-0-387-84858-7' in entry 'hastieElementsStatisticalLearning2009' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - legacy year field 'Nov./1998' in entry 'lecunGradientbasedLearningApplied1998' is not an integer - this will probably not sort properly.
+[2492] Biber.pm:130> WARN - ISBN '978-1-107-05713-5 978-1-107-29801-9' in entry 'shalev-shwartzUnderstandingMachineLearning2014' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - ISBN '978-3-319-46465-7 978-3-319-46466-4' in entry 'norooziUnsupervisedLearningVisual2016' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - ISBN '978-3-030-00535-1 978-3-030-00536-8' in entry 'shinMedicalImageSynthesis2018' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - ISBN '978-3-319-24573-7 978-3-319-24574-4' in entry 'ronnebergerUNetConvolutionalNetworks2015' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - ISBN '978-3-030-01233-5 978-3-030-01234-2' in entry 'chenEncoderDecoderAtrousSeparable2018' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - ISBN '978-3-319-46483-1 978-3-319-46484-8' in entry 'newellStackedHourglassNetworks2016' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - ISBN '978-3-030-00888-8 978-3-030-00889-5' in entry 'zhouUNetNestedUNet2018' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - ISBN '978-3-030-59724-5 978-3-030-59725-2' in entry 'fanPraNetParallelReverse2020' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - ISBN '978-3-319-66181-0 978-3-319-66182-7' in entry 'zhouFixedPointModelPancreas2017' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - legacy year field '2013-06-17/2013-06-19' in entry 'pmlr-v28-li13b' is not an integer - this will probably not sort properly.
+[2492] Biber.pm:130> WARN - ISBN '978-3-030-00888-8 978-3-030-00889-5' in entry 'zhouUNetNestedUNet2018b' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:130> WARN - ISBN '978-3-030-01233-5 978-3-030-01234-2' in entry 'chenEncoderDecoderAtrousSeparable2018b' is invalid - run biber with '--validate_datamodel' for details.
+[2492] Biber.pm:132> INFO - WARNINGS: 16

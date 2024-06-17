@@ -8,114 +8,114 @@
 \contentsline {subsubsection}{A new biomedical image segmentation method based on polar transform preprocessing with a learned center point.}{2}{section*.20}%
 \contentsline {subsubsection}{An improved method of reducing the input image size in neural networks using salient image crops.}{2}{section*.21}%
 \contentsline {subsubsection}{A new neural network architecture for high-resolution image segmentation that combines object detection in low-resolution images and segmentation in high-resolution images.}{3}{section*.22}%
-\contentsline {subsubsection}{A new method of embedding depth information in two-dimensional convolutional neural network input data.}{3}{section*.24}%
-\contentsline {section}{\numberline {1.2}List of Publications}{3}{section.25}%
-\contentsline {subsection}{\numberline {1.2.1}Publications in Scientific Journals}{3}{subsection.26}%
-\contentsline {subsection}{\numberline {1.2.2}Publications in Scientific Conferences}{4}{subsection.27}%
-\contentsline {section}{\numberline {1.3}Organization of the Thesis}{4}{section.28}%
-\contentsline {section}{References}{6}{section*.29}%
-\contentsline {chapter}{\numberline {2}Neural Network-Based Segmentation of Biomedical Images}{8}{chapter.30}%
-\contentsline {section}{\numberline {2.1}Common Types of Biomedical Images}{8}{section.31}%
-\contentsline {subsection}{\numberline {2.1.1}3D Modalities}{8}{subsection.32}%
-\contentsline {subsubsection}{Computed Tomography (CT)}{9}{section*.33}%
-\contentsline {subsubsection}{Magnetic Resonance Imaging (MRI)}{11}{section*.38}%
-\contentsline {subsection}{\numberline {2.1.2}2D Modalities}{12}{subsection.43}%
-\contentsline {subsubsection}{X-ray imaging}{12}{section*.44}%
-\contentsline {subsubsection}{Dermatological images (clinical and dermatoscopic)}{13}{section*.45}%
-\contentsline {subsubsection}{Microscopy}{13}{section*.46}%
-\contentsline {section}{\numberline {2.2}Image Segmentation: From Images to Segmentation Maps}{13}{section.47}%
-\contentsline {subsection}{\numberline {2.2.1}Traditional Image Processing Methods}{14}{subsection.49}%
-\contentsline {subsubsection}{Image Thresholding}{15}{section*.50}%
-\contentsline {subsubsection}{Region Growing Techniques}{15}{section*.51}%
-\contentsline {subsubsection}{Active Contours or Snakes}{16}{section*.53}%
-\contentsline {subsubsection}{Atlas-Based Segmentation}{16}{section*.55}%
-\contentsline {subsection}{\numberline {2.2.2}Machine Learning}{17}{subsection.57}%
-\contentsline {section}{\numberline {2.3}Deep Learning-Based Segmentation Methods}{18}{section.60}%
-\contentsline {subsection}{\numberline {2.3.1}Neural Network Training, Validation and Testing}{19}{subsection.65}%
-\contentsline {subsection}{\numberline {2.3.2}Encoders and Decoders}{20}{subsection.66}%
-\contentsline {subsection}{\numberline {2.3.3}Convolutional Neural Networks}{21}{subsection.68}%
-\contentsline {subsubsection}{Convolution}{21}{section*.69}%
-\contentsline {subsubsection}{Convolutional Layers}{23}{section*.74}%
-\contentsline {subsubsection}{Pooling Layers}{24}{section*.76}%
-\contentsline {section}{\numberline {2.4}CNN Architectures for Medical Image Segmentation}{25}{section.78}%
-\contentsline {subsection}{\numberline {2.4.1}Fully Convolutional Network (FCN)}{25}{subsection.79}%
-\contentsline {subsection}{\numberline {2.4.2}U-Net and Its Variants}{26}{subsection.81}%
-\contentsline {subsubsection}{nnU-Net}{27}{section*.83}%
-\contentsline {subsubsection}{U-Net++}{28}{section*.85}%
-\contentsline {subsection}{\numberline {2.4.3}Mask R-CNN}{29}{subsection.87}%
-\contentsline {subsection}{\numberline {2.4.4}Other Notable Segmentation CNNs}{30}{subsection.89}%
-\contentsline {section}{\numberline {2.5}Fully Connected Transformers for Medical Image Segmentation}{31}{section.90}%
-\contentsline {subsection}{\numberline {2.5.1}Attention}{31}{subsection.91}%
-\contentsline {subsection}{\numberline {2.5.2}Positional Encoding}{32}{subsection.97}%
-\contentsline {subsection}{\numberline {2.5.3}Adapting Transformers to Image Segmentation}{33}{subsection.99}%
-\contentsline {section}{References}{35}{section*.101}%
-\contentsline {chapter}{\numberline {3}Data Efficiency in Neural Network-Based Image Segmentation}{38}{chapter.102}%
-\contentsline {section}{\numberline {3.1}Transfer Learning}{41}{section.113}%
-\contentsline {subsection}{\numberline {3.1.1}Simple Transfer Learning}{41}{subsection.114}%
-\contentsline {subsection}{\numberline {3.1.2}Domain Adaptation}{42}{subsection.116}%
-\contentsline {subsection}{\numberline {3.1.3}Semi-Supervised and Self-Supervised Learning}{43}{subsection.118}%
-\contentsline {section}{\numberline {3.2}Synthetic Data}{44}{section.120}%
-\contentsline {section}{\numberline {3.3}Regularization}{44}{section.121}%
-\contentsline {section}{\numberline {3.4}Conclusion}{45}{section.124}%
-\contentsline {section}{References}{46}{section*.125}%
-\contentsline {chapter}{\numberline {4}Data Efficiency via Model-Driven Preprocessing}{48}{chapter.126}%
-\contentsline {section}{\numberline {4.1}Motivation: Using The Polar Transform for Preprocessing}{48}{section.127}%
-\contentsline {section}{\numberline {4.2}Model-driven Preprocessing}{50}{section.133}%
-\contentsline {subsection}{\numberline {4.2.1}Training Model-Driven Preprocessing Networks}{52}{subsection.138}%
-\contentsline {subsubsection}{Training the Transformation Parameter Predictor}{52}{section*.139}%
-\contentsline {subsubsection}{Training the Segmentation Network}{53}{section*.141}%
-\contentsline {subsubsection}{Transfer Learning}{53}{section*.143}%
-\contentsline {section}{\numberline {4.3}Model-Driven Polar Transform Using Centerpoint Prediction}{54}{section.147}%
-\contentsline {subsection}{\numberline {4.3.1}Background and Related Work}{54}{subsection.148}%
-\contentsline {subsubsection}{Previous work using the polar transform for medical image processing}{55}{section*.151}%
-\contentsline {subsection}{\numberline {4.3.2}Methodology}{56}{subsection.152}%
-\contentsline {subsection}{\numberline {4.3.3}Centerpoint prediction}{56}{subsection.155}%
-\contentsline {subsubsection}{(A) Training the same neural network on cartesian and polar images}{57}{section*.158}%
-\contentsline {subsubsection}{(B) Training a centerpoint predictor}{57}{section*.159}%
-\contentsline {subsubsection}{Data Processing}{58}{section*.160}%
-\contentsline {subsection}{\numberline {4.3.4}Experiments}{59}{subsection.162}%
-\contentsline {subsubsection}{Datasets description}{59}{section*.167}%
-\contentsline {subsubsection}{Implementation details}{60}{section*.173}%
-\contentsline {subsection}{\numberline {4.3.5}Results and Discussion}{61}{subsection.175}%
-\contentsline {subsubsection}{Discussion}{65}{section*.182}%
-\contentsline {section}{\numberline {4.4}Supporting Multiple Transformations of an Image}{67}{section.189}%
-\contentsline {section}{\numberline {4.5}Model-Driven Preprocessing using Multiple Transformations for Aorta Segmentation}{69}{section.196}%
-\contentsline {subsection}{\numberline {4.5.1}Methodology}{69}{subsection.197}%
-\contentsline {subsubsection}{Data Description and Preprocessing}{70}{section*.200}%
-\contentsline {subsection}{\numberline {4.5.2}Results and Discussion}{71}{subsection.201}%
-\contentsline {section}{\numberline {4.6}Conclusion}{73}{section.206}%
-\contentsline {section}{References}{75}{section*.207}%
-\contentsline {chapter}{\numberline {5}Reducing Model Input Sizes with Model-Driven Crops}{79}{chapter.208}%
-\contentsline {section}{\numberline {5.1}Model-Driven Image Cropping}{80}{section.211}%
-\contentsline {subsubsection}{Cropping}{81}{section*.216}%
-\contentsline {subsubsection}{Fine Segmentation and Fusion}{83}{section*.217}%
-\contentsline {subsubsection}{Training the Fine Segmentation Network}{83}{section*.218}%
-\contentsline {subsection}{\numberline {5.1.1}Related work}{83}{subsection.219}%
-\contentsline {subsubsection}{Detect-then-segment}{83}{section*.220}%
-\contentsline {subsubsection}{Coarse-to-fine Segmentation}{84}{section*.221}%
-\contentsline {subsubsection}{Non-uniform Downsampling}{84}{section*.222}%
-\contentsline {subsubsection}{Other Approaches to Reducing Input Resolution}{85}{section*.223}%
-\contentsline {subsection}{\numberline {5.1.2}Results}{85}{subsection.224}%
-\contentsline {subsubsection}{Datasets}{85}{section*.226}%
-\contentsline {subsubsection}{Quantitative Assessment}{86}{section*.227}%
-\contentsline {subsubsection}{Qualitative Assessment}{90}{section*.232}%
-\contentsline {subsubsection}{Computational Performance Characteristics}{91}{section*.236}%
-\contentsline {section}{\numberline {5.2}An End-to-End Extension of Model-Driven Image Cropping}{93}{section.239}%
-\contentsline {subsection}{\numberline {5.2.1}End-to-end Network Architecture and Training}{93}{subsection.240}%
-\contentsline {subsection}{\numberline {5.2.2}Experiments in Clinical Dermatological Image Segmentation}{94}{subsection.242}%
-\contentsline {subsubsection}{Results and Discussion}{95}{section*.243}%
-\contentsline {section}{\numberline {5.3}Conclusion}{99}{section.247}%
-\contentsline {section}{References}{100}{section*.249}%
-\contentsline {chapter}{\numberline {6}Adding Depth Information to 2D U-Nets for CT Segmentation}{103}{chapter.250}%
-\contentsline {section}{\numberline {6.1}Epicardial Adipose Tissue Segmentation}{104}{section.253}%
-\contentsline {section}{\numberline {6.2}Related Work}{105}{section.254}%
-\contentsline {section}{\numberline {6.3}Dataset Description}{105}{section.255}%
-\contentsline {section}{\numberline {6.4}Methodology}{106}{section.257}%
-\contentsline {subsection}{\numberline {6.4.1}Data Preprocessing}{107}{subsection.260}%
-\contentsline {subsection}{\numberline {6.4.2}Model Training}{107}{subsection.262}%
-\contentsline {section}{\numberline {6.5}Experiments and Results}{108}{section.263}%
-\contentsline {subsection}{\numberline {6.5.1}Results}{108}{subsection.264}%
-\contentsline {section}{\numberline {6.6}Conclusion}{109}{section.269}%
-\contentsline {section}{References}{111}{section*.270}%
-\contentsline {chapter}{\numberline {7}Conclusion}{114}{chapter.271}%
-\contentsline {chapter}{\numberline {8}Curriculum Vitae}{116}{chapter.272}%
+\contentsline {subsubsection}{A new method of embedding depth information in two-dimensional convolutional neural network input data.}{3}{section*.23}%
+\contentsline {section}{\numberline {1.2}List of Publications}{3}{section.24}%
+\contentsline {subsection}{\numberline {1.2.1}Publications in Scientific Journals}{3}{subsection.25}%
+\contentsline {subsection}{\numberline {1.2.2}Publications in Scientific Conferences}{4}{subsection.26}%
+\contentsline {section}{\numberline {1.3}Organization of the Thesis}{4}{section.27}%
+\contentsline {section}{References}{6}{section*.28}%
+\contentsline {chapter}{\numberline {2}Neural Network-Based Segmentation of Biomedical Images}{9}{chapter.29}%
+\contentsline {section}{\numberline {2.1}Common Types of Biomedical Images}{9}{section.30}%
+\contentsline {subsection}{\numberline {2.1.1}3D Modalities}{9}{subsection.31}%
+\contentsline {subsubsection}{Computed Tomography (CT)}{10}{section*.32}%
+\contentsline {subsubsection}{Magnetic Resonance Imaging (MRI)}{12}{section*.37}%
+\contentsline {subsection}{\numberline {2.1.2}2D Modalities}{13}{subsection.42}%
+\contentsline {subsubsection}{X-ray imaging}{13}{section*.43}%
+\contentsline {subsubsection}{Dermatological images (clinical and dermatoscopic)}{14}{section*.44}%
+\contentsline {subsubsection}{Microscopy}{14}{section*.45}%
+\contentsline {section}{\numberline {2.2}Image Segmentation: From Images to Segmentation Maps}{14}{section.46}%
+\contentsline {subsection}{\numberline {2.2.1}Traditional Image Processing Methods}{15}{subsection.48}%
+\contentsline {subsubsection}{Image Thresholding}{16}{section*.49}%
+\contentsline {subsubsection}{Region Growing Techniques}{16}{section*.50}%
+\contentsline {subsubsection}{Active Contours or Snakes}{17}{section*.52}%
+\contentsline {subsubsection}{Atlas-Based Segmentation}{17}{section*.54}%
+\contentsline {subsection}{\numberline {2.2.2}Machine Learning}{18}{subsection.56}%
+\contentsline {section}{\numberline {2.3}Deep Learning-Based Segmentation Methods}{19}{section.59}%
+\contentsline {subsection}{\numberline {2.3.1}Neural Network Training, Validation and Testing}{20}{subsection.64}%
+\contentsline {subsection}{\numberline {2.3.2}Encoders and Decoders}{21}{subsection.65}%
+\contentsline {subsection}{\numberline {2.3.3}Convolutional Neural Networks}{22}{subsection.67}%
+\contentsline {subsubsection}{Convolution}{22}{section*.68}%
+\contentsline {subsubsection}{Convolutional Layers}{24}{section*.73}%
+\contentsline {subsubsection}{Pooling Layers}{25}{section*.75}%
+\contentsline {section}{\numberline {2.4}CNN Architectures for Medical Image Segmentation}{26}{section.77}%
+\contentsline {subsection}{\numberline {2.4.1}Fully Convolutional Network (FCN)}{26}{subsection.78}%
+\contentsline {subsection}{\numberline {2.4.2}U-Net and Its Variants}{27}{subsection.80}%
+\contentsline {subsubsection}{nnU-Net}{28}{section*.82}%
+\contentsline {subsubsection}{U-Net++}{29}{section*.84}%
+\contentsline {subsection}{\numberline {2.4.3}Mask R-CNN}{30}{subsection.86}%
+\contentsline {subsection}{\numberline {2.4.4}Other Notable Segmentation CNNs}{31}{subsection.88}%
+\contentsline {section}{\numberline {2.5}Fully Connected Transformers for Medical Image Segmentation}{32}{section.89}%
+\contentsline {subsection}{\numberline {2.5.1}Attention}{32}{subsection.90}%
+\contentsline {subsection}{\numberline {2.5.2}Positional Encoding}{33}{subsection.96}%
+\contentsline {subsection}{\numberline {2.5.3}Adapting Transformers to Image Segmentation}{34}{subsection.98}%
+\contentsline {section}{References}{36}{section*.100}%
+\contentsline {chapter}{\numberline {3}Data Efficiency in Neural Network-Based Image Segmentation}{39}{chapter.101}%
+\contentsline {section}{\numberline {3.1}Transfer Learning}{42}{section.112}%
+\contentsline {subsection}{\numberline {3.1.1}Simple Transfer Learning}{42}{subsection.113}%
+\contentsline {subsection}{\numberline {3.1.2}Domain Adaptation}{43}{subsection.115}%
+\contentsline {subsection}{\numberline {3.1.3}Semi-Supervised and Self-Supervised Learning}{44}{subsection.117}%
+\contentsline {section}{\numberline {3.2}Synthetic Data}{45}{section.119}%
+\contentsline {section}{\numberline {3.3}Regularization}{45}{section.120}%
+\contentsline {section}{\numberline {3.4}Conclusion}{46}{section.123}%
+\contentsline {section}{References}{47}{section*.124}%
+\contentsline {chapter}{\numberline {4}Data Efficiency via Model-Driven Preprocessing}{49}{chapter.125}%
+\contentsline {section}{\numberline {4.1}Motivation: Using The Polar Transform for Preprocessing}{49}{section.126}%
+\contentsline {section}{\numberline {4.2}Model-driven Preprocessing}{51}{section.132}%
+\contentsline {subsection}{\numberline {4.2.1}Training Model-Driven Preprocessing Networks}{53}{subsection.137}%
+\contentsline {subsubsection}{Training the Transformation Parameter Predictor}{53}{section*.138}%
+\contentsline {subsubsection}{Training the Segmentation Network}{54}{section*.140}%
+\contentsline {subsubsection}{Transfer Learning}{54}{section*.142}%
+\contentsline {section}{\numberline {4.3}Model-Driven Polar Transform Using Centerpoint Prediction}{55}{section.146}%
+\contentsline {subsection}{\numberline {4.3.1}Background and Related Work}{55}{subsection.147}%
+\contentsline {subsubsection}{Previous work using the polar transform for medical image processing}{56}{section*.150}%
+\contentsline {subsection}{\numberline {4.3.2}Methodology}{57}{subsection.151}%
+\contentsline {subsection}{\numberline {4.3.3}Centerpoint prediction}{57}{subsection.154}%
+\contentsline {subsubsection}{(A) Training the same neural network on cartesian and polar images}{58}{section*.157}%
+\contentsline {subsubsection}{(B) Training a centerpoint predictor}{58}{section*.158}%
+\contentsline {subsubsection}{Data Processing}{59}{section*.159}%
+\contentsline {subsection}{\numberline {4.3.4}Experiments}{60}{subsection.161}%
+\contentsline {subsubsection}{Datasets description}{60}{section*.166}%
+\contentsline {subsubsection}{Implementation details}{61}{section*.172}%
+\contentsline {subsection}{\numberline {4.3.5}Results and Discussion}{62}{subsection.174}%
+\contentsline {subsubsection}{Discussion}{66}{section*.181}%
+\contentsline {section}{\numberline {4.4}Supporting Multiple Transformations of an Image}{68}{section.188}%
+\contentsline {section}{\numberline {4.5}Model-Driven Preprocessing using Multiple Transformations for Aorta Segmentation}{70}{section.195}%
+\contentsline {subsection}{\numberline {4.5.1}Methodology}{70}{subsection.196}%
+\contentsline {subsubsection}{Data Description and Preprocessing}{71}{section*.199}%
+\contentsline {subsection}{\numberline {4.5.2}Results and Discussion}{72}{subsection.200}%
+\contentsline {section}{\numberline {4.6}Conclusion}{74}{section.205}%
+\contentsline {section}{References}{76}{section*.206}%
+\contentsline {chapter}{\numberline {5}Reducing Model Input Sizes with Model-Driven Crops}{80}{chapter.207}%
+\contentsline {section}{\numberline {5.1}Model-Driven Image Cropping}{81}{section.210}%
+\contentsline {subsubsection}{Cropping}{82}{section*.215}%
+\contentsline {subsubsection}{Fine Segmentation and Fusion}{84}{section*.216}%
+\contentsline {subsubsection}{Training the Fine Segmentation Network}{84}{section*.217}%
+\contentsline {subsection}{\numberline {5.1.1}Related work}{84}{subsection.218}%
+\contentsline {subsubsection}{Detect-then-segment}{84}{section*.219}%
+\contentsline {subsubsection}{Coarse-to-fine Segmentation}{85}{section*.220}%
+\contentsline {subsubsection}{Non-uniform Downsampling}{85}{section*.221}%
+\contentsline {subsubsection}{Other Approaches to Reducing Input Resolution}{86}{section*.222}%
+\contentsline {subsection}{\numberline {5.1.2}Results}{86}{subsection.223}%
+\contentsline {subsubsection}{Datasets}{86}{section*.225}%
+\contentsline {subsubsection}{Quantitative Assessment}{87}{section*.226}%
+\contentsline {subsubsection}{Qualitative Assessment}{91}{section*.231}%
+\contentsline {subsubsection}{Computational Performance Characteristics}{92}{section*.235}%
+\contentsline {section}{\numberline {5.2}An End-to-End Extension of Model-Driven Image Cropping}{94}{section.238}%
+\contentsline {subsection}{\numberline {5.2.1}End-to-end Network Architecture and Training}{94}{subsection.239}%
+\contentsline {subsection}{\numberline {5.2.2}Experiments in Clinical Dermatological Image Segmentation}{95}{subsection.241}%
+\contentsline {subsubsection}{Results and Discussion}{96}{section*.242}%
+\contentsline {section}{\numberline {5.3}Conclusion}{100}{section.246}%
+\contentsline {section}{References}{101}{section*.247}%
+\contentsline {chapter}{\numberline {6}Adding Depth Information to 2D U-Nets for CT Segmentation}{104}{chapter.248}%
+\contentsline {section}{\numberline {6.1}Epicardial Adipose Tissue Segmentation}{105}{section.251}%
+\contentsline {section}{\numberline {6.2}Related Work}{106}{section.252}%
+\contentsline {section}{\numberline {6.3}Dataset Description}{106}{section.253}%
+\contentsline {section}{\numberline {6.4}Methodology}{107}{section.255}%
+\contentsline {subsection}{\numberline {6.4.1}Data Preprocessing}{108}{subsection.258}%
+\contentsline {subsection}{\numberline {6.4.2}Model Training}{108}{subsection.260}%
+\contentsline {section}{\numberline {6.5}Experiments and Results}{109}{section.261}%
+\contentsline {subsection}{\numberline {6.5.1}Results}{109}{subsection.262}%
+\contentsline {section}{\numberline {6.6}Conclusion}{110}{section.267}%
+\contentsline {section}{References}{112}{section*.268}%
+\contentsline {chapter}{\numberline {7}Conclusion}{115}{chapter.269}%
+\contentsline {chapter}{\numberline {8}Curriculum Vitae}{117}{chapter.270}%

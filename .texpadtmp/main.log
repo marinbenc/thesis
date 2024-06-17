@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.21)  17 JUN 2024 10:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.21)  17 JUN 2024 11:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1303,192 +1303,190 @@ Chapter 1.
 
 
 
-]
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 36.
- [2]
+] [2]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 47.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [3]) [4] [5] [6
+) [3] [4]) [5] [6
 
 
-]
+] [7]
 Package biblatex Info: Reference section=0 on input line 340.
 \c@blx@maxsegment@2=\count507
 \c@blx@sectionciteorder@2=\count508
 Package biblatex Info: Reference section=2 on input line 342.
 Package biblatex Info: Setting label 'refsection:2' on input line 342.
- [7]
+ [8]
 \openout2 = `Chapters/02_foundations.aux'.
 
  (./Chapters/02_foundations.tex
 Chapter 2.
 1: section
-[8
+[9
 
 
-] [9]
-<images/windowing-example.png, id=643, 1245.65375pt x 471.7625pt>
+] [10]
+<images/windowing-example.png, id=650, 1245.65375pt x 471.7625pt>
 File: images/windowing-example.png Graphic file (type png)
 <use images/windowing-example.png>
 Package pdftex.def Info: images/windowing-example.png  used on input line 70.
 (pdftex.def)             Requested size: 423.9459pt x 160.56268pt.
- [10 <./images/windowing-example.png>]
-<images/mri-t1-t2-example.jpg, id=665, 836.12375pt x 568.1225pt>
+ [11 <./images/windowing-example.png>]
+<images/mri-t1-t2-example.jpg, id=671, 836.12375pt x 568.1225pt>
 File: images/mri-t1-t2-example.jpg Graphic file (type jpg)
 <use images/mri-t1-t2-example.jpg>
 Package pdftex.def Info: images/mri-t1-t2-example.jpg  used on input line 89.
 (pdftex.def)             Requested size: 275.56224pt x 187.23827pt.
- [11 <./images/mri-t1-t2-example.jpg>] [12] [13]
+ [12 <./images/mri-t1-t2-example.jpg>] [13] [14]
 LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 134.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ufplmbb.fd
 File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
-) [14]
-<images/region_growing.png, id=711, 414.54875pt x 209.78375pt>
+) [15]
+<images/region_growing.png, id=717, 414.54875pt x 209.78375pt>
 File: images/region_growing.png Graphic file (type png)
 <use images/region_growing.png>
 Package pdftex.def Info: images/region_growing.png  used on input line 168.
 (pdftex.def)             Requested size: 296.76083pt x 150.17989pt.
- [15 <./images/region_growing.png>]
-<images/active_contour.png, id=726, 487.8225pt x 312.16624pt>
+ [16 <./images/region_growing.png>]
+<images/active_contour.png, id=734, 487.8225pt x 312.16624pt>
 File: images/active_contour.png Graphic file (type png)
 <use images/active_contour.png>
 Package pdftex.def Info: images/active_contour.png  used on input line 180.
 (pdftex.def)             Requested size: 275.56224pt x 176.33615pt.
-<images/registration.png, id=732, 812.03375pt x 458.71375pt>
+<images/registration.png, id=740, 812.03375pt x 458.71375pt>
 File: images/registration.png Graphic file (type png)
 <use images/registration.png>
 Package pdftex.def Info: images/registration.png  used on input line 191.
 (pdftex.def)             Requested size: 296.76083pt x 167.6356pt.
- [16 <./images/active_contour.png>]
-<images/machine_learning.png, id=752, 1488.56125pt x 1041.8925pt>
+ [17 <./images/active_contour.png>]
+<images/machine_learning.png, id=758, 1488.56125pt x 1041.8925pt>
 File: images/machine_learning.png Graphic file (type png)
 <use images/machine_learning.png>
 Package pdftex.def Info: images/machine_learning.png  used on input line 210.
 (pdftex.def)             Requested size: 423.9459pt x 296.73578pt.
- [17 <./images/registration.png>]
-<images/nn-typical.png, id=765, 443.6575pt x 419.5675pt>
+ [18 <./images/registration.png>]
+<images/nn-typical.png, id=771, 443.6575pt x 419.5675pt>
 File: images/nn-typical.png Graphic file (type png)
 <use images/nn-typical.png>
 Package pdftex.def Info: images/nn-typical.png  used on input line 227.
 (pdftex.def)             Requested size: 211.97295pt x 200.4618pt.
- [18 <./images/machine_learning.png>] [19 <./images/nn-typical.png>] [20]
-<images/convolution-explainer.png, id=790, 682.55pt x 424.58624pt>
+ [19 <./images/machine_learning.png>] [20 <./images/nn-typical.png>] [21]
+<images/convolution-explainer.png, id=796, 682.55pt x 424.58624pt>
 File: images/convolution-explainer.png Graphic file (type png)
 <use images/convolution-explainer.png>
 Package pdftex.def Info: images/convolution-explainer.png  used on input line 302.
 (pdftex.def)             Requested size: 423.9459pt x 263.72017pt.
- [21 <./images/convolution-explainer.png>]
-<images/prewitt-example.png, id=806, 1246.6575pt x 471.7625pt>
+ [22 <./images/convolution-explainer.png>]
+<images/prewitt-example.png, id=813, 1246.6575pt x 471.7625pt>
 File: images/prewitt-example.png Graphic file (type png)
 <use images/prewitt-example.png>
 Package pdftex.def Info: images/prewitt-example.png  used on input line 326.
 (pdftex.def)             Requested size: 423.9459pt x 160.4331pt.
- [22 <./images/prewitt-example.png (PNG copy)>]
-<images/cnn-operation-explained.pdf, id=817, 460.72125pt x 158.5925pt>
+ [23 <./images/prewitt-example.png (PNG copy)>]
+<images/cnn-operation-explained.pdf, id=823, 460.72125pt x 158.5925pt>
 File: images/cnn-operation-explained.pdf Graphic file (type pdf)
 <use images/cnn-operation-explained.pdf>
 Package pdftex.def Info: images/cnn-operation-explained.pdf  used on input line 395.
 (pdftex.def)             Requested size: 339.158pt x 116.74677pt.
- [23]
-<images/cnn_encoder_example.pdf, id=826, 676.5275pt x 175.65625pt>
+ [24]
+<images/cnn_encoder_example.pdf, id=832, 676.5275pt x 175.65625pt>
 File: images/cnn_encoder_example.pdf Graphic file (type pdf)
 <use images/cnn_encoder_example.pdf>
 Package pdftex.def Info: images/cnn_encoder_example.pdf  used on input line 406.
 (pdftex.def)             Requested size: 423.9459pt x 110.07703pt.
- [24 <./images/cnn-operation-explained.pdf> <./images/cnn_encoder_example.pdf>] [25]
-<images/fcn-arch.png, id=860, 755.82375pt x 189.70876pt>
+ [25 <./images/cnn-operation-explained.pdf> <./images/cnn_encoder_example.pdf>] [26]
+<images/fcn-arch.png, id=866, 755.82375pt x 189.70876pt>
 File: images/fcn-arch.png Graphic file (type png)
 <use images/fcn-arch.png>
 Package pdftex.def Info: images/fcn-arch.png  used on input line 465.
 (pdftex.def)             Requested size: 423.9459pt x 106.40985pt.
- [26 <./images/fcn-arch.png>]
-<images/unet-arch.png, id=876, 752.8125pt x 471.7625pt>
+ [27 <./images/fcn-arch.png>]
+<images/unet-arch.png, id=882, 752.8125pt x 471.7625pt>
 File: images/unet-arch.png Graphic file (type png)
 <use images/unet-arch.png>
 Package pdftex.def Info: images/unet-arch.png  used on input line 480.
 (pdftex.def)             Requested size: 339.158pt x 212.5431pt.
-<images/nnunet-arch.png, id=884, 2131.965pt x 1000.73875pt>
+<images/nnunet-arch.png, id=890, 2131.965pt x 1000.73875pt>
 File: images/nnunet-arch.png Graphic file (type png)
 <use images/nnunet-arch.png>
 Package pdftex.def Info: images/nnunet-arch.png  used on input line 497.
 (pdftex.def)             Requested size: 423.9459pt x 198.99895pt.
- [27 <./images/unet-arch.png>]
-<images/unetpp-arch.png, id=901, 1278.7775pt x 455.7025pt>
+ [28 <./images/unet-arch.png>]
+<images/unetpp-arch.png, id=908, 1278.7775pt x 455.7025pt>
 File: images/unetpp-arch.png Graphic file (type png)
 <use images/unetpp-arch.png>
 Package pdftex.def Info: images/unetpp-arch.png  used on input line 516.
 (pdftex.def)             Requested size: 423.9459pt x 151.07762pt.
- [28 <./images/nnunet-arch.png>]
-<images/maskrcnn-arch.png, id=917, 409.53pt x 197.73875pt>
+ [29 <./images/nnunet-arch.png>]
+<images/maskrcnn-arch.png, id=923, 409.53pt x 197.73875pt>
 File: images/maskrcnn-arch.png Graphic file (type png)
 <use images/maskrcnn-arch.png>
 Package pdftex.def Info: images/maskrcnn-arch.png  used on input line 533.
 (pdftex.def)             Requested size: 254.37012pt x 122.82304pt.
- [29 <./images/unetpp-arch.png>] [30 <./images/maskrcnn-arch.png>] [31]
-<images/attention-explainer.pdf, id=946, 861.2175pt x 343.2825pt>
+ [30 <./images/unetpp-arch.png>] [31 <./images/maskrcnn-arch.png>] [32]
+<images/attention-explainer.pdf, id=952, 861.2175pt x 343.2825pt>
 File: images/attention-explainer.pdf Graphic file (type pdf)
 <use images/attention-explainer.pdf>
 Package pdftex.def Info: images/attention-explainer.pdf  used on input line 584.
 (pdftex.def)             Requested size: 339.158pt x 135.18915pt.
- [32 <./images/attention-explainer.pdf>]
-<images/vit-arch.png, id=996, 752.8125pt x 414.54875pt>
+ [33 <./images/attention-explainer.pdf>]
+<images/vit-arch.png, id=1002, 752.8125pt x 414.54875pt>
 File: images/vit-arch.png Graphic file (type png)
 <use images/vit-arch.png>
 Package pdftex.def Info: images/vit-arch.png  used on input line 614.
 (pdftex.def)             Requested size: 423.9459pt x 233.46141pt.
- [33]) [34 <./images/vit-arch.png>] [35
+ [34]) [35 <./images/vit-arch.png>] [36
 
 
-] [36]
+] [37]
 Package biblatex Info: Reference section=0 on input line 345.
 \c@blx@maxsegment@3=\count509
 \c@blx@sectionciteorder@3=\count510
 Package biblatex Info: Reference section=3 on input line 347.
 Package biblatex Info: Setting label 'refsection:3' on input line 347.
- [37]
+ [38]
 \openout2 = `Chapters/03_data_efficiency.aux'.
 
  (./Chapters/03_data_efficiency.tex
 Chapter 3.
-<images/3/heart_disease_risk.pdf, id=1073, 343.6683pt x 331.46335pt>
+<images/3/heart_disease_risk.pdf, id=1079, 343.6683pt x 331.46335pt>
 File: images/3/heart_disease_risk.pdf Graphic file (type pdf)
 <use images/3/heart_disease_risk.pdf>
 Package pdftex.def Info: images/3/heart_disease_risk.pdf  used on input line 27.
 (pdftex.def)             Requested size: 211.97295pt x 204.44807pt.
-<images/3/heart_disease_risk_samples.pdf, id=1074, 425.24309pt x 422.31902pt>
+<images/3/heart_disease_risk_samples.pdf, id=1080, 425.24309pt x 422.31902pt>
 File: images/3/heart_disease_risk_samples.pdf Graphic file (type pdf)
 <use images/3/heart_disease_risk_samples.pdf>
 Package pdftex.def Info: images/3/heart_disease_risk_samples.pdf  used on input line 29.
 (pdftex.def)             Requested size: 211.97295pt x 210.51457pt.
-<images/3/heart_disease_risk_samples_degrees.pdf, id=1075, 655.16203pt x 235.96532pt>
+<images/3/heart_disease_risk_samples_degrees.pdf, id=1081, 655.16203pt x 235.96532pt>
 File: images/3/heart_disease_risk_samples_degrees.pdf Graphic file (type pdf)
 <use images/3/heart_disease_risk_samples_degrees.pdf>
 Package pdftex.def Info: images/3/heart_disease_risk_samples_degrees.pdf  used on input line 36.
 (pdftex.def)             Requested size: 423.9459pt x 152.68793pt.
 1: section
-[38
+[39
 
 
-] [39 <./images/3/heart_disease_risk.pdf> <./images/3/heart_disease_risk_samples.pdf> <./images/3/heart_disease_risk_samples_degrees.pdf>] [40]
-<images/3/simple-transfer-learning-diagram.pdf, id=1223, 1234.6125pt x 323.2075pt>
+] [40 <./images/3/heart_disease_risk.pdf> <./images/3/heart_disease_risk_samples.pdf> <./images/3/heart_disease_risk_samples_degrees.pdf>] [41]
+<images/3/simple-transfer-learning-diagram.pdf, id=1229, 1234.6125pt x 323.2075pt>
 File: images/3/simple-transfer-learning-diagram.pdf Graphic file (type pdf)
 <use images/3/simple-transfer-learning-diagram.pdf>
 Package pdftex.def Info: images/3/simple-transfer-learning-diagram.pdf  used on input line 85.
 (pdftex.def)             Requested size: 423.9459pt x 110.98393pt.
- [41]
-<images/3/unsup-dom-adpt.png, id=1242, 911.405pt x 396.48125pt>
+ [42]
+<images/3/unsup-dom-adpt.png, id=1248, 911.405pt x 396.48125pt>
 File: images/3/unsup-dom-adpt.png Graphic file (type png)
 <use images/3/unsup-dom-adpt.png>
 Package pdftex.def Info: images/3/unsup-dom-adpt.png  used on input line 102.
 (pdftex.def)             Requested size: 296.76083pt x 129.09686pt.
- [42 <./images/3/simple-transfer-learning-diagram.pdf>]
-<images/3/shuffle-to-learn.png, id=1272, 1012.78375pt x 199.74625pt>
+ [43 <./images/3/simple-transfer-learning-diagram.pdf>]
+<images/3/shuffle-to-learn.png, id=1278, 1012.78375pt x 199.74625pt>
 File: images/3/shuffle-to-learn.png Graphic file (type png)
 <use images/3/shuffle-to-learn.png>
 Package pdftex.def Info: images/3/shuffle-to-learn.png  used on input line 117.
 (pdftex.def)             Requested size: 423.9459pt x 83.61244pt.
- [43 <./images/3/unsup-dom-adpt.png> <./images/3/shuffle-to-learn.png>] [44]) [45] [46
+ [44 <./images/3/unsup-dom-adpt.png> <./images/3/shuffle-to-learn.png>] [45]) [46] [47
 
 
 ]
@@ -1497,87 +1495,87 @@ Package biblatex Info: Reference section=0 on input line 350.
 \c@blx@sectionciteorder@4=\count512
 Package biblatex Info: Reference section=4 on input line 352.
 Package biblatex Info: Setting label 'refsection:4' on input line 352.
- [47]
+ [48]
 \openout2 = `Chapters/04_model_driven_preprocessing.aux'.
 
  (./Chapters/04_model_driven_preprocessing.tex
 Chapter 4.
-<images/4/nn_trans_dataset.pdf, id=1338, 491.8375pt x 241.90375pt>
+<images/4/nn_trans_dataset.pdf, id=1344, 491.8375pt x 241.90375pt>
 File: images/4/nn_trans_dataset.pdf Graphic file (type pdf)
 <use images/4/nn_trans_dataset.pdf>
 Package pdftex.def Info: images/4/nn_trans_dataset.pdf  used on input line 16.
 (pdftex.def)             Requested size: 275.56224pt x 135.5353pt.
-<images/4/circular_dataset_neurons.pdf, id=1341, 699.61375pt x 241.90375pt>
+<images/4/circular_dataset_neurons.pdf, id=1347, 699.61375pt x 241.90375pt>
 File: images/4/circular_dataset_neurons.pdf Graphic file (type pdf)
 <use images/4/circular_dataset_neurons.pdf>
 Package pdftex.def Info: images/4/circular_dataset_neurons.pdf  used on input line 25.
 (pdftex.def)             Requested size: 423.9459pt x 146.59029pt.
 1: section
-[48
+[49
 
 
 ]
-<images/4/polar_dataset_neurons.pdf, id=1350, 491.8375pt x 241.90375pt>
+<images/4/polar_dataset_neurons.pdf, id=1356, 491.8375pt x 241.90375pt>
 File: images/4/polar_dataset_neurons.pdf Graphic file (type pdf)
 <use images/4/polar_dataset_neurons.pdf>
 Package pdftex.def Info: images/4/polar_dataset_neurons.pdf  used on input line 49.
 (pdftex.def)             Requested size: 275.56224pt x 135.5353pt.
-<images/4/data_polar_origin.pdf, id=1353, 663.26372pt x 225.23923pt>
+<images/4/data_polar_origin.pdf, id=1359, 663.26372pt x 225.23923pt>
 File: images/4/data_polar_origin.pdf Graphic file (type pdf)
 <use images/4/data_polar_origin.pdf>
 Package pdftex.def Info: images/4/data_polar_origin.pdf  used on input line 58.
 (pdftex.def)             Requested size: 423.9459pt x 143.97044pt.
- [49 <./images/4/nn_trans_dataset.pdf> <./images/4/circular_dataset_neurons.pdf>] [50 <./images/4/polar_dataset_neurons.pdf> <./images/4/data_polar_origin.pdf>]
-<images/4/model-based-preprocessing-overview.pdf, id=2202, 1351.0475pt x 311.1625pt>
+ [50 <./images/4/nn_trans_dataset.pdf> <./images/4/circular_dataset_neurons.pdf>] [51 <./images/4/polar_dataset_neurons.pdf> <./images/4/data_polar_origin.pdf>]
+<images/4/model-based-preprocessing-overview.pdf, id=2208, 1351.0475pt x 311.1625pt>
 File: images/4/model-based-preprocessing-overview.pdf Graphic file (type pdf)
 <use images/4/model-based-preprocessing-overview.pdf>
 Package pdftex.def Info: images/4/model-based-preprocessing-overview.pdf  used on input line 73.
 (pdftex.def)             Requested size: 423.9459pt x 97.63687pt.
- [51 <./images/4/model-based-preprocessing-overview.pdf>] [52] [53]
-<images/4/to_polar.png, id=2259, 326.21875pt x 281.05pt>
+ [52 <./images/4/model-based-preprocessing-overview.pdf>] [53] [54]
+<images/4/to_polar.png, id=2265, 326.21875pt x 281.05pt>
 File: images/4/to_polar.png Graphic file (type png)
 <use images/4/to_polar.png>
 Package pdftex.def Info: images/4/to_polar.png  used on input line 173.
 (pdftex.def)             Requested size: 169.57578pt x 146.09966pt.
- [54] [55 <./images/4/to_polar.png>] [56]
-<images/4/retraining-approach.png, id=2299, 737.75626pt x 139.52126pt>
+ [55] [56 <./images/4/to_polar.png>] [57]
+<images/4/retraining-approach.png, id=2305, 737.75626pt x 139.52126pt>
 File: images/4/retraining-approach.png Graphic file (type png)
 <use images/4/retraining-approach.png>
 Package pdftex.def Info: images/4/retraining-approach.png  used on input line 262.
 (pdftex.def)             Requested size: 423.9459pt x 80.17513pt.
-<images/4/centerpoint-approach.png, id=2302, 737.75626pt x 139.52126pt>
+<images/4/centerpoint-approach.png, id=2308, 737.75626pt x 139.52126pt>
 File: images/4/centerpoint-approach.png Graphic file (type png)
 <use images/4/centerpoint-approach.png>
 Package pdftex.def Info: images/4/centerpoint-approach.png  used on input line 269.
 (pdftex.def)             Requested size: 423.9459pt x 80.17513pt.
- [57 <./images/4/retraining-approach.png> <./images/4/centerpoint-approach.png>]
-<images/4/heatmaps.png, id=2321, 372.9132pt x 253.6677pt>
+ [58 <./images/4/retraining-approach.png> <./images/4/centerpoint-approach.png>]
+<images/4/heatmaps.png, id=2328, 372.9132pt x 253.6677pt>
 File: images/4/heatmaps.png Graphic file (type png)
 <use images/4/heatmaps.png>
 Package pdftex.def Info: images/4/heatmaps.png  used on input line 311.
 (pdftex.def)             Requested size: 339.158pt x 230.70634pt.
- [58 <./images/4/heatmaps.png>]
-<images/4/polyp_example.png, id=2344, 425.59pt x 180.675pt>
+ [59 <./images/4/heatmaps.png>]
+<images/4/polyp_example.png, id=2350, 425.59pt x 180.675pt>
 File: images/4/polyp_example.png Graphic file (type png)
 <use images/4/polyp_example.png>
 Package pdftex.def Info: images/4/polyp_example.png  used on input line 356.
 (pdftex.def)             Requested size: 207.73581pt x 88.18967pt.
-<images/4/lesion_example.png, id=2345, 425.59pt x 180.675pt>
+<images/4/lesion_example.png, id=2351, 425.59pt x 180.675pt>
 File: images/4/lesion_example.png Graphic file (type png)
 <use images/4/lesion_example.png>
 Package pdftex.def Info: images/4/lesion_example.png  used on input line 358.
 (pdftex.def)             Requested size: 207.73581pt x 88.18967pt.
-<images/4/liver_example.png, id=2346, 425.59pt x 230.8625pt>
+<images/4/liver_example.png, id=2352, 425.59pt x 230.8625pt>
 File: images/4/liver_example.png Graphic file (type png)
 <use images/4/liver_example.png>
 Package pdftex.def Info: images/4/liver_example.png  used on input line 359.
 (pdftex.def)             Requested size: 207.73581pt x 112.6868pt.
-<images/4/eat_example.png, id=2347, 425.59pt x 230.8625pt>
+<images/4/eat_example.png, id=2353, 425.59pt x 230.8625pt>
 File: images/4/eat_example.png Graphic file (type png)
 <use images/4/eat_example.png>
 Package pdftex.def Info: images/4/eat_example.png  used on input line 361.
 (pdftex.def)             Requested size: 207.73581pt x 112.6868pt.
- [59] [60 <./images/4/polyp_example.png> <./images/4/lesion_example.png> <./images/4/liver_example.png> <./images/4/eat_example.png>]
+ [60] [61 <./images/4/polyp_example.png> <./images/4/lesion_example.png> <./images/4/liver_example.png> <./images/4/eat_example.png>]
 Overfull \hbox (17.49763pt too wide) in paragraph at lines 575--575
 []|\T1/ppl/m/n/10.95 Polyp|  
  []
@@ -1597,247 +1595,247 @@ Overfull \hbox (10.16133pt too wide) in paragraph at lines 575--575
 []|\T1/ppl/m/n/10.95 EAT|  
  []
 
-<images/4/training-graphs.png, id=2430, 1050.92625pt x 266.9975pt>
+<images/4/training-graphs.png, id=2436, 1050.92625pt x 266.9975pt>
 File: images/4/training-graphs.png Graphic file (type png)
 <use images/4/training-graphs.png>
 Package pdftex.def Info: images/4/training-graphs.png  used on input line 586.
 (pdftex.def)             Requested size: 423.9459pt x 107.70561pt.
-<images/4/mse-vs-dice.png, id=2435, 425.59pt x 281.05pt>
+<images/4/mse-vs-dice.png, id=2441, 425.59pt x 281.05pt>
 File: images/4/mse-vs-dice.png Graphic file (type png)
 <use images/4/mse-vs-dice.png>
 Package pdftex.def Info: images/4/mse-vs-dice.png  used on input line 595.
 (pdftex.def)             Requested size: 275.56224pt x 181.9856pt.
-[61 <./images/4/training-graphs.png>]
+[62 <./images/4/training-graphs.png>]
 
-LaTeX Warning: Text page 62 contains only floats.
+LaTeX Warning: Text page 63 contains only floats.
 
 
 Overfull \vbox (3.72437pt too high) has occurred while \output is active []
 
- [62] [63] [64 <./images/4/mse-vs-dice.png>]
-<images/4/dsc-vs-dataset-percent.png, id=2474, 393.47pt x 266.9975pt>
+ [63] [64] [65 <./images/4/mse-vs-dice.png>]
+<images/4/dsc-vs-dataset-percent.png, id=2480, 393.47pt x 266.9975pt>
 File: images/4/dsc-vs-dataset-percent.png Graphic file (type png)
 <use images/4/dsc-vs-dataset-percent.png>
 Package pdftex.def Info: images/4/dsc-vs-dataset-percent.png  used on input line 604.
 (pdftex.def)             Requested size: 275.56224pt x 186.98659pt.
-<images/4/centerpoint_model_output_polyp.png, id=2479, 454.5783pt x 205.2468pt>
+<images/4/centerpoint_model_output_polyp.png, id=2485, 454.5783pt x 205.2468pt>
 File: images/4/centerpoint_model_output_polyp.png Graphic file (type png)
 <use images/4/centerpoint_model_output_polyp.png>
 Package pdftex.def Info: images/4/centerpoint_model_output_polyp.png  used on input line 624.
 (pdftex.def)             Requested size: 207.73581pt x 93.79768pt.
-<images/4/centerpoint_model_output_lesion.png, id=2480, 454.5783pt x 205.2468pt>
+<images/4/centerpoint_model_output_lesion.png, id=2486, 454.5783pt x 205.2468pt>
 File: images/4/centerpoint_model_output_lesion.png Graphic file (type png)
 <use images/4/centerpoint_model_output_lesion.png>
 Package pdftex.def Info: images/4/centerpoint_model_output_lesion.png  used on input line 626.
 (pdftex.def)             Requested size: 207.73581pt x 93.79768pt.
-<images/4/centerpoint_model_output_liver.png, id=2481, 427.1157pt x 208.8603pt>
+<images/4/centerpoint_model_output_liver.png, id=2487, 427.1157pt x 208.8603pt>
 File: images/4/centerpoint_model_output_liver.png Graphic file (type png)
 <use images/4/centerpoint_model_output_liver.png>
 Package pdftex.def Info: images/4/centerpoint_model_output_liver.png  used on input line 627.
 (pdftex.def)             Requested size: 207.73581pt x 101.58394pt.
-<images/4/centerpoint_model_output_eat.png, id=2482, 427.1157pt x 208.8603pt>
+<images/4/centerpoint_model_output_eat.png, id=2488, 427.1157pt x 208.8603pt>
 File: images/4/centerpoint_model_output_eat.png Graphic file (type png)
 <use images/4/centerpoint_model_output_eat.png>
 Package pdftex.def Info: images/4/centerpoint_model_output_eat.png  used on input line 629.
 (pdftex.def)             Requested size: 207.73581pt x 101.58394pt.
- [65
+ [66
 
- <./images/4/dsc-vs-dataset-percent.png>] [66 <./images/4/centerpoint_model_output_polyp.png> <./images/4/centerpoint_model_output_lesion.png> <./images/4/centerpoint_model_output_liver.png> <./images/4/centerpoint_model_output_eat.png>] [67]
-<images/4/hysteresis-ccs.pdf, id=2522, 708.6475pt x 395.4775pt>
+ <./images/4/dsc-vs-dataset-percent.png>] [67 <./images/4/centerpoint_model_output_polyp.png> <./images/4/centerpoint_model_output_lesion.png> <./images/4/centerpoint_model_output_liver.png> <./images/4/centerpoint_model_output_eat.png>] [68]
+<images/4/hysteresis-ccs.pdf, id=2528, 708.6475pt x 395.4775pt>
 File: images/4/hysteresis-ccs.pdf Graphic file (type pdf)
 <use images/4/hysteresis-ccs.pdf>
 Package pdftex.def Info: images/4/hysteresis-ccs.pdf  used on input line 697.
 (pdftex.def)             Requested size: 211.97295pt x 118.29416pt.
- [68 <./images/4/hysteresis-ccs.pdf>]
-<images/4/summary.png, id=2552, 3063.445pt x 1359.0775pt>
+ [69 <./images/4/hysteresis-ccs.pdf>]
+<images/4/summary.png, id=2558, 3063.445pt x 1359.0775pt>
 File: images/4/summary.png Graphic file (type png)
 <use images/4/summary.png>
 Package pdftex.def Info: images/4/summary.png  used on input line 720.
 (pdftex.def)             Requested size: 423.9459pt x 188.07133pt.
-<images/4/hyst.png, id=2557, 569.4876pt x 195.129pt>
+<images/4/hyst.png, id=2563, 569.4876pt x 195.129pt>
 File: images/4/hyst.png Graphic file (type png)
 <use images/4/hyst.png>
 Package pdftex.def Info: images/4/hyst.png  used on input line 731.
 (pdftex.def)             Requested size: 339.158pt x 116.21185pt.
- [69] [70 <./images/4/summary.png> <./images/4/hyst.png>]
-<images/4/examples_3.png, id=2584, 416.2752pt x 494.3268pt>
+ [70] [71 <./images/4/summary.png> <./images/4/hyst.png>]
+<images/4/examples_3.png, id=2590, 416.2752pt x 494.3268pt>
 File: images/4/examples_3.png Graphic file (type png)
 <use images/4/examples_3.png>
 Package pdftex.def Info: images/4/examples_3.png  used on input line 748.
 (pdftex.def)             Requested size: 423.9459pt x 503.45992pt.
- [71]
-<images/4/box_plot.png, id=2602, 361.35pt x 216.81pt>
+ [72]
+<images/4/box_plot.png, id=2608, 361.35pt x 216.81pt>
 File: images/4/box_plot.png Graphic file (type png)
 <use images/4/box_plot.png>
 Package pdftex.def Info: images/4/box_plot.png  used on input line 777.
 (pdftex.def)             Requested size: 254.37012pt x 152.62279pt.
- [72 <./images/4/examples_3.png>] [73 <./images/4/box_plot.png>]) [74] [75
+ [73 <./images/4/examples_3.png>] [74 <./images/4/box_plot.png>]) [75] [76
 
 
-] [76] [77]
+] [77] [78]
 Package biblatex Info: Reference section=0 on input line 355.
 \c@blx@maxsegment@5=\count513
 \c@blx@sectionciteorder@5=\count514
 Package biblatex Info: Reference section=5 on input line 357.
 Package biblatex Info: Setting label 'refsection:5' on input line 357.
- [78]
+ [79]
 \openout2 = `Chapters/05_input_size_reduction.aux'.
 
  (./Chapters/05_input_size_reduction.tex
 Chapter 5.
 1: section
-[79
+[80
 
 
 ]
-<images/5/explainer-diagram.png, id=2707, 2186.1675pt x 882.29625pt>
+<images/5/explainer-diagram.png, id=2713, 2186.1675pt x 882.29625pt>
 File: images/5/explainer-diagram.png Graphic file (type png)
 <use images/5/explainer-diagram.png>
 Package pdftex.def Info: images/5/explainer-diagram.png  used on input line 33.
 (pdftex.def)             Requested size: 423.9459pt x 171.08449pt.
- [80 <./images/5/explainer-diagram.png>]
+ [81 <./images/5/explainer-diagram.png>]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 57.
- [81] [82] [83] [84] [85] [86]
-<images/5/dsc-vs-size.png, id=2803, 1071.00125pt x 666.49pt>
+ [82] [83] [84] [85] [86] [87]
+<images/5/dsc-vs-size.png, id=2809, 1071.00125pt x 666.49pt>
 File: images/5/dsc-vs-size.png Graphic file (type png)
 <use images/5/dsc-vs-size.png>
 Package pdftex.def Info: images/5/dsc-vs-size.png  used on input line 265.
 (pdftex.def)             Requested size: 423.9459pt x 263.82509pt.
-<images/5/violin-plots.png, id=2804, 1009.7725pt x 721.69624pt>
+<images/5/violin-plots.png, id=2810, 1009.7725pt x 721.69624pt>
 File: images/5/violin-plots.png Graphic file (type png)
 <use images/5/violin-plots.png>
 Package pdftex.def Info: images/5/violin-plots.png  used on input line 271.
 (pdftex.def)             Requested size: 423.9459pt x 303.00023pt.
- [87] [88 <./images/5/dsc-vs-size.png>] [89 <./images/5/violin-plots.png>]
-<images/5/output_examples_cells.png, id=2829, 1020.81375pt x 684.5575pt>
+ [88] [89 <./images/5/dsc-vs-size.png>] [90 <./images/5/violin-plots.png>]
+<images/5/output_examples_cells.png, id=2835, 1020.81375pt x 684.5575pt>
 File: images/5/output_examples_cells.png Graphic file (type png)
 <use images/5/output_examples_cells.png>
 Package pdftex.def Info: images/5/output_examples_cells.png  used on input line 286.
 (pdftex.def)             Requested size: 423.9459pt x 284.30542pt.
-<images/5/output_examples_polyp.png, id=2832, 1020.81375pt x 684.5575pt>
+<images/5/output_examples_polyp.png, id=2838, 1020.81375pt x 684.5575pt>
 File: images/5/output_examples_polyp.png Graphic file (type png)
 <use images/5/output_examples_polyp.png>
 Package pdftex.def Info: images/5/output_examples_polyp.png  used on input line 291.
 (pdftex.def)             Requested size: 423.9459pt x 284.30542pt.
-<images/5/output_examples_aa.png, id=2835, 1020.81375pt x 684.5575pt>
+<images/5/output_examples_aa.png, id=2841, 1020.81375pt x 684.5575pt>
 File: images/5/output_examples_aa.png Graphic file (type png)
 <use images/5/output_examples_aa.png>
 Package pdftex.def Info: images/5/output_examples_aa.png  used on input line 296.
 (pdftex.def)             Requested size: 423.9459pt x 284.30542pt.
- [90
+ [91
 
  <./images/5/output_examples_cells.png>]
 Overfull \vbox (15.0205pt too high) has occurred while \output is active []
 
- [91 <./images/5/output_examples_polyp.png> <./images/5/output_examples_aa.png>]
-<images/5/inf_time.png, id=2856, 789.95125pt x 229.85875pt>
+ [92 <./images/5/output_examples_polyp.png> <./images/5/output_examples_aa.png>]
+<images/5/inf_time.png, id=2862, 789.95125pt x 229.85875pt>
 File: images/5/inf_time.png Graphic file (type png)
 <use images/5/inf_time.png>
 Package pdftex.def Info: images/5/inf_time.png  used on input line 343.
 (pdftex.def)             Requested size: 423.9459pt x 123.36076pt.
- [92 <./images/5/inf_time.png>]
-<images/5/e2e/diagram.pdf, id=2866, 1296.845pt x 238.8925pt>
+ [93 <./images/5/inf_time.png>]
+<images/5/e2e/diagram.pdf, id=2872, 1296.845pt x 238.8925pt>
 File: images/5/e2e/diagram.pdf Graphic file (type pdf)
 <use images/5/e2e/diagram.pdf>
 Package pdftex.def Info: images/5/e2e/diagram.pdf  used on input line 366.
 (pdftex.def)             Requested size: 423.9459pt x 78.09479pt.
- [93] [94 <./images/5/e2e/diagram.pdf>]
-<images/5/e2e/visual_results.png, id=2899, 1062.369pt x 1068.1506pt>
+ [94] [95 <./images/5/e2e/diagram.pdf>]
+<images/5/e2e/visual_results.png, id=2905, 1062.369pt x 1068.1506pt>
 File: images/5/e2e/visual_results.png Graphic file (type png)
 <use images/5/e2e/visual_results.png>
 Package pdftex.def Info: images/5/e2e/visual_results.png  used on input line 393.
 (pdftex.def)             Requested size: 423.9459pt x 426.25845pt.
-<images/5/e2e/boxplots.pdf, id=2902, 960.16217pt x 564.67584pt>
+<images/5/e2e/boxplots.pdf, id=2908, 960.16217pt x 564.67584pt>
 File: images/5/e2e/boxplots.pdf Graphic file (type pdf)
 <use images/5/e2e/boxplots.pdf>
 Package pdftex.def Info: images/5/e2e/boxplots.pdf  used on input line 441.
 (pdftex.def)             Requested size: 423.9459pt x 249.31975pt.
- [95] [96 <./images/5/e2e/visual_results.png>] [97] [98 <./images/5/e2e/boxplots.pdf>]) [99
+ [96] [97 <./images/5/e2e/visual_results.png>] [98] [99 <./images/5/e2e/boxplots.pdf>]) [100
 
-] [100
+] [101
 
 
-] [101]
+] [102]
 Package biblatex Info: Reference section=0 on input line 360.
 \c@blx@maxsegment@6=\count515
 \c@blx@sectionciteorder@6=\count516
 Package biblatex Info: Reference section=6 on input line 362.
 Package biblatex Info: Setting label 'refsection:6' on input line 362.
- [102]
+ [103]
 \openout2 = `Chapters/06_other_methods.aux'.
 
  (./Chapters/06_other_methods.tex
 Chapter 6.
-<images/6/conditioned-image.pdf, id=3043, 883.3pt x 315.1775pt>
+<images/6/conditioned-image.pdf, id=3050, 883.3pt x 315.1775pt>
 File: images/6/conditioned-image.pdf Graphic file (type pdf)
 <use images/6/conditioned-image.pdf>
 Package pdftex.def Info: images/6/conditioned-image.pdf  used on input line 20.
 (pdftex.def)             Requested size: 275.56224pt x 98.3244pt.
 1: section
-[103
+[104
 
 
-] [104 <./images/6/conditioned-image.pdf>] [105]
-<images/6/relabel.png, id=3108, 372.1905pt x 192.9609pt>
+] [105 <./images/6/conditioned-image.pdf>] [106]
+<images/6/relabel.png, id=3116, 372.1905pt x 192.9609pt>
 File: images/6/relabel.png Graphic file (type png)
 <use images/6/relabel.png>
 Package pdftex.def Info: images/6/relabel.png  used on input line 61.
 (pdftex.def)             Requested size: 275.56224pt x 142.86243pt.
-<images/6/inputs.png, id=3114, 372.9132pt x 52.0344pt>
+<images/6/inputs.png, id=3122, 372.9132pt x 52.0344pt>
 File: images/6/inputs.png Graphic file (type png)
 <use images/6/inputs.png>
 Package pdftex.def Info: images/6/inputs.png  used on input line 72.
 (pdftex.def)             Requested size: 423.9459pt x 59.15546pt.
- [106 <./images/6/relabel.png> <./images/6/inputs.png>]
-<images/6/augmentation.png, id=3131, 826.08624pt x 387.4475pt>
+ [107 <./images/6/relabel.png> <./images/6/inputs.png>]
+<images/6/augmentation.png, id=3138, 826.08624pt x 387.4475pt>
 File: images/6/augmentation.png Graphic file (type png)
 <use images/6/augmentation.png>
 Package pdftex.def Info: images/6/augmentation.png  used on input line 92.
 (pdftex.def)             Requested size: 423.9459pt x 198.83711pt.
- [107 <./images/6/augmentation.png>]
-<images/6/examples.png, id=3143, 372.9132pt x 253.6677pt>
+ [108 <./images/6/augmentation.png>]
+<images/6/examples.png, id=3150, 372.9132pt x 253.6677pt>
 File: images/6/examples.png Graphic file (type png)
 <use images/6/examples.png>
 Package pdftex.def Info: images/6/examples.png  used on input line 126.
 (pdftex.def)             Requested size: 296.76083pt x 201.86612pt.
- [108 <./images/6/examples.png>]
-<images/6/blaltman.jpg, id=3154, 2569.6pt x 1927.2pt>
+ [109 <./images/6/examples.png>]
+<images/6/blaltman.jpg, id=3161, 2569.6pt x 1927.2pt>
 File: images/6/blaltman.jpg Graphic file (type jpg)
 <use images/6/blaltman.jpg>
 Package pdftex.def Info: images/6/blaltman.jpg  used on input line 135.
 (pdftex.def)             Requested size: 317.95943pt x 238.45865pt.
-) [109 <./images/6/blaltman.jpg>] [110] [111
+) [110 <./images/6/blaltman.jpg>] [111] [112
 
 
-] [112]
+] [113]
 Package biblatex Info: Reference section=0 on input line 365.
 \c@blx@maxsegment@7=\count517
 \c@blx@sectionciteorder@7=\count518
 Package biblatex Info: Reference section=7 on input line 367.
 Package biblatex Info: Setting label 'refsection:7' on input line 367.
- [113]
+ [114]
 \openout2 = `Chapters/07_conclusion.aux'.
 
  (./Chapters/07_conclusion.tex
 Chapter 7.
 1: section
-[114
+[115
 
 
-]) [115]
+]) [116]
 
 LaTeX Warning: Empty bibliography on input line 369.
 
 Package biblatex Info: Reference section=0 on input line 370.
 1: section
 Chapter 8.
-<images/signature.png, id=3234, 525.965pt x 269.005pt>
+<images/signature.png, id=3241, 525.965pt x 269.005pt>
 File: images/signature.png Graphic file (type png)
 <use images/signature.png>
 Package pdftex.def Info: images/signature.png  used on input line 394.
 (pdftex.def)             Requested size: 142.26378pt x 72.75955pt.
 1: section
-[116
+[117
 
 
 
@@ -1846,24 +1844,24 @@ Package pdftex.def Info: images/signature.png  used on input line 394.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 96785EACA3C77730911950FEF32782E5;15218.
+(rerunfilecheck)             Checksum: C9888F6F2FA58A49132E4C22613A5CE6;15218.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45614 strings out of 478268
- 998438 string characters out of 5846347
- 1786624 words of memory out of 5000000
- 62434 multiletter control sequences out of 15000+600000
+ 45508 strings out of 478268
+ 996296 string characters out of 5846347
+ 1785873 words of memory out of 5000000
+ 62327 multiletter control sequences out of 15000+600000
  536689 words of font info for 151 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  100i,20n,95p,2502b,2667s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/mathpazo/fplmbb.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on /Users/marinbenc/Projects/thesis/.texpadtmp/main.pdf (131 pages, 12310615 bytes).
+Output written on /Users/marinbenc/Projects/thesis/.texpadtmp/main.pdf (132 pages, 12310560 bytes).
 PDF statistics:
- 3414 PDF objects out of 3580 (max. 8388607)
- 2815 compressed objects within 29 object streams
- 554 named destinations out of 1000 (max. 500000)
+ 3421 PDF objects out of 3580 (max. 8388607)
+ 2821 compressed objects within 29 object streams
+ 555 named destinations out of 1000 (max. 500000)
  985 words of extra memory for PDF output out of 10000 (max. 10000000)
 
