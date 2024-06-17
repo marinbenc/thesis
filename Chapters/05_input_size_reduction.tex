@@ -6,15 +6,12 @@
 In Chapter \ref{chap:data-efficiency} of this thesis we discussed how increasing the number of parameters of a model allows it to overfit more easily. Additionally, we discussed how more complex problems require more parameters to be modeled. Thus, for small datasets, it is beneficial to reduce the complexity of the problem to allow for using networks of fewer parameters. A simple way to reduce the complexity of problems in convolutional neural networks is to reduce the size of the images.
 
 To understand how reducing input size reduces model complexity, let's revisit the concept of sample complexity \(n(\epsilon, \delta)\) and its established bounds:
-
 \begin{equation}
 	n(\epsilon, \delta) \geq \frac{\log(\lvert \mathcal{F} \rvert / \delta)}{\epsilon},
 \end{equation}
+where \(n\) represents the minimum number of samples needed for a model from the hypothesis space \(\mathcal{F}\) to achieve a performance that is 'probably approximately correct'—that is, within an error margin \(\epsilon\) with a confidence level of \(1 - \delta\). It's clear from this relation that as the size of the hypothesis space expands, so does the sample complexity.
 
-Here, \(n\) represents the minimum number of samples needed for a model from the hypothesis space \(\mathcal{F}\) to achieve a performance that is 'probably approximately correct'—that is, within an error margin \(\epsilon\) with a confidence level of \(1 - \delta\). It's clear from this relation that as the size of the hypothesis space expands, so does the sample complexity.
-
-The hypothesis space refers to the set of all functions that the model is capable of approximating, encompassing every conceivable mapping from the domain \(\mathcal{D}\) to the codomain \(\mathcal{C}\). Therefore, the magnitude of the hypothesis space can be expressed as:
-
+The hypothesis space refers to the set of all functions that the model is capable of approximating, encompassing every conceivable mapping from the domain \(\mathcal{D}\) to the codomain \(\mathcal{C}\). Therefore, the magnitude of the hypothesis space can be expressed as
 \begin{equation}
 	\lvert \mathcal{F} \rvert = {\lvert C \rvert}^{\lvert D \rvert}.
 \end{equation}
@@ -31,7 +28,7 @@ An effective way to overcome this loss of information while still reducing the i
 
 We introduce a strategy to minimize the input size for segmentation networks, focusing on cropping rather than uniform downsampling. This method involves isolating each object within the original high-resolution image, cropping these areas, and performing segmentation on the individual cropped sections. By concentrating on smaller crop regions instead of the entire image, we significantly reduce the network's input size while preserving essential pixel information within the objects. This approach is illustrated in \figref{fig:summary}, providing a visual summary of the process.
 
-\begin{figure}[H]
+\begin{figure}[b!]
 \centering
 \includegraphics[width=\textwidth]{images/5/explainer-diagram.png}
 \caption{A visual summary of our approach. (1) An image is uniformly downsampled from its original resolution. (2) A rough segmentation is predicted by a neural network, and the bounding box of each connected component is calculated. (3) The bounding boxes are scaled to the original image space and crops of the input image are taken in the original resolution and scaled to a common input size. (4) Each crop is segmented separately by a second neural network specifically trained on cropped images. These crops are fused to form a final segmentation in the original high resolution. \cite{bencevicSegmentthenSegmentContextPreservingCropBased2023a}\label{fig:summary}}
@@ -41,17 +38,13 @@ The inference procedure using our method is as follows. Let $I$ be an input imag
 
 Given $N$ connected components of $M_{rough}$, a set of bounding boxes $\{b_i\}, i \in [1..N]$ is calculated enclosing each connected component, described in more detail later in this chapter. The bounding boxes are used to generate a set of crops $\{I_i: I_i = I(T_i(b_i))\}$, where $T_i$ is a scaling and translation of the bounding box in $S \times S$ space to the corresponding region in the $W \times H$ space.
 The crops are used to generate a set of fine segmentation masks $Y_f$ using:
-
 \begin{equation}
 Y_f = \{Y_{fi}: Y_{fi} = g_{\phi_2}(C_i(I_i)), i \in 1..N\},
 \end{equation}
-
 where $g_{\phi_2}$ is a CNN of the same architecture as $g_{\phi_1}$ and size $S \times S$, parameterized by $\phi_2$, and $C_i$ is a scaling operation from the width and height of $I_i$ to $S \times S$. A final segmentation $y$ is formed using:
-
 \begin{equation}
 y = max(\{(T_i \circ C^{-1}_i)(Y_{fi}), i \in 1..N\}),
 \end{equation}
-
 where $y$ is the resulting segmentation formed as the maximum value in all of the fine segmentations, transformed to their corresponding regions in $W \times H$ space. This process is described in more detail in Algorithm \ref{alg:crop}. 
 
 The rough segmentation network $g_{\phi_1}$ is trained on uniformly downsampled images. The network outputs a rough, low-resolution segmentation mask. The rough segmentation mask contains a number of connected components. For each connected component, we calculate a bounding box that encompasses all of its pixels. These bounding boxes are the crop regions used for the fine segmentation network. Since we only use this segmentation to obtain rough regions of interest, the input images to this network can be heavily downsampled without impacting the final fine segmentation.
@@ -158,7 +151,7 @@ Each network is trained from scratch using the downscaled dataset. The outputs f
 
 In the interest of providing objective metrics of model performance, all of the hyperparameters were tuned using the validation dataset on the baseline U-Net. Those same hyperparameters are then used for each of the models in our approach. Each model is trained using the Adam optimizer up to a maximum number of epochs and the best model with the best validation loss is saved during training. The validation loss is calculated as the Dice score coefficient (DSC) over the validation dataset at the same resolution as the input images. We do not upscale the outputs for the validation loss as we do for calculating the final metrics. Each model was trained using PyTorch 1.10 on an Nvidia GeForce RTX 3080 GPU. Where possible, we have fixed the random seed value to ``2022'', but we have also run the experiments on two other random seeds and obtained similar results.
 
-\begin{table}[H]
+\begin{table}[t!]
 \caption{The hyper-parameters used for each of the models in our experiments.\label{tab:hyperparams}}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 \begin{tabularx}{\textwidth}{CCCC}
@@ -185,7 +178,7 @@ This section briefly describes the datasets used in our experiments as well as t
 
 The results of our experiments are shown in Table \ref{tab:seg-then-seg-results}. Our approach, using low input sizes, results in segmentation DSC on par or better than baseline models trained on larger input sizes using downscaled images. This is especially apparent at large downscaling factors of 4 and more, where the baseline models quickly deteriorate in their performance but our models were still able to achieve results that are close to those on full-size images. The biggest improvement is seen in terms of recall. For instance, on the 4x downscaled cells dataset, our approach leads to a 4.3 times larger recall. Likewise, for the polyp images, the recall improves from 0.039 to 0.799, a 20 times improvement. Recall is especially important in medical image segmentation since the cost of false negatives can often far outweigh the cost of false positives.
 
-\begin{table}[H]
+\begin{table}[t!]
 \caption{The results of our approach using U-Net as the underlying architecture.\label{tab:seg-then-seg-results}}
 		\newcolumntype{C}{>{\centering\arraybackslash}X}
 		\begin{tabularx}{\textwidth}{lCCCC}
@@ -231,7 +224,7 @@ $512 \times 512$ - Ours & $85.51 \pm 14.80$ & $76.85 \pm 17.17$ & $90.90 \pm 14.
 
 We evaluate how general our approach is by applying it to two other state-of-the-art semantic segmentation architectures, Res-U-Net++ \cite{jhaResUNetAdvancedArchitecture2019, zhouUNetNestedUNet2018b} and DeepLabv3+ \cite{chenEncoderDecoderAtrousSeparable2018b}. The results of these experiments are shown in Table \ref{tab:other-sota}.
 
-\begin{table}[h]
+\begin{table}[t!]
 \caption{A comparison of the Dice Score Coefficients of our approach using other underlying architectures at 4x and 2x downscaled images.\label{tab:other-sota}}
 		\newcolumntype{C}{>{\centering\arraybackslash}X}
 		\begin{tabularx}{\textwidth}{lCCC}
@@ -267,13 +260,13 @@ DeepLabv3+ & $256 \times 256$ & $87.71 \pm 12.13$ & $89.28 \pm 11.75$ \\
 
 Furthermore, our approach achieves much better stability of results as the input size decreases. This is shown visually in Figure \ref{fig:dsc-vs-size}. The stability improvements are especially visible in Figure \ref{fig:box-plots}, where it can be seen that the distribution of the results from our approach remains more stable than in the baseline models.
 
-\begin{figure}[H]
+\begin{figure}[t!]
 \centering
 \includegraphics[width=\textwidth]{images/5/dsc-vs-size.png}
 \caption{The relationship between input dimensions and the mean Dice Score Coefficient (DSC) and recall for different datasets. The points are measured values from our experiments.\label{fig:dsc-vs-size}}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[b!]
 \centering
 \includegraphics[width=\textwidth]{images/5/violin-plots.png}
 \caption{Violin plots of Dice Score Coefficients of our approach compared to the baseline models at various input dimensions. The dashed lines represent quartiles of the distributions.\label{fig:box-plots}}
@@ -281,34 +274,37 @@ Furthermore, our approach achieves much better stability of results as the input
 
 The goal of our approach is increasing segmentation performance on downscaled images, so we do not expect a performance increase on the full-size images. While our approach offers significant improvements when using downscaled images, the main disadvantage of our approach is that it requires training two separate neural networks. However, this downside is lessened by two key factors. First, the cropped networks converge much faster since the objects are already localized and unified in scale in the images, making the problem easier for the network to learn. Secondly, since the architecture of the two networks is identical, one can use transfer learning from the trained rough segmentation network to the fine segmentation network.
 
+\FloatBarrier
+
 \subsubsection{Qualitative Assessment}
 
 Qualitatively, there is a large improvement when using our approach over the baseline methods on downscaled inputs. At large downscaling factors, outputs from the baseline models often include artifacts on the border since the pixel grid is not fine enough to represent small variations on the object boundary. These issues disappear with our approach, as the overall downscaling amount is much lower. This effect is especially visible on the cells dataset due to its relatively small object size, as shown in Figure \ref{fig:examples-cells}. We observe a similar effect on the aorta dataset, shown in Figure \ref{fig:examples-aa}.
 
 On the polyp dataset, our approach greatly reduces the number of false negative pixels on the image, as can be seen in Figure \ref{fig:examples-polyp}. U-Net fails to predict the whole polyp region on small input sizes, leading to ragged object boundaries and holes in the predicted regions. By comparison, our approach produces smoother, closed contours and manages to capture more of the object boundary than U-Net equivalents at the same input size.
 
-\begin{figure}[H]
+\begin{figure}[b!]
 	\includegraphics[width=\textwidth]{images/5/output_examples_cells.png}
 	\caption{Example outputs from the models for the cells dataset at various input sizes. \cite{bencevicSegmentthenSegmentContextPreservingCropBased2023a}\label{fig:examples-cells}}
 \end{figure}
 
-
-\begin{figure}[H]
+\begin{figure}[t!]
 	\includegraphics[width=\textwidth]{images/5/output_examples_polyp.png}
 	\caption{Example outputs from the models for the polyp dataset at various input sizes. \cite{bencevicSegmentthenSegmentContextPreservingCropBased2023a}\label{fig:examples-polyp}}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[t!]
 	\includegraphics[width=\textwidth]{images/5/output_examples_aa.png}
 	\caption{Example outputs from the models for the aorta dataset at various input sizes. \cite{bencevicSegmentthenSegmentContextPreservingCropBased2023a}\label{fig:examples-aa}}
 \end{figure}
+
+\FloatBarrier
 
 \subsubsection{Computational Performance Characteristics}
 
 Since our approach consists of using a cascade of two U-Nets, the number of parameters of the network is doubled. However, the peak GPU memory utilization during training and inference remains exactly the same when using our approach as with a baseline model on the same input size. Our approach allows one to reduce the input size while still maintaining the same segmentation metrics, thus allowing larger batch sizes during training. This is presented in Table \ref{tab:performance}.
 
 
-\begin{table}[H]
+\begin{table}[b!]
 \caption{Performance characteristics of our approach compared to the baseline model with similar mean test Dice Score Coefficients.\label{tab:performance}}
 		\newcolumntype{C}{>{\centering\arraybackslash}X}
 		\begin{tabularx}{\textwidth}{lCCCCC}
@@ -342,7 +338,7 @@ Since our approach consists of using a cascade of two U-Nets, the number of para
 
 In terms of computational performance, the largest downside of our approach is that it increases inference time non-linearly with the size of the images, which can be seen in Figure \ref{fig:inf-time}.
 
-\begin{figure}[H]
+\begin{figure}[b!]
 \centering
 \includegraphics[width=\textwidth]{images/5/inf_time.png}
 \caption{Mean per-input inference time across different input sizes for the U-Net-based models. \cite{bencevicSegmentthenSegmentContextPreservingCropBased2023a}\label{fig:inf-time}}
@@ -366,7 +362,7 @@ To address these issues, we suggest two key modifications for a viable end-to-en
 
 \subsection{End-to-end Network Architecture and Training}
 
-\begin{figure}[h]
+\begin{figure}[b!]
 \includegraphics[width=\textwidth]{images/5/e2e/diagram.pdf}
 \caption{An illustration of the end-to-end model-driven cropping architecture, comprising two interconnected modules: a coarse and a fine segmentation module, linked via a cropping layer. Both modules are designed to handle images of small, fixed input sizes. The first module processes a downscaled version of the input image. Its segmentation output determines the region of interest in the high-resolution image, which, along with the cropped initial segmentation, is fed into the fine segmentation module. Before being fine-tuned together, both networks are pre-trained as standard segmentation networks.\label{fig:e2e-diagram}}\end{figure}
 
@@ -392,7 +388,7 @@ The two segmentation metrics we use for the evaluation are the Dice Similarity C
 
 Visually, our approach demonstrates enhanced performance in delineating lesion boundaries, as evident in Figure \ref{fig:visual}. The segmentation results more accurately adhere to the ground truth contours and exhibit fewer false-positive regions compared to those generated by the baseline models.
 
-\begin{figure}[h]
+\begin{figure}[t!]
 \centering
 \includegraphics[width=\textwidth]{images/5/e2e/visual_results.png}
 \caption{Randomly chosen examples of out-of-sample segmentation results. The columns, from left to right, show the input image with the ground truth segmentation mask, the final output segmentation mask of our approach, the rough segmentation of our approach, and the output of a baseline U-Net model. The images are zoomed in on the lesion region.} \label{fig:visual}
@@ -400,7 +396,7 @@ Visually, our approach demonstrates enhanced performance in delineating lesion b
 
 Quantitatively, in-sample and out-of-sample results of our model compared to a baseline U-Net are shown in Table \ref{tab:results}. When comparing our method and a baseline U-Net using the same input size, we note an increase in DSC in almost all experiments. We see similar results for the Thresholded Jaccard Index. These increases can give us an estimate of how much we can reduce the input size of an image while still retaining the same segmentation quality. For instance, using our approach, we can go from $256 \times 256$ to $64 \times 64$ images while achieving the same in-sample as well as out-of-sample Thresholded Jaccard Index for DermIS.
 
-\begin{table}[h]
+\begin{table}[t!]
 \caption{Results of our approach and the baseline model in terms of the Dice Coefficient (DSC) as well as the thresholded Jaccard index (Th. Jacc.) for various experiments. Results are shown in the form of mean $\pm$ standard deviation. The top two groups show in-sample performance within the DermIS and DermQuest datasets, while the bottom two groups show out-of-sample performance when trained on DermIS and tested on DermQuest, and vice-versa.}\label{tab:results}
 \def\arraystretch{1.2}
 \setlength\tabcolsep{1em}
@@ -441,7 +437,7 @@ Quantitatively, in-sample and out-of-sample results of our model compared to a b
 
 The thresholded Jaccard index assumes that any segmentation with a Jaccard index below 0.65 is a failed segmentation, i.e. it cannot be used for any downstream analysis of the legion due to its insufficient accuracy. Consequently, we examined the frequency of these failed segmentations across various input sizes, as depicted in Figure \ref{fig:box-plot}. The findings indicate a general improvement in the mean Jaccard Index (exceeding 0.65) when utilizing our model, particularly for smaller input sizes, and this trend persists even in out-of-sample evaluations. Additionally, there is a noticeable decrease in the incidence of failed segmentations (Jaccard Index < 0.65) in all but two experiments. This decline is most pronounced with smaller input sizes, suggesting that our method significantly enhances the robustness of segmentations derived from images with small input sizes.
 
-\begin{figure}[h]
+\begin{figure}[t!]
 \includegraphics[width=\textwidth]{images/5/e2e/boxplots.pdf}
 \caption{A box plot of Jaccard indices above or equal to 0.65 (above) and the number of Jaccard indices below 0.65 (below). The first two columns show in-sample results, while the last two columns show out-of-sample results for models trained on DermIS and tested on DermQuest and vice-versa.} \label{fig:box-plot}
 \end{figure}

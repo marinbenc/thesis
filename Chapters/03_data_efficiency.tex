@@ -8,26 +8,21 @@ Above all, the accuracy of neural networks is governed by three factors: problem
 Consider a machine learning scenario where we estimate the 10-year risk of heart disease based on age. Here, some underlying function maps age to heart disease risk, based on a complex physical process that is almost impossible to understand and model. Our only recourse is to collect a set of data points and try to approximate the underlying function. Our goal is to iteratively search for a function that minimizes some criterion that measures the discrepancy between the function and our collected data points.
 
 One can construct an infinite number of functions that fit a set of data points equally well under a selected criterion. Therefore, to derive a single solution, we have to choose a finite class of functions to evaluate. One of the simplest classes of functions we could use is lines --- leading to a simple linear regression. A line is defined by two parameters, its slope $\theta_1$ and intersect $\theta_0$:
-
 \begin{equation}
 	f(x) = \theta_1 x + \theta_0.
 \end{equation}
-
 In this equation, $f(x)$ represents our regression model. The objective is to determine the optimal value of $\theta = \{ \theta_1, \theta_2 \}$ that most accurately represents the collected data pairs $(x_i, y_i)$. This can be achieved by minimizing the mean squared distance between the line and each data point:
-
 \begin{equation}
 	\min_{\theta} \sum_{i=1}^N (y_i - f(x_i))^2.
 \end{equation}
 
 We will conduct a simulated experiment. We will construct an underlying function as a cosine function with an added Gaussian noise:
-
 \begin{equation}
 	y(x) = -(\cos(0.01 \pi x) - 1) \cdot 0.4 + Z, Z \sim \mathcal{N}(0, 0.1).
 \end{equation}
-
 We will generate several $(x_i, y_i)$ pairs and apply the previously discussed linear model and criterion to fit a line through these points. In real-world conditions, the underlying function and the nature of the measurement noise remain unknown. However, for this simulation, knowing these details is useful to demonstrate the divergence between the fitted function and the underlying one. Figure \ref{fig:t1-t2-example} illustrates the fitted line using varying numbers of data points.
 
-\begin{figure}[h!]
+\begin{figure}[t!]
  \hfill
  \subfloat{\includegraphics[width=0.5\linewidth]{images/3/heart_disease_risk}}
  \hfill
@@ -36,7 +31,7 @@ We will generate several $(x_i, y_i)$ pairs and apply the previously discussed l
  \caption{A simulated example of heart disease risk prediction using simple linear regression. The plots on the right show how the approximated function depends on the sample size.\label{fig:t1-t2-example}}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[t!]
  \centering
  \includegraphics[width=\columnwidth]{images/3/heart_disease_risk_samples_degrees}
  \caption{Fitting a polygonal function of various degrees on three different sample sizes.}
@@ -46,31 +41,25 @@ We will generate several $(x_i, y_i)$ pairs and apply the previously discussed l
 The simulation with only three points clearly demonstrates a mismatch between the approximated and underlying functions. This discrepancy is known as \textbf{overfitting}. Overfitting occurs when the model is overly influenced by the specific sample of data, particularly the noise, and fails to generalize to new, unseen examples. As the number of samples increases, the approximated function aligns more closely with the underlying one. However, even with 20 measurements, there is a notable difference between the approximated and underlying functions. The underlying function is a non-linear cosine function. No matter how many data points we use, a line cannot perfectly approximate this non-linear function. This is an example of \textbf{underfitting}, where the model lacks sufficient parameters to capture the complexity of the underlying function.
 
 To address underfitting, a more complex model is required, meaning we need a broader class of functions for optimization. Our current regression can be viewed as fitting a polynomial function to the dataset. Initially, we have employed polynomials of degree 1 — lines. We can generalize our model to an $n$-degree polynomial:
-
 \begin{equation}
 	f(x) = \theta_n x^n + \theta_{n-1}x^{n-1} + \cdots + \theta_1 x + \theta_0.
 \end{equation}
-
 To increase our function class, we will choose a larger polynomial degree and again minimize the mean squared distance to obtain $\theta_n$ through $\theta_0$. By increasing the degree we are increasing the complexity of the model and the model will be able to represent more complex underlying functions. We can observe what happens when we choose degrees 2, 3, or 5 in \figref{fig:reg-deg-2}.
 
 In the case with 10 measurements, we observe that the approximated polynomial with $n = 2$ follows the underlying function somewhat well. However, as we increase the degree the function quickly begins to overfit. This experiment demonstrates that the likelihood of overfitting increases with model complexity. Yet, we need complex models to approximate complex functions.
 
 This inherent conflict between overfitting and underfitting is known as the \textbf{bias--complexity tradeoff} (alternatively, the bias–-variance tradeoff). Let us investigate this problem more formally. We can decompose the error of a deep learning model into two components \cite{shalev-shwartzUnderstandingMachineLearning2014}. Consider a trained model $f_\theta$ with optimal parameter values $\theta$ from a class of functions $\mathcal{F}$. Let there be a function $L(f)$ that measures the error between any model $f \in \mathcal{F}$ and the underlying function we are approximating. The total error of the trained model can be expressed as:
-
 \begin{equation}
 	L(f_\theta) = \epsilon_{app} + \epsilon_{est}
 	\text{ where:\;}  \epsilon_{app} = \min_{f \in F}L(f),\;
 	\epsilon_{est} = L(f_\theta) - \epsilon_{app},
 \end{equation}
-
 where $\epsilon_{app}$ is the \textbf{approximation error} and $\epsilon_{est}$ is the \textbf{estimation error}. The approximation error is the residual error when using the best possible approximator within our chosen class of functions $\mathcal{F}$. In other words, the error that remains given the best possible model parameters. For instance, in the earlier function approximation example with a 1st-degree polynomial, even with infinite data, there would always be some discrepancy in approximation compared to the underlying function. The approximation error depends entirely on the class of functions we use and can only be reduced by adopting a different class, such as polynomials of a higher degree. The remaining estimation error depends on the quality of our parameters $\theta$. It is possible to have a class of functions capable of perfectly approximating the underlying function but still fail to precisely identify the optimal function within that class.
 
 In our previous experiment, we observed that the estimation error is influenced by both the sample size and the complexity of the model. To formally analyze this, we can explore the concept of \textbf{sample complexity}. Sample complexity, denoted as $n(\epsilon, \delta)$ for chosen $\epsilon, \delta \in (0, 1)$ measures the number of samples needed for a model $f$ chosen from a finite class of functions $\mathcal{F}$ to be \textbf{probably approximately correct}. This means that, across different samplings of data points, there is a probability of $1 - \delta$ that the model is correct within some margin of error $\epsilon$, i.e. $L(f) \leq \epsilon$. Assuming there exists some unknown $f' \in \mathcal{F}$ for which $L(f') = 0$, we can say that the approximation error is zero. Then, it can be shown \cite{shalev-shwartzUnderstandingMachineLearning2014} that:
-
 \begin{equation}
 	n(\epsilon, \delta) \geq \frac{\log(\lvert \mathcal{F} \rvert \delta)}{\epsilon}.
 \end{equation}
-
 We can see that an increased function class size (for instance, by choosing a higher-degree polynomial) necessitates a larger sample size $n$ to probably approximately correctly approximate the underlying function. Thus, we conclude that the estimation error can be reduced either by adding more data samples or by decreasing the size of the function class we are optimizing over.
 
 In medical image segmentation, we have an unfortunate stalemate between the three factors governing estimation and approximation errors. The complexity of medical image segmentation demands a large number of parameters, which in turn increases the estimation error. Ideally, this error could be mitigated by adding more data samples, but in the realm of medical imaging, acquiring ample data is often impractical.
@@ -91,7 +80,7 @@ In this thesis, we refer to this basic technique as ``simple transfer learning''
 	
 Simple transfer learning is used extensively in medical image segmentation. Segmentation neural networks are commonly initialized using weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet is a dataset of natural images and its distribution is drastically different from medical images. Therefore, this initialization does not typically lead to increases in accuracy but can make the network converge faster as it ``skips'' having to learn to detect base-level image features common to all images. This process is shown in \figref{fig:stl-diagram}.
 
-\begin{figure}[h]
+\begin{figure}[t!]
  \centering
  \includegraphics[width=\linewidth]{images/3/simple-transfer-learning-diagram}
  \caption{An overview of the simple transfer learning procedure. First, a model is pretrained on some related segmentation task. Then, part of the trained model's weights are copied to a new model that is then fine-tuned on the target segmentation task.}
@@ -108,7 +97,7 @@ One class of methods aims to explicitly penalize domain shift by including an es
 
 Another approach involves reducing the network's ability to distinguish between source and target domains, thereby removing information that leads to domain shift. \citet{ganinDA2015} add a classification head to the network to identify the input's domain. Typically, networks adjust their parameters to minimize loss during each iteration. However, in \cite{ganinDA2015}, the gradients from the domain classifier are inverted so the network updates its parameters to make it harder to differentiate between the two datasets. This method is illustrated in \figref{fig:unsup-dom-adpt}.
 
-\begin{figure}[h!]
+\begin{figure}[t!]
  \centering
  \includegraphics[width=0.7\linewidth]{images/3/unsup-dom-adpt}
  \caption{A diagram of the domain adaptation approach in \citet{ganinDA2015}. The gradients of the domain classification head which are applied to the encoder are reversed during backpropagation.}
@@ -123,7 +112,7 @@ Although domain adaptation techniques enhance transfer learning performance, the
 	
 Semi-supervised learning combines both labeled and unlabeled data to train neural networks. One such approach is \textbf{self-supervised learning}, where a feature extractor can be trained in a completely unsupervised manner using a large number of images. Then, that feature extractor can be employed via transfer learning to train a network for some specific task such as segmentation. One common strategy for this involves a \textbf{pretext task}, where the network is trained on a task for which solutions can be automatically generated from unlabeled data, using automatically generated labels to train the network. A pretext task could be, for instance, solving jigsaw puzzles \cite{norooziUnsupervisedLearningVisual2016}. An image is divided into $3 \times 3$ tiles, the tiles are randomly shuffled and fed into the network. The network is tasked with reordering these tiles to reconstruct the original image. Solving this task forces the network to learn to identify salient features such as recognizing a single object across multiple tiles. Such an approach is visualized in \figref{fig:ssl-pretext}.
 
-\begin{figure}[h!]
+\begin{figure}[b!]
  \centering
  \includegraphics[width=\linewidth]{images/3/shuffle-to-learn}
  \caption{A self-supervised learning approach using shuffling image tiles as a pretext task presented by \citet{carr2021shuffle}. The trained feature encoder learns to extract relevant features and its parameters are transferred to a model trained to perform the downstream task.}
@@ -146,11 +135,9 @@ Diffusion models \cite{ho2020denoising}, a more recent development in the field 
 \section{Regularization}
 
 Aside from getting new data, the easiest way to reduce the estimation error is by limiting the size of the function class our model optimizes. In a traditional machine learning approach, this would be done by hand-selecting a class of functions with a lower number of parameters and then training the model. In deep learning, however, this approach is usually replaced with \textbf{regularization}, where the parameters themselves are manipulated to simplify the model.\footnote{Often, any method of reducing the estimation error of the model is broadly termed as regularization.} Instead of selecting the number of parameters, we can penalize the network for the complexity and size of the parameters. In other words, the loss function between a predicted model output $y_{pred}$ and a ground-truth label $y$ has the form:
-
 \begin{equation}
-	L(\theta; y_{pred}, y) = L_{seg}(\theta; y_{pred}, y) + \alpha\Omega(\theta)
+	L(\theta; y_{pred}, y) = L_{seg}(\theta; y_{pred}, y) + \alpha\Omega(\theta),
 \end{equation}
-
 where $L_{seg}$ is the segmentation loss function while $\Omega(\theta)$ is a parameter norm penalty, i.e. a measure of the complexity of the model \cite{goodfellowDeepLearning2016}. As we increase $\alpha$, the strength of the regularization increases and the loss is more impacted by the complexity of the model. As the network is being trained, it will seek to both reduce $\Omega(\theta)$ as well as $L_{seg}$, leading to a more constrained model.
 
 A commonly used parameter norm penalty is the $L^2$ regularization, also known as \textbf{weight decay} in deep learning contexts. Assuming $\theta$ consists of a set of weights $w, \lvert w \rvert = n$ and biases $b$, the $L^2$ norm is defined as $\Omega(w) = \sqrt{(w_1^2 + w_2^2 + \cdots + w_n^2)}$. In other words, the network is exponentially penalized for moving weights away from zero. This regularisation, in effect, forces the network to use fewer parameters.

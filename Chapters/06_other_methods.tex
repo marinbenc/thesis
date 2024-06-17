@@ -15,7 +15,7 @@ One potential solution to incorporate depth information into 2D segmentation net
 
 This problem has been solved in the field of image generation, where the condition is added as a separate input channel. For an image \(I \in \mathbb{R}^{W \times H \times C}\) and a condition vector \(x\), the image is augmented to include \(\lvert x \rvert\) additional channels. Each new channel \(c(i) \in \mathbb{R}^{W \times H}\) is constructed so that every pixel \(c(i)_{xy}\) equals \(x(i)\) for all \(x, y\) coordinates \cite{mirzaConditionalGenerativeAdversarial2014}. This approach is illustrated in \figref{fig:conditioned-image}.
 
-\begin{figure}[h]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=0.65\columnwidth]{images/6/conditioned-image}
     \caption{An illustration of conditioning an image by adding a channel to the image where each pixel is equal to the condition value.}
@@ -23,11 +23,9 @@ This problem has been solved in the field of image generation, where the conditi
 \end{figure}
 
 Drawing inspiration from this, we propose a new and simple way of incorporating 3D information into 2D fully-convolutional neural networks for medical image segmentation. Consider a 3D scan comprising \(D\) slices:
-
 \begin{equation}
 	I = \{I_d(x, y)\; \vert\;  I_d(x,y) \in R^{W \times H}, d \in [1..D]\}.
 \end{equation}
-
 For every slice \(I_d\), we create a depth information channel \(C_d(x, y) = d / D\) for all \(x, y\), i.e. each pixel is equal to the normalized z-coordinate of that slice. The network's input for each slice becomes $I'_{d} = [I_d, C_d]$ where the first channel is $I_d$ and the second channel contains the depth information.
 
 This method enables 2D networks to utilize depth cues without significant modifications to their architecture or an increase in parameter count, maintaining compatibility with transfer learning from 2D datasets. Throughout the rest of this chapter, we evaluate this technique on the specific task of epicardial adipose tissue (EAT) segmentation.
@@ -58,7 +56,7 @@ We use a dataset of CT scans of 20 patients from Rio de Janeiro obtained and rel
 
 The original labels contain three classes: pericardium, EAT, and paracardial adipose tissues. Using these labels as a reference, we manually labeled a closed pericardium region on each slice. During labeling, we follow the pericardium line where available and mark the pericardium region as the border separating the two adipose tissues when a label is not visible. We then create a separate set of EAT labels by multiplying the input images, thresholded to the range of adipose tissue, with the pericardium label. I.e. we define EAT as all adipose tissue masked by the pericardium label. A comparison of the original label and our re-labeled images is shown in \figref{fig:dataset-relabel}.
 
-\begin{figure}[h]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=0.65\columnwidth]{images/6/relabel}
     \caption{An example of the original image label and our relabeled image. The EAT label is shown in red, while the pericardium label is shown in white. \cite{bencevicEpicardialAdiposeTissue2021}}
@@ -77,12 +75,10 @@ We achieve segmentation of the pericardium using a deep neural network architect
 \end{figure}
 
 We use a loss function which is a modified version of the Dice coefficient:
-
   \begin{equation}
     \textit{DSC}_{loss} = 1 - \frac {2 \lvert X\cap Y \rvert + \lambda}{\lvert X \rvert + \lvert Y \rvert + \lambda},
     \label{eq:loss}
   \end{equation}
-  
 where $X$ and $Y$ are the input and predicted images, respectively, and $\lambda$ is a smoothing parameter set to 1 in our experiments.
 
 \subsection{Data Preprocessing}
@@ -91,7 +87,7 @@ We apply several data preprocessing steps on the original dataset to achieve bet
 
 Furthermore, we utilize heavy data augmentation to increase model generalizability. In real-world distributions, anatomical structures can differ drastically from one person to the next. To simulate these differences, we add a random chance of augmenting each input image during the training phase. Each input image has a 50\% chance for a horizontal flip, and a 30\% chance of a random combination of affine image transformations, including (1) a translation of max. 6.25\% of the image's width, (2) a scaling of max. 10\% of the image's scale, and (3) a rotation of a max. 45 degrees. Additionally, each input image has a 20\% chance of a non-linear mesh deform. Examples of augmented images are shown in \figref{fig:augment}.
 
-\begin{figure}[h]
+\begin{figure}[b!]
 \center
 \includegraphics[width=\textwidth]{images/6/augmentation.png}
 \caption{Different random augmentation examples of the same input image. \cite{bencevicEpicardialAdiposeTissue2021}}
@@ -110,7 +106,7 @@ The results in this section are evaluated on the two cross-validation folds and 
 
 Our method's mean DSC and correlation results are presented in Table \ref{tab:results}. 
 
-\begin{table}[h]
+\begin{table}[b!]
 \renewcommand{\arraystretch}{1.4}
 \caption{Mean results of the cross-validation. The Corr. value is the Pearson correlation between the total number of EAT pixels for each slice of the validation dataset ($p<0.0001$).}
 \centering
@@ -125,7 +121,7 @@ Our method's mean DSC and correlation results are presented in Table \ref{tab:re
 
 The network provides better results for pericardium segmentation than EAT segmentation, which is expected given the pericardium's smoother shape. The DSC for EAT indicates that our method performs slightly worse inter-observer variability, but still achieves good segmentation in a fraction of the time needed for manual segmentation. The precision and recall have similar values both for EAT and the pericardium, showing a good potential for future use to measure EAT volume. Examples of predictions from our model are presented in \figref{fig:examples}.
 
-\begin{figure}[h]
+\begin{figure}[b!]
     \centering
     \includegraphics[width=0.7\columnwidth]{images/6/examples.png}
     \caption{Examples of EAT predictions compared to the ground truth images. \cite{bencevicEpicardialAdiposeTissue2021}}
@@ -134,7 +130,7 @@ The network provides better results for pericardium segmentation than EAT segmen
 
 The Bland-Altman analysis of our method is presented in \figref{fig:corr}. The analysis shows a high level of agreement between our method and ground-truth annotations. The plot also shows a small positive bias from our method. Additionally, the plot does not show a strong proportional bias. However, while most measurements fall within the 95\% confidence interval, there are outliers. The most likely reason for these errors is the noisy nature of the ground truth labels especially towards the edges of the heart region.
 
-\begin{figure}[h]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=0.75\columnwidth]{images/6/blaltman.jpg}
     \caption{The Bland-Altman analysis of the number of pixels predicted as EAT on each slice of the test dataset for each fold. The dashed lines indicate a 95\% confidence interval. \cite{bencevicEpicardialAdiposeTissue2021}}
@@ -143,7 +139,7 @@ The Bland-Altman analysis of our method is presented in \figref{fig:corr}. The a
 
 Additionally, we compare our results to using a U-Net to directly segment the pericardium, as well as with other state-of-the-art approaches This comparison is presented in Table \ref{tab:comparison}.
 
-\begin{table}[h]
+\begin{table}[t!]
 \renewcommand{\arraystretch}{1.4}
 \caption{A comparison of our approach with other deep-learning-based approaches for EAT segmentation.}
 \centering

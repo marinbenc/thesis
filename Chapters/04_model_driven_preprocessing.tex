@@ -11,7 +11,7 @@ In this chapter, we will propose another way of achieving data efficiency in neu
 
 Our approach is centered on discovering transformations of data that enable neural networks to approximate decision boundaries with fewer parameters. This strategy is grounded in a particular interpretation of neural networks. Consider a network tasked with classifying a given image region \(I(x, y)\) as class ``0'' or ``1''. All conceivable image regions \(I(x, y)\) form part of a \(d\)-dimensional space, known as the input space. Here, \(d\) represents the total number of pixels in the region multiplied by the number of channels in each pixel. The neural network, through iterative optimization, seeks to transform the input space into some other $n$-dimensional in such a way that it becomes linearly separable by an $n$-dimensional hyperplane into two distinct classes. This process and its outcome are depicted in \figref{fig:input-space-transform}.
 
-	\begin{figure}[h]
+	\begin{figure}[t!]
 		\centering
 		\includegraphics[width=0.65\linewidth]{images/4/nn_trans_dataset}
 		\caption{An example of how a 2-class classification neural network bends an input space (left) such that it is linearly separable with a hyperplane.}
@@ -20,7 +20,7 @@ Our approach is centered on discovering transformations of data that enable neur
 
 To find the transformation, the network needs a sufficient number of parameters. More parameters allow for more complex transformations. For instance, to accurately approximate a circular decision boundary, the network needs at least three neurons in its second layer. We exemplify this in \figref{fig:circ-datataset-neurons}.
 
-	\begin{figure}[h]
+	\begin{figure}[t!]
 		\centering
 		\includegraphics[width=\linewidth]{images/4/circular_dataset_neurons}
 		\caption{The decision boundary (shown as the background color) according to a fully connected neural network with three layers where the second layer has one, two, or three neurons.}
@@ -34,19 +34,17 @@ To find the transformation, the network needs a sufficient number of parameters.
 The goal of data efficiency is to find a decision boundary given fewer data samples. As discussed in the previous chapter, this necessitates narrowing the search space of possible decision boundaries, or, in other words, reducing the number of neural network parameters. In the current and subsequent chapters, our focus will be on devising methods to pre-process the data into an intermediary form, denoted as \(\mathcal{X}_{pre}\), which is more easily separable than the original input space \(\mathcal{X}\). By transforming data into \(\mathcal{X}_{pre}\), the network requires fewer parameters as it has a smaller search space to find \(X'\). This transformation process is referred to as \(\mathcal{T}\).
 
 A commonly used example of $\mathcal{T}$ is the polar transform. In the two-dimensional case, the polar transform \(\mathcal{T}(X_i; C)\), defined by a chosen origin \(C = [c_0, c_1]\), converts an input vector \(X = [x_0, x_1]\) into a vector \(\mathcal{T}_C(X) = [\theta, r]\). The transformation is as follows:
-
 \begin{equation}
     \begin{aligned}
 	r =& \sqrt{(x_0 - c_0)^2 + (x_1 - c_1)^2},\\
-	\theta =& arctan(x_1 - c_1, x_0 - c_0),
-    \end{aligned}
+	\theta =& arctan(x_1 - c_1, x_0 - c_0)
+    \end{aligned},
 \end{equation}
-
 where $arctan(x, y)$ is the two-argument arcus tangent function, defined as the angle between the vector $(x, y) \in \mathbb{R}^2 \backslash\{0\}$ and the positive x-axis.
 
 The polar transform effectively converts a circular decision boundary into a linear one. This transformation enables linear separability in our example dataset, which then requires only a single neuron in the second layer for effective classification. This is demonstrated in \figref{fig:polar_dataset_neurons}.
 
-	\begin{figure}[h]
+	\begin{figure}[t!]
 		\centering
 		\includegraphics[width=0.65\linewidth]{images/4/polar_dataset_neurons}
 		\caption{An example circular dataset transformed using the polar transform. The background color shows the decision boundary of a fully connected network with one neuron in the second layer.}
@@ -55,7 +53,7 @@ The polar transform effectively converts a circular decision boundary into a lin
 	
 However, the key to the polar transform's success in facilitating separability lies in the correct selection of the polar origin. When the origin is shifted away from the center of class ``0'', the decision boundary in the polar space ceases to be linear. This effect of origin displacement on the linearity of the decision boundary in the polar space is illustrated in \figref{fig:polar-origin-selection}.
 
- 	\begin{figure}[h]
+ 	\begin{figure}[t!]
 		\centering
 		\includegraphics[width=\linewidth]{images/4/data_polar_origin}
 		\caption{The polar transformation of the simulated data using different polar origins ($C$).}
@@ -70,7 +68,7 @@ The concept illustrated with the polar transform can be effectively applied to i
 
 We propose a general formulation of this approach, wherein images are transformed to be more linearly separable using carefully selected transformations derived from traditional image processing methods. The success of these transformations hinges on the correct selection of parameters. To address this, we employ neural networks trained specifically to predict these optimal transformation parameters. The preprocessed image is then segmented using a regular neural network. Importantly, since the preprocessed image is inherently simpler to segment, the segmentation network can be designed with fewer parameters compared to a network segmenting unprocessed images. This is, in essence, a model-driven approach to preprocessing the image. A visual summary of this approach is shown in \figref{fig:visual-summary-mdp}. In the remainder of this section, we will describe this approach in more detail.
 
- 	\begin{figure}[h]
+ 	\begin{figure}[t!]
 		\centering
 		\includegraphics[width=\linewidth]{images/4/model-based-preprocessing-overview}
 		\caption{A visual summary of the model-driven preprocessing approach. First, the transformation parameter predictor network predicts a segmentation-like map, from which the transformation parameters are calculated using a transformation parameter function. Then, the input image is transformed and the transformed representation is segmented by a segmentation neural network. The final segmentation map is obtained by inverting the transformation.}
@@ -80,27 +78,21 @@ We propose a general formulation of this approach, wherein images are transforme
 To preprocess the image, we select a transformation function \(\mathcal{T}_{\phi}(I)\), where \(\phi\) represents the transformation parameters, and \(I\) is the original image. This transformation yields a new image, \(I'\), which can be segmented with fewer parameters than the original. 
 
 The transformation function \(\mathcal{T}\) can vary, encompassing affine transformations, deformation fields, thresholding techniques, and, as previously mentioned, the polar transform. The choice of \(\mathcal{T}\) is contingent upon the specific segmentation task. For instance, the polar transform is advantageous for segmenting elliptical objects. When segmenting small objects, we might opt for an affine transformation that scales each object to a uniform scale. The design of \(\mathcal{T}\) should be informed by domain knowledge and validated through empirical testing. An important requirement is that \(\mathcal{T}\) must be invertible, allowing the resulting segmentation mask to be mapped back to the original image space. The segmentation process on the transformed image can be represented as:
-
 \begin{equation}
 	M(I) = (\mathcal{T}_{\phi}^{-1} \circ F_{seg} \circ \mathcal{T}_{\phi})(I),
 \end{equation}
-
 where $M(I)$ is the resulting segmentation mask for image $I$, $F_{seg}$ is the segmentation neural network. 
 
 The effectiveness of preprocessing is highly dependent on the appropriate choice of \(\phi\), as illustrated with the polar transform. It's also important to note that \(\phi\) is specific to each image: the origin, scale, location, and distribution of objects differ across images. Acknowledging this, we propose training a model to estimate the optimal \(\phi\) for a given image:
-
 \begin{equation}
 	\phi(I) = F_{\mathcal{T}}(I; \theta_{\mathcal{T}}),
 \end{equation}
-
 where $F_{\mathcal{T}}$ is a neural network with parameters $\theta_{\mathcal{T}}$ trained to estimate the correct parameters for $\mathcal{T}$ given an image $I$. In our approach, we use various types of neural networks as $F_{\mathcal{T}}$, though it is also possible to use more traditional approaches.
 
 More precisely, $F_{\mathcal{T}}$ is structured similarly to a regular segmentation network, producing a segmentation mask $M_\phi(I)$ in its second-to-last layer. The final layer, which is a non-trainable function $\phi(I) = f_\phi(M_\phi(I))$, produces segmentation parameters given a predicted segmentation map. $F_{\mathcal{T}}$ can then be expressed as:
-
 \begin{equation}
 	F_{\mathcal{T}}(I; \theta_{\mathcal{T}}) = f_\phi(F_{\mathcal{T}seg}(I; \theta_{\mathcal{T}})),
 \end{equation}
-
 where $F_{\mathcal{T}seg}$ is the segmentation sub-network producing $M_\phi(I)$. $F_{\mathcal{T}seg}$ can be trained using segmentation-like loss functions, where $M_\phi$ can be compared to a ground truth segmentation mask $M_{gt}(I)$. 
 
 The function $f_\phi$ is hand-constructed using knowledge of the transformation. For instance, we know that for the polar transform, the optimal origin lies in the center of the object. Therefore, we may use the centroid of the ground truth segmentation labels as $f_\phi$. Other examples of \( f_\phi \) for various transformations include:
@@ -125,21 +117,17 @@ As mentioned earlier, using the approach of model-driven preprocessing requires 
 \subsubsection{Training the Transformation Parameter Predictor}
 
 \(F_{\mathcal{T}}\) is designed to process original, untransformed images and output the corresponding transformation parameters, \( \phi(I) \). As previously discussed, the penultimate layer of \(F_{\mathcal{T}}\) generates a segmentation-like mask \( M_\phi(I) \). The training data for \(F_{\mathcal{T}}\) comprises pairs of images and their corresponding ground truth masks, represented as \((I, M_{gt})\). Given a predicted segmentation mask $M_\phi = F_{\mathcal{T}seg}(I)$ and the transformation parameter function $f_\phi(M(I))$, the transformation parameters loss $L_\mathcal{T}$ can be calculated as:
-
 \begin{equation}
 	L_\mathcal{T}(I, M_\phi, M_{gt}) = \alpha L_\phi(f_\phi(M), f_\phi(M_{gt})) + \beta L_{M}(M_\phi, M_{gt}),
 \end{equation}
-
 where $L_\phi$ measures the error in predicting the transformation parameters, while $L_{M}$ is a segmentation-like loss that measures the error in predicting the segmentation mask used to calculate the transformation parameters. The coefficients \(\alpha\) and \(\beta\), which balance these two terms, are determined empirically.
 
 \subsubsection{Training the Segmentation Network}
 
 The segmentation network is trained using ground-truth transformation parameters (\(\phi\)) to preprocess the input image. For every pair of image and ground truth segmentation label \((I, M_{gt})\), the ground truth transformation parameters are derived using:
-
 \begin{equation}
 	\phi = f_\phi(M_{gt}) + z_\phi,
 \end{equation}
-
 where \(f_\phi\) is the transformation parameter function, identical to the one used in the parameter predictor network. The term \(z_\phi\) represents a random noise vector matching \(\phi\)'s dimensions. This noise serves as a form of augmentation, enhancing the segmentation network's resilience to less-than-ideal \(\phi\) predictions.
 
 Given $\phi$, the input to the segmentation network is constructed as $I' = \mathcal{T}_\phi(I)$. The network's final layer applies an inverse transformation to the output segmentation map, \(\mathcal{T}^{-1}_\phi(M)\). To train the network, we use a standard segmentation loss $L_{seg}(M, M_{gt})$.
@@ -180,7 +168,7 @@ common neural network architectures for medical image segmentation including U-N
 
 The polar transform's potential for simplifying the segmentation of images with elliptical borders was discussed earlier in this chapter. Transforming such images into polar coordinates effectively turns a perfect circle from Cartesian coordinates into a straight line, significantly simplifying the decision boundary. This simplification means that a less complex model can accurately predict borders in polar coordinates. As illustrated in \figref{fig:polar-lesion}, even for complex shapes, transforming roughly elliptical objects into polar coordinates can reduce the complexity required for accurate segmentation. Moreover, by using the object's center as the polar origin, the approach standardizes the location and border distances in each training example. This standardization allows the model to focus on learning the border distance from the origin at various angles, obviating the need for object localization learning.
 
-	\begin{figure}[h]
+	\begin{figure}[t!]
 		\centering
 		\includegraphics[width=0.4\linewidth]{images/4/to_polar}
 		\caption{An example image and label from the lesion dataset and their corresponding polar transformation. \cite{bencevicTrainingPolarImage2021}}
@@ -188,15 +176,13 @@ The polar transform's potential for simplifying the segmentation of images with 
 	\end{figure}
 
 Given a polar origin $(c_x, c_y)$ of a Cartesian image $I(x, y)$ of resolution $H \times W$, we obtain each point $(r, \vartheta)$ of the polar transformed image $I'(r, \vartheta)$ as:
-
   \begin{equation}
     \begin{aligned}
       r &= \frac{H}{2 \pi} \cdot arctan(x, y) [ \cdot 180 / \pi ], \\
-      \vartheta &= \frac{W}{\sqrt{(W / 2)^2 + (H / 2)^2}} \cdot \sqrt{x^2 + y^2},
-    \end{aligned}
+      \vartheta &= \frac{W}{\sqrt{(W / 2)^2 + (H / 2)^2}} \cdot \sqrt{x^2 + y^2}
+    \end{aligned},
     \label{eq:polar-transform}
   \end{equation}
-  
   where $arctan$ is the 2-argument arctangent function.
 
     \subsubsection{Previous work using the polar transform for medical image processing}
@@ -244,19 +230,16 @@ network. In all of the described approaches, the polar transformation is not par
 To transform each input image, the polar origin is determined as the center of mass of the 
 ground truth label for that image. The center of mass of an image $I(x, y)$ is calculated by first 
 calculating the spatial image moments matrix $M$, where the entry of the matrix at row $i$ and column $j$ is calculated as:
-
   \begin{equation}
     M_{ij}= \sum _{x,y} I(x,y) \cdot x^i \cdot y^j.
     \label{eq:moments}
   \end{equation}
-  
 The center of mass $(c_x, c_y)$ of the image can then be calculated as:
-
   \begin{equation}
     \begin{aligned}
       c_x &= M_{10} / M_{00}, \\
-      c_y &= M_{01} / M_{00}.
-    \end{aligned}
+      c_y &= M_{01} / M_{00}
+    \end{aligned}.
     \label{eq:center-mass}
   \end{equation}
 
@@ -274,14 +257,14 @@ the image. We propose two ways to accomplish this, described in this section.
 	
 	\pagebreak
 
-	\begin{figure*}[h!]
+	\begin{figure*}[t!]
 		\centering
 		\includegraphics[width=\linewidth]{images/4/retraining-approach}
 		\caption{A diagram of the approach (A) of predicting polar origins from a Cartesian network. The first network performs an initial segmentation, which is then used to extract a polar origin for the polar transformation. The method does not rely on any specific neural network architecture. The Polar and Cartesian network can be any neural network that takes an input image and produces a binary segmentation mask as output. The red point shows the extracted polar origin. The Polar network is trained on polar image transformations. The polar transformation is not part of the network itself, but happens as a preprocessing step for the Polar network. \cite{bencevicTrainingPolarImage2021}}
 		\label{fig:retraining-diagram}
 	\end{figure*}
 	
-		\begin{figure*}[h]
+		\begin{figure*}[t!]
 		\centering
 		\includegraphics[width=\linewidth]{images/4/centerpoint-approach}
 		\caption{A diagram of the approach (B) of using a centerpoint prediction network. The first network can be any neural network that predicts a heatmap from an input image, which is then used to extract the polar origin, shown as a red point. The Polar network can be any semantic segmentation neural network that produces a binary mask output from an input image. The Polar network is trained on polar image transformations. The polar transformation is not part of the network itself, but happens as a preprocessing step for the Polar network. \cite{bencevicTrainingPolarImage2021}}
@@ -323,6 +306,13 @@ coordinates and predicts a heatmap of the image.
 
 \subsubsection{Data Processing}
  
+ 	\begin{figure}[b!]
+		\centering
+		\includegraphics[width=0.8\linewidth]{images/4/heatmaps}
+		\caption{Examples of heatmaps generated from the ground truth data. The heatmap is a Gaussian centered on the center of mass of the ground-truth label, shown as a blue point on the input images. \cite{bencevicTrainingPolarImage2021}}
+		\label{fig:heatmap}
+	\end{figure}
+	
 The ground truth heatmaps were generated by calculating the center of mass of each ground truth label 
 image using \eqref{eq:center-mass}. We then create the heatmap as an image with a 2D Gaussian with the
 mean on 
@@ -331,26 +321,10 @@ validation datasets. We found that the optimal value of the standard deviation i
 of the object.
 Example heatmaps are shown in 
 \figref{fig:heatmap}.
-
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=0.8\linewidth]{images/4/heatmaps}
-		\caption{Examples of heatmaps generated from the ground truth data. The heatmap is a Gaussian centered on the center of mass of the ground-truth label, shown as a blue point on the input images. \cite{bencevicTrainingPolarImage2021}}
-		\label{fig:heatmap}
-	\end{figure}
-	
-\pagebreak
 	
 Additionally, during training, we use augmentation to increase the number of training inputs. In 
-particular, during training for each input example, the following random augmentations are applied:
-
-\begin{itemize}
-  \item A 50\% chance of a horizontal flip.
-  \item A 30\% chance of a random combination of shifting up to 6.5\% of the image dimensions, scaling up 
-    to 10\% and rotating up to 45$^{\circ}$.
-  \item A 30\% chance for a grid distortion, details of which are described in \cite{info11020125}.
-\end{itemize}
-
+particular, during training for each input example, the following random augmentations are applied: (1) a 50\% chance of a horizontal flip; (2)a  30\% chance of a random combination of shifting up to 6.5\% of the image dimensions, scaling up to 10\% and rotating up to 45$^{\circ}$; and (3) a 30\% chance for a grid distortion, details of which are described in \cite{info11020125}.
+	
 The center-point predictor outputs 8 separate heatmaps \cite{newellStackedHourglassNetworks2016}. We
 calculate the predicted center as the coordinates of the pixel with the largest intensity in the heatmap
 predicted by the final layer of the model. This predicted center is then used to transform the input
@@ -378,7 +352,7 @@ perform four different experiments:
 
 We used four different datasets to train the network. In this section, we give an overview of each used dataset and how it was preprocessed. Note that for training the center-point predictor, the input images were resized to a resolution of $256 \times 256$, while the generated heatmaps were resized to $64 \times 64$ pixels. Otherwise, all preprocessing steps described here are applied to the center-point model datasets as well. Each dataset was normalized and zero-centered to facilitate better network convergence. 
 
-	\begin{figure*}
+	\begin{figure*}[t!]
 	\subfloat[Polyp dataset]{\includegraphics[width=0.49\columnwidth]{images/4/polyp_example}}
 	\hfill
 	\subfloat[Lesion dataset]{\includegraphics[width=0.49\columnwidth]{images/4/lesion_example}} \\
@@ -428,13 +402,11 @@ Each model is implemented and trained using PyTorch 1.7.1 on an NVIDIA GeForce R
 networks, we use the Adam optimizer with a learning rate of $10^{-3}$. A batch size of 8 was used for all 
 networks except the center-point model, where a batch size of 6 was used for the lesion and liver datasets 
 and 8 for all remaining datasets. We trained all models up to a maximum of 200 epochs and used checkpoints 
-after each epoch to store the model with the best validation loss. We modify the Dice coefficient to act as a loss function as shown in (\ref{eq:dice-loss}).
-
+after each epoch to store the model with the best validation loss. We modify the Dice coefficient to act as a loss function as follows:
   \begin{equation}
     \textit{DSC}_{loss} = 1 - \frac {2\lvert X\cap Y\rvert + \lambda}{\lvert X\rvert + \lvert Y\rvert + \lambda},
     \label{eq:dice-loss}
   \end{equation}
-  
 where $X$ and $Y$ are the input and predicted images, respectively, and $\lambda$ is a smoothing parameter set to 1 in our experiments used to avoid dividing by zero.
 This loss function is used to train all models except the center-point model.
 
@@ -446,7 +418,7 @@ The code used for all experiments is available at \url{github.com/marinbenc/medi
 
 % ---------- RESULT  TABLES ---------- %
 
-\begin{table}
+\begin{table}[t!]
 \centering
 \def\arraystretch{1.2}
 \begin{tabularx}{\textwidth}{X X c c c c} 
@@ -508,7 +480,7 @@ for three different neural network architectures. The Cartesian network is the n
 \label{table:results}
 \end{table}
 
-\begin{table}
+\begin{table}[t!]
 \ContinuedFloat
 \centering
 \def\arraystretch{1.2}
@@ -609,32 +581,32 @@ We also compare our methods to other state-of-the-art methods that use the same 
 
 A training graph for a polar and Cartesian U-Net-based network is shown in \figref{fig:training}. Additionally, we evaluate the accuracy of the different ways of obtaining the polar origin. This accuracy is compared with segmentation performance in \figref{fig:centers-vs-performance}.
 
-	\begin{figure}[h]
+	\begin{figure}[b!]
 		\centering
 		\includegraphics[width=\linewidth]{images/4/training-graphs}
 		\caption{The training and validation Dice coefficient (DSC) of the polar and Cartesian U-Net models during training. \cite{bencevicTrainingPolarImage2021}}
 		\label{fig:training}
 	\end{figure}
-	
-\clearpage
 		
 We also train several models with both polar and Cartesian coordinates on subsets of the training dataset. Namely, we trained models on 25\%, 50\%, 75\%, and 100\% of the lesion training dataset for 50 epochs. The results of this training are shown in \figref{fig:dataset-vs-dsc}. The polar network is much more data efficient and achieves better results than the cartesian network even with only 25\% of the data.
 
-	\begin{figure}[h]
+	\begin{figure}[t!]
 		\centering
 		\includegraphics[width=0.65\linewidth]{images/4/mse-vs-dice}
 		\caption{The relationship between mean squared errors of the centers used for the polar transformation and segmentation performance of the polar network on the lesion dataset. The mean squared errors are calculated compared to the ground-truth centers. \cite{bencevicTrainingPolarImage2021}}
 		\label{fig:centers-vs-performance}
 	\end{figure}
-
-		\begin{figure}[h]
+	
+	\clearpage
+	
+			\begin{figure}[t!]
 		\centering
 		\includegraphics[width=0.65\linewidth]{images/4/dsc-vs-dataset-percent}
 		\caption{The best Dice coefficient by epoch 50 for models trained on subsets of the lesion training dataset. \cite{bencevicTrainingPolarImage2021}}
 		\label{fig:dataset-vs-dsc}
 	\end{figure}
 	
-	\subsubsection{Discussion}
+		\subsubsection{Discussion}
 	
 We obtain state-of-the-art results for polyp and lesion segmentation by training common biomedical image segmentation models. In the liver dataset, we achieve state-of-the-art results when compared to other 2D methods, but 3D methods 
 achieve the same or slightly better results \cite{valanarasuKiUNetOvercompleteConvolutional2020a}. 
@@ -648,7 +620,7 @@ requires a more complex approach \cite{zhangAutomaticEpicardialFat2020a}. It is 
 these existing approaches, namely segmenting the pericardium first, with training on polar coordinates 
 would lead to an improvement in the state of the art.
 
-	\begin{figure*}
+	\begin{figure*}[b!]
 	\subfloat[Polyp predictions]{\includegraphics[width=0.49\columnwidth]{images/4/centerpoint_model_output_polyp}}
 	\hfill
 	\subfloat[Lesion predictions]{\includegraphics[width=0.49\columnwidth]{images/4/centerpoint_model_output_lesion}} \\
@@ -715,14 +687,12 @@ In this chapter, we've explored an approach where each image undergoes a single 
 \end{enumerate}
 
 To exemplify this, we will present a case of using the polar transformation as we did earlier, only this time we will be segmenting images with multiple connected components (objects) in their segmentation maps. Therefore, we will use multiple polar transformations for each image, one for each connected component. The transformation parameter predictor will be modified to predict the centroid of each connected component, instead of just a single centroid. Each centroid will be used to transform and segment the image. For the aggregation function, we will choose a weighted sum and a hysteresis thresholding function $th$ with thresholds $t_1$ and $t_2$:
-
 \begin{equation}
 	f_{agg}(\{M_i\}) = th(\sum_{i = 1}^n M_i W_i; t_1, t_2),
 \end{equation}
-
 each weight \(W_i\) functions as an image matching the dimensions of \(M_i\), where the pixels correspond to the relative importance of that pixel in the corresponding segmentation map. For instance, in the case of the polar transform, the value assigned to each element in \(W_i\) depends on its relation to the connected component associated with the polar origin for the corresponding segmentation mask \(M_i\). Specifically, elements that belong to the same connected component as the polar origin used for the \(i\)-th segmentation are assigned a value of 2. Elements outside this connected component are assigned a value of 1. With this weighing strategy, regions belonging to the connected component that is most beneficially transformed are more heavily weighted than other pixels.
 
-		\begin{figure}[h]
+		\begin{figure}[b!]
 		\centering
 		\includegraphics[width=0.5\linewidth]{images/4/hysteresis-ccs}
 		\caption{A visual explanation of hysteresis thresholding. Kept regions are marked with green checkmarks, while deleted regions are marked with red crosses. The pixel intensity scale is shown on the right, where $t_1$ is marked in yellow and $t_2$ is marked in blue.}
@@ -745,7 +715,7 @@ Several methods based on deep learning were proposed for segmenting the aorta fr
 
 The approach presented in this section is an extension of the approach presented in \ref{polar-paper}. We obtain the center points of the objects in the image using a rough segmentation from a U-Net-based network, instead of using a center point predictor as is described in \ref{polar-paper}. A summary of the approach is shown in \figref{fig:summary}.
 
-\begin{figure}[h]
+\begin{figure}[t!]
 \centering
 \includegraphics[width=\textwidth]{images/4/summary}
 \caption{A summary of our approach. An input image is first segmented using a U-Net network. For each connected component in the segmentation, the input image is transformed to polar coordinates using the centroid of the connected component as the origin. These images are then fed into a U-Net trained on polar images, and the predictions for each object are fused, hysteresis thresholded, and transformed back to cartesian coordinates. Note how one of the false positive connected components in the initial segmentation was removed during hysteresis thresholding since the component was only predicted in one of the three polar predictions. \cite{bencevicUsingPolarTransform2022a}}
@@ -756,7 +726,7 @@ As described earlier in this section, we perform several key modifications to al
 
 We also employ prediction fusion during inference. First, a 2D U-Net-based network is used to obtain an initial rough segmentation. A separate polar transformation for each connected component in the rough segmentation is constructed using the centroid of each component as the origin. The polar network predicts a segmentation map for each transform, resulting in a number of predictions equal to the number of connected components. In the predicted image, a weight of 2 is assigned to the connected component which contains the origin for that prediction, and a weight of 1 to all other connected components. We then sum all of the weighted images together. As shown earlier in this chapter, the polar network generally performs best on objects which contain the polar origin, and worse at predicting other objects on the image. Therefore, we assign a larger weight to that component as a proxy for a confidence measure. We then sum all of the weighted predictions together and normalize the prediction to a 0-1 range. This leads to a segmentation map where each non-zero pixel represents the confidence that the pixel belongs to the aorta class. To obtain the final segmentation, we use hysteresis thresholding where the bottom threshold is 0, and the top threshold is 0.4, empirically determined according to the best Dice coefficient on the validation dataset. An example of thresholding a prediction is shown in \figref{fig:thresh}.
 
-\begin{figure}[h]
+\begin{figure}[t!]
 \centering
 \includegraphics[width=0.8\columnwidth]{images/4/hyst}
 \caption{Hystersis-thresholded segmentation output. For each polar prediction, the component that contains the origin of the transform gets a weight of 2 assigned, while all other components get a weight of 1. This left-most image is the result of summing the predictions of 3 polar transformations of the original image (one for each connected component), converted to cartesian coordinates. Note how the thresholding removes the false positive object on the left of the image while keeping the true positive objects intact. \cite{bencevicUsingPolarTransform2022a}}
@@ -773,7 +743,14 @@ All of our models were implemented using PyTorch 3.9 using an NVIDIA GeForce RTX
 
 \subsection{Results and Discussion}
 
-\begin{table}[h]
+\begin{figure}[b!]
+\centering
+\includegraphics[width=\columnwidth]{images/4/examples_3}
+\caption{Random examples of predictions. Columns from left to right show: the input image, the initial prediction from the non-polar network, the final fused polar prediction, and the ground truth segmentation label. \cite{bencevicUsingPolarTransform2022a}}
+\label{fig:examples}
+\end{figure}
+
+\begin{table}[b!]
 \def\arraystretch{1.2}
 \centering
 \begin{tabularx}{\linewidth}{X c c c c} 
@@ -789,22 +766,13 @@ Polar + NP centers* & $0.932 \pm 0.027$ & $0.895 \pm 0.033$ & $0.915 \pm 0.040$ 
 
 To perform evaluation, we use 3-fold cross-validation on the 18 scans. For each fold, we train a polar and non-polar model using the slices of 12 CT scans and run inference on the slices of the remaining 6 scans. All results presented in this section are averaged across each CT scan and then across the three folds.
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\columnwidth]{images/4/examples_3}
-\caption{Random examples of predictions. Columns from left to right show: the input image, the initial prediction from the non-polar network, the final fused polar prediction, and the ground truth segmentation label. \cite{bencevicUsingPolarTransform2022a}}
-\label{fig:examples}
-\end{figure}
-
-\pagebreak
-
 A summary of our segmentation results is presented in \tabref{table:results}. Random examples of segmentation results are shown in \figref{fig:examples}. In the experiments in \ref{polar-paper} the polar networks achieve the best segmentation performance when using accurate center points during inference. As the accuracy of the center points goes down, so does the segmentation performance. The experiments in this paper follow the same pattern, the polar networks perform significantly better than the cartesian networks when using ground truth centers. However, even with less accurate centers obtained from initial rough segmentation by the non-polar network, the results yield only slightly lower Dice coefficients than when using ground-truth centers directly. The non-polar network can also be seen as a baseline model, and our approach results in a significant improvement over this baseline in all segmentation metrics.
 
 In some problems in medical imaging, e.g. segmenting cancerous tissues, a higher recall is beneficial since the cost of missing tissues can be very high \cite{tahaMetricsEvaluating3D2015}. A key advantage of our approach is that by fusing multiple predictions and using hysteresis thresholding the threshold value can be used to impact the precision--recall tradeoff. Our experiments show that the average per-patient pixel-level recall increased when compared to the baseline model.
 
 We also present the standard deviation across CT scans as a measure of segmentation reliability. Using the polar coordinates decreases the standard deviation between patients of all performance metrics, indicating that the predictions are more reliable and more robust to inter-patient differences. To further emphasize this, we present a box plot of segmentation results for each patient in \figref{fig:box}. Note that, in contrast with the baseline model, when using our approach there are no outliers in the box plot.
 
-\begin{figure}[h]
+\begin{figure}[t!]
 \centering
 \includegraphics[width=0.6\columnwidth]{images/4/box_plot}
 \caption{A box plot of the per-scan Dice coefficients of our experiments. \textit{Non-polar} are the results of the U-Net trained using cartesian images. \textit{Polar + GT centers} are the results of the U-Net trained on polar images, using ground-truth connected component centers during inference. \textit{Polar + NP centers} are the results when running inference on the polar model using center points obtained from the non-polar model predictions. \cite{bencevicUsingPolarTransform2022a}}
@@ -813,7 +781,7 @@ We also present the standard deviation across CT scans as a measure of segmentat
 
 A comparison of our results with other deep learning-based approaches for aorta segmentation in the literature is shown in \tabref{table:comparison}. Our approach achieves performance comparable to the state of the art, and a large improvement over the baseline methods. Note that the results are evaluated on different datasets and with a different number of cases. Therefore, it is hard to objectively compare these approaches.
 
-\begin{table}[h]
+\begin{table}[t!]
 \def\arraystretch{1.25}
 \centering
 \begin{tabularx}{\textwidth}{X l l c}
@@ -827,10 +795,6 @@ Proposed method & $0.932 \pm 0.027$ & $0.895 \pm 0.033$ & 18 \\
 \caption{A comparison of our approach with results reported in papers describing deep learning-based aorta segmentation methods. Note that the datasets used for obtaining the results are not the same. $n$ is the number of cases used to obtain the evaluation.}
 \label{table:comparison}
 \end{table}
-
-\pagebreak
-
-% END AORTA PAPER
 
   \section{Conclusion}
     
