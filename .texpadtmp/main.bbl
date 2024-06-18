@@ -1567,6 +1567,140 @@
       \verb 10.3390/app12105217
       \endverb
     \endentry
+    \entry{babaWindowingCT2017}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=4886edacc9dde9b9e0a298f4d5b27f33}{%
+           family={Baba},
+           familyi={B\bibinitperiod},
+           given={Yahya},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=e1aebdbcb0261db75d2b0ad47acfc629}{%
+           family={Murphy},
+           familyi={M\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Radiopaedia.org}%
+      }
+      \strng{namehash}{f5c64365af42a52b0e0c318af32f1600}
+      \strng{fullhash}{f5c64365af42a52b0e0c318af32f1600}
+      \strng{bibnamehash}{f5c64365af42a52b0e0c318af32f1600}
+      \strng{authorbibnamehash}{f5c64365af42a52b0e0c318af32f1600}
+      \strng{authornamehash}{f5c64365af42a52b0e0c318af32f1600}
+      \strng{authorfullhash}{f5c64365af42a52b0e0c318af32f1600}
+      \field{labelalpha}{BM17}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Radiopaedia.Org}
+      \field{langid}{english}
+      \field{month}{3}
+      \field{title}{Windowing ({{CT}})}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.53347/rID-52108
+      \endverb
+    \endentry
+    \entry{boaventuraT1T2weightedRatio2022}{article}{}
+      \name{author}{12}{}{%
+        {{hash=f0de6906233f9b4721e1e16ec0213f4c}{%
+           family={Boaventura},
+           familyi={B\bibinitperiod},
+           given={Mateus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=09537bfef8d13654539ab0be68e740cb}{%
+           family={{Sastre-Garriga}},
+           familyi={S\bibinitperiod},
+           given={Jaume},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d686e2b17d398bc0ba1c5bc6074f98f6}{%
+           family={{Garcia-Vidal}},
+           familyi={G\bibinitperiod},
+           given={Aran},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8e5dd105708196c876bf6a59b2560e5c}{%
+           family={{Vidal-Jordana}},
+           familyi={V\bibinitperiod},
+           given={Angela},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8f64fa0d129332927495cfa724d1feca}{%
+           family={Quartana},
+           familyi={Q\bibinitperiod},
+           given={Davide},
+           giveni={D\bibinitperiod}}}%
+        {{hash=518b3d3b8d9013c33b63f8627095af0a}{%
+           family={Carvajal},
+           familyi={C\bibinitperiod},
+           given={René},
+           giveni={R\bibinitperiod}}}%
+        {{hash=eef0e60411d25b3eb0661ba3a92e6fcb}{%
+           family={Auger},
+           familyi={A\bibinitperiod},
+           given={Cristina},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f8687e6b0a08ce9d8e547209824a1697}{%
+           family={Alberich},
+           familyi={A\bibinitperiod},
+           given={Manel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=643e3dd1708efaf2edf0aa12179c9101}{%
+           family={Tintoré},
+           familyi={T\bibinitperiod},
+           given={Mar},
+           giveni={M\bibinitperiod}}}%
+        {{hash=10d3c6b9d4924195cabe020ac04f5820}{%
+           family={Rovira},
+           familyi={R\bibinitperiod},
+           given={Àlex},
+           giveni={À\bibinitperiod}}}%
+        {{hash=c2e1658b71932d1dd6dc90c9ff04bcc4}{%
+           family={Montalban},
+           familyi={M\bibinitperiod},
+           given={Xavier},
+           giveni={X\bibinitperiod}}}%
+        {{hash=db782faa2f9b092844ba336b99bffc91}{%
+           family={Pareto},
+           familyi={P\bibinitperiod},
+           given={Deborah},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{8dc9ae99122128c8c7af2697cd88ebe1}
+      \strng{fullhash}{2a6ecba123517553630f6fe5dd2af397}
+      \strng{bibnamehash}{fbc43936516f84ad03e7c477659b9a54}
+      \strng{authorbibnamehash}{fbc43936516f84ad03e7c477659b9a54}
+      \strng{authornamehash}{8dc9ae99122128c8c7af2697cd88ebe1}
+      \strng{authorfullhash}{2a6ecba123517553630f6fe5dd2af397}
+      \field{labelalpha}{Boa+22}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{22131582}
+      \field{journaltitle}{NeuroImage: Clinical}
+      \field{langid}{english}
+      \field{shorttitle}{T1/{{T2-weighted}} Ratio in Multiple Sclerosis}
+      \field{title}{T1/{{T2-weighted}} Ratio in Multiple Sclerosis: {{A}} Longitudinal Study with Clinical Associations}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{34}
+      \field{year}{2022}
+      \field{urldateera}{ce}
+      \field{pages}{102967}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.nicl.2022.102967
+      \endverb
+      \verb{file}
+      \verb /Users/marinbenc/Zotero/storage/QPMGMKHJ/Boaventura et al_2022_T1-T2-weighted ratio in multiple sclerosis.pdf
+      \endverb
+    \endentry
     \entry{calabreseUniversityCaliforniaSan2022}{article}{}
       \name{author}{9}{}{%
         {{hash=112eba73015c8085ef80143c9c6f03b4}{%
@@ -1652,6 +1786,97 @@
       \verb /Users/marinbenc/Zotero/storage/UADUEREK/2109.html
       \endverb
       \keyw{Computer Science - Computer Vision and Pattern Recognition,Electrical Engineering and Systems Science - Image and Video Processing}
+    \endentry
+    \entry{changMagneticResonanceImaging1987}{article}{}
+      \name{author}{11}{}{%
+        {{hash=4f0cb04496ef374b559ba5b9c8fa5037}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Alfred\bibnamedelima E.},
+           giveni={A\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=3ea6e873cd8aeda0ac07e191df2e99d5}{%
+           family={Matory},
+           familyi={M\bibinitperiod},
+           given={Yvedt\bibnamedelima L.},
+           giveni={Y\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=ebe1fe49e7f1ee652815deefa7f37155}{%
+           family={Dwyer},
+           familyi={D\bibinitperiod},
+           given={Andrew\bibnamedelima J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=6798ecd56a087f9ef373a1e336cbed91}{%
+           family={Hill},
+           familyi={H\bibinitperiod},
+           given={Suvimol\bibnamedelima C.},
+           giveni={S\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=934a225423adf058eb13d0ded65e199a}{%
+           family={Girton},
+           familyi={G\bibinitperiod},
+           given={Mary\bibnamedelima E.},
+           giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=40a2c6b7263caeb11472d6135c20c653}{%
+           family={Steinberg},
+           familyi={S\bibinitperiod},
+           given={Seth\bibnamedelima M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=55511428564ce5f89057746631f5ffd5}{%
+           family={Knop},
+           familyi={K\bibinitperiod},
+           given={Richard\bibnamedelima H.},
+           giveni={R\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=c604e37b8d588b0661c5fe94cb026325}{%
+           family={Frank},
+           familyi={F\bibinitperiod},
+           given={Joseph\bibnamedelima A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=0fe11a92e244ee49f17e3d40236dc2ba}{%
+           family={Hyams},
+           familyi={H\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=6e6d35fcf9ecdad5f611eb3279de3938}{%
+           family={Doppman},
+           familyi={D\bibinitperiod},
+           given={John\bibnamedelima L.},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=214ad58ec1dd89b114f07b31f89a3a84}{%
+           family={Rosenberg},
+           familyi={R\bibinitperiod},
+           given={Steven\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{6c4fc856cb03d2d49ae310bb021d3902}
+      \strng{fullhash}{89e9ba1e97cb858cadf991fc966fe4fa}
+      \strng{bibnamehash}{b2c3d70f8d654daffe14ea6ed283e19c}
+      \strng{authorbibnamehash}{b2c3d70f8d654daffe14ea6ed283e19c}
+      \strng{authornamehash}{6c4fc856cb03d2d49ae310bb021d3902}
+      \strng{authorfullhash}{89e9ba1e97cb858cadf991fc966fe4fa}
+      \field{labelalpha}{Cha+87}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{0003-4932}
+      \field{journaltitle}{Annals of Surgery}
+      \field{langid}{english}
+      \field{month}{4}
+      \field{number}{4}
+      \field{shorttitle}{Magnetic {{Resonance Imaging Versus Computed Tomography}} in the {{Evaluation}} of {{Soft Tissue Tumors}} of the {{Extremities}}}
+      \field{title}{Magnetic {{Resonance Imaging Versus Computed Tomography}} in the {{Evaluation}} of {{Soft Tissue Tumors}} of the {{Extremities}}:}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{205}
+      \field{year}{1987}
+      \field{urldateera}{ce}
+      \field{pages}{340\bibrangedash 348}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1097/00000658-198704000-00002
+      \endverb
+      \verb{file}
+      \verb /Users/marinbenc/Zotero/storage/Z5NHPGR5/Chang et al_1987_Magnetic Resonance Imaging Versus Computed Tomography in the Evaluation of Soft.pdf
+      \endverb
     \endentry
     \entry{chen2017rethinking}{misc}{}
       \name{author}{4}{}{%
@@ -1952,6 +2177,157 @@
       \field{isbn}{978-0-7817-7554-0}
       \field{title}{Essentials of Radiologic Science}
       \field{year}{2011}
+    \endentry
+    \entry{goldmanPrinciplesCTCT2007}{article}{}
+      \name{author}{1}{}{%
+        {{hash=1ec9f38574213c321a2ebbdb035db89f}{%
+           family={Goldman},
+           familyi={G\bibinitperiod},
+           given={L.\bibnamedelimi W.},
+           giveni={L\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{1ec9f38574213c321a2ebbdb035db89f}
+      \strng{fullhash}{1ec9f38574213c321a2ebbdb035db89f}
+      \strng{bibnamehash}{1ec9f38574213c321a2ebbdb035db89f}
+      \strng{authorbibnamehash}{1ec9f38574213c321a2ebbdb035db89f}
+      \strng{authornamehash}{1ec9f38574213c321a2ebbdb035db89f}
+      \strng{authorfullhash}{1ec9f38574213c321a2ebbdb035db89f}
+      \field{extraname}{1}
+      \field{labelalpha}{Gol07}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0091-4916}
+      \field{journaltitle}{Journal of Nuclear Medicine Technology}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{3}
+      \field{title}{Principles of {{CT}} and {{CT Technology}}}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{35}
+      \field{year}{2007}
+      \field{urldateera}{ce}
+      \field{pages}{115\bibrangedash 128}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.2967/jnmt.107.042978
+      \endverb
+      \verb{file}
+      \verb /Users/marinbenc/Zotero/storage/PJ6VMWHX/Goldman_2007_Principles of CT and CT Technology.pdf
+      \endverb
+    \endentry
+    \entry{goldmanPrinciplesCTRadiation2007}{article}{}
+      \name{author}{1}{}{%
+        {{hash=1ec9f38574213c321a2ebbdb035db89f}{%
+           family={Goldman},
+           familyi={G\bibinitperiod},
+           given={L.\bibnamedelimi W.},
+           giveni={L\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{1ec9f38574213c321a2ebbdb035db89f}
+      \strng{fullhash}{1ec9f38574213c321a2ebbdb035db89f}
+      \strng{bibnamehash}{1ec9f38574213c321a2ebbdb035db89f}
+      \strng{authorbibnamehash}{1ec9f38574213c321a2ebbdb035db89f}
+      \strng{authornamehash}{1ec9f38574213c321a2ebbdb035db89f}
+      \strng{authorfullhash}{1ec9f38574213c321a2ebbdb035db89f}
+      \field{extraname}{2}
+      \field{labelalpha}{Gol07}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{0091-4916}
+      \field{journaltitle}{Journal of Nuclear Medicine Technology}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{number}{4}
+      \field{shorttitle}{Principles of {{CT}}}
+      \field{title}{Principles of {{CT}}: {{Radiation Dose}} and {{Image Quality}}}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{35}
+      \field{year}{2007}
+      \field{urldateera}{ce}
+      \field{pages}{213\bibrangedash 225}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.2967/jnmt.106.037846
+      \endverb
+      \verb{file}
+      \verb /Users/marinbenc/Zotero/storage/PUSGJ8AP/Goldman_2007_Principles of CT.pdf
+      \endverb
+    \endentry
+    \entry{groverMagneticResonanceImaging2015}{article}{}
+      \name{author}{6}{}{%
+        {{hash=82df886321d1f5d869d9f82cb44707c0}{%
+           family={Grover},
+           familyi={G\bibinitperiod},
+           given={Vijay\bibnamedelima P.B.},
+           giveni={V\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=d1039ee87b95b74ce6f474dbc4563706}{%
+           family={Tognarelli},
+           familyi={T\bibinitperiod},
+           given={Joshua\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=25d95fdd1982520dd9f56f63be2ab846}{%
+           family={Crossey},
+           familyi={C\bibinitperiod},
+           given={Mary\bibnamedelima M.E.},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=0ffa47151f95abcdd5c6eca3b855e1da}{%
+           family={Cox},
+           familyi={C\bibinitperiod},
+           given={I.\bibnamedelimi Jane},
+           giveni={I\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=f081d4f4a6a2fd9d56d35df18fac9257}{%
+           family={{Taylor-Robinson}},
+           familyi={T\bibinitperiod},
+           given={Simon\bibnamedelima D.},
+           giveni={S\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=cb2b499a1f94af5c7b9ebe765fe8efbe}{%
+           family={McPhail},
+           familyi={M\bibinitperiod},
+           given={Mark\bibnamedelima J.W.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{7504617f107b3eaea01e74a645d37284}
+      \strng{fullhash}{e0347cd163f6a4b88df418431a63f39a}
+      \strng{bibnamehash}{1da27e60ca68d23c5fd6de2721667983}
+      \strng{authorbibnamehash}{1da27e60ca68d23c5fd6de2721667983}
+      \strng{authornamehash}{7504617f107b3eaea01e74a645d37284}
+      \strng{authorfullhash}{e0347cd163f6a4b88df418431a63f39a}
+      \field{labelalpha}{Gro+15}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{09736883}
+      \field{journaltitle}{Journal of Clinical and Experimental Hepatology}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{3}
+      \field{shorttitle}{Magnetic {{Resonance Imaging}}}
+      \field{title}{Magnetic {{Resonance Imaging}}: {{Principles}} and {{Techniques}}: {{Lessons}} for {{Clinicians}}}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{5}
+      \field{year}{2015}
+      \field{urldateera}{ce}
+      \field{pages}{246\bibrangedash 255}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1016/j.jceh.2015.08.001
+      \endverb
+      \verb{file}
+      \verb /Users/marinbenc/Zotero/storage/D6774NNH/Grover et al_2015_Magnetic Resonance Imaging.pdf
+      \endverb
     \endentry
     \entry{heMaskRCNN2017b}{inproceedings}{}
       \name{author}{4}{}{%
@@ -2502,6 +2878,82 @@
       \verb 10.1109/5.726791
       \endverb
     \endentry
+    \entry{liLowDoseCTImage2023}{article}{}
+      \name{author}{9}{}{%
+        {{hash=dbe83fd8da75338203d4e8dd0e20be17}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Ming},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d7d891f249e13824415182126a29e516}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Jiping},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f532a47a63f16b583c4455dea6a8018e}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=466449113297ab73fb9ce241abe257a7}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Yufei},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=8cb2684e6c67a0b5032a0952c06c8e50}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Zhongyi},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=9a91c24aa3a6c4a390291ca0881b15db}{%
+           family={Qi},
+           familyi={Q\bibinitperiod},
+           given={Yujin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=7eb0806c19a3ce5e90bb219be9ef61f0}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Haochuan},
+           giveni={H\bibinitperiod}}}%
+        {{hash=03e7b39f55a0b0b2a4a392102ecd6bf7}{%
+           family={Zheng},
+           familyi={Z\bibinitperiod},
+           given={Jian},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ca0714ee2e4a08351aaa38060a062543}{%
+           family={Tsui},
+           familyi={T\bibinitperiod},
+           given={Benjamin\bibnamedelimb M.\bibnamedelimi W.},
+           giveni={B\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{b2c49bbb2e0a288bcaa887002ca1ab95}
+      \strng{fullhash}{0408f12173e80795c27bfb35388ac32f}
+      \strng{bibnamehash}{7f8a16c75c8c755a88809e97d03c3b03}
+      \strng{authorbibnamehash}{7f8a16c75c8c755a88809e97d03c3b03}
+      \strng{authornamehash}{b2c49bbb2e0a288bcaa887002ca1ab95}
+      \strng{authorfullhash}{0408f12173e80795c27bfb35388ac32f}
+      \field{labelalpha}{Li+23}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0278-0062, 1558-254X}
+      \field{journaltitle}{IEEE Transactions on Medical Imaging}
+      \field{month}{9}
+      \field{number}{9}
+      \field{title}{Low-{{Dose CT Image Synthesis}} for {{Domain Adaptation Imaging Using}} a {{Generative Adversarial Network With Noise Encoding Transfer Learning}}}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{42}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{2616\bibrangedash 2630}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/TMI.2023.3261822
+      \endverb
+    \endentry
     \entry{liu2021Swin}{article}{}
       \name{author}{8}{}{%
         {{hash=19aabf2deb737584450693431af51cc3}{%
@@ -2599,6 +3051,44 @@
       \field{pages}{3431\bibrangedash 3440}
       \range{pages}{10}
     \endentry
+    \entry{macovskiNoiseMRI1996}{article}{}
+      \name{author}{1}{}{%
+        {{hash=ad9cb7056e46527bd83665b8077dff05}{%
+           family={Macovski},
+           familyi={M\bibinitperiod},
+           given={Albert},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{ad9cb7056e46527bd83665b8077dff05}
+      \strng{fullhash}{ad9cb7056e46527bd83665b8077dff05}
+      \strng{bibnamehash}{ad9cb7056e46527bd83665b8077dff05}
+      \strng{authorbibnamehash}{ad9cb7056e46527bd83665b8077dff05}
+      \strng{authornamehash}{ad9cb7056e46527bd83665b8077dff05}
+      \strng{authorfullhash}{ad9cb7056e46527bd83665b8077dff05}
+      \field{labelalpha}{Mac96}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract This study analyzes the signal-to-noise ratio (SNR) in magnetic resonance imaging. The factors that determine the SNR are derived starting from basic principles. The SNR, for a given object, is shown to be proportional to the voxel volume and the square root of the acquisition time. The noise generated by the body is derived using a cylindrical model and is shown to be proportional to the square of the radius and the square root of the length.}
+      \field{issn}{0740-3194, 1522-2594}
+      \field{journaltitle}{Magnetic Resonance in Medicine}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{3}
+      \field{title}{Noise in {{MRI}}}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{36}
+      \field{year}{1996}
+      \field{urldateera}{ce}
+      \field{pages}{494\bibrangedash 497}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1002/mrm.1910360327
+      \endverb
+    \endentry
     \entry{mahabadiCardiacComputedTomographyderived2017}{article}{}
       \name{author}{7}{}{%
         {{hash=aeb23052bdb1ec68142771e307531cd6}{%
@@ -2674,6 +3164,87 @@
       \range{pages}{-1}
       \verb{doi}
       \verb 10.1371/journal.pone.0183514
+      \endverb
+    \endentry
+    \entry{mottolaReproducibilityCTbasedRadiomic2021}{article}{}
+      \name{author}{9}{}{%
+        {{hash=0b0fb36deee350893bbc009a3a3df89d}{%
+           family={Mottola},
+           familyi={M\bibinitperiod},
+           given={Margherita},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ecbfd5c0b5ed55b5ce6f97b10c291bf0}{%
+           family={Ursprung},
+           familyi={U\bibinitperiod},
+           given={Stephan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0f1b65a92f7b90f9b1c7eadb95626cae}{%
+           family={Rundo},
+           familyi={R\bibinitperiod},
+           given={Leonardo},
+           giveni={L\bibinitperiod}}}%
+        {{hash=ce15fa3f66dc74597fe200605c221aaf}{%
+           family={Sanchez},
+           familyi={S\bibinitperiod},
+           given={Lorena\bibnamedelima Escudero},
+           giveni={L\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=389dbfc85dda6e0972118bfb1f41935c}{%
+           family={Klatte},
+           familyi={K\bibinitperiod},
+           given={Tobias},
+           giveni={T\bibinitperiod}}}%
+        {{hash=fc0361c1096166178108899a5351aacf}{%
+           family={Mendichovszky},
+           familyi={M\bibinitperiod},
+           given={Iosif},
+           giveni={I\bibinitperiod}}}%
+        {{hash=52521c074dffb3ec99e19845cb5d4656}{%
+           family={Stewart},
+           familyi={S\bibinitperiod},
+           given={Grant\bibnamedelima D},
+           giveni={G\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=aeb1f9cdb412e0eb0d5039996bdeca1a}{%
+           family={Sala},
+           familyi={S\bibinitperiod},
+           given={Evis},
+           giveni={E\bibinitperiod}}}%
+        {{hash=1e289ac7cd9f2e71693d58b0a46b05ee}{%
+           family={Bevilacqua},
+           familyi={B\bibinitperiod},
+           given={Alessandro},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{c47570bfd0efe65177a643dd8689a379}
+      \strng{fullhash}{1526aecaff15128218a8c07ee565c3b6}
+      \strng{bibnamehash}{39f44fce89a244b7fc5317198e6d390e}
+      \strng{authorbibnamehash}{39f44fce89a244b7fc5317198e6d390e}
+      \strng{authornamehash}{c47570bfd0efe65177a643dd8689a379}
+      \strng{authorfullhash}{1526aecaff15128218a8c07ee565c3b6}
+      \field{labelalpha}{Mot+21}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract Computed Tomography (CT) is widely used in oncology for morphological evaluation and diagnosis, commonly through visual assessments, often exploiting semi-automatic tools as well. Well-established automatic methods for quantitative imaging offer the opportunity to enrich the radiologist interpretation with a large number of radiomic features, which need to be highly reproducible to be used reliably in clinical practice. This study investigates feature reproducibility against noise, varying resolutions and segmentations (achieved by perturbing the regions of interest), in a CT dataset with heterogeneous voxel size of 98 renal cell carcinomas (RCCs) and 93 contralateral normal kidneys (CK). In particular, first order (FO) and second order texture features based on both 2D and 3D grey level co-occurrence matrices (GLCMs) were considered. Moreover, this study carries out a comparative analysis of three of the most commonly used interpolation methods, which need to be selected before any resampling procedure. Results showed that the Lanczos interpolation is the most effective at preserving original information in resampling, where the median slice resolution coupled with the native slice spacing allows the best reproducibility, with 94.6\% and 87.7\% of features, in RCC and CK, respectively. GLCMs show their maximum reproducibility when used at short distances.}
+      \field{issn}{2045-2322}
+      \field{journaltitle}{Scientific Reports}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{number}{1}
+      \field{title}{Reproducibility of {{CT-based}} Radiomic Features against Image Resampling and Perturbations for Tumour and Healthy Kidney in Renal Cancer Patients}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{11}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \field{pages}{11542}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s41598-021-90985-y
+      \endverb
+      \verb{file}
+      \verb /Users/marinbenc/Zotero/storage/6XVX8EB4/Mottola et al_2021_Reproducibility of CT-based radiomic features against image resampling and.pdf
       \endverb
     \endentry
     \entry{nguyen2020vindrcxr}{misc}{}
@@ -3193,6 +3764,39 @@
       \verb 10.1038/s41597-021-00815-z
       \endverb
     \endentry
+    \entry{seibertXrayImagingPhysics2004}{article}{}
+      \name{author}{1}{}{%
+        {{hash=20648d75cd1b274bd67aeb0c260cb46e}{%
+           family={Seibert},
+           familyi={S\bibinitperiod},
+           given={J.\bibnamedelimi Anthony},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{20648d75cd1b274bd67aeb0c260cb46e}
+      \strng{fullhash}{20648d75cd1b274bd67aeb0c260cb46e}
+      \strng{bibnamehash}{20648d75cd1b274bd67aeb0c260cb46e}
+      \strng{authorbibnamehash}{20648d75cd1b274bd67aeb0c260cb46e}
+      \strng{authornamehash}{20648d75cd1b274bd67aeb0c260cb46e}
+      \strng{authorfullhash}{20648d75cd1b274bd67aeb0c260cb46e}
+      \field{labelalpha}{Sei04}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{The purpose is to review in a 4-part series: (i) the basic principles of x-ray production, (ii) x-ray interactions and data capture/conversion, (iii) acquisition/creation of the CT image, and (iv) operational details of a modern multislice CT scanner integrated with a PET scanner. Advances in PET technology have lead to widespread applications in diagnostic imaging and oncologic staging of disease. Combined PET/CT scanners provide the high-resolution anatomic imaging capability of CT with the metabolic and physiologic information by PET, to offer a significant increase in information content useful for the diagnostician and radiation oncologist, neurosurgeon, or other physician needing both anatomic detail and knowledge of disease extent. Nuclear medicine technologists at the forefront of PET should therefore have a good understanding of x-ray imaging physics and basic CT scanner operation, as covered by this 4-part series. After reading the first article on x-ray production, the nuclear medicine technologist will be familiar with (a) the physical characteristics of x-rays relative to other electromagnetic radiations, including gamma-rays in terms of energy, wavelength, and frequency; (b) methods of x-ray production and the characteristics of the output x-ray spectrum; (c) components necessary to produce x-rays, including the x-ray tube/x-ray generator and the parameters that control x-ray quality (energy) and quantity; (d) x-ray production limitations caused by heating and the impact on image acquisition and clinical throughput; and (e) a glossary of terms to assist in the understanding of this information.}
+      \field{issn}{0091-4916}
+      \field{journaltitle}{Journal of Nuclear Medicine Technology}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{3}
+      \field{shorttitle}{X-Ray Imaging Physics for Nuclear Medicine Technologists. {{Part}} 1}
+      \field{title}{X-Ray Imaging Physics for Nuclear Medicine Technologists. {{Part}} 1: {{Basic}} Principles of x-Ray Production}
+      \field{volume}{32}
+      \field{year}{2004}
+      \field{pages}{139\bibrangedash 147}
+      \range{pages}{9}
+      \keyw{Humans,Nuclear Medicine,Physical Phenomena,Physics,Radiation,Radiology,Technology Radiologic,Tomography X-Ray Computed,X-Rays}
+    \endentry
     \entry{sinclairAtlasISTNJointSegmentation2022a}{article}{}
       \name{author}{8}{}{%
         {{hash=0c7723ed39a0a95a787ed8206a0113a9}{%
@@ -3263,6 +3867,157 @@
       \range{pages}{1}
       \verb{doi}
       \verb 10.1016/j.media.2022.102383
+      \endverb
+    \endentry
+    \entry{steccoPatientSafetyIssues2007}{article}{}
+      \name{author}{3}{}{%
+        {{hash=48c086079f90306f98666ed00647ac89}{%
+           family={Stecco},
+           familyi={S\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ba98cdd413b7b8f036c8c7c3f798842d}{%
+           family={Saponaro},
+           familyi={S\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=31b9ac818bf3fb058095fb1cd948d59b}{%
+           family={Carriero},
+           familyi={C\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{c2a8d990215f2a06df48d716446c97c2}
+      \strng{fullhash}{c2a8d990215f2a06df48d716446c97c2}
+      \strng{bibnamehash}{c2a8d990215f2a06df48d716446c97c2}
+      \strng{authorbibnamehash}{c2a8d990215f2a06df48d716446c97c2}
+      \strng{authornamehash}{c2a8d990215f2a06df48d716446c97c2}
+      \strng{authorfullhash}{c2a8d990215f2a06df48d716446c97c2}
+      \field{labelalpha}{SSC07}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{0033-8362, 1826-6983}
+      \field{journaltitle}{La radiologia medica}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{number}{4}
+      \field{shorttitle}{Patient Safety Issues in Magnetic Resonance Imaging}
+      \field{title}{Patient Safety Issues in Magnetic Resonance Imaging: State of the Art}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{112}
+      \field{year}{2007}
+      \field{urldateera}{ce}
+      \field{pages}{491\bibrangedash 508}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1007/s11547-007-0154-4
+      \endverb
+    \endentry
+    \entry{strangmanQuantitativeComparisonSimultaneous2002}{article}{}
+      \name{author}{4}{}{%
+        {{hash=c1ffc4a14c63fae0ae900d034dc18e25}{%
+           family={Strangman},
+           familyi={S\bibinitperiod},
+           given={Gary},
+           giveni={G\bibinitperiod}}}%
+        {{hash=23c38680b4bd75376bca65691a33bc64}{%
+           family={Culver},
+           familyi={C\bibinitperiod},
+           given={Joseph\bibnamedelima P.},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=69a49f233644e0c9d0e368bcdadcb5c0}{%
+           family={Thompson},
+           familyi={T\bibinitperiod},
+           given={John\bibnamedelima H.},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=95dd4e11f8349988582195f69a5119f3}{%
+           family={Boas},
+           familyi={B\bibinitperiod},
+           given={David\bibnamedelima A.},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{2edabe2270f2def99a3a10448047981e}
+      \strng{fullhash}{f9bedb068d8e991eabaf8759838f7a7e}
+      \strng{bibnamehash}{f9bedb068d8e991eabaf8759838f7a7e}
+      \strng{authorbibnamehash}{f9bedb068d8e991eabaf8759838f7a7e}
+      \strng{authornamehash}{2edabe2270f2def99a3a10448047981e}
+      \strng{authorfullhash}{f9bedb068d8e991eabaf8759838f7a7e}
+      \field{labelalpha}{Str+02}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{10538119}
+      \field{journaltitle}{NeuroImage}
+      \field{langid}{english}
+      \field{month}{10}
+      \field{number}{2}
+      \field{title}{A {{Quantitative Comparison}} of {{Simultaneous BOLD fMRI}} and {{NIRS Recordings}} during {{Functional Brain Activation}}}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{17}
+      \field{year}{2002}
+      \field{urldateera}{ce}
+      \field{pages}{719\bibrangedash 731}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1006/nimg.2002.1227
+      \endverb
+    \endentry
+    \entry{thorpeClaustrophobiaMRIRole2008}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b0b0e668c54143acd5b9ed4cbdcebfa0}{%
+           family={Thorpe},
+           familyi={T\bibinitperiod},
+           given={Susan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=5dd294413b392ddff1c1d1eac8deac01}{%
+           family={Salkovskis},
+           familyi={S\bibinitperiod},
+           given={Paul\bibnamedelima M.},
+           giveni={P\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=54a454cc2336cab7dd0f39d2bf58c368}{%
+           family={Dittner},
+           familyi={D\bibinitperiod},
+           given={Antonia},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{585672cf478b741fbfb4b45b5f6e6e6c}
+      \strng{fullhash}{585672cf478b741fbfb4b45b5f6e6e6c}
+      \strng{bibnamehash}{585672cf478b741fbfb4b45b5f6e6e6c}
+      \strng{authorbibnamehash}{585672cf478b741fbfb4b45b5f6e6e6c}
+      \strng{authornamehash}{585672cf478b741fbfb4b45b5f6e6e6c}
+      \strng{authorfullhash}{585672cf478b741fbfb4b45b5f6e6e6c}
+      \field{labelalpha}{TSD08}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{0730725X}
+      \field{journaltitle}{Magnetic Resonance Imaging}
+      \field{langid}{english}
+      \field{month}{10}
+      \field{number}{8}
+      \field{shorttitle}{Claustrophobia in {{MRI}}}
+      \field{title}{Claustrophobia in {{MRI}}: The Role of Cognitions}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{26}
+      \field{year}{2008}
+      \field{urldateera}{ce}
+      \field{pages}{1081\bibrangedash 1088}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1016/j.mri.2008.01.022
+      \endverb
+      \verb{file}
+      \verb /Users/marinbenc/Zotero/storage/LPAR3JXT/Thorpe et al_2008_Claustrophobia in MRI.pdf
       \endverb
     \endentry
     \entry{attnAllYouNeed}{inproceedings}{}
@@ -3366,6 +4121,183 @@
       \field{title}{Attention Is All You Need}
       \field{volume}{30}
       \field{year}{2017}
+    \endentry
+    \entry{wahidIntensityStandardizationMethods2021}{article}{}
+      \name{author}{19}{}{%
+        {{hash=b46b19eec5287e0463349e4e51de4641}{%
+           family={Wahid},
+           familyi={W\bibinitperiod},
+           given={Kareem\bibnamedelima A.},
+           giveni={K\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=67079908929f394f6891ad9b150284c2}{%
+           family={He},
+           familyi={H\bibinitperiod},
+           given={Renjie},
+           giveni={R\bibinitperiod}}}%
+        {{hash=b17b36290e19721c7fe84904a5cb738c}{%
+           family={McDonald},
+           familyi={M\bibinitperiod},
+           given={Brigid\bibnamedelima A.},
+           giveni={B\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=75cf40e3dd62073ca20cee663f2295dd}{%
+           family={Anderson},
+           familyi={A\bibinitperiod},
+           given={Brian\bibnamedelima M.},
+           giveni={B\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=d03e3974794399ea146369e9bb57574c}{%
+           family={Salzillo},
+           familyi={S\bibinitperiod},
+           given={Travis},
+           giveni={T\bibinitperiod}}}%
+        {{hash=8a169efac3eee9fe4ac616c372bdbe81}{%
+           family={Mulder},
+           familyi={M\bibinitperiod},
+           given={Sam},
+           giveni={S\bibinitperiod}}}%
+        {{hash=17b6b79bcbf6969bb84e6407694fd7e6}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Jarey},
+           giveni={J\bibinitperiod}}}%
+        {{hash=705722786806b1006a3825e581ce4063}{%
+           family={Sharafi},
+           familyi={S\bibinitperiod},
+           given={Christina\bibnamedelima Setareh},
+           giveni={C\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=cb6bb2f028d507be1f90b437c880f8d3}{%
+           family={McCoy},
+           familyi={M\bibinitperiod},
+           given={Lance\bibnamedelima A.},
+           giveni={L\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=3ef819c70e6806751797c8e7fb685d05}{%
+           family={Naser},
+           familyi={N\bibinitperiod},
+           given={Mohamed\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=dcb6ede026a660b35cb62c10a7a9a2da}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={Sara},
+           giveni={S\bibinitperiod}}}%
+        {{hash=8cbed2950cf7077b02dce7b31893a0bb}{%
+           family={Sanders},
+           familyi={S\bibinitperiod},
+           given={Keith\bibnamedelima L.},
+           giveni={K\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=4c01a61725022a54e6f596ef445ee95c}{%
+           family={Mohamed},
+           familyi={M\bibinitperiod},
+           given={Abdallah\bibnamedelima S.R.},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=cb674d7ed0136874c0d417716d2d158e}{%
+           family={Ding},
+           familyi={D\bibinitperiod},
+           given={Yao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=ee9fc338956139781f5bfa2a9884822e}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Jihong},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d3d805a25a24a8171fdedde1bc7f1091}{%
+           family={Hutcheson},
+           familyi={H\bibinitperiod},
+           given={Kate},
+           giveni={K\bibinitperiod}}}%
+        {{hash=be685e110a580b82ec8756a848d4a152}{%
+           family={Lai},
+           familyi={L\bibinitperiod},
+           given={Stephen\bibnamedelima Y.},
+           giveni={S\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{hash=9a46ee4a8b17e724fdb217594c8c064d}{%
+           family={Fuller},
+           familyi={F\bibinitperiod},
+           given={Clifton\bibnamedelima D.},
+           giveni={C\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=2e2d276df796148c258423c2ba03dc66}{%
+           family={Van\bibnamedelima Dijk},
+           familyi={V\bibinitperiod\bibinitdelim D\bibinitperiod},
+           given={Lisanne\bibnamedelima V.},
+           giveni={L\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+      }
+      \strng{namehash}{ad4243593c77244482c7cf390f4cbc23}
+      \strng{fullhash}{d9417e642736e3800b6fbc3e4a79e175}
+      \strng{bibnamehash}{1c048f7181a4c8fbaf9f90e39e79f5e0}
+      \strng{authorbibnamehash}{1c048f7181a4c8fbaf9f90e39e79f5e0}
+      \strng{authornamehash}{ad4243593c77244482c7cf390f4cbc23}
+      \strng{authorfullhash}{d9417e642736e3800b6fbc3e4a79e175}
+      \field{labelalpha}{Wah+21}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{24056316}
+      \field{journaltitle}{Physics and Imaging in Radiation Oncology}
+      \field{langid}{english}
+      \field{month}{10}
+      \field{title}{Intensity Standardization Methods in Magnetic Resonance Imaging of Head and Neck Cancer}
+      \field{urlday}{18}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{volume}{20}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \field{pages}{88\bibrangedash 93}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1016/j.phro.2021.11.001
+      \endverb
+      \verb{file}
+      \verb /Users/marinbenc/Zotero/storage/XQVL9PFS/Wahid et al_2021_Intensity standardization methods in magnetic resonance imaging of head and.pdf
+      \endverb
+    \endentry
+    \entry{Wallyn2019}{article}{}
+      \name{author}{4}{}{%
+        {{hash=06e3429713681ea9b440c0fa0c10253d}{%
+           family={Wallyn},
+           familyi={W\bibinitperiod},
+           given={Justine},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7aa753d6d076bc035f4469c97ba7a580}{%
+           family={Anton},
+           familyi={A\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=6a3733713784e6d40f8dc953f1e2b311}{%
+           family={Akram},
+           familyi={A\bibinitperiod},
+           given={Salman},
+           giveni={S\bibinitperiod}}}%
+        {{hash=59193a25018d3bae75a39148846bd219}{%
+           family={Vandamme},
+           familyi={V\bibinitperiod},
+           given={Thierry\bibnamedelima F.},
+           giveni={T\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Science and Business Media LLC}%
+      }
+      \strng{namehash}{66a77cabbb081c43d91f9ebb6328420f}
+      \strng{fullhash}{3ab7b1370b85af21037e1e1394685734}
+      \strng{bibnamehash}{3ab7b1370b85af21037e1e1394685734}
+      \strng{authorbibnamehash}{3ab7b1370b85af21037e1e1394685734}
+      \strng{authornamehash}{66a77cabbb081c43d91f9ebb6328420f}
+      \strng{authorfullhash}{3ab7b1370b85af21037e1e1394685734}
+      \field{labelalpha}{Wal+19}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1573-904X}
+      \field{journaltitle}{Pharmaceutical Research}
+      \field{month}{4}
+      \field{number}{6}
+      \field{title}{Biomedical Imaging: {{Principles}}, Technologies, Clinical Aspects, Contrast Agents, Limitations and Future Trends in Nanomedicines}
+      \field{volume}{36}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.1007/s11095-019-2608-5
+      \endverb
     \endentry
     \entry{zhao2017pspnet}{inproceedings}{}
       \name{author}{5}{}{%

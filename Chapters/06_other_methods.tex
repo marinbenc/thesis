@@ -124,7 +124,7 @@ Our method's mean DSC and correlation results are presented in Table \ref{tab:re
     \label{fig:examples}
 \end{figure}
 
-The Bland-Altman analysis of our method is presented in \figref{fig:corr}. The analysis shows a high level of agreement between our method and ground-truth annotations. The plot also shows a small positive bias from our method. Additionally, the plot does not show a strong proportional bias. However, while most measurements fall within the 95\% confidence interval, there are outliers. The most likely reason for these errors is the noisy nature of the ground truth labels especially towards the edges of the heart region.
+The Bland-Altman analysis of our method is presented in \figref{fig:corr}. Bland-Altman analysis is a common way of visualizing the agreement between two clinical measuring methods. It consists of a scatterplot where the x-axis is the average and the y-axis is the difference between two measurements. In this case, we show the average between the ground truth and the predicted measure of the number of epicardial fat pixels in a slice of a CT scan. The analysis shows a high level of agreement between our method and ground-truth annotations. The plot also shows a small positive bias from our method. Additionally, the plot does not show a strong proportional bias. However, while most measurements fall within the 95\% confidence interval, there are outliers. The most likely reason for these errors is the noisy nature of the ground truth labels especially towards the edges of the heart region.
 
 \begin{figure}[t!]
     \centering

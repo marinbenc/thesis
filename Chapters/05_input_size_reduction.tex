@@ -3,6 +3,8 @@
 \chapter{Reducing Model Input Sizes with Model-Driven Crops}
 \label{chap:reducing-input-size}
 
+In this chapter, we will present a simple but powerful way of reducing the sizes of input images to segmentation neural networks using image crops. We will show why reducing the input size can lead to an increase in data efficiency. Finally, we will evaluate the approach empirically using two similar methods on various medical image modalities.
+
 In Chapter \ref{chap:data-efficiency} of this thesis we discussed how increasing the number of parameters of a model allows it to overfit more easily. Additionally, we discussed how more complex problems require more parameters to be modeled. Thus, for small datasets, it is beneficial to reduce the complexity of the problem to allow for using networks of fewer parameters. A simple way to reduce the complexity of problems in convolutional neural networks is to reduce the size of the images.
 
 To understand how reducing input size reduces model complexity, let us revisit the concept of sample complexity \(n(\epsilon, \delta)\) and its established bounds:
@@ -108,7 +110,7 @@ Each crop of the high-resolution image is scaled to the input size of the fine s
 
 The fine segmentation network is trained on ground truth image crops. The crops are obtained by using the connected components of ground truth segmentation masks. From there, the crops are prepared in the same way as described above. Since the images have multiple crop regions, we choose one of the crop regions of the full-resolution image at random during each training iteration. If the original image has no connected components in the ground truth segmentation mask, the whole image is used as training input. All input images to the fine segmentation network are resized to $S \times S$, where $S$ is a pre-determined input size that matches the input size used to train the rough segmentation network.
 
-During training, we add an augmentation step in the form of crop region jittering. When preparing the crops during training, a uniformly distributed random number between $\pm16$ pixels is added to each dimension of the bounding box (the $x$- and $y$-coordinate, width, and height). This ensures that the trained network is robust to imperfect rough segmentation masks during inference.
+During training, we add an augmentation step by adding random noise to the crop region. When preparing the crops during training, a uniformly distributed random number between $\pm16$ pixels is added to each dimension of the bounding box (the $x$- and $y$-coordinate, width, and height). This ensures that the trained network is robust to imperfect rough segmentation masks during inference.
 
 In our experiments, we used the same architecture for both the rough and fine segmentation networks, as this allows us to use transfer learning. However, there is no requirement that the networks use the same architecture.
 
