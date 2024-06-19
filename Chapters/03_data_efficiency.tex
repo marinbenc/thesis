@@ -20,11 +20,12 @@ In this equation, $f(x)$ represents our regression model. The objective is to de
 
 We will conduct a simulated experiment. We will construct an underlying function as a cosine function with an added Gaussian noise:
 \begin{equation}
-	y(x) = -(\cos(0.01 \pi x) - 1) \cdot 0.4 + Z, Z \sim \mathcal{N}(0, 0.1).
+	y(x) = -(\cos(0.01 \pi x) - 1) \cdot 0.4 + Z, Z \sim \mathcal{N}(0, 0.1),
 \end{equation}
+where $\mathcal{N}(0, 0.1)$ is the normal distribution with a mean of zero and a standard deviation of 0.1 from which $Z$ is sampled.
 We will generate several $(x_i, y_i)$ pairs and apply the previously discussed linear model and criterion to fit a line through these points. In real-world conditions, the underlying function and the nature of the measurement noise remain unknown. However, for this simulation, knowing these details is useful to demonstrate the divergence between the fitted function and the underlying one. Figure \ref{fig:t1-t2-example} illustrates the fitted line using varying numbers of data points.
 
-\begin{figure}[t!]
+\begin{figure}[b!]
  \hfill
  \subfloat{\includegraphics[width=0.5\linewidth]{images/3/heart_disease_risk}}
  \hfill
@@ -33,7 +34,7 @@ We will generate several $(x_i, y_i)$ pairs and apply the previously discussed l
  \caption{A simulated example of heart disease risk prediction using simple linear regression. The plots on the right show how the approximated function depends on the sample size.\label{fig:t1-t2-example}}
 \end{figure}
 
-\begin{figure}[t!]
+\begin{figure}[b!]
  \centering
  \includegraphics[width=\columnwidth]{images/3/heart_disease_risk_samples_degrees}
  \caption{Fitting a polygonal function of various degrees on three different sample sizes.}
@@ -78,7 +79,7 @@ In this thesis, we refer to this basic technique as ``simple transfer learning''
 
 	\subsection{Simple Transfer Learning}
 	
-	Simple transfer learning is a prevalent technique in medical image segmentation. Typically, segmentation neural networks in this field are initialized with weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet comprises a collection of natural images, which significantly differ in distribution from medical images. As a result, initializing with ImageNet-trained weights does not usually enhance accuracy but it does make the network converge faster. This is because such initialization `skips'' the phase of learning fundamental image features common across various types of images, including medical ones. \figref{fig:stl-diagram} illustrates this process.
+	Simple transfer learning is a prevalent technique in medical image segmentation. Typically, segmentation neural networks in this field are initialized with weights trained on the ImageNet dataset \cite{dengImageNetLargescaleHierarchical2009a}. ImageNet comprises a collection of natural images, which significantly differ in distribution from medical images. As a result, initializing with ImageNet-trained weights does not usually enhance accuracy but it does make the network converge faster. This is because such initialization `skips' the phase of learning fundamental image features common across various types of images, including medical ones. \figref{fig:stl-diagram} illustrates this process.
 
 \begin{figure}[t!]
  \centering
@@ -138,11 +139,11 @@ Aside from getting new data, the easiest way to reduce the estimation error is b
 \begin{equation}
 	L(\theta; y_{pred}, y) = L_{seg}(\theta; y_{pred}, y) + \alpha\Omega(\theta),
 \end{equation}
-where $L_{seg}$ is the segmentation loss function while $\Omega(\theta)$ is a parameter norm penalty, i.e. a measure of the complexity of the model \cite{goodfellowDeepLearning2016}. As we increase $\alpha$, the strength of the regularization increases and the loss is more impacted by the complexity of the model. As the network is being trained, it will seek to both reduce $\Omega(\theta)$ as well as $L_{seg}$, leading to a more constrained model.
+where $\theta$ are the model parameters, $L_{seg}$ is the segmentation loss function, and $\Omega(\theta)$ is a parameter norm penalty, i.e. a measure of the complexity of the model \cite{goodfellowDeepLearning2016}. As we increase $\alpha$, the strength of the regularization increases and the loss is more impacted by the complexity of the model. As the network is being trained, it will seek to both reduce $\Omega(\theta)$ as well as $L_{seg}$, leading to a more constrained model.
 
 A commonly used parameter norm penalty is the $L^2$ regularization, also known as \textbf{weight decay} in deep learning contexts. Assuming $\theta$ consists of a set of weights $w, \lvert w \rvert = n$ and biases $b$, the $L^2$ norm is defined as $\Omega(w) = \sqrt{(w_1^2 + w_2^2 + \cdots + w_n^2)}$. In other words, the network is exponentially penalized for moving weights away from zero. This regularisation, in effect, forces the network to use fewer parameters.
 
-Thus, a deep learning network can learn to use fewer parameters without necessarily changing the architecture of the network itself. However, what remains unsolved is how to transform the data such that the network can solve the problem with fewer parameters. We will discuss that in the next chapter, where we present a another approach to achieving data efficiency.
+Thus, a deep learning network can learn to use fewer parameters without necessarily changing the architecture of the network itself. However, what remains unsolved is how to transform the data such that the network can solve the problem with fewer parameters. We will discuss that in the next chapter, where we present a different approach to achieving data efficiency.
 
 \section{Conclusion}
 

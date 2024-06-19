@@ -7,7 +7,7 @@ In this chapter, we will present a simple but powerful way of reducing the sizes
 
 In Chapter \ref{chap:data-efficiency} of this thesis we discussed how increasing the number of parameters of a model allows it to overfit more easily. Additionally, we discussed how more complex problems require more parameters to be modeled. Thus, for small datasets, it is beneficial to reduce the complexity of the problem to allow for using networks of fewer parameters. A simple way to reduce the complexity of problems in convolutional neural networks is to reduce the size of the images.
 
-To understand how reducing input size reduces model complexity, let us revisit the concept of sample complexity \(n(\epsilon, \delta)\) and its established bounds:
+To understand how reducing input size reduces model complexity, let us revisit the concept of sample complexity \(n(\epsilon, \delta)\) and its established bounds \cite{shalev-shwartzUnderstandingMachineLearning2014}:
 \begin{equation}
 	n(\epsilon, \delta) \geq \frac{\log(\lvert \mathcal{F} \rvert / \delta)}{\epsilon},
 \end{equation}
@@ -15,7 +15,7 @@ where \(n\) represents the minimum number of samples needed for a model from the
 
 The hypothesis space refers to the set of all functions that the model is capable of approximating, encompassing every conceivable mapping from the domain \(\mathcal{D}\) to the codomain \(\mathcal{C}\). Therefore, the magnitude of the hypothesis space can be expressed as
 \begin{equation}
-	\lvert \mathcal{F} \rvert = {\lvert C \rvert}^{\lvert D \rvert}.
+	\lvert \mathcal{F} \rvert = {\lvert \mathcal{C} \rvert}^{\lvert \mathcal{D} \rvert}.
 \end{equation}
 
 For binary CNN-based image segmentation, the model maps \(c\)-channeled images \(I \in \mathbb{R}^{w \times h \times c}\) to binary masks \(M \in \{0, 1\}^{w \times h}\). The hypothesis space thus grows with the image dimensions \(w, h\), and the number of channels \(c\). Reducing image size directly decreases the hypothesis space, lowering the sample size needed for effective training. This relationship is supported by empirical findings --- \citet{tanEfficientNetRethinkingModel2020} show that convolutional neural networks perform best when input size, network depth, and width are scaled proportionally.
@@ -170,7 +170,7 @@ Aorta & 8 & $10^{-3}$ & 100\\
 
 This section briefly describes the datasets used in our experiments as well as the preprocessing steps for the images. For more details, we direct readers to the supplemental code repository available at \href{https://github.com/marinbenc/segment-then-segment}{github.com/marinbenc/segment-then-segment}. To evaluate our approach, we chose three datasets across different medical imaging modalities, including CT scans, microscopy imaging, and colonoscopy images. We hope that the variety in the datasets will show the generalizability of our approach. Aside from the variety, the datasets were selected because they include images of large dimensions on which small objects of various sizes need to be segmented. These types of tasks are most likely to suffer from the loss of information due to downscaling and are thus particularly suitable to be segmented using our approach.
 
-\textbf{Aorta Dataset}: For aorta segmentation we use the AVT dataset \cite{radlAVTMulticenterAortic2022}, a multi-center dataset of labeled CTA scans of the aortic vessel tree. We only use a subset of the dataset from Dongyang Hospital, a total of 18 scans of between 122 and 251 slices. Each slice is windowed to 200 to 500 HU, normalized to $[-0.5, 0.5]$, and zero-centered by subtracting 0.1 from each slice. The original resolution of the slices is $512 \times 666$ pixels. We use augmentation during training. Each input has a 50\% chance of an affine transform (translation of $\pm6.25\%$, scaling of $\pm10\%$, rotation of $\pm14^{\circ}$), as well as a 30\% chance of a horizontal flip. The dataset is split per patient into a training set (70\%, 39 scans, 14,147 slices), validation set (20\%, 11 scans, 4,488 slices), and test set (10\%, 6 scans, 3,119 slices).
+\textbf{Aorta Dataset}: For aorta segmentation we use the AVT dataset \cite{radlAVTMulticenterAortic2022}, a multi-center dataset of labeled CTA scans of the aortic vessel tree. We only use a subset of the dataset from Dongyang Hospital, a total of 18 scans of between 122 and 251 slices. Each slice is windowed to 200 to 500 HU, normalized to $[-0.5, 0.5]$, and zero-centered by subtracting 0.1 from each slice. The original resolution of the slices is $512 \times 666$ pixels. We use augmentation during training. Each input has a 50\% chance of an affine transform (translation of $\pm6.25\%$, scaling of $\pm10\%$, rotation of $\pm14^{\circ}$), as well as a 30\% chance of a horizontal flip. The dataset is split per patient into a training set (12 scans), validation set (3 scans), and test set (3 scans).
 
 \textbf{Cells Dataset}: For cell nucleus segmentation we use the 2018 Data Science Bowl dataset, otherwise known as image set BBBC038v1 from the Broad Bioimage Benchmark Collection \cite{caicedoNucleusSegmentationImaging2019}. We use 670 RGB images and their corresponding labels from the \verb|stage1_train| repository. The original files are of various sizes ranging from $256 \times 256$ to $1024 \times 1024$ pixels. We did not further split the images into patches, all training is done on the whole images. We use the same augmentation as for the aorta dataset. The dataset is split into a training set (80\%, 536 images), validation set (10\%, 67 images), and test set (10\%, 67 images).
 
@@ -181,7 +181,7 @@ This section briefly describes the datasets used in our experiments as well as t
 The results of our experiments are shown in Table \ref{tab:seg-then-seg-results}. Our approach, using low input sizes, results in segmentation DSC on par or better than baseline models trained on larger input sizes using downscaled images. This is especially apparent at large downscaling factors of 4 and more, where the baseline models quickly deteriorate in their performance but our models were still able to achieve results that are close to those on full-size images. The biggest improvement is seen in terms of recall. For instance, on the 4x downscaled cells dataset, our approach leads to a 4.3 times larger recall. Likewise, for the polyp images, the recall improves from 0.039 to 0.799, a 20 times improvement. Recall is especially important in medical image segmentation since the cost of false negatives can often far outweigh the cost of false positives.
 
 \begin{table}[t!]
-\caption{The results of our approach using U-Net as the underlying architecture.\label{tab:seg-then-seg-results}}
+\caption{The results of our approach using U-Net as the underlying architecture. The U-Net results are based on uniformly downscaled images.\label{tab:seg-then-seg-results}}
 		\newcolumntype{C}{>{\centering\arraybackslash}X}
 		\begin{tabularx}{\textwidth}{lCCCC}
 			& \textbf{DSC [\%]} & \textbf{IoU [\%]} & \textbf{Prec. [\%]} & \textbf{Rec. [\%]}\\
@@ -227,10 +227,10 @@ $512 \times 512$ - Ours & $85.51 \pm 14.80$ & $76.85 \pm 17.17$ & $90.90 \pm 14.
 We evaluate how general our approach is by applying it to two other state-of-the-art semantic segmentation architectures, Res-U-Net++ \cite{jhaResUNetAdvancedArchitecture2019, zhouUNetNestedUNet2018b} and DeepLabv3+ \cite{chenEncoderDecoderAtrousSeparable2018b}. The results of these experiments are shown in Table \ref{tab:other-sota}.
 
 \begin{table}[t!]
-\caption{A comparison of the Dice Score Coefficients of our approach using other underlying architectures at 4x and 2x downscaled images.\label{tab:other-sota}}
+\caption{A comparison of the Dice Score Coefficients of our approach using other underlying architectures at 4x and 2x downscaled images. The Baseline model is trained on uniformly downscaled images.\label{tab:other-sota}}
 		\newcolumntype{C}{>{\centering\arraybackslash}X}
 		\begin{tabularx}{\textwidth}{lCCC}
-			\textbf{Model} & \textbf{Size} & \textbf{Baseline [\%]} & \textbf{Seg-Then-Seg [\%]}\\
+			\textbf{Model} & \textbf{Size} & \textbf{Baseline [\%]} & \textbf{Ours [\%]}\\
 \toprule
 \textbf{Cells} ($256 \times 256$) & & & \\
 \midrule
@@ -265,13 +265,13 @@ Furthermore, our approach achieves much better stability of results as the input
 \begin{figure}[t!]
 \centering
 \includegraphics[width=\textwidth]{images/5/dsc-vs-size.png}
-\caption{The relationship between input dimensions and the mean Dice Score Coefficient (DSC) and recall for different datasets. The points are measured values from our experiments.\label{fig:dsc-vs-size}}
+\caption{The relationship between input dimensions and the mean Dice Score Coefficient (DSC) and recall for different datasets. The points are measured values from our experiments. The Baseline model is trained on uniformly downscaled images.\label{fig:dsc-vs-size}}
 \end{figure}
 
 \begin{figure}[b!]
 \centering
 \includegraphics[width=\textwidth]{images/5/violin-plots.png}
-\caption{Violin plots of Dice Score Coefficients of our approach compared to the baseline models at various input dimensions. The dashed lines represent quartiles of the distributions.\label{fig:box-plots}}
+\caption{Violin plots of Dice Score Coefficients of our approach compared to the baseline models trained on uniformly downscaled images at various input dimensions. The dashed lines represent quartiles of the distributions.\label{fig:box-plots}}
 \end{figure}
 
 The goal of our approach is increasing segmentation performance on downscaled images, so we do not expect a performance increase on the full-size images. While our approach offers significant improvements when using downscaled images, the main disadvantage of our approach is that it requires training two separate neural networks. However, this downside is lessened by two key factors. First, the cropped networks converge much faster since the objects are already localized and unified in scale in the images, making the problem easier for the network to learn. Secondly, since the architecture of the two networks is identical, one can use transfer learning from the trained rough segmentation network to the fine segmentation network.
@@ -356,7 +356,7 @@ This initial version of the approach presents a promising avenue for future rese
 
 \section{An End-to-End Extension of Model-Driven Image Cropping}
 
-So far, both in this chapter as well as the previous chapter, we employed separate networks for initial rough segmentation and subsequent fine segmentation. Transitioning to an end-to-end model presents distinct advantages. Training the rough and fine segmentation modules together could enhance the rough segmentation's ability to identify more accurate regions of interest, while the fine segmentation module could improve its robustness to imperfect initial segmentations.
+So far, both in this chapter as well as the previous chapter, we employed separate networks for initial rough segmentation and subsequent fine segmentation. Instead of using separate neural networks, connecting the two networks end-to-end and training them as a single architecture presents distinct advantages. Training the rough and fine segmentation modules together could enhance the rough segmentation's ability to identify more accurate regions of interest, while the fine segmentation module could improve its robustness to imperfect initial segmentations.
 
 A straightforward approach might involve chaining the two networks: an input image first undergoes rough segmentation, followed by fine segmentation of the transformed image, with both subnetworks trained simultaneously. This naive approach has several challenges. Firstly, since the network now needs to perform two segmentations, network convergence is much harder as there is no straightforward flow of gradients from the output to the input of the network. Secondly, the transformation procedure is potentially non-differentiable, and thus there could be no gradient calculated between the output layer of one subnetwork and the input layer of the other subnetwork.
 
@@ -378,7 +378,7 @@ We use pre-training to allow the two networks to reliably converge. First, we tr
 
 \subsection{Experiments in Clinical Dermatological Image Segmentation}
 
-We validate this end-to-end architecture on segmenting the skin lesion boundary in clinical dermatological images using datasets of small sample sizes. Namely, we use the University of Waterloo skin cancer database \cite{waterloo} (available at \cite{uwaterlooSkinCancer}) of clinical skin lesion images. The dataset consists of manual segmentation labels of two publicly available skin lesion databases, DermIS \cite{dermisDermIS} and DermQuest (no longer available). We treat these two collections as two different centers to evaluate out-of-sample performance. The images are of various sizes from 300 to 550 pixels in height and width. As a preprocessing step, each image of each dataset is normalized to $[-0.5, 0.5]$.
+We validate this end-to-end architecture on segmenting the skin lesion boundary in clinical dermatological images using datasets of small sample sizes. Namely, we use the University of Waterloo skin cancer database \cite{waterloo} (available at \cite{uwaterlooSkinCancer}) of clinical skin lesion images. The dataset consists of manual segmentation labels of two publicly available skin lesion databases, DermIS \cite{dermisDermIS} (69 images) and DermQuest (137 images, no longer available). We treat these two collections as two different centers to evaluate out-of-sample performance. The images are of various sizes from 300 to 550 pixels in height and width. As a preprocessing step, each image of each dataset is normalized to $[-0.5, 0.5]$.
 
 We use PyTorch 1.10 for all experiments. All models are trained on an Nvidia GeForce RTX 3080. Wherever possible, we fix an arbitrarily chosen random seed value of ``2022'' to increase reproducibility. We use the Adam optimizer for all training while reducing the learning rate on plateaus by a factor of 0.1. The best model is selected and saved during training based on validation loss. We use a learning rate of $10^{-4}$ for both pre-training and fine-tuning. We set the batch size to 16 for all input sizes except $512 \times 512$, where the batch size was set to 4. The aforementioned hyperparameters were chosen based on the validation DSC of the models. For ease of implementation, all high-resolution input images are resized to $1024 \times 1024$ pixels, but this is not a required step for our method, which can work with any high-resolution input image size.
 
